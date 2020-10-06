@@ -1,1 +1,27 @@
 @import './style_components/variables.scss';
+
+#main_container{
+    //We will be using the grid display as it is becoming the standard
+    //Just because we use grid does not mean we do not use flex-box
+    //or other techniques. However, grid should be the default.
+    display: grid;
+
+    //1f is 1 fraction. We will use it to create columns of equal sizes.
+    //Or make it so one column is proportionally bigger than others.
+    //Use repeat so we can repeat the 1f without writing it all out.
+    grid-template-columns: repeat(5, 1f);
+
+    ////We do the same thing but for rows:
+    //grid-template-rows: repeat(5, 1f);
+    //auto rows let us not define how many row, but just the height.
+    //If we have both auto and template, then the auto will be a default.
+    grid-auto-rows: 150px;
+    
+    //// can be used with grid-area to define where each item should be
+    //// The value would be a string
+    //grid-template-areas:
+    // "header header
+    //  sidebar content";
+
+
+}
