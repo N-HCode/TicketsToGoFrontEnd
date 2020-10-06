@@ -27,7 +27,7 @@ class App extends React.Component {
   render() {
 
     return(
-    <div>
+    <div id="main_container">
       <div id="test">Hello world</div>
       <div id="test2">World hello</div>
     </div>
