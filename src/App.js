@@ -28,8 +28,45 @@ class App extends React.Component {
 
     return(
     <div id="main_container">
-      <div id="test">Hello world</div>
-      <div id="test2">World hello</div>
+
+        {/* Whole header container: has the top nav and the tabs */}
+        <div>
+          {/* main nav and search bar */}
+          <div>
+
+          </div>
+
+          {/* primary tab bar */}
+          <div>
+
+          </div>
+        </div>
+
+
+        {/* Whole container for ticket template */}
+        <div>
+          {/* template selection */}
+          <div>
+
+          </div>
+
+          {/* ticket tabs */}
+          <div>
+
+          </div>
+
+          {/* Ticket column container */}
+          <div>
+
+          </div>
+        </div>
+
+        {/* Footer if needed*/}
+
+        <div id="test">Hello world</div>
+        <div id="test2">World hello</div>
+   
+
     </div>
     );
   }
