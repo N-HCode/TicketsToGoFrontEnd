@@ -1,5 +1,8 @@
 @import './style_components/variables.scss';
-
+@import'./style_components/navbar.scss';
+@import './style_components/primary_tab.scss';
+@import './style_components/template_container.scss';
+@import './style_components/footer.scss';
 
 //The html has a default margin that you can deal with using
 //the code below
@@ -19,7 +22,7 @@ html{
     //Just because we use grid does not mean we do not use flex-box
     //or other techniques. However, grid should be the default.
     display: grid;
-
+    height: 100vh;
     //1f is 1 fraction. We will use it to create columns of equal sizes.
     //Or make it so one column is proportionally bigger than others.
     //Use repeat so we can repeat the 1f without writing it all out.

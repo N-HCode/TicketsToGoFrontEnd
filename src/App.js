@@ -27,25 +27,32 @@ class App extends React.Component {
   render() {
 
     return(
+    //Looks like there isn't a standard for naming html/css ids and classes.
+    //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classes
+    
     <div id="main_container">
 
         {/* Whole header container: has the top nav and the tabs */}
         <div>
           {/* main nav and search bar */}
-          <div>
-
+          <div id="main_nav">
+              search
+              Advance search
+              Log out
+              menu
           </div>
 
           {/* primary tab bar */}
-          <div>
-
+          <div id="primary_tab">
+              Tab
           </div>
         </div>
 
 
         {/* Whole container for ticket template */}
-        <div>
+        <div id="template_container">
           {/* template selection */}
+          Template
           <div>
 
           </div>
@@ -62,9 +69,9 @@ class App extends React.Component {
         </div>
 
         {/* Footer if needed*/}
+        <div id="footer">
 
-        <div id="test">Hello world</div>
-        <div id="test2">World hello</div>
+        </div>
    
 
     </div>
