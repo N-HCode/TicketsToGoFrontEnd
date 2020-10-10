@@ -1,12 +1,42 @@
-#main_nav{
-    background-color: aliceblue;
-    display: flex;
+//https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+@import './variables';
 
-    #main_nav__search{
-        background-color: blueviolet;
+#main_nav{
+    background-color: #264653;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    // margin-top: 20px;
+    height: 40px;
+    //alignment goes on the parent that has the display
+    align-items: center;
+
+    #main_nav__search_container{
+        margin-left: 20px;
+
+        #main_nav__search_box{
+            color: #767676;
+            background-color: #242424 ;
+            border-color: #767676;
+            border: 1px solid;
+            width: 200px;
+            height: 20px;
+        }
+
+
+        a{
+            //need to move color in here to change the text
+            margin-left: 15px;
+            color: #74ADB5;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
     }
 
-    #main_nav__menu{
+    #main_nav__menu_container{
         background-color: coral;
+        margin-right: 20px;
+        
     }
 }

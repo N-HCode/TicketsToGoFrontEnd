@@ -37,12 +37,15 @@ class App extends React.Component {
         
           {/* main nav and search bar */}
           <div id="main_nav">
-            <div id="main_nav__search">
-              search
-              Advance search
+            <div id="main_nav__search_container">
+              <input id="main_nav__search_box" type="text" name="" placeholder="search">
+
+              </input>
+              <a href="#">Advance Search</a>
+              
             </div>
 
-            <div id="main_nav__menu">
+            <div id="main_nav__menu_container">
               Log out
               menu
             </div>
