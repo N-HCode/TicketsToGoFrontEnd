@@ -33,21 +33,29 @@ class App extends React.Component {
     <div id="main_container">
 
         {/* Whole header container: has the top nav and the tabs */}
-        <div>
+        <div id="#header_container">
+        
           {/* main nav and search bar */}
           <div id="main_nav">
+            <div id="main_nav__search">
               search
               Advance search
+            </div>
+
+            <div id="main_nav__menu">
               Log out
               menu
+            </div>
+
           </div>
+   
 
           {/* primary tab bar */}
           <div id="primary_tab">
               Tab
           </div>
         </div>
-
+        
 
         {/* Whole container for ticket template */}
         <div id="template_container">
@@ -70,7 +78,7 @@ class App extends React.Component {
 
         {/* Footer if needed*/}
         <div id="footer">
-
+          Footer
         </div>
    
 
