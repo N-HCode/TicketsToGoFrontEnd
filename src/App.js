@@ -55,7 +55,22 @@ class App extends React.Component {
 
           {/* primary tab bar */}
           <div id="primary_tab">
-              Tab
+
+              <div id="primary_tab__tab_container">
+                <div class="primary_tab__singletab">
+                  <p>Test</p>
+                </div>
+
+                <div class="primary_tab__singletab">
+                  <p>Test</p>
+                </div>
+
+                <div class="primary_tab__singletab">
+                  <p>Test</p>
+                </div>
+              </div>  
+
+              <div id="primary_tab__tab_line"></div>
           </div>
         </div>
         

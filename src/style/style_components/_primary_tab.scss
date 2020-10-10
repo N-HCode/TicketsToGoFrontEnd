@@ -1,4 +1,23 @@
 #primary_tab{
-    background-color: aqua;
-    margin-top: 60px;
+    margin-top: 30px;
+
+    #primary_tab__tab_container{
+        display: flex;
+    }
+ 
+    .primary_tab__singletab{
+        margin-right: 10px;
+        height: 30px;
+        width: 150px;
+        background-color:$primaryHeaderBGColor;
+
+        &:active{
+            background-color: $secondaryPHBGColor;
+        }
+    }
+
+    #primary_tab__tab_line{
+        background-color: $secondaryPHBGColor;
+        height: 5px;
+    }
 }
