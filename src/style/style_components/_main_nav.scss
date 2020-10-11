@@ -14,13 +14,13 @@
         margin-left: 20px;
 
         #main_nav__search_box{
-            color: $searchBarTextAndBorderColor;
+            color: $secondaryTextColor;
             background-color: $secondaryBackgroundColor;
-            border-color: $searchBarTextAndBorderColor;
+            border-color: $secondaryTextColor;
             border: 1px solid;
             width: 200px;
             height: 20px;
-            font-size: 14px;
+            font-size: 16px;
             padding-left: 5px;
         }
 

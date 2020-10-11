@@ -1,20 +1,39 @@
 #primary_tab{
-    margin-top: 30px;
+    margin-top: 20px;
 
     #primary_tab__tab_container{
         display: flex;
+        
+
+        .primary_tab__singletab{
+            //have to make the display flex in order to align
+            //the text to the middle. There is a ton of other
+            //ways to do this, but this seems to be an easy way
+            display: flex;
+            align-items: center;
+           
+            //use border-box as it help prevent padding from
+            //adding to the element's width/height
+            box-sizing: border-box;
+            margin-right: 5px;
+            height: 30px;
+            width: 150px;
+            padding-left: 10px;
+            background-color:$primaryHeaderBGColor;
+            color:$secondaryTextColor;
+
+
+            
+    
+            &:active{
+                background-color: $secondaryPHBGColor;
+                color: $activeTextColor;
+            }
+        }        
+
     }
  
-    .primary_tab__singletab{
-        margin-right: 10px;
-        height: 30px;
-        width: 150px;
-        background-color:$primaryHeaderBGColor;
 
-        &:active{
-            background-color: $secondaryPHBGColor;
-        }
-    }
 
     #primary_tab__tab_line{
         background-color: $secondaryPHBGColor;
