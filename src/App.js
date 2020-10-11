@@ -2,6 +2,14 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// The Router library used to navigate the site
+import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
+
+// Components from the applicaiton
+import EditTicketPage from './components/ticket/EditTicketPage';
+import HomePage from './components/HomePage';
+import Navbar from './components/Navbar';
+
 class App extends React.Component {
 
   //appConfig is used to apply configuration to the react program.
@@ -25,87 +33,30 @@ class App extends React.Component {
 
   //The render is required for all react classes
   render() {
-
     return(
-    //Looks like there isn't a standard for naming html/css ids and classes.
-    //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classes
-    
-    <div id="main_container">
+      <div>
+      {/* {this is the router for changing pages on the site} */}
+      <BrowserRouter>
 
-        {/* Whole header container: has the top nav and the tabs */}
-        <div id="#header_container">
-        
-          {/* main nav and search bar */}
-          <div id="main_nav">
-            <div id="main_nav__search_container">
-              <input id="main_nav__search_box" type="text" name="" placeholder="search">
+        {/* {importing the Navbar component to navigate} */}
+        <Navbar/>
 
-              </input>
-              <a href="#">Advance Search</a>
-              
-            </div>
+        {/* {creating a switch to swap out the component to show when on different pages} */}
+        <Switch>
 
-            <div id="main_nav__menu_container">
-              Log out
-              menu
-            </div>
+          {/* {pages and the component assgined to them} */}
+          <Route path="/edit" component={EditTicketPage} />
+          <Route exact path="/" component={HomePage} />
 
-          </div>
-   
+          {/* {a redirect incase we need it} */}
+          <Redirect from= "/" to="/" /> 
 
-          {/* primary tab bar */}
-          <div id="primary_tab">
+        </Switch>
 
-              <div id="primary_tab__tab_container">
-                <div class="primary_tab__singletab">
-                  <p>Test</p>
-                </div>
-
-                <div class="primary_tab__singletab">
-                  <p>Test</p>
-                </div>
-
-                <div class="primary_tab__singletab">
-                  <p>Test</p>
-                </div>
-              </div>  
-
-              <div id="primary_tab__tab_line"></div>
-          </div>
-        </div>
-        
-
-        {/* Whole container for ticket template */}
-        <div id="template_container">
-          {/* template selection */}
-          Template
-          <div>
-
-          </div>
-
-          {/* ticket tabs */}
-          <div>
-
-          </div>
-
-          {/* Ticket column container */}
-          <div>
-
-          </div>
-        </div>
-
-        {/* Footer if needed*/}
-        <div id="footer">
-          Footer
-        </div>
-   
-
+      </BrowserRouter>
     </div>
     );
   }
-
-  //react lifecycles menthods: https://reactjs.org/docs/react-component.html
-
 }
 
 export default App;
