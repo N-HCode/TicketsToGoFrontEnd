@@ -32,15 +32,15 @@ const HomePage = () => {
                 <div id="primary_tab">
 
                     <div id="primary_tab__tab_container">
-                        <div class="primary_tab__singletab">
+                        <div className="primary_tab__singletab">
                             <p>Test</p>
                         </div>
 
-                        <div class="primary_tab__singletab">
+                        <div className="primary_tab__singletab">
                             <p>Test</p>
                         </div>
 
-                        <div class="primary_tab__singletab">
+                        <div className="primary_tab__singletab">
                             <p>Test</p>
                         </div>
                     </div>
