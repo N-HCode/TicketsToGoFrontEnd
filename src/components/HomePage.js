@@ -3,19 +3,22 @@ import TicketList from './ticket/TicketList';
 
 const HomePage = () => {
     return (
-        //Looks like there isn't a standard for naming html/css ids and classes.
-        //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classes
+        //Looks like there isn't a standard for naming html/css ids and classNamees.
+        //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classNamees
         <div id="main_container">
 
             {/* Whole header container: has the top nav and the tabs */}
-            <div id="#header_container">
+            <div id="header_container">
 
                 {/* main nav and search bar */}
                 <div id="main_nav">
                     <div id="main_nav__search_container">
-                        <input id="main_nav__search_box" type="text" name="" placeholder="search">
+                        <div id="main_nav__search_box">
+                            <input  type="text" name="" placeholder="search"/>
+                            <i className="material-icons">search</i> 
+                        </div>
 
-                        </input>
+                    
                         <a href="#">Advance Search</a>
 
                     </div>
@@ -34,25 +37,37 @@ const HomePage = () => {
                     <div id="primary_tab__tab_container">
 
                         <div className="primary_tab__singletab">
-                            <p>Test</p>
+                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                            <a className="material-icons">close</a>
                         </div>
-      
+
                         <div className="primary_tab__singletab">
                             <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a class="material-icons">close</a>
+                            <a className="material-icons">close</a>
+                        </div>
+
+
+                        <div className="primary_tab__singletab">
+                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                            <a className="material-icons">close</a>
                         </div>
 
                         <div className="primary_tab__singletab">
-                            <p>Testafefafaefaefaefaefaefefa</p>
 
+                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                            <a className="material-icons">close</a>
                         </div>
 
                         <div className="primary_tab__singletab">
-                            <p>Test</p>
+                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                            <a className="material-icons">close</a>
                         </div>
+
+                        <i className="material-icons">add</i>
+ 
                     </div>
 
-                    <div id="primary_tab__tab_line"></div>
+                    <div className="tab_line"></div>
                 </div>
             </div>
 
@@ -60,17 +75,44 @@ const HomePage = () => {
             {/* Whole container for ticket template */}
             <div id="template_container">
                 {/* template selection */}
-                Template/TicketList
-
-                <TicketList />
-
-                {/* ticket tabs */}
                 <div>
 
                 </div>
 
+                {/* tab line */}
+                <div className="tab_line"></div>
+
+                {/* ticket tabs */}
+                <div id="ticket_tab_container">
+                    <div className="single_ticket_tab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <div className="single_ticket_tab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <div className="single_ticket_tab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <div className="single_ticket_tab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                </div>
+
                 {/* Ticket column container */}
-                <div>
+                <div id="ticket_columns_container">
+                    <div className="single_ticket_column">
+                        Template/TicketList
+                        <TicketList />
+                    </div>
+
 
                 </div>
             </div>
