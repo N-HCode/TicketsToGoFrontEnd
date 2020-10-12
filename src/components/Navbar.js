@@ -21,6 +21,17 @@ const Navbar = () => {
                 
                 <li> 
                     <NavLink 
+                        to="/createTicket"
+                         // {this is for when css gets made but for now using activeStyle
+                         className="inactive" activeClassName="active"
+                        activeStyle={{ color: 'teal' }}
+                        >
+                            CreateTicket
+                    </NavLink>
+                </li>
+
+                <li> 
+                    <NavLink 
                         to="/edit"
                          // {this is for when css gets made but for now using activeStyle
                          className="inactive" activeClassName="active"
