@@ -3,7 +3,8 @@
 
     #primary_tab__tab_container{
         display: flex;
-        
+        align-items: center;
+        flex: auto;
 
         .primary_tab__singletab{
             //have to make the display flex in order to align
@@ -42,12 +43,15 @@
             }
         }        
 
+        i{
+            margin-left: 5px;
+            color:$secondaryTextColor;
+            font-size: 14px;
+        }
+
     }
  
 
 
-    #primary_tab__tab_line{
-        background-color: $secondaryPHBGColor;
-        height: 5px;
-    }
+
 }
