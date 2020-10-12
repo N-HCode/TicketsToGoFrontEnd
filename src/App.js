@@ -9,6 +9,7 @@ import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import EditTicketPage from './components/ticket/EditTicketPage';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
+import CreateTicketPage from './components/ticket/CreateTicketPage';
 
 class App extends React.Component {
 
@@ -45,9 +46,10 @@ class App extends React.Component {
         <Switch>
 
           {/* {pages and the component assgined to them} */}
+          <Route exact path="/createTicket" component={CreateTicketPage} />
           <Route path="/edit" component={EditTicketPage} />
           <Route exact path="/" component={HomePage} />
-
+          
           {/* {a redirect incase we need it} */}
           <Redirect from= "/" to="/" /> 
 

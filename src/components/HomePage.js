@@ -32,16 +32,22 @@ const HomePage = () => {
                 <div id="primary_tab">
 
                     <div id="primary_tab__tab_container">
-                        <div class="primary_tab__singletab">
+
+                        <div className="primary_tab__singletab">
+                            <p>Test</p>
+                        </div>
+      
+                        <div className="primary_tab__singletab">
                             <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
                             <a class="material-icons">close</a>
                         </div>
 
-                        <div class="primary_tab__singletab">
+                        <div className="primary_tab__singletab">
                             <p>Testafefafaefaefaefaefaefefa</p>
+
                         </div>
 
-                        <div class="primary_tab__singletab">
+                        <div className="primary_tab__singletab">
                             <p>Test</p>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ const TicketList = () => {
        // mapping through the array to create a ticket component for each object in the array
     return (
         <div>
-            { ticketList.map( ticket => <Ticket ticket={ticket}/>  ) }
+            { ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ) }
         </div>
     )
 }
