@@ -1,3 +1,26 @@
 #ticket_columns_container{
     margin-top: 50px;
+    display: flex;
+
+    .single_ticket_column{
+        
+        color:$activeTextColor;
+        
+       
+        .column_title{
+            
+            background-color: $columnTitleColor;
+            font-size: 24px;
+            font-family: 'Roboto', sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .ticket_list_container{
+
+            background-color: $secondaryBackgroundColor;
+            padding: 10px;
+        }
+
+    }
 }
