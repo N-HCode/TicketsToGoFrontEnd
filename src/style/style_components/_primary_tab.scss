@@ -11,23 +11,34 @@
             //ways to do this, but this seems to be an easy way
             display: flex;
             align-items: center;
-           
+            justify-content: space-between;
             //use border-box as it help prevent padding from
             //adding to the element's width/height
             box-sizing: border-box;
             margin-right: 5px;
             height: 30px;
-            width: 150px;
+            width: 125px;
             padding-left: 10px;
+            padding-right: 10px;
             background-color:$primaryHeaderBGColor;
             color:$secondaryTextColor;
+            overflow: hidden;
 
-
-            
     
             &:active{
                 background-color: $secondaryPHBGColor;
                 color: $activeTextColor;
+            }
+
+            p{
+                width:auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 3px;
+            }
+
+            a{
+                font-size: 12px;
             }
         }        
 
