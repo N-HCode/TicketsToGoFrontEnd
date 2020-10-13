@@ -109,8 +109,12 @@ const HomePage = () => {
                 {/* Ticket column container */}
                 <div id="ticket_columns_container">
                     <div className="single_ticket_column">
-                        Template/TicketList
-                        <TicketList />
+                        <div className="column_title">TITLE HERE</div>
+                        <div className="ticket_list_container">
+                            Template/TicketList
+                            <TicketList />
+                        </div>
+
                     </div>
 
 
