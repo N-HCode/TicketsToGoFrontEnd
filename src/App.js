@@ -4,6 +4,7 @@ import './App.css';
 
 // The Router library used to navigate the site
 import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 
 // Components from the applicaiton
 import EditTicketPage from './components/ticket/EditTicketPage';
@@ -11,6 +12,7 @@ import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
 
+const history = createBrowserHistory();
 class App extends React.Component {
 
   //appConfig is used to apply configuration to the react program.
@@ -37,7 +39,7 @@ class App extends React.Component {
     return(
       <div>
       {/* {this is the router for changing pages on the site} */}
-      <BrowserRouter>
+      <BrowserRouter history={history}>
 
         {/* {importing the Navbar component to navigate} */}
         <Navbar/>

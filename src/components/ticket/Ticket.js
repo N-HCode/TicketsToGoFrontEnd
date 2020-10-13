@@ -11,7 +11,7 @@ const Ticket = (props) => {
         <div>
             <h4>{ticket.subject}</h4>
             <p>Ticket #{ticket.ticketNumber}</p>
-            <p>Owner: {ticket.ticketOwner.firstName}</p>
+            {/* <p>Owner: {ticket.ticketOwner.firstName}</p> */}
             <p>Description: {ticket.description}</p>
         </div>
     )

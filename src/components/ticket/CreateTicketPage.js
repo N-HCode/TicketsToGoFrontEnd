@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { createTicket } from '../../services/TicketService';
 
 // useHistory method for redirecting back to pages
-import { useHistory } from 'react-router-dom'
 
-const CreateTicketPage = () => {
+const CreateTicketPage = (props) => {
     const [ticket, setTicket] = useState({
         subject: "",
         description: "",
@@ -13,8 +12,6 @@ const CreateTicketPage = () => {
         userPhoneNumber:"",
         userEmail:""
     });
-
-    const history = useHistory();
 
      // the method that runs when the create button is hit
     const handleCreate = (event) => {
@@ -46,7 +43,7 @@ const CreateTicketPage = () => {
         createTicket(ticket)
         // afterwards go back to home page
         return () => {
-            history.push("/")
+            props.history.push("/")
         }
 
         // the trigger on this useEffect is the ticket state
