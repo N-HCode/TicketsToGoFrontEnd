@@ -35,10 +35,6 @@ const HomePage = () => {
                 <div id="primary_tab">
 
                     <div id="primary_tab__tab_container">
-                        <div className="primary_tab__singletab">
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
 
                         <div className="primary_tab__singletab">
                             <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
@@ -50,7 +46,14 @@ const HomePage = () => {
                             <a className="material-icons">close</a>
                         </div>
 
+
                         <div className="primary_tab__singletab">
+                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                            <a className="material-icons">close</a>
+                        </div>
+
+                        <div className="primary_tab__singletab">
+
                             <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
                             <a className="material-icons">close</a>
                         </div>

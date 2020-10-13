@@ -50,10 +50,12 @@ const EditTicketPage = () => {
                         <option value="escalate">Escalate</option>
                     </select>
                 </div>
+                
+                {/* {button for submitting the form } */}
+                <button type="submit" onClick={handleSave}>Save</button>
             </form>
 
-            {/* {button for submitting the form } */}
-            <button type="submit" onClick={handleSave}>Save</button>
+         
         </div>
     )
 }
