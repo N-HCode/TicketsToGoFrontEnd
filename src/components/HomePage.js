@@ -29,54 +29,64 @@ const HomePage = () => {
                     </div>
 
                 </div>
+            </div>
 
+            {/* primary tab bar */}
+            <div id="primary_tab">
 
-                {/* primary tab bar */}
-                <div id="primary_tab">
+                <div id="primary_tab__tab_container">
 
-                    <div id="primary_tab__tab_container">
-
-                        <div className="primary_tab__singletab">
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
-
-                        <div className="primary_tab__singletab">
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
-
-
-                        <div className="primary_tab__singletab">
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
-
-                        <div className="primary_tab__singletab">
-
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
-
-                        <div className="primary_tab__singletab">
-                            <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                            <a className="material-icons">close</a>
-                        </div>
-
-                        <i className="material-icons">add</i>
- 
+                    <div className="primary_tab__singletab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
                     </div>
 
-                    <div className="tab_line"></div>
+                    <div className="primary_tab__singletab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+
+                    <div className="primary_tab__singletab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <div className="primary_tab__singletab">
+
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <div className="primary_tab__singletab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <a className="material-icons">close</a>
+                    </div>
+
+                    <i className="material-icons">add</i>
+
                 </div>
+
+                <div className="tab_line"></div>
             </div>
+            
 
 
             {/* Whole container for ticket template */}
             <div id="template_container">
                 {/* template selection */}
-                <div>
+                <div className="template_options">
+                   
+                    <select className="template_dropdown">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="escalate">Escalate</option>
+                    </select>
+                     
 
+  
+                    <div className="template_icon_menus"></div>
                 </div>
 
                 {/* tab line */}
@@ -113,7 +123,7 @@ const HomePage = () => {
                             <i className="material-icons">edit</i>
                             <p>TITLE HERE</p>
                             <i className="material-icons">add</i>
-                            </div>
+                        </div>
                         <div className="ticket_list_container">
                             Template/TicketList
                             <TicketList />
