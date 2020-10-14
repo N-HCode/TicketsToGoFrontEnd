@@ -1,3 +1,14 @@
 #template_container{
-    
+    margin-top: 40px;
+
+    .template_options{
+        
+
+        .template_dropdown{
+            background-color: $secondaryBackgroundColor;
+            color: $secondaryTextColor;
+            width: 200px;
+            
+        }
+    }
 }
