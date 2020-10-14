@@ -10,16 +10,30 @@
         .column_title{
             
             background-color: $columnTitleColor;
-            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
             font-family: 'Roboto', sans-serif;
-            padding: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
             text-align: center;
+            align-items: center;
+            width: 275px;
+            height: 45px;
+
+            p{
+                font-size: 22px;
+            }
+
+            i{
+                font-size: 18px;
+            }
         }
 
         .ticket_list_container{
 
             background-color: $secondaryBackgroundColor;
             padding: 10px;
+            height: auto;
         }
 
     }
