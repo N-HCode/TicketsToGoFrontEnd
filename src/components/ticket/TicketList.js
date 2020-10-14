@@ -6,8 +6,10 @@ const TicketList = () => {
     // created temp data for testing because the plan is to use the Context Hook here to pull in the data
     // to pass down to each individual ticket component
 
+    // The state that will hold the data from api
     const [ticketList, setTicketList] = useState([]);
 
+    // Component did mount and update useEffect to watch for the length value of ticketList
     useEffect(() => {
         findAll()
         .then( data => setTicketList(data) )
