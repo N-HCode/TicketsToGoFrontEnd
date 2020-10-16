@@ -6,6 +6,8 @@
         display: flex;
         align-items: center;
         flex: auto;
+        font-family: $mainTextStyle;
+        font-size: 14px;
 
         .primary_tab__singletab{
             //have to make the display flex in order to align
@@ -26,11 +28,15 @@
             color:$secondaryTextColor;
             overflow: hidden;
 
-    
             &:active{
                 background-color: $secondaryPHBGColor;
                 color: $activeTextColor;
+
+                i{
+                    color: $activeTextColor;
+                }
             }
+
 
             p{
                 width:auto;
@@ -41,6 +47,14 @@
 
             a{
                 font-size: 12px;
+                cursor: pointer;
+                //Makes it so the user cannot highlight the icon
+                user-select: none;
+
+                &:active{
+                    color: $activeTextColor;
+    
+                }
             }
         }        
 
@@ -48,6 +62,10 @@
             margin-left: 5px;
             color:$secondaryTextColor;
             font-size: 14px;
+            cursor: pointer;
+            //Makes it so the user cannot highlight the icon
+            user-select: none;
+
         }
 
     }

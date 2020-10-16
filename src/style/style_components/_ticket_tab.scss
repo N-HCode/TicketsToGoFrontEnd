@@ -2,7 +2,9 @@
     display: flex;
     margin-top: 5px;
     height: 30px;
+    
     .single_ticket_tab{
+
         //have to make the display flex in order to align
         //the text to the middle. There is a ton of other
         //ways to do this, but this seems to be an easy way
@@ -20,13 +22,19 @@
         background-color:$primaryHeaderBGColor;
         color:$secondaryTextColor;
         overflow: hidden;
+        font-family: $mainTextStyle;
+        font-size: 14px;
+
+        a{
+            //Makes it so the user cannot highlight the icon
+            user-select: none;
+            font-size: 12px;
+            cursor: pointer;
+        }    
+
+
     }
 
-        
-    &:active{
-        background-color: $secondaryPHBGColor;
-        color: $activeTextColor;
-    }
 
     p{
         width:auto;
@@ -35,8 +43,6 @@
         margin-right: 3px;
     }
 
-    a{
-        font-size: 12px;
-    }    
+
 
 }
