@@ -1,4 +1,7 @@
 @import './style_components/variables.scss';
+@import './style_components/header_container.scss';
+@import './style_components/ticket_column';
+@import './style_components/tab_line.scss';
 @import './style_components/primary_tab.scss';
 @import './style_components/template_container.scss';
 @import './style_components/footer.scss';
@@ -9,6 +12,7 @@
 //the code below
 body,html{
     margin:0;
+    padding: 0;
     width:100%;
   }
 
@@ -23,14 +27,15 @@ html{
     //Just because we use grid does not mean we do not use flex-box
     //or other techniques. However, grid should be the default.
     display: grid;
-    height: 100vh;
+ 
     //1f is 1 fraction. We will use it to create columns of equal sizes.
     //Or make it so one column is proportionally bigger than others.
     //Use repeat so we can repeat the 1f without writing it all out.
-    grid-template-columns: repeat(5, 1f);
+    //grid-template-columns: repeat(5, 1f);
 
     ////We do the same thing but for rows:
     //grid-template-rows: repeat(5, 1f);
+
   
     //auto rows let us not define how many row, but just the height.
     //If we have both auto and template, then the auto will be a default.

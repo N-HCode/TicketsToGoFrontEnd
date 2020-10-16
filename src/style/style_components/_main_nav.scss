@@ -5,6 +5,8 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    font-family: $mainTextStyle;
+    
     // margin-top: 20px;
     height: 40px;
     //alignment goes on the parent that has the display
@@ -12,17 +14,40 @@
 
     #main_nav__search_container{
         margin-left: 20px;
-
+        display: flex;
+        align-items: center;
+     
         #main_nav__search_box{
+            display: flex;
             color: $secondaryTextColor;
             background-color: $secondaryBackgroundColor;
-            border-color: $secondaryTextColor;
             border: 1px solid;
             width: 200px;
             height: 20px;
-            font-size: 16px;
+            font-size: 14px;
             padding-left: 5px;
+            margin: 0px;
+            justify-content: space-between;
+            align-items: center;
+
+            input{
+                background-color: $secondaryBackgroundColor;
+                border: 0px solid;
+                color: $secondaryTextColor;
+                font-family: $mainTextStyle;
+                //this makes it so the search go through the full bar
+                //it also let you type more than the width of the bar
+                flex: auto;
+            }
+
+            i{
+                font-size: 18px;
+                padding-right: 3px;
+                margin-left: 3px;
+            }
         }
+
+        
 
 
         a{
@@ -30,7 +55,7 @@
             margin-left: 15px;
             color: #74ADB5;
             text-decoration: none;
-            font-size: 18px;
+            font-size: px;
             &:active{
                 color: #5f8e94 ;
             }
@@ -43,8 +68,30 @@
     }
 
     #main_nav__menu_container{
-        background-color: coral;
-        margin-right: 20px;
+        display: flex;
         
+        align-items: center;
+        margin-right: 20px;
+        color:$secondaryTextColor;
+
+        a{
+            //need to move color in here to change the text
+            margin-right: 15px;
+            color: #74ADB5;
+            text-decoration: none;
+            font-size: px;
+            &:active{
+                color: #5f8e94 ;
+            }
+
+            &:link{
+                color: #5f8e94 ;
+            }
+        }
+        
+        i{
+            font-size: 30px;
+            cursor: pointer;
+        }
     }
 }

@@ -1,0 +1,48 @@
+#ticket_tab_container{
+    display: flex;
+    margin-top: 5px;
+    height: 30px;
+    
+    .single_ticket_tab{
+
+        //have to make the display flex in order to align
+        //the text to the middle. There is a ton of other
+        //ways to do this, but this seems to be an easy way
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        //use border-box as it help prevent padding from
+        //adding to the element's width/height
+        box-sizing: border-box;
+        margin-left: 5px;
+        height: 30px;
+        width: 125px;
+        padding-left: 5px;
+        padding-right: 10px;
+        background-color:$primaryHeaderBGColor;
+        color:$secondaryTextColor;
+        overflow: hidden;
+        font-family: $mainTextStyle;
+        font-size: 14px;
+
+        a{
+            //Makes it so the user cannot highlight the icon
+            user-select: none;
+            font-size: 12px;
+            cursor: pointer;
+        }    
+
+
+    }
+
+
+    p{
+        width:auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 3px;
+    }
+
+
+
+}

@@ -1,0 +1,42 @@
+#ticket_columns_container{
+    margin-top: 50px;
+    display: flex;
+
+    .single_ticket_column{
+        
+        color:$activeTextColor;
+        
+       
+        .column_title{
+            
+            background-color: $columnTitleColor;
+            display: flex;
+            justify-content: space-between;
+            font-family: $mainTextStyle;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
+            align-items: center;
+            width: 275px;
+            height: 45px;
+
+            p{
+                font-size: 22px;
+            }
+
+            i{
+                font-size: 18px;
+                color: $secondaryTextColor;
+                cursor: pointer;
+            }
+        }
+
+        .ticket_list_container{
+
+            background-color: $secondaryBackgroundColor;
+            padding: 10px;
+            height: auto;
+        }
+
+    }
+}
