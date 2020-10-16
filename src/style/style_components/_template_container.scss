@@ -2,13 +2,38 @@
     margin-top: 40px;
 
     .template_options{
-        
-
+        display: flex;
+        color: $secondaryTextColor;
         .template_dropdown{
             background-color: $secondaryBackgroundColor;
             color: $secondaryTextColor;
+            font-family: $mainTextStyle;
             width: 200px;
             
+        }
+
+        .template_icon_menus{
+            display: flex;
+            justify-content: space-between;
+            flex: auto;
+            //Makes it so the user cannot highlight the icon
+             user-select: none;
+
+            div {
+                margin-left: 15px;
+
+                i{
+                    margin-right: 10px;
+                }
+            }
+
+            i{
+                cursor: pointer;
+
+                &:active{
+                    color:$activeTextColor;
+                }
+            }
         }
     }
 }

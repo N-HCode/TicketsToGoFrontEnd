@@ -24,8 +24,8 @@ const HomePage = () => {
                     </div>
 
                     <div id="main_nav__menu_container">
-                        Log out
-                        menu
+                        <a href="#">Log out</a>
+                        <i className="material-icons">menu</i>
                     </div>
 
                 </div>
@@ -38,32 +38,28 @@ const HomePage = () => {
 
                     <div className="primary_tab__singletab">
                         <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
+                        <i className="material-icons">close</i>
                     </div>
 
                     <div className="primary_tab__singletab">
                         <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
+                        <i className="material-icons">close</i>
                     </div>
-
-
                     <div className="primary_tab__singletab">
                         <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
+                        <i className="material-icons">close</i>
                     </div>
-
-                    <div className="primary_tab__singletab">
-
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
-                    </div>
-
                     <div className="primary_tab__singletab">
                         <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
+                        <i className="material-icons">close</i>
+                    </div>
+                    <div className="primary_tab__singletab">
+                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
+                        <i className="material-icons">close</i>
                     </div>
 
                     <i className="material-icons">add</i>
+                   
 
                 </div>
 
@@ -78,15 +74,22 @@ const HomePage = () => {
                 <div className="template_options">
                    
                     <select className="template_dropdown">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                        <option value="escalate">Escalate</option>
+                        <option value="new_template">New Template</option>
+                        <option value="medium">Test1</option>
+                        <option value="high">Test2</option>
+                        <option value="escalate">Test3</option>
                     </select>
                      
 
   
-                    <div className="template_icon_menus"></div>
+                    <div className="template_icon_menus">
+                        <div>
+                            <i className="material-icons">settings</i>
+                            <i className="material-icons">people</i>
+                        </div>
+
+                        <i className="material-icons">delete_forever</i>
+                    </div>
                 </div>
 
                 {/* tab line */}

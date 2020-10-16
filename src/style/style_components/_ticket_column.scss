@@ -12,7 +12,7 @@
             background-color: $columnTitleColor;
             display: flex;
             justify-content: space-between;
-            font-family: 'Roboto', sans-serif;
+            font-family: $mainTextStyle;
             padding-left: 10px;
             padding-right: 10px;
             text-align: center;
@@ -27,6 +27,7 @@
             i{
                 font-size: 18px;
                 color: $secondaryTextColor;
+                cursor: pointer;
             }
         }
 
