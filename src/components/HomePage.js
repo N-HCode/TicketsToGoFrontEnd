@@ -41,23 +41,6 @@ const HomePage = () => {
                         <i className="material-icons">close</i>
                     </div>
 
-                    <div className="primary_tab__singletab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <i className="material-icons">close</i>
-                    </div>
-                    <div className="primary_tab__singletab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <i className="material-icons">close</i>
-                    </div>
-                    <div className="primary_tab__singletab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <i className="material-icons">close</i>
-                    </div>
-                    <div className="primary_tab__singletab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <i className="material-icons">close</i>
-                    </div>
-
                     <i className="material-icons">add</i>
                    
 
