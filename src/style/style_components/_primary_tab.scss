@@ -66,6 +66,11 @@
             //Makes it so the user cannot highlight the icon
             user-select: none;
 
+            &:active{
+                color: $activeTextColor;
+
+            }
+
         }
 
     }

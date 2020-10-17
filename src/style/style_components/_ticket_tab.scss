@@ -30,7 +30,14 @@
             user-select: none;
             font-size: 12px;
             cursor: pointer;
+
+            &:active{
+                color: $activeTextColor;
+
+            }
         }    
+
+
 
 
     }
