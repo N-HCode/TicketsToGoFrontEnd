@@ -1,7 +1,17 @@
 import React from 'react'
 import TicketList from './ticket/TicketList';
+import MainNavTabs from './mainNav/MainNavTabs';
 
 const HomePage = () => {
+
+    //need the const to create the function
+    const addNewPrimaryTab = () => {
+
+    }
+
+
+
+
     return (
         //Looks like there isn't a standard for naming html/css ids and classNamees.
         //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classNamees
@@ -34,17 +44,7 @@ const HomePage = () => {
             {/* primary tab bar */}
             <div id="primary_tab">
 
-                <div id="primary_tab__tab_container">
-
-                    <div className="primary_tab__singletab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <i className="material-icons">close</i>
-                    </div>
-
-                    <i className="material-icons">add</i>
-                   
-
-                </div>
+                <MainNavTabs />
 
                 <div className="tab_line"></div>
             </div>
