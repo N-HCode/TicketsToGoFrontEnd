@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const SingleTab = () => {
+const SingleTab = (props) => {
 
-    
+
     return(
-        <div className="primary_tab__singletab">
+        // onMoustDown is the middle mouse button click.
+        <div className="primary_tab__singletab" key={props.keynumber} onMouseDown={() => props.deleteTab(props.keynumber)}>
             <p>New Tab</p>
-            <i className="material-icons">close</i>
+            <i className="material-icons" onClick={() => props.deleteTab(props.keynumber)}>close</i>
         </div>
     );
 
