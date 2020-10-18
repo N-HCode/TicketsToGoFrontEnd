@@ -11,12 +11,21 @@ const TicketList = () => {
 
     // Component did mount and update useEffect to watch for the length value of ticketList
     useEffect(() => {
-        findAll()
-        .then( data => setTicketList(data) )
-        return () => {
-            console.log("loaded ticketList")
+        // add a listener for ticketList
+        let isMounted = true;
+        window.addEventListener('tickets', ticketList)
+        
+        if(isMounted){
+            findAll()
+            .then( data => setTicketList(data) )
         }
-    }, [ticketList.length])
+
+        // remove when component switches out
+        return () => {
+            isMounted = false;
+            window.removeEventListener('tickets', ticketList)
+        }
+    })
 
        // mapping through the array to create a ticket component for each object in the array
     return (

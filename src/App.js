@@ -49,7 +49,7 @@ class App extends React.Component {
 
           {/* {pages and the component assgined to them} */}
           <Route exact path="/createTicket" component={CreateTicketPage} />
-          <Route path="/edit" component={EditTicketPage} />
+          <Route exact path="/edit/:id" component={EditTicketPage} />
           <Route exact path="/" component={HomePage} />
           
           {/* {a redirect incase we need it} */}

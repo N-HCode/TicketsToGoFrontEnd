@@ -37,16 +37,23 @@ const CreateTicketPage = (props) => {
     
     // this is to call the service on the form is submited and the state changes
     useEffect(() => {
+        let isMounted = true;
         // if the state changes
-        if(ticket.subject.length > 0)
+        if(ticket.subject.length > 0 && isMounted)
+
         // then call the createTicket service/api
         // afterwards go back to home page after 1 second after getting a response from api
-        createTicket(ticket)
-            .then( 
-                setTimeout( ()=> {props.history.push("/")}, 1000));
+            {  
+                createTicket(ticket)
+                .then( 
+                    props.history.push("/")
+            )
+                // setTimeout( ()=> {props.history.push("/")}, 1000));
         // afterwards go back to home page
+            }
         return () => {
             // clean up
+            isMounted = false;
         }
         // the trigger on this useEffect is the ticket state
     }, [ticket])

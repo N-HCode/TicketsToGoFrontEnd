@@ -10,4 +10,18 @@ const findAll = () => {
   .then( response => response.data)
 }
 
-export  { createTicket, findAll };
+const findTicket = (id) => {
+  return axios.get(`http://localhost:8080/ticket/${id}`)
+  .then( response => response.data )
+}
+
+const editTicket = (id, ticket) => {
+  return axios.put(`http://localhost:8080/ticket/${id}`, ticket)
+  .then( response => response.data)
+}
+
+const deleteTicket = (id) => {
+  return axios.delete(`http://localhost:8080/ticket/${id}`)
+}
+
+export  { createTicket, findAll, findTicket, editTicket, deleteTicket };
