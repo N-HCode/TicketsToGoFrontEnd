@@ -1,13 +1,35 @@
 #primary_tab{
     margin-top: 30px;
-  
+    overflow: auto;
+    white-space: nowrap;
+
+    
 
     #primary_tab__tab_container{
         display: flex;
-        align-items: center;
-        flex: auto;
+        //use baseline so that when the scroll pop up, everything is aligned correctly
+        align-items: baseline;
+        ////If you want to hide the scrollbar, we can indicate a height and have
+        ////overflow as hidden for the parent-container
+        height:35px;
+        overflow: hidden;
         font-family: $mainTextStyle;
         font-size: 14px;
+        #primary_tab__horizontal_scroll_container{
+            display: flex;
+            align-items: baseline;
+            //put max width so that the plus icon will be next to the tabs
+            max-width:98vw;
+            //without the overflow-x auto or scroll, it will make the items go off the page
+            //if you want no scrollbar, you can use overflow hidden.
+            overflow-x: auto;
+
+            
+
+        }
+
+        
+
 
         .primary_tab__singletab{
             //have to make the display flex in order to align
@@ -21,9 +43,12 @@
             box-sizing: border-box;
             margin-right: 5px;
             height: 30px;
-            width: 125px;
+            //to make a horiztonal scroll bar you need to have the child element
+            //have a min width.
+            min-width: 125px;
             padding-left: 10px;
             padding-right: 10px;
+            
             background-color:$primaryHeaderBGColor;
             color:$secondaryTextColor;
             overflow: hidden;
@@ -45,26 +70,22 @@
                 margin-right: 3px;
             }
 
-            a{
-                font-size: 12px;
-                cursor: pointer;
-                //Makes it so the user cannot highlight the icon
-                user-select: none;
-
-                &:active{
-                    color: $activeTextColor;
-    
-                }
-            }
         }        
 
         i{
             margin-left: 5px;
             color:$secondaryTextColor;
             font-size: 14px;
+            align-self: center;
+         
             cursor: pointer;
             //Makes it so the user cannot highlight the icon
             user-select: none;
+
+            &:active{
+                color: $activeTextColor;
+
+            }
 
         }
 
