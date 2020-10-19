@@ -37,10 +37,10 @@ const MainNavTabs = () => {
     //delete tab that will be passed down. Will be passed down because the stata
     //with the list of tabs is in this component.
     const deleteTab = (e,index) => {
-
+        
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
-
+            e.preventDefault();
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
