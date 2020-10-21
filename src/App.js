@@ -6,11 +6,18 @@ import './App.css';
 import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import { createBrowserHistory } from 'history';
 
-// Components from the applicaiton
+// Components for Tickets
 import EditTicketPage from './components/ticket/EditTicketPage';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
+
+// Components for User
+import LoginPage from './components/user/LoginPage';
+
+// Context for User
+import { UserProvider } from './components/context/UserContext'
+
 
 const history = createBrowserHistory();
 class App extends React.Component {
@@ -40,23 +47,23 @@ class App extends React.Component {
       <div>
       {/* {this is the router for changing pages on the site} */}
       <BrowserRouter history={history}>
+        <UserProvider>
 
-        {/* {importing the Navbar component to navigate} */}
-        <Navbar/>
+          {/* {importing the Navbar component to navigate} */}
+          <Navbar/>
 
-        {/* {creating a switch to swap out the component to show when on different pages} */}
-        <Switch>
-
-          {/* {pages and the component assgined to them} */}
-          <Route exact path="/createTicket" component={CreateTicketPage} />
-          <Route exact path="/edit/:id" component={EditTicketPage} />
-          <Route exact path="/" component={HomePage} />
+          {/* {creating a switch to swap out the component to show when on different pages} */}
+          <Switch>
+            {/* {pages and the component assgined to them} */}
+            <Route exact path="/createTicket" component={CreateTicketPage} />
+            <Route exact path="/edit/:id" component={EditTicketPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/" component={HomePage} />
+            {/* {a redirect incase we need it} */}
+            <Redirect from= "/" to="/" /> 
+          </Switch>
           
-          {/* {a redirect incase we need it} */}
-          <Redirect from= "/" to="/" /> 
-
-        </Switch>
-
+        </UserProvider>
       </BrowserRouter>
     </div>
     );

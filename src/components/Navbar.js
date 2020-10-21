@@ -32,12 +32,12 @@ const Navbar = () => {
 
                 <li> 
                     <NavLink 
-                        to="/edit"
+                        to="/login"
                          // {this is for when css gets made but for now using activeStyle
                          className="inactive" activeClassName="active"
                         activeStyle={{ color: 'teal' }}
                         >
-                            EditTicket
+                            Login
                     </NavLink>
                 </li>
             </ul>
