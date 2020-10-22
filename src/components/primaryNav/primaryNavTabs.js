@@ -3,6 +3,8 @@ import SingleTab from './SingleTab';
 
 const MainNavTabs = () => {
 
+    //This is the state for the list. This will tell how much tabs there are
+    //and possibly the name of the tab
     const [navTabListState, setNavTabList] = useState(["hello", "hello", "hello"]);
     
     const addNewPrimaryTab = () => {
