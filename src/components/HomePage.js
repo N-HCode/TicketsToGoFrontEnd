@@ -1,6 +1,9 @@
 import React from 'react'
 import TicketList from './ticket/TicketList';
+
 import MainNavTabs from './mainNav/MainNavTabs';
+import PrimaryNavTabs from './primaryNav/primaryNavTabs';
+
 
 const HomePage = () => {
 
@@ -44,7 +47,10 @@ const HomePage = () => {
             {/* primary tab bar */}
             <div id="primary_tab">
 
+
                 <MainNavTabs />
+                <PrimaryNavTabs />
+
 
                 <div className="tab_line"></div>
             </div>
