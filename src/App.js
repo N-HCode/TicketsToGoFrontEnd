@@ -12,11 +12,18 @@ import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
 
+// Components for Organization
+import CreateOrganization from './components/organization/CreateOrganizationPage';
+
 // Components for User
 import LoginPage from './components/user/LoginPage';
+import SignUpPage from './components/user/SignUpPage';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext'
+
+
+
 
 
 const history = createBrowserHistory();
@@ -58,8 +65,11 @@ class App extends React.Component {
             <Route exact path="/createTicket" component={CreateTicketPage} />
             <Route exact path="/edit/:id" component={EditTicketPage} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/signUp" component={SignUpPage} />
+            <Route exact path="/createOrganization" component={CreateOrganization} />
             <Route exact path="/" component={HomePage} />
-            {/* {a redirect incase we need it} */}
+
+            {/* {a redirect for anypage not listed above} */}
             <Redirect from= "/" to="/" /> 
           </Switch>
           

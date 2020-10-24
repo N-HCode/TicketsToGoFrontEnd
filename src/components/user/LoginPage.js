@@ -18,27 +18,25 @@ const LoginPage = (props) => {
         
         await loginUser(user.username, user.password)
             .then(response => setUser(response.data))
-          
-    }
-
-    const buttonForTest = () => {
-        console.log(user)
+            .then(props.history.push("/"))
     }
 
     return (
-        <div>
             <form onSubmit={onSubmit}>
-                <label htmlFor="username">Username:</label>
-                <input  type="text" required name="username" value={user.username} onChange={onChange}></input>
+                <div className="form-container">
+                    <h1>Login</h1>
+                    <hr></hr>
 
-                <label htmlFor="password">Password:</label>
-                <input  type="password" required name="password" value={user.password} onChange={onChange}></input>
+                    <label htmlFor="username">Username:</label>
+                    <input  type="text" required name="username" value={user.username} onChange={onChange}></input>
 
-                <button>Login</button>
+                    <label htmlFor="password">Password:</label>
+                    <input  type="password" required name="password" value={user.password} onChange={onChange}></input>
+
+                    <button>Login</button>
+                </div>
+             
             </form>
-
-            <button onClick={buttonForTest}>state</button>
-        </div>
     )
 }
 
