@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import SingleTab from './SingleTab';
+import SingleTab from './SinglePrimaryTab';
 
-const MainNavTabs = () => {
+const PrimaryNavTabs = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
@@ -85,4 +85,4 @@ const MainNavTabs = () => {
 
 }
 
-export default MainNavTabs;
+export default PrimaryNavTabs;

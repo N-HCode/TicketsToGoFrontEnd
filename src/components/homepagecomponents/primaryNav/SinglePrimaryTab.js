@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const SingleTab = (props) => {
+const SinglePrimaryTab = (props) => {
 
 
     return(
@@ -14,4 +14,4 @@ const SingleTab = (props) => {
 
 }
 
-export default SingleTab
+export default SinglePrimaryTab;

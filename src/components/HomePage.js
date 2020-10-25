@@ -1,16 +1,13 @@
 import React from 'react'
 import TicketList from './ticket/TicketList';
-import PrimaryNavTabs from './primaryNav/primaryNavTabs';
+import Searchbar from './homepagecomponents/mainnav/SearchBar';
+import MainNavOptions from './homepagecomponents/mainnav/MainNavOptions';
+import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
+import TemplateDropdown from './homepagecomponents/tickettemplate/TemplateDropdown';
 
 const HomePage = () => {
 
     //need the const to create the function
-    const addNewPrimaryTab = () => {
-
-    }
-
-
-
 
     return (
         //Looks like there isn't a standard for naming html/css ids and classNamees.
@@ -22,21 +19,9 @@ const HomePage = () => {
 
                 {/* main nav and search bar */}
                 <div id="main_nav">
-                    <div id="main_nav__search_container">
-                        <div id="main_nav__search_box">
-                            <input  type="text" name="" placeholder="search"/>
-                            <i className="material-icons">search</i> 
-                        </div>
 
-                    
-                        <a href="#">Advance Search</a>
-
-                    </div>
-
-                    <div id="main_nav__menu_container">
-                        <a href="#">Log out</a>
-                        <i className="material-icons">menu</i>
-                    </div>
+                    <Searchbar/>
+                    <MainNavOptions/>
 
                 </div>
             </div>
@@ -56,13 +41,7 @@ const HomePage = () => {
                 {/* template selection */}
                 <div className="template_options">
                    
-                    <select className="template_dropdown">
-                        <option value="new_template">New Template</option>
-                        <option value="medium">Test1</option>
-                        <option value="high">Test2</option>
-                        <option value="escalate">Test3</option>
-                    </select>
-                     
+                    <TemplateDropdown/>
 
   
                     <div className="template_icon_menus">
