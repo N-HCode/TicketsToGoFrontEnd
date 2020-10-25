@@ -31,7 +31,6 @@ const HomePage = () => {
             <div id="primary_tab">
 
 
-                <MainNavTabs />
                 <PrimaryNavTabs />
 
 
