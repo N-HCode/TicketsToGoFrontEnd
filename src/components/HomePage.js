@@ -3,8 +3,9 @@ import TicketList from './ticket/TicketList';
 import Searchbar from './homepagecomponents/mainnav/SearchBar';
 import MainNavOptions from './homepagecomponents/mainnav/MainNavOptions';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
-import TemplateDropdown from './homepagecomponents/tickettemplate/TemplateDropdown';
-
+import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
+import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
+import TicketTabList from './homepagecomponents/tickettab/TicketTabList';
 
 const HomePage = () => {
 
@@ -44,45 +45,18 @@ const HomePage = () => {
                 {/* template selection */}
                 <div className="template_options">
                    
+                    
                     <TemplateDropdown/>
-
+                    <CurrentTemplateOptions/>
   
-                    <div className="template_icon_menus">
-                        <div>
-                            <i className="material-icons">settings</i>
-                            <i className="material-icons">people</i>
-                        </div>
 
-                        <i className="material-icons">delete_forever</i>
-                    </div>
                 </div>
 
                 {/* tab line */}
                 <div className="tab_line"></div>
 
                 {/* ticket tabs */}
-                <div id="ticket_tab_container">
-                    <div className="single_ticket_tab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
-                    </div>
-
-                    <div className="single_ticket_tab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
-                    </div>
-
-                    <div className="single_ticket_tab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
-                    </div>
-
-                    <div className="single_ticket_tab">
-                        <p>Testfdfsafadsadasdadsfdsfsdfdss</p>
-                        <a className="material-icons">close</a>
-                    </div>
-
-                </div>
+                < TicketTabList />
 
                 {/* Ticket column container */}
                 <div id="ticket_columns_container">
@@ -98,6 +72,11 @@ const HomePage = () => {
                         </div>
 
                     </div>
+
+                    <div id="add_new_ticket_column_icon">
+                        <i className="material-icons">add_circle</i>
+                    </div>
+                   
 
 
                 </div>
