@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import SingleTab from './SingleTab';
+import SingleTab from './SinglePrimaryTab';
 
-const MainNavTabs = () => {
+const PrimaryNavTabs = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
@@ -38,18 +38,23 @@ const MainNavTabs = () => {
 
     //delete tab that will be passed down. Will be passed down because the stata
     //with the list of tabs is in this component.
-    const deleteTab = (e,index) => {
-        
+    const middleMouseDeleteTab = (e,index) => {  
+     
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
-            e.preventDefault();
+            deleteTab(e, index);
+        }
+
+    }
+
+    const deleteTab = (e,index) => {     
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
             let newTabList = navTabListState.slice(0);
             newTabList.splice(index, 1);
             setNavTabList( newTabList );
-        }
+
 
     }
 
@@ -71,7 +76,12 @@ const MainNavTabs = () => {
         <div id="primary_tab__tab_container">
 
             <div id="primary_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}>
-                {navTabListState.map((tab,i) => <SingleTab keynumber={i} deleteTab={deleteTab}/> )}
+                {navTabListState.map((tab,i) => <SingleTab 
+                keynumber={i} 
+                deleteTab={deleteTab}
+                middleMouseDeleteTab = {middleMouseDeleteTab}
+                
+                /> )}
             </div>
             
         
@@ -85,4 +95,4 @@ const MainNavTabs = () => {
 
 }
 
-export default MainNavTabs;
+export default PrimaryNavTabs;

@@ -29,6 +29,7 @@
                 color: $secondaryTextColor;
                 cursor: pointer;
                 user-select: none;
+   
             }
         }
 
@@ -40,4 +41,20 @@
         }
 
     }
+
+    #add_new_ticket_column_icon{
+
+        i{
+            color:$secondaryTextColor;
+            margin-left: 20px;
+            user-select: none;
+            cursor: pointer;
+
+            &:active{
+                color: $activeTextColor;
+            }
+        }
+
+    }
+
 }
