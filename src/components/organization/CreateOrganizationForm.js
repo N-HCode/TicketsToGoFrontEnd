@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { CreateOrganiaiton, createOrganization } from '../../services/OrganizationService'
 
-const CreateOrganizationForm = () => {
+const CreateOrganizationForm = (props) => {
     const [ organization, setOrganization]= useState({
         organizationName: "",
         isForeignAddress: false,
@@ -8,7 +9,7 @@ const CreateOrganizationForm = () => {
         state: "",
         streetAddress: "",
         zipcode: "",
-        country: "",
+        country: "United States of America",
         organizationPhoneNumber: ""
     })
 
@@ -29,8 +30,21 @@ const CreateOrganizationForm = () => {
         })
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log(props.user)
+        createOrganization(organization)
+        .then(response => console.log(response.data))
+        .then()
+    }
+
+    const checkState = (e) => {
+        e.preventDefault()
+        console.log(organization)
+    }
+
     return (
-        <form>
+        <form >
             <div className="form-container">
                 <h1>Create Organization</h1>
                 <p>Please fill in this form to register your organization.</p>
@@ -38,7 +52,7 @@ const CreateOrganizationForm = () => {
                 <hr></hr>
 
                 <label htmlFor="name">Organization Name</label>
-                <input type="text" onChange={onChange} ></input>
+                <input type="text" name="organizationName" onChange={onChange} required ></input>
 
                 <label htmlFor="foreign">Foreign Address?</label>
                 <select name="isForeignAddress" onChange={formChange}> 
@@ -53,23 +67,29 @@ const CreateOrganizationForm = () => {
                     : 
                     <div>
                       <label htmlFor="city">City</label>
-                      <input type="text" onChange={onChange}></input>
+                      <input type="text" name="city" onChange={onChange} required ></input>
   
                       <label htmlFor="state">State</label>
-                      <input type="text" onChange={onChange}></input>
+                      <input type="text" name="state" onChange={onChange} required ></input>
   
                       <label htmlFor="street">Street Address</label>
-                      <input type="text" onChange={onChange}></input>
+                      <input type="text" name="streetAddress" onChange={onChange} required ></input>
   
                       <label htmlFor="zip">ZipCode</label>
-                      <input type="text" onChange={onChange}></input>
+                      <input type="text" name="zipcode" onChange={onChange} required ></input>
+
+                      <label htmlFor="country">Country</label>
+                      <select name="country" onChange={onChange}> 
+                        <option value="United States of America">United States of America</option>
+                      </select>
   
                       <label htmlFor="phone">Phone Number</label>
-                      <input type="tel" pattern="[0-9][1]-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1-800-333-3333" onChange={onChange}></input>
+                      <input type="tel" name="organizationPhoneNumber" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1-800-333-3333" onChange={onChange} required ></input>
                     </div>
                 }
                 
-                <button type="submit">Create Organization</button>
+                <button onClick={onSubmit}>Create Organization</button>
+                <button onClick={checkState}>check State</button>
             </div>
         </form>
     )

@@ -9,7 +9,7 @@ const CreateOrganization = () => {
     return (
         <div>
             {user.username ? user.userRole === ("admin") ? 
-                    <CreateOrganizationForm/>
+                    <CreateOrganizationForm user={user} />
                     : <h4>Not admin</h4> 
                 
                 : <h4>Not logged in</h4>}

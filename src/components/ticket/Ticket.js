@@ -9,7 +9,7 @@ const Ticket = (props) => {
 
     // Showing the parts from each Ticket Object that will be printed out here
     return (
-        <div class="single_ticket">
+        <div className="single_ticket">
             <Link to={`/edit/${ticket.ticketNumber}`}><h4>{ticket.subject}</h4></Link>
             <p>Ticket #{ticket.ticketNumber}</p>
             {/* <p>Owner: {ticket.ticketOwner.firstName}</p> */}
