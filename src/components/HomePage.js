@@ -5,6 +5,7 @@ import MainNavOptions from './homepagecomponents/mainnav/MainNavOptions';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplate/TemplateDropdown';
 
+
 const HomePage = () => {
 
     //need the const to create the function
@@ -29,7 +30,10 @@ const HomePage = () => {
             {/* primary tab bar */}
             <div id="primary_tab">
 
+
+                <MainNavTabs />
                 <PrimaryNavTabs />
+
 
                 <div className="tab_line"></div>
             </div>
