@@ -1,0 +1,24 @@
+.single_ticket{
+    background-color: #816161;
+    border: 3px solid #612222;
+    font-family: $mainTextStyle ;
+    padding: 0px 0px 0px 5px;
+    margin-bottom: 5px;
+
+    a{
+        color: white;
+        text-decoration: none;
+        font-family: $mainTextStyle ;
+        
+    }
+
+    h4{
+        margin: 0px 0px 5px 0px;
+        font-weight: normal;
+        
+    }
+
+    p{
+        margin: 0px 0px 5px 0px;   
+    }
+}
