@@ -42,6 +42,7 @@ const TicketTabList = () => {
      
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
+            e.preventDefault();
             deleteTab(e, index);
         }
 

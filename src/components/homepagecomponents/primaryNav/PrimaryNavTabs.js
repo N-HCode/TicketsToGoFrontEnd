@@ -36,12 +36,13 @@ const PrimaryNavTabs = () => {
 
     }
 
-    //delete tab that will be passed down. Will be passed down because the stata
+    //delete tab that will be passed down. Will be passed down because the state
     //with the list of tabs is in this component.
     const middleMouseDeleteTab = (e,index) => {  
      
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
+            e.preventDefault();
             deleteTab(e, index);
         }
 

@@ -1,11 +1,11 @@
-import React from 'react'
-import TicketList from './ticket/TicketList';
+import React from 'react';
 import Searchbar from './homepagecomponents/mainnav/SearchBar';
 import MainNavOptions from './homepagecomponents/mainnav/MainNavOptions';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from './homepagecomponents/tickettab/TicketTabList';
+import TickColumnList from './homepagecomponents/ticketcolumns/TicketColumnList';
 
 const HomePage = () => {
 
@@ -59,27 +59,7 @@ const HomePage = () => {
                 < TicketTabList />
 
                 {/* Ticket column container */}
-                <div id="ticket_columns_container">
-                    <div className="single_ticket_column">
-                        <div className="column_title">
-                            <i className="material-icons">edit</i>
-                            <p>TITLE HERE</p>
-                            <i className="material-icons">add</i>
-                        </div>
-                        <div className="ticket_list_container">
-                            Template/TicketList
-                            <TicketList />
-                        </div>
-
-                    </div>
-
-                    <div id="add_new_ticket_column_icon">
-                        <i className="material-icons">add_circle</i>
-                    </div>
-                   
-
-
-                </div>
+                <TickColumnList />
             </div>
 
             {/* Footer if needed*/}
