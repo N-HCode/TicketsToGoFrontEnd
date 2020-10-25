@@ -59,23 +59,18 @@ const CreateTicketPage = (props) => {
     }, [ticket])
 
     return (
-        <div>
-            This is the create ticket page
-            {/* {for subject} */}
             <form onSubmit={handleCreate}>
-                <div>
+                <div className="form-container">
+                    <h1>Create a new ticket</h1>
+                    <p>Please fill in this form to create a new ticket.</p>
+                    <hr></hr>
+
                     <label htmlFor="subject">Subject:</label>
                     <input type="text" name="subject"></input>
-                </div>
-
-                {/* {for description} */}
-                <div>
+            
                     <label htmlFor="description">Description:</label>
                     <textarea name="description" rows="3" cols="40"></textarea>
-                </div>
-
-                {/* {for priority} */}
-                <div>
+               
                     <label htmlFor="priority">Priority:</label>
                     <select name="priority">
                         <option value="low">Low</option>
@@ -83,30 +78,20 @@ const CreateTicketPage = (props) => {
                         <option value="high">High</option>
                         <option value="escalate">Escalate</option>
                     </select>
-                </div>
-
-                 {/* {for description} */}
-                <div>
+                
                     <label htmlFor="contactName">Contact Name:</label>
                     <input  type="text" required name="userContact"></input>
-                </div>
-
-                {/* {for description} */}
-                <div>
+                
                     <label htmlFor="contactNumber">Contact Number:</label>
                     <input  type="text" required name="userPhoneNumber"></input>
-                </div>
-
-                 {/* {for description} */}
-                 <div>
+            
                     <label htmlFor="contactEmail">Contact Email:</label>
                     <input  type="text" required name="userEmail"></input>
-                </div>
+               
+                    <button type="submit" >Create</button>
 
-                  {/* {button for submitting the form } */}
-                <button type="submit" >Create</button>
+                </div>
             </form>
-        </div>
     )
 }
 
