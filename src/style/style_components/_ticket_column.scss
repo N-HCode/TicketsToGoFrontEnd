@@ -5,7 +5,7 @@
     .single_ticket_column{
         
         color:$activeTextColor;
-        
+        margin-right: 30px;
        
         .column_title{
             
@@ -46,7 +46,7 @@
 
         i{
             color:$secondaryTextColor;
-            margin-left: 20px;
+
             user-select: none;
             cursor: pointer;
 
