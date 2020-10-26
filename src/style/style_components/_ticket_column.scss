@@ -1,11 +1,23 @@
 #ticket_columns_container{
-    margin-top: 50px;
-    display: flex;
+
+    margin-top: 20px;
+ 
+
+    #ticket_column_list{     
+        display: flex;
+        overflow-x: auto;
+      
+    }
+
+
+
+
 
     .single_ticket_column{
-        
+        margin-right: 20px;
         color:$activeTextColor;
-        margin-right: 30px;
+        
+        
        
         .column_title{
             
@@ -34,7 +46,7 @@
         }
 
         .ticket_list_container{
-
+            width: 275px;
             background-color: $secondaryBackgroundColor;
             padding: 10px;
             height: auto;
@@ -43,6 +55,8 @@
     }
 
     #add_new_ticket_column_icon{
+        display: flex;
+        align-items: center;
 
         i{
             color:$secondaryTextColor;
@@ -53,6 +67,12 @@
             &:active{
                 color: $activeTextColor;
             }
+        }
+
+        p{
+            color: $secondaryTextColor;
+            margin-left: 5px;
+            font-size: 18px;
         }
 
     }
