@@ -33,8 +33,13 @@
             width: 275px;
             height: 45px;
 
+            
+
             p{
                 font-size: 22px;
+                width: 175px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             i{

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // The Router library used to navigate the site
-import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // Components for Tickets
@@ -21,9 +21,12 @@ import SignUpPage from './components/user/SignUpPage';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext';
+
+// Context for Organization
 import { OrganizationProvider } from './components/context/OrganizationContext';
 
-
+// Context for TicketTab
+import { TicketTabContextProvider } from './components/context/TicketTabContext';
 
 
 const history = createBrowserHistory();
@@ -54,26 +57,29 @@ class App extends React.Component {
       <div>
       {/* {this is the router for changing pages on the site} */}
       <BrowserRouter history={history}>
-        <UserProvider>  
+        <UserProvider>
         <OrganizationProvider>
-          
           {/* {importing the Navbar component to navigate} */}
           <Navbar/>
 
-          {/* {creating a switch to swap out the component to show when on different pages} */}
-          <Switch>
-            {/* {pages and the component assgined to them} */}
-            <Route exact path="/createTicket" component={CreateTicketPage} />
-            <Route exact path="/edit/:id" component={EditTicketPage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/signUp" component={SignUpPage} />
-            <Route exact path="/createOrganization" component={CreateOrganization} />
-            <Route exact path="/" component={HomePage} />
+          {/* TicketTabContext to hold the ticket tabs*/}
+          <TicketTabContextProvider>
 
-            {/* {a redirect for anypage not listed above} */}
-            <Redirect from= "/" to="/" /> 
-          </Switch>
+            {/* {creating a switch to swap out the component to show when on different pages} */}
+            <Switch>
+              {/* {pages and the component assgined to them} */}
+              <Route exact path="/createTicket" component={CreateTicketPage} />
+              <Route exact path="/edit/:id" component={EditTicketPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/signUp" component={SignUpPage} />
+              <Route exact path="/createOrganization" component={CreateOrganization} />
+              <Route exact path="/" component={HomePage} />
 
+              {/* {a redirect for anypage not listed above} */}
+              <Redirect from= "/" to="/" /> 
+            </Switch>
+
+            </TicketTabContextProvider>
           </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
