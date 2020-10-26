@@ -20,8 +20,8 @@ import LoginPage from './components/user/LoginPage';
 import SignUpPage from './components/user/SignUpPage';
 
 // Context for User
-import { UserProvider } from './components/context/UserContext'
-
+import { UserProvider } from './components/context/UserContext';
+import { OrganizationProvider } from './components/context/OrganizationContext';
 
 
 
@@ -54,8 +54,9 @@ class App extends React.Component {
       <div>
       {/* {this is the router for changing pages on the site} */}
       <BrowserRouter history={history}>
-        <UserProvider>
-
+        <UserProvider>  
+        <OrganizationProvider>
+          
           {/* {importing the Navbar component to navigate} */}
           <Navbar/>
 
@@ -72,7 +73,8 @@ class App extends React.Component {
             {/* {a redirect for anypage not listed above} */}
             <Redirect from= "/" to="/" /> 
           </Switch>
-          
+
+          </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
     </div>

@@ -26,7 +26,7 @@ const TicketList = () => {
             window.removeEventListener('tickets', ticketList)
         }
     })
-
+            
        // mapping through the array to create a ticket component for each object in the array
     return (
         <div>
