@@ -1,4 +1,7 @@
+//The variables will be needed to be imported first.
+//This is because the other components will use the variables.
 @import './style_components/variables.scss';
+@import './style_components/main_container';
 @import './style_components/header_container.scss';
 @import './style_components/ticket_column';
 @import './style_components/tab_line.scss';

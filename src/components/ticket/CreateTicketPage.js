@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { createTicket } from '../../services/TicketService';
+import { UserContext } from '../context/UserContext';
 
 // useHistory method for redirecting back to pages
 
 const CreateTicketPage = (props) => {
+    
+    const [user] = useContext(UserContext);
     const [ticket, setTicket] = useState({
         subject: "",
         description: "",
@@ -26,9 +29,6 @@ const CreateTicketPage = (props) => {
                 subject: event.target.subject.value,
                 description: event.target.description.value,
                 priority: event.target.priority.value,
-                userContact: event.target.userContact.value,
-                userPhoneNumber: event.target.userPhoneNumber.value,
-                userEmail: event.target.userEmail.value
             })
         }else{
             return;
@@ -44,7 +44,7 @@ const CreateTicketPage = (props) => {
         // then call the createTicket service/api
         // afterwards go back to home page after 1 second after getting a response from api
             {  
-                createTicket(ticket)
+                createTicket(user.userId, ticket)
                 .then( 
                     props.history.push("/")
             )
@@ -79,15 +79,6 @@ const CreateTicketPage = (props) => {
                         <option value="escalate">Escalate</option>
                     </select>
                 
-                    <label htmlFor="contactName">Contact Name:</label>
-                    <input  type="text" required name="userContact"></input>
-                
-                    <label htmlFor="contactNumber">Contact Number:</label>
-                    <input  type="text" required name="userPhoneNumber"></input>
-            
-                    <label htmlFor="contactEmail">Contact Email:</label>
-                    <input  type="text" required name="userEmail"></input>
-               
                     <button type="submit" >Create</button>
 
                 </div>
@@ -96,3 +87,16 @@ const CreateTicketPage = (props) => {
 }
 
 export default CreateTicketPage
+
+   // userContact: event.target.userContact.value,
+                // userPhoneNumber: event.target.userPhoneNumber.value,
+                // userEmail: event.target.userEmail.value
+                   {/* <label htmlFor="contactName">Contact Name:</label>
+                    <input  type="text" required minLength="5" name="userContact"></input>
+                
+                    <label htmlFor="contactNumber">Contact Number:</label>
+                    <input  type="text" required name="userPhoneNumber"></input>
+            
+                    <label htmlFor="contactEmail">Contact Email:</label>
+                    <input  type="email" required name="userEmail"></input> */}
+               

@@ -23,7 +23,7 @@
             background-color: $secondaryBackgroundColor;
             border: 1px solid;
             width: 200px;
-            height: 20px;
+            height: 25px;
             font-size: 14px;
             padding-left: 5px;
             margin: 0px;
@@ -31,6 +31,7 @@
             align-items: center;
 
             input{
+                display: flex;
                 background-color: $secondaryBackgroundColor;
                 border: 0px solid;
                 color: $secondaryTextColor;
@@ -38,6 +39,7 @@
                 //this makes it so the search go through the full bar
                 //it also let you type more than the width of the bar
                 flex: auto;
+
             }
 
             i{

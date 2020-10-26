@@ -14,7 +14,7 @@
         //use border-box as it help prevent padding from
         //adding to the element's width/height
         box-sizing: border-box;
-        margin-left: 5px;
+        margin-right: 5px;
         height: 30px;
         width: 125px;
         padding-left: 5px;
@@ -25,7 +25,7 @@
         font-family: $mainTextStyle;
         font-size: 14px;
 
-        a{
+        i{
             //Makes it so the user cannot highlight the icon
             user-select: none;
             font-size: 12px;
