@@ -8,16 +8,18 @@
         display: flex;
         overflow-x: auto;
         scrollbar-width: thin;
-        transform: rotateX(180deg);
+        //have to rotate 180 to get the scrollbar on top
+        transform:rotateX(180deg);
     }
    
 
     .single_ticket_column{
         margin-right: 20px;
         color:$activeTextColor;
-        transform: rotateX(180deg);
+        //when we rotate 180 for the scrollbar, we rotate the elements too
+        //we have to rotate them back.
+        transform:rotateX(180deg);
         
-       
         .column_title{
             
             background-color: $columnTitleColor;
