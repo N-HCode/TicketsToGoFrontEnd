@@ -51,7 +51,7 @@ const TicketColumnList = (props) => {
 
     }
 
-
+ 
     return(
         <div id="ticket_columns_container">
 
@@ -59,7 +59,8 @@ const TicketColumnList = (props) => {
                 <i className="material-icons" onClick={addNewColumn}>add_circle</i>
                 <p>add column</p>
             </div>
-
+         
+            
             <div id="ticket_column_list">
                 {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
                     keynumber={i}              
