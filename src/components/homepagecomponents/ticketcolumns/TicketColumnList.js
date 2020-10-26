@@ -6,15 +6,19 @@ const TicketColumnList = (props) => {
 
     const [ticketColumnListState, setticketColumnList] = useState(["hello", "hello", "hello"]);
 
-    const addNewPrimaryTab = () => {
+    const addNewColumn = () => {
         
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
-        // //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        // let newTabList = navTabListState.slice(0);
-        // newTabList.push("hello");
-        // setNavTabList( newTabList );
+        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
+        //
+       
+            let newColumnList = ticketColumnListState.slice(0);
+            newColumnList.push("hello");
+            setticketColumnList( newColumnList );
+
+
     }
 
 
@@ -51,14 +55,19 @@ const TicketColumnList = (props) => {
     return(
         <div id="ticket_columns_container">
 
-            {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
-                keynumber={i}              
-            /> )}
-
-
             <div id="add_new_ticket_column_icon">
-                <i className="material-icons">add_circle</i>
+                <i className="material-icons" onClick={addNewColumn}>add_circle</i>
+                <p>add column</p>
             </div>
+
+            <div id="ticket_column_list">
+                {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
+                    keynumber={i}              
+                /> )}
+            </div>
+
+
+
         
 
 
