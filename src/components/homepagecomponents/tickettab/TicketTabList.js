@@ -1,41 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import SingleTicketTab from './SingleTicketTab';
+import {TicketTabContext} from '../../context/TicketTabContext';
 
 const TicketTabList = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
-    const [ticketTabListState, setTicketTabList] = useState(["hello", "hello", "hello"]);
+    const [ticketTabListState, setTicketTabList] = useContext(TicketTabContext);
     
-    const addNewTicketTab = () => {
-        
-        //The setState will only re-render if a new object is setted.
-        //Thus we have to create a new array from the old one.
-        //one way to do this is to use the .slice(0)
-        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        let newTicketTabList = ticketTabListState.slice(0);
-        newTicketTabList.push("hello");
-        setTicketTabList( newTicketTabList );
-    }
-
-
-    //need to use JS to implement a mouse wheel scrolling function.
-    const mouseWheelScroll = (e) => {
-        //this is to prevent the default vertical scroll.
-        e.preventDefault();
-
-        //this is to get the scrollable container
-        var container = document.getElementById("ticket_tab__horizontal_scroll_container");
-        //this is a scroll event
-        container.scrollTo({
-            //The deltaY property returns a positive value when scrolling down, and a negative value when scrolling up, otherwise 0.
-            left: container.scrollLeft + e.deltaY*85,
-            behavior: "smooth"
-        })
-        console.log(e.deltaY);
-
-    }
-
     //delete tab that will be passed down. Will be passed down because the state
     //with the list of tabs is in this component.
     const middleMouseDeleteTab = (e,index) => {  
@@ -67,8 +39,8 @@ const TicketTabList = () => {
     //we just need the component to re-render, we can most likely use
     //the userEffect hook instead of cloning the array.
     useEffect(() =>{
-        
-    }, [])
+        window.addEventListener("test", TicketTabContext)
+    })
 
     
     
