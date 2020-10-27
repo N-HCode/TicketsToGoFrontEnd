@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
-import { signUp } from '../../services/UserService'
+import React, { useState, useContext } from 'react'
+import { signUp, addOrganizationToUser } from '../../services/UserService'
+import { OrganizationContext } from "../context/OrganizationContext"
 
 const SignUpPage = (props) => {
+
+    const [ organization ] = useContext(OrganizationContext);
+
     const [user, setUser] = useState({
         username:"",
         password:"",
@@ -23,9 +27,11 @@ const SignUpPage = (props) => {
         event.preventDefault();
 
         await signUp(user)
-            .then(response => setUser(response.data))
-            .then(alert("success please sign in"))
+            .then( response => response.data.userId)
+            .then( userId => addOrganizationToUser(userId, organization.id))
+            .then(alert("success"))
             .then(props.history.push("/"))
+            .catch(alert);
     }
     
     return (

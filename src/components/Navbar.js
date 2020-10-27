@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { UserContext } from './context/UserContext'
+import { OrganizationContext } from './context/OrganizationContext'
 
 // NavLinks for styling and isActive option
 import {NavLink} from 'react-router-dom'
@@ -7,8 +8,10 @@ import {NavLink} from 'react-router-dom'
 const Navbar = () => {
 
     const [user] = useContext(UserContext);
+    const [organization ] = useContext(OrganizationContext);
     const buttonForTest = () => {
         console.log(user)
+        console.log(organization)
     }
 
     return (
@@ -74,6 +77,20 @@ const Navbar = () => {
                             createOrganization
                     </NavLink>
                 </li>
+
+                <li>
+                    <NavLink 
+                        to="/users"
+                        // {this is for when css gets made but for now using activeStyle
+                        className="inactive" activeClassName="active"
+                        activeStyle={{ color: 'teal' }}
+                        style={{color: 'white'}}
+                        >
+                            users
+                    </NavLink>
+                </li>
+
+                
             </ul>
             <button onClick={buttonForTest}>state of user</button>
         </nav>
