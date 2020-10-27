@@ -54,7 +54,7 @@ const SinglePrimaryTab = (props) => {
             </div>
             <div className="ticket_list_container">
                 Template/TicketList
-                <TicketList />
+                {/* <TicketList /> */}
             </div>
 
         </div>

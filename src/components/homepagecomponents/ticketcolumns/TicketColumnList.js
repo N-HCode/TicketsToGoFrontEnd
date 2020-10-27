@@ -31,10 +31,8 @@ const TicketColumnList = (props) => {
         }
         
         //this is a scroll event
-        container.scrollLeft += e.deltaY*85;
-        console.log("scroll is: " + e.deltaY*85);
-   
-        console.log(container.scrollLeft);
+        container.scrollLeft += e.deltaY*150;
+ 
    
 
     }
