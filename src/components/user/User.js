@@ -8,7 +8,7 @@ const User = (props) => {
 
           <label htmlFor="role">UserRole:</label>
           <select name="userRole"> 
-            <otpion value={props.user.userRole || ""} >{props.user.userRole}</otpion>
+            <option value={props.user.userRole} >{props.user.userRole}</option>
             <option value="standard">standard</option>
             <option value="admin">admin</option>
           </select>

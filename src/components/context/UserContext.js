@@ -4,6 +4,9 @@ const UserContext = createContext();
 
 const UserProvider = (props) => {
     const [ user, setUser ] = useState({
+        details:{},
+        organization:{},
+        tickets:{}
     })
 
     return (

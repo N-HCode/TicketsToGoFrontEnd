@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { signUp, addOrganizationToUser } from '../../services/UserService'
-import { OrganizationContext } from "../context/OrganizationContext"
+import { UserContext } from "../context/UserContext"
 
 const SignUpPage = (props) => {
 
-    const [ organization ] = useContext(OrganizationContext);
+    const [ context ] = useContext(UserContext);
 
     const [user, setUser] = useState({
         username:"",
@@ -28,7 +28,7 @@ const SignUpPage = (props) => {
 
         await signUp(user)
             .then( response => response.data.userId)
-            .then( userId => addOrganizationToUser(userId, organization.id))
+            .then( userId => addOrganizationToUser(userId, context.organization.id))
             .then(alert("success"))
             .then(props.history.push("/"))
             .catch(alert);
