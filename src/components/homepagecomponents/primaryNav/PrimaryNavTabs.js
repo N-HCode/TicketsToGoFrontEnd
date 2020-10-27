@@ -25,14 +25,17 @@ const PrimaryNavTabs = () => {
         e.preventDefault();
 
         //this is to get the scrollable container
-        var container = document.getElementById("primary_tab__horizontal_scroll_container");
-        //this is a scroll event
-        container.scrollTo({
-            //The deltaY property returns a positive value when scrolling down, and a negative value when scrolling up, otherwise 0.
-            left: container.scrollLeft + e.deltaY*85,
-            behavior: "smooth"
-        })
-        console.log(e.deltaY);
+        if(container == undefined){
+            var container = document.getElementById("primary_tab__horizontal_scroll_container");
+        }
+
+        container.scrollLeft += e.deltaY*85;
+        // //this is a scroll event
+        // container.scrollTo({
+        //     //The deltaY property returns a positive value when scrolling down, and a negative value when scrolling up, otherwise 0.
+        //     left: container.scrollLeft + e.deltaY*85,
+        // })
+        
 
     }
 
@@ -76,7 +79,7 @@ const PrimaryNavTabs = () => {
 
         <div id="primary_tab__tab_container">
 
-            <div id="primary_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}>
+            <div id="primary_tab__horizontal_scroll_container" onWheel={mouseWheelScroll}>
                 {navTabListState.map((tab,i) => <SingleTab 
                 keynumber={i} 
                 deleteTab={deleteTab}

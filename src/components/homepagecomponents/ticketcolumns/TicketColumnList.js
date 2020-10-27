@@ -5,18 +5,16 @@ import SingleTicketColumn from './SingleTicketColumn';
 const TicketColumnList = (props) => {
 
     const [ticketColumnListState, setticketColumnList] = useState(["hello", "hello", "hello"]);
-
+    var container;
     const addNewColumn = () => {
         
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        //
-       
-            let newColumnList = ticketColumnListState.slice(0);
-            newColumnList.push("hello");
-            setticketColumnList( newColumnList );
+        let newColumnList = ticketColumnListState.slice(0);
+        newColumnList.push("hello");
+        setticketColumnList( newColumnList );
 
 
     }
@@ -28,14 +26,16 @@ const TicketColumnList = (props) => {
         e.preventDefault();
 
         //this is to get the scrollable container
-        // var container = document.getElementById("primary_tab__horizontal_scroll_container");
-        // //this is a scroll event
-        // container.scrollTo({
-        //     //The deltaY property returns a positive value when scrolling down, and a negative value when scrolling up, otherwise 0.
-        //     left: container.scrollLeft + e.deltaY*85,
-        //     behavior: "smooth"
-        // })
-        // console.log(e.deltaY);
+        if(container == undefined){
+            container = document.getElementById("ticket_column_list");
+        }
+        
+        //this is a scroll event
+        container.scrollLeft += e.deltaY*85;
+        console.log("scroll is: " + e.deltaY*85);
+   
+        console.log(container.scrollLeft);
+   
 
     }
 
@@ -51,6 +51,10 @@ const TicketColumnList = (props) => {
 
     }
 
+    useEffect(() =>{
+        
+    }, [])
+
  
     return(
         <div id="ticket_columns_container">
@@ -61,15 +65,11 @@ const TicketColumnList = (props) => {
             </div>
          
             
-            <div id="ticket_column_list">
+            <div id="ticket_column_list" onWheel={mouseWheelScroll}>
                 {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
                     keynumber={i}              
                 /> )}
             </div>
-
-
-
-        
 
 
         </div>

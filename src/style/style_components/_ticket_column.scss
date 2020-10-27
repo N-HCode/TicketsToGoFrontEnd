@@ -10,6 +10,7 @@
         scrollbar-width: thin;
         //have to rotate 180 to get the scrollbar on top
         transform:rotateX(180deg);
+        scroll-behavior: smooth;
     }
    
 

@@ -39,8 +39,8 @@ const TicketTabList = () => {
     //we just need the component to re-render, we can most likely use
     //the userEffect hook instead of cloning the array.
     useEffect(() =>{
-        window.addEventListener("test", TicketTabContext)
-    })
+     
+    },[])
 
     
     
