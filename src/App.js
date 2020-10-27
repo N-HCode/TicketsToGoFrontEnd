@@ -18,6 +18,7 @@ import CreateOrganization from './components/organization/CreateOrganizationPage
 // Components for User
 import LoginPage from './components/user/LoginPage';
 import SignUpPage from './components/user/SignUpPage';
+import UserList from './components/user/UserList';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext';
@@ -27,6 +28,7 @@ import { OrganizationProvider } from './components/context/OrganizationContext';
 
 // Context for TicketTab
 import { TicketTabContextProvider } from './components/context/TicketTabContext';
+
 
 
 const history = createBrowserHistory();
@@ -73,6 +75,7 @@ class App extends React.Component {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/signUp" component={SignUpPage} />
               <Route exact path="/createOrganization" component={CreateOrganization} />
+              <Route exact path="/users" component={UserList} />
               <Route exact path="/" component={HomePage} />
 
               {/* {a redirect for anypage not listed above} */}

@@ -8,7 +8,7 @@ const signUp = (user) => {
     return axios.post("http://localhost:8080/user/create", user)
 }
 
-const addOrganizationToUser = (id, organization) => {
-    return axios.post(`http://localhost:8080/user/organization?id=${id}`, organization)
+const addOrganizationToUser = (id, organizationId) => {
+    return axios.post(`http://localhost:8080/user/organization?id=${id}&organizationId=${organizationId}`)
 }
 export  { loginUser, signUp, addOrganizationToUser};
