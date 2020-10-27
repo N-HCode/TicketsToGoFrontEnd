@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import User from './User'
-import { OrganizationContext } from "../context/OrganizationContext"
+import { UserContext } from "../context/UserContext"
 
 const UserList = () => {
-    const [ organization ] = useContext(OrganizationContext);
-    const userList = organization.users;
+    const [ user ] = useContext(UserContext);
+    const userList = user.organization.users;
     const button = () => {
         console.log(userList)
     }

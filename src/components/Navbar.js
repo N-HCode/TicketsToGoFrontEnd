@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { UserContext } from './context/UserContext'
-import { OrganizationContext } from './context/OrganizationContext'
 
 // NavLinks for styling and isActive option
 import {NavLink} from 'react-router-dom'
@@ -8,10 +7,8 @@ import {NavLink} from 'react-router-dom'
 const Navbar = () => {
 
     const [user] = useContext(UserContext);
-    const [organization ] = useContext(OrganizationContext);
     const buttonForTest = () => {
         console.log(user)
-        console.log(organization)
     }
 
     return (
@@ -92,7 +89,7 @@ const Navbar = () => {
 
                 
             </ul>
-            <button onClick={buttonForTest}>state of user</button>
+            <button onClick={buttonForTest}>state of user and organization</button>
         </nav>
     )
 }

@@ -1,36 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Ticket from './Ticket';
-import { findAll } from '../../services/TicketService';
+import axios from 'axios';
+
+import { UserContext } from '../context/UserContext';
 
 const TicketList = () => {
     // created temp data for testing because the plan is to use the Context Hook here to pull in the data
     // to pass down to each individual ticket component
 
     // The state that will hold the data from api
-    const [ticketList, setTicketList] = useState([]);
+    const [ticketList, setTicketList] = useContext(UserContext)
 
-    // Component did mount and update useEffect to watch for the length value of ticketList
+    // Component did Mount
     useEffect(() => {
-        // add a listener for ticketList
-        let isMounted = true;
-        window.addEventListener('tickets', ticketList)
+        // empty dependancy array to mount component one time
         
-        if(isMounted){
-            findAll()
-            .then( data => setTicketList(data) )
-        }
-
-        // remove when component switches out
-        return () => {
-            isMounted = false;
-            window.removeEventListener('tickets', ticketList)
-        }
-    })
+        // empty dependancy array to mount component one time
+    },[])
             
+    // Update this component every 60 seconds 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // update home page every 60 sec but not in use for now
+            // axios.get(findAll)
+            // .then( response => setTicketList(response.data) )
+        }, 60000);
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
+
        // mapping through the array to create a ticket component for each object in the array
     return (
         <div>
-            {ticketList.length > 0 ? ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
+            {ticketList.tickets.length > 0 ? ticketList.tickets.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
         </div>
     )
 }
