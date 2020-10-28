@@ -64,6 +64,10 @@ const EditTicketPage = (props) => {
         })
     }
 
+    const testButton = () => {
+        console.log(ticket)
+    }
+
     return (
         <form>
             <div className="form-container">
@@ -88,12 +92,22 @@ const EditTicketPage = (props) => {
                     <option value="high">High</option>
                     <option value="escalate">Escalate</option>
                 </select>
-   
+                
+                {/* Status */}
+                <label htmlFor="status">Status:</label>
+                <select name="status" value={ticket.status} onChange={onChange}>
+                    <option value="new">new</option>
+                    <option value="in progress">in progress</option>
+                    <option value="resolved">resolved</option>
+                </select>
+
                 {/* button for saving changes to ticket */}
                 <button type="submit" onClick={onSave}>Save</button>
 
                 {/* button for deleting the ticket  */}
                 <button type="button" onClick={onDelete}>Delete</button>
+
+                <button type="button" onClick={testButton}>check</button>
             </div>
         </form>
     )
