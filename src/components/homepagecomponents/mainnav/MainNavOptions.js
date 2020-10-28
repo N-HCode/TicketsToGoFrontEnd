@@ -33,7 +33,6 @@ const MainNavOptions = () => {
                     <NavLink to="/createOrganization" className="dropdown_menu_item">Create Organization</NavLink>
                     <NavLink to="#" className="dropdown_menu_item">Log out</NavLink>
 
-
                 </div>
             </NavDropDown>
             
