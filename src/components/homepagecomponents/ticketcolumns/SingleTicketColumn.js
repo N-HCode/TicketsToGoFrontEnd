@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
 import { UserContext } from '../../context/UserContext'
 
 const SinglePrimaryTab = (props) => {
 
+    const [ user ] = useContext(UserContext);
+    const { a, b, tickets} = user;
+
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        title: "New",
+        title: "new",
         isEdit: false
         
     });
-
+    
     //this is used on the pencil icon to edit the title of the
     //columns
     const editTitle = () => {
@@ -30,12 +33,15 @@ const SinglePrimaryTab = (props) => {
             ...ticketColumnTitle,
             title: e.target.value
         })
+        // setTicketList(user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title))
     }
 
+    const checkTickets = () => {
+        console.log(tickets)
+    }
     return(
         <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
            
-
             <div className="column_title">
                 <i className="material-icons" onClick={editTitle}>edit</i>
                 {ticketColumnTitle.isEdit ?
@@ -55,13 +61,18 @@ const SinglePrimaryTab = (props) => {
             </div>
             <div className="ticket_list_container">
                 Template/TicketList
-                <TicketList />
+                { 
+                    tickets.length > 0 && 
+                        <TicketList 
+                        ticketList={ user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
+                    />
+                    
+                }
             </div>
-
+                
+                <button onClick={checkTickets}>check tickets</button>
         </div>
     );
-
-
 }
 
 export default SinglePrimaryTab;

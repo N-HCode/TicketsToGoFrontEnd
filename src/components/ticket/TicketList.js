@@ -1,20 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, {useEffect } from 'react'
 import Ticket from './Ticket';
-import axios from 'axios';
 
-import { UserContext } from '../context/UserContext';
-
-const TicketList = () => {
+const TicketList = (props) => {
     // created temp data for testing because the plan is to use the Context Hook here to pull in the data
     // to pass down to each individual ticket component
 
-    // The state that will hold the data from api
-    const [ticketList, setTicketList] = useContext(UserContext)
+    // The state that will hold the data 
 
     // Component did Mount
     useEffect(() => {
         // empty dependancy array to mount component one time
-        
+        console.log(props)
         // empty dependancy array to mount component one time
     },[])
             
@@ -33,7 +29,7 @@ const TicketList = () => {
        // mapping through the array to create a ticket component for each object in the array
     return (
         <div>
-            {ticketList.tickets.length > 0 ? ticketList.tickets.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
+            {props.ticketList.length > 0 ? props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
         </div>
     )
 }
