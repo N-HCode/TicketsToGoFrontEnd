@@ -6,9 +6,17 @@ import {NavLink} from 'react-router-dom'
 
 const Navbar = () => {
 
-    const [user] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
     const buttonForTest = () => {
         console.log(user)
+    }
+
+    const logOut = () => {
+        setUser({
+            details:{},
+            organization:{},
+            tickets:{}
+        })
     }
 
     return (
@@ -90,6 +98,7 @@ const Navbar = () => {
                 
             </ul>
             <button onClick={buttonForTest}>state of user and organization</button>
+            <button onClick={logOut}>LogOut</button>
         </nav>
     )
 }

@@ -13,9 +13,7 @@ const CreateTicketPage = (props) => {
         subject: "",
         description: "",
         priority: "low",
-        userContact:"",
-        userPhoneNumber:"",
-        userEmail:""
+        status: "new"
     });
 
      // the method that runs when the create button is hit
@@ -32,7 +30,7 @@ const CreateTicketPage = (props) => {
             axios.post(
                 createTicket,
                 ticket,
-                { params: { userId: user.userId}}
+                { params: { userId: user.details.userId}}
             )
             .then( props.history.push("/") )
             .catch( err => alert(err) )
@@ -74,6 +72,14 @@ const CreateTicketPage = (props) => {
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
                         <option value="escalate">Escalate</option>
+                    </select>
+
+                    {/* Status */}
+                    <label htmlFor="status">Status:</label>
+                    <select name="status" onChange={onChange}>
+                        <option value="new">new</option>
+                        <option value="in progress">in progress</option>
+                        <option value="resolved">resolved</option>
                     </select>
 
                     {/* Submit */}

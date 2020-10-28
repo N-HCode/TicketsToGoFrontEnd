@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
+import { UserContext } from '../../context/UserContext'
 
 const SinglePrimaryTab = (props) => {
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        title: "Title Here",
+        title: "New",
         isEdit: false
         
     });
@@ -54,7 +55,7 @@ const SinglePrimaryTab = (props) => {
             </div>
             <div className="ticket_list_container">
                 Template/TicketList
-                {/* <TicketList /> */}
+                <TicketList />
             </div>
 
         </div>
