@@ -95,6 +95,18 @@ const Navbar = () => {
                     </NavLink>
                 </li>
 
+                <li>
+                    <NavLink 
+                        to="/editUser"
+                        // {this is for when css gets made but for now using activeStyle
+                        className="inactive" activeClassName="active"
+                        activeStyle={{ color: 'teal' }}
+                        style={{color: 'white'}}
+                        >
+                            editUser
+                    </NavLink>
+                </li>
+
                 
             </ul>
             <button onClick={buttonForTest}>state of user and organization</button>

@@ -11,4 +11,10 @@ const signUp = (user) => {
 const addOrganizationToUser = (id, organizationId) => {
     return axios.post(`http://localhost:8080/user/organization?id=${id}&organizationId=${organizationId}`)
 }
-export  { loginUser, signUp, addOrganizationToUser};
+
+
+const editUser = (userId, userModel) => {
+    return axios.put(`http://localhost:8080/user/${userId}`, userModel);
+}
+
+export  { loginUser, signUp, addOrganizationToUser, editUser};

@@ -19,6 +19,7 @@ import CreateOrganization from './components/organization/CreateOrganizationPage
 import LoginPage from './components/user/LoginPage';
 import SignUpPage from './components/user/SignUpPage';
 import UserList from './components/user/UserList';
+import EditUserPage from './components/user/EditUserPage';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext';
@@ -69,6 +70,7 @@ class App extends React.Component {
                 {/* {creating a switch to swap out the component to show when on different pages} */}
                 <Switch>
                   {/* {pages and the component assgined to them} */}
+                  <Route exact path="/editUser" component={EditUserPage} />
                   <Route exact path="/createTicket" component={CreateTicketPage} />
                   <Route exact path="/edit/:id" component={EditTicketPage} />
                   <Route exact path="/login" component={LoginPage} />
