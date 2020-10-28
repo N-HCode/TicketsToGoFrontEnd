@@ -26,7 +26,7 @@ const TicketColumnList = (props) => {
         e.preventDefault();
 
         //this is to get the scrollable container
-        if(container == undefined){
+        if(container === undefined){
             container = document.getElementById("ticket_column_list");
         }
         

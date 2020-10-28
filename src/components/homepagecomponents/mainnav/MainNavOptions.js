@@ -1,14 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// NavLinks for styling and isActive option
+import {NavLink} from 'react-router-dom'
 
 const MainNavOptions = () => {
 
+    const [navMenuOpen, setNavMenuOpen] = useState(false);
+
+    const NavDropDown = (props) =>{
+
+        return (
+            <div id="main_nav__drop_down">
+                <i className="material-icons" 
+                onClick={() => setNavMenuOpen(!navMenuOpen)} >menu</i>
+
+                {/* if nav menu is true it will show the children.
+                Otherwise it will not. Makes it easy to create a
+                dropdown on/off*/}
+                {navMenuOpen && props.children}
+
+                
+            </div>
+        )
+    }
 
     return (
-        <div id="main_nav__menu_container">
-            <a href="#">Log out</a>
-            <i className="material-icons">menu</i>
-        </div>
+        <nav id="main_nav__menu_container">
+            <NavDropDown>
+                <div className="dropdown">
+                    <NavLink to="/createTicket" className="dropdown_menu_item">Create Ticket</NavLink>
+                    <NavLink to="/login" className="dropdown_menu_item">Log in</NavLink>
+                    <NavLink to="/signUp" className="dropdown_menu_item">Sign up</NavLink>
+                    <NavLink to="/createOrganization" className="dropdown_menu_item">Create Organization</NavLink>
+                    <NavLink to="#" className="dropdown_menu_item">Log out</NavLink>
 
+
+                </div>
+            </NavDropDown>
+            
+        </nav>
     )
 
 

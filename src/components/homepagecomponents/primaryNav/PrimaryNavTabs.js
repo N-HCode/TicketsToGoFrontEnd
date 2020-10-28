@@ -25,7 +25,7 @@ const PrimaryNavTabs = () => {
         e.preventDefault();
 
         //this is to get the scrollable container
-        if(container == undefined){
+        if(container === undefined){
             var container = document.getElementById("primary_tab__horizontal_scroll_container");
         }
 
