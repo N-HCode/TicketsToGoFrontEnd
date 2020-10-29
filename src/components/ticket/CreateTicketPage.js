@@ -1,12 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { createTicket } from '../../services/TicketService';
 import { UserContext } from '../context/UserContext';
+import { TicketContext } from '../context/TicketContext';
+
 import axios from 'axios';
 
 const CreateTicketPage = (props) => {
     
     // get user Context to know who is creating the ticket
     const [user] = useContext(UserContext);
+    const [tickets, setTickets ] = useContext(TicketContext);
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
@@ -30,8 +33,9 @@ const CreateTicketPage = (props) => {
             axios.post(
                 createTicket,
                 ticket,
-                { params: { userId: user.details.userId}}
+                { params: { userId: user.userId}}
             )
+            .then( response => setTickets( [ ...tickets, response.data] ))
             .then( props.history.push("/") )
             .catch( err => alert(err) )
         }else{

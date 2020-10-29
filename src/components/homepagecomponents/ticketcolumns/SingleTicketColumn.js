@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
-import { UserContext } from '../../context/UserContext'
+import { TicketContext } from '../../context/TicketContext'
 
 const SinglePrimaryTab = (props) => {
 
-    const [ user ] = useContext(UserContext);
-    const { a, b, tickets} = user;
+    const [ tickets ] = useContext(TicketContext);
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
         title: "new",
@@ -39,11 +38,12 @@ const SinglePrimaryTab = (props) => {
     const checkTickets = () => {
         console.log(tickets)
     }
+
     return(
         <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
            
             <div className="column_title">
-                <i className="material-icons" onClick={editTitle}>edit</i>
+                <i className="material-icons" onClick={editTitle} >edit</i>
                 {ticketColumnTitle.isEdit ?
                 <input 
                     onChange={onChange} 
@@ -64,7 +64,7 @@ const SinglePrimaryTab = (props) => {
                 { 
                     tickets.length > 0 && 
                         <TicketList 
-                        ticketList={ user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
+                        ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
                     />
                     
                 }

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { editTicket, deleteTicket } from '../../services/TicketService'
+import { TicketContext } from '../context/TicketContext'
 
 import axios from 'axios';
 
@@ -13,7 +14,10 @@ const EditTicketPage = (props) => {
     const [ticket, setTicket] = useState(
         props.location.state.ticket
     )
-
+    
+    // context to add to tickets if success
+    const [ tickets, setTickets ] = useContext(TicketContext)
+    
     // the method that runs when the save button is hit
     const onSave = (event) => {
         // stop the reload of page when event is triggerd
@@ -27,6 +31,12 @@ const EditTicketPage = (props) => {
             axios.put(
                 editTicket + ticket.ticketNumber,
                 ticket
+            )
+            .then( response => {
+                let index = tickets.indexOf(props.location.state.ticket)
+                tickets.splice(index, 1, response.data)
+                setTickets(tickets)
+            }
             )
             .then(
                 props.history.push("/")

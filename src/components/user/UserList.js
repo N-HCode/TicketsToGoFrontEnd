@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import User from './User'
-import { UserContext } from "../context/UserContext"
+import { OrganizationContext } from "../context/OrganizationContext"
 
 const UserList = () => {
-    const [ user ] = useContext(UserContext);
-    const userList = user.organization.users;
+    const [ organization ] = useContext(OrganizationContext);
+
     const button = () => {
-        console.log(userList)
+        console.log(organization)
     }
     return (
         <div>
             <button onClick={button}>check</button>
-            { userList && userList.length > 0 && userList.map( user => <User user={user} /> )}
+            { organization && organization.users.length > 0 && organization.users.map( user => <User user={user} /> )}
         </div>
     )
 }
