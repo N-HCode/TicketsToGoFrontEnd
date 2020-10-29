@@ -97,11 +97,17 @@ const Navbar = () => {
 
                 <li>
                     <NavLink 
-                        to="/editUser"
+                        to={
+                            { 
+                                pathname: "/editUser",
+                                state: user.details
+                            }
+                        } 
                         // {this is for when css gets made but for now using activeStyle
                         className="inactive" activeClassName="active"
                         activeStyle={{ color: 'teal' }}
                         style={{color: 'white'}}
+                        
                         >
                             editUser
                     </NavLink>
