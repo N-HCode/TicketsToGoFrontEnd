@@ -23,6 +23,10 @@ import EditUserPage from './components/user/EditUserPage';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext';
+// Context for Organization
+import { OrganizationProvider } from './components/context/OrganizationContext'
+// Context for Tickets
+import { TicketProvider} from './components/context/TicketContext'
 
 // Context for TicketTab
 import { TicketTabContextProvider } from './components/context/TicketTabContext';
@@ -60,7 +64,8 @@ class App extends React.Component {
       <BrowserRouter history={history}>
         {/* The Main Context Providers */}
         <UserProvider>
-  
+          <OrganizationProvider>
+            <TicketProvider>
               {/* {Navbar component to navigate} */}
               <Navbar/>
 
@@ -84,6 +89,9 @@ class App extends React.Component {
                 </Switch>
 
               </TicketTabContextProvider>
+              
+              </TicketProvider>
+            </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
     </div>

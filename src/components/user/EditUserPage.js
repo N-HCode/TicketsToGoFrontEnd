@@ -5,9 +5,9 @@ import { editUser } from '../../services/UserService'
 const EditUserPage = (props) => {
 
     const [ user, setUser ] = useContext(UserContext);
-    const [ userCopy, setUserCopy] = useState(props.state);
+    const [ userCopy, setUserCopy] = useState(props.location.state.user);
   
- 
+
     const onChange = (e) => {
 
         setUserCopy({
@@ -24,7 +24,9 @@ const EditUserPage = (props) => {
             // .then(props.history.push("/"))
             .then(response => setUser(response.data))
             .then(alert("save"))
-            .catch(alert)
+            .catch(error => 
+                alert(error.message)
+            )
     }
 
     return (

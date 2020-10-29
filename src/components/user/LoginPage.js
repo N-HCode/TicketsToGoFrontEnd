@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import { loginUser } from '../../services/UserService';
 import { UserContext } from '../context/UserContext';
+import { OrganizationContext } from '../context/OrganizationContext';
+import { TicketContext } from '../context/TicketContext';
 
 const LoginPage = (props) => {
     // Load User Context
     const [ user, setUser] = useContext(UserContext);
+    const [ organization, setOrganization ] = useContext(OrganizationContext);
+    const [ tickets, setTickets ] = useContext(TicketContext);
 
     const onChange = (e) => {
         setUser({
@@ -22,11 +26,13 @@ const LoginPage = (props) => {
                 const { tickets, ...rest} = response.data.user;
 
                 setUser( 
-                    {
-                        details: rest,
-                        organization : response.data.organization,
-                        tickets: response.data.user.tickets
-                    }
+                    rest,
+                )
+                setOrganization(
+                    response.data.organization
+                )
+                setTickets(
+                    response.data.user.tickets
                 )
             })
             .then(props.history.push("/"))
