@@ -1,0 +1,87 @@
+.ticket_form_container{
+  /* Add padding to container elements */ 
+  padding: 16px;
+  width: 90%;
+  color: $activeTextColor;
+  font-size: 18px;
+  font-family: $mainTextStyle;
+
+  // Set a style for all buttons 
+  button {
+    background-color: teal;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+
+    &:hover{
+      opacity:1;
+    }
+  }
+
+  //the white line divider
+  hr {
+    display: flex;
+    border: 1px solid #f1f1f1;
+    margin: 0;
+    margin-bottom: 25px;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: aqua;
+    
+  }
+
+  .ticket_form__allsides{
+    display: grid;
+    //grid auto flow and you change the direction like flex-direction
+    grid-auto-flow: column;
+    column-gap: 20px;
+
+    .ticket_form__oneside{
+
+      display: flex;
+      flex-direction: column;
+      //For flex the min-width is auto. Need this to override it so that it will get smaller
+      min-width: 0;
+      overflow: hidden;
+      max-width: 100%;
+  
+      //basic styling for the form fields
+      input[type=text], input[type=password], input[type=email], input[type=tel], textarea, select {
+          //the box sizing will make it so that all the form fields
+          //will be the same length. By default the select is shorter
+          -ms-box-sizing:border-box;
+          -moz-box-sizing:border-box;
+          -webkit-box-sizing:border-box; 
+          box-sizing:border-box;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          border: none;
+          background: #242424;
+          border-radius: 5px;
+          color: $activeTextColor;
+      }
+  
+      textarea{
+        font-size: 20px;
+        //If we let the text are expand horizontally. It will expand outside the container and
+        //spill into the container over the right. Even with an overflow hidden, that will cause
+        //the inputted characters to disappear.
+        resize: vertical;
+        min-height: 100px;
+        max-height: 300px;
+      }
+    }  
+
+
+
+  }
+
+
+
+}
+
+
