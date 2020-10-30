@@ -36,11 +36,28 @@ const SinglePrimaryTab = (props) => {
         // setTicketList(user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title))
     }
 
+    const onDrop = (e) => {
+        e.preventDefault();
+        const ticketData = e.dataTransfer.getData("ticketData");
+
+        const ticket = document.getElementById(ticketData);
+        ticket.style.display = "block";
+
+    }
+
+    const onDragOver = (e) => {
+        e.preventDefault();
+    }
+
     const checkTickets = () => {
         console.log(tickets)
     }
     return(
-        <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
+        <div className="single_ticket_column" 
+        key={"single_ticket_column_" + props.keynumber}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+        >
            
             <div className="column_title">
                 <i className="material-icons" onClick={editTitle}>edit</i>

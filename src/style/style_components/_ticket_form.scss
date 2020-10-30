@@ -5,6 +5,10 @@
   color: $activeTextColor;
   font-size: 18px;
   font-family: $mainTextStyle;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   // Set a style for all buttons 
   button {
@@ -15,6 +19,7 @@
     border: none;
     cursor: pointer;
     width: 20%;
+    max-width: 185px;
     opacity: 0.9;
 
     &:hover{
@@ -28,7 +33,7 @@
     border: 1px solid #f1f1f1;
     margin: 0;
     margin-bottom: 25px;
-    width: 100%;
+    max-width: 850px;
     justify-content: flex-start;
     background-color: aqua;
     
@@ -39,6 +44,7 @@
     //grid auto flow and you change the direction like flex-direction
     grid-auto-flow: column;
     column-gap: 20px;
+    max-width: 850px;
 
     .ticket_form__oneside{
 
@@ -47,7 +53,8 @@
       //For flex the min-width is auto. Need this to override it so that it will get smaller
       min-width: 0;
       overflow: hidden;
-      max-width: 100%;
+      
+      
   
       //basic styling for the form fields
       input[type=text], input[type=password], input[type=email], input[type=tel], textarea, select {
@@ -63,6 +70,7 @@
           background: #242424;
           border-radius: 5px;
           color: $activeTextColor;
+          
       }
   
       textarea{

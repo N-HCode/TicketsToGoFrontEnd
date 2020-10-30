@@ -51,6 +51,7 @@ const CreateTicketPage = (props) => {
         // form for creating tickets
             <form onSubmit={onSubmit}>
                 <div className="ticket_form_container">
+                    <div>
 
                     {/* Instructions */}
                     <h1>Create a new ticket</h1>
@@ -80,6 +81,20 @@ const CreateTicketPage = (props) => {
                                 <option value="escalate">Escalate</option>
                             </select>
 
+
+                        </div>
+                        <div className="ticket_form__oneside">
+
+                            {/* Ticket Owner */}
+                            
+                            <label htmlFor="ticketOwner">Ticket Owner:</label>
+                            <input type="text" name="ticketNumber" ></input> 
+
+
+                            {/* Resolution */}
+                            <label htmlFor="Resolution">Resolution:</label>
+                            <textarea name="description" rows="3" cols="40"  ></textarea>
+
                             {/* Status */}
                             <label htmlFor="status">Status:</label>
                             <select name="status" onChange={onChange}>
@@ -87,43 +102,13 @@ const CreateTicketPage = (props) => {
                                 <option value="in progress">in progress</option>
                                 <option value="resolved">resolved</option>
                             </select>
-                        </div>
-                        <div className="ticket_form__oneside">
-
-
-                            {/* Subject */}
-                            
-                            <label htmlFor="subject">Subject:</label>
-                            <input type="text" name="subject" ></input>
-
-                            {/* Description */}
-                            <label htmlFor="description">Description:</label>
-                            <textarea name="description" rows="3" cols="40"  ></textarea>
-
-                            {/* Priority */}
-                            <label htmlFor="priority">Priority:</label>
-                            <select name="priority" >
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                                <option value="escalate">Escalate</option>
-                            </select>
-
-                            {/* Status */}
-                            <label htmlFor="status">Status:</label>
-                            <select name="status" >
-                                <option value="new">new</option>
-                                <option value="in progress">in progress</option>
-                                <option value="resolved">resolved</option>
-                            </select>
-
-
 
                         </div>
                     </div>
 
                     {/* Submit */}
                     <button type="submit" >Create</button>
+                    </div> 
                 </div>
             </form>
     )
