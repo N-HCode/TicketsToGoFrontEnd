@@ -41,20 +41,32 @@ const LoginPage = (props) => {
 
     return (
             <form onSubmit={onSubmit}>
-                <div className="form-container">
-                    {/* Header */}
-                    <h1>Login</h1>
-                    <hr></hr>
+                <div id="login_form_container">
+                    <div id="login_input_and_button_container">
 
-                    <label htmlFor="username">Username:</label>
-                    <input  type="text" required name="username" value={user.username || ""} onChange={onChange}></input>
-                    {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
+                        <div className="input_container">
+                        {/* Header */}
+                        <h1>Login</h1>
+                        <hr></hr>
+                        
+                            <label htmlFor="username">Username:</label>
+                            <input  type="text" required name="username" value={user.username || ""} onChange={onChange}></input>
+                            {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
-                    <label htmlFor="password">Password:</label> 
-                    <input  type="password" required name="password" value={user.password || ""} onChange={onChange}></input>
-                    {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
+                            <label htmlFor="password">Password:</label> 
+                            <input  type="password" required name="password" value={user.password || ""} onChange={onChange}></input>
+                            {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
-                    <button type="submit">Login</button>
+                            
+                        </div>
+                        <div className="login_signup_button_container">
+                            <button className="button_left_corner" type="submit">Signup</button>
+                            <button className="button_right_corner" >Login</button>
+                        
+                        </div>
+
+
+                    </div>
                 </div>
             </form>
     )
