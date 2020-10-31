@@ -60,7 +60,7 @@ const LoginPage = (props) => {
                             
                         </div>
                         <div className="login_signup_button_container">
-                            <button className="button_left_corner" type="submit">Signup</button>
+                            <button className="button_left_corner" type="submit">Sign up</button>
                             <button className="button_right_corner" >Login</button>
                         
                         </div>
