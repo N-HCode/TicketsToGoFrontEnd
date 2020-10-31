@@ -1,0 +1,81 @@
+.step_container{
+    height: 40px;
+    width: 240px;
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    div{
+        background-color: aquamarine;
+        border-radius: 50%;
+        width:40px;
+        height: 40px;
+ 
+        
+    }
+}
+
+#setup_hidden_container{
+    width:240px;
+    overflow: hidden;
+    
+  
+}
+
+
+
+.input_signup_container{
+
+    // background-color: $primaryHeaderBGColor;
+    display: grid;
+    grid-auto-flow: column;
+    transform: translateX(-30px);
+    
+   
+    #first_step_signup{
+        position: relative;
+        padding: 20px;
+        min-width:200px;
+        background-color: $primaryHeaderBGColor;
+        border-radius: 5px;
+
+    }
+
+    #second_step_signup{
+        
+ 
+        background-color: $primaryHeaderBGColor;;
+        min-width:200px;
+        padding: 20px;
+        height: fit-content;
+        border-radius: 5px;
+       
+    }
+
+    
+    hr{
+        width:240px;
+        width: 100%;
+        
+    }
+
+    input{
+        width: 100%;
+    }
+
+    label{
+        margin-top: 10px;
+    }
+
+    p{
+        font-size: 10px;
+
+       a{
+           cursor: pointer;
+           color: $secondaryTextColor;
+           text-decoration: none;
+       }
+    }
+
+}

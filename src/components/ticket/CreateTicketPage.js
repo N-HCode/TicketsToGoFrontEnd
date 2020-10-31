@@ -110,6 +110,8 @@ const CreateTicketPage = (props) => {
                         </div>
                     </div>
 
+                    <div ></div>
+
                     {/* Submit */}
                     <button type="submit" >Create</button>
                     </div> 
