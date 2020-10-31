@@ -12,7 +12,7 @@ const TicketList = (props) => {
         // empty dependancy array to mount component one time
         console.log(props)
         // empty dependancy array to mount component one time
-    },[])
+    },[props])
             
     // Update this component every 60 seconds 
     useEffect(() => {

@@ -1,22 +1,22 @@
 import React, { useContext } from 'react'
 import { UserContext } from './context/UserContext'
-
+import { TicketContext } from './context/TicketContext';
 // NavLinks for styling and isActive option
 import {NavLink} from 'react-router-dom'
+
 
 const Navbar = () => {
 
     const [user, setUser] = useContext(UserContext);
+    const [tickets, setTickets] = useContext(TicketContext);
     const buttonForTest = () => {
         console.log(user)
+        console.log(tickets)
     }
 
     const logOut = () => {
-        setUser({
-            details:{},
-            organization:{},
-            tickets:{}
-        })
+        setUser({})
+        setTickets({})
     }
 
     return (
@@ -100,7 +100,7 @@ const Navbar = () => {
                         to={
                             { 
                                 pathname: "/editUser",
-                                state: user.details
+                                state: {user}
                             }
                         } 
                         // {this is for when css gets made but for now using activeStyle
