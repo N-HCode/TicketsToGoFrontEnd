@@ -11,7 +11,7 @@
     .input_and_button_container{
         border-radius: 5px;
         background-color: $primaryHeaderBGColor;
-        width: 300px;
+        width: $loginAndSignUpSize;
         
     }
 
@@ -51,18 +51,8 @@
     }
 
     .login_signup_button_container{
-        width: 240px;
-        display: flex;
-        justify-content:space-between;
-     
-        .button_right_corner{
-            border-bottom-right-radius: 5px;
-  
-        }
-        .button_left_corner{
-            border-bottom-left-radius: 5px;
-
-        }
+       
+ 
 
         button{
             font-size: 16px;

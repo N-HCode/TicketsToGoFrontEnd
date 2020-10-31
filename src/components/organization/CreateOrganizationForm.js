@@ -54,6 +54,11 @@ const CreateOrganizationForm = (props) => {
         console.log(organization)
     }
 
+    const continueToNext = () => {
+        var sigupForm = document.getElementsByClassName("input_signup_container")[0];
+        sigupForm.style.transform = "translateX(-340px)";
+    }
+
     return (
         <form onSubmit={onSubmit}>
 
@@ -85,7 +90,7 @@ const CreateOrganizationForm = (props) => {
                             Foreign Address Form
                         </div>
                         : 
-                        <div>
+                        <div className="signup_address">
 
                     
                             <label htmlFor="city">City</label>
@@ -115,8 +120,12 @@ const CreateOrganizationForm = (props) => {
 
                         </div>
                     }
-
-                    <button>Button</button>
+                    {/* By defualt a button in a form will have a type of submit. Will need to change the button type
+                    so it does not submit */}
+                    <button type="button" 
+                    id="first_step_button"
+                    onClick={continueToNext}
+                    >Continue</button>
                 </div>
                 
                     <div id="second_step_signup">  
@@ -129,7 +138,7 @@ const CreateOrganizationForm = (props) => {
                         <label htmlFor="password">Password</label>
                         <input type="text" name="password" onChange={onChangeRoot} required></input>
                     
-                    <button type="submit">Create Organization</button>
+                    <button type="submit">Complete</button>
                     </div>  
                </div>
                </div> 

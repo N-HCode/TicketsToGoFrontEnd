@@ -1,6 +1,6 @@
 .step_container{
     height: 40px;
-    width: 240px;
+    width: ($loginAndSignUpSize + 40px);
     display: flex;
     justify-content: space-between;
 
@@ -17,7 +17,7 @@
 }
 
 #setup_hidden_container{
-    width:240px;
+    width:($loginAndSignUpSize + 40px);
     overflow: hidden;
     
   
@@ -30,52 +30,64 @@
     // background-color: $primaryHeaderBGColor;
     display: grid;
     grid-auto-flow: column;
-    transform: translateX(-30px);
+    transition:transform 300ms;
     
    
     #first_step_signup{
-        position: relative;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
         padding: 20px;
-        min-width:200px;
+        min-width:$loginAndSignUpSize;
         background-color: $primaryHeaderBGColor;
-        border-radius: 5px;
+       
+
+
+        .signup_address{
+            display: flex;
+            flex-direction: column;
+        }
+
+
 
     }
 
     #second_step_signup{
-        
- 
+        display: flex;
+        flex-direction: column;
         background-color: $primaryHeaderBGColor;;
-        min-width:200px;
+        min-width:$loginAndSignUpSize;
         padding: 20px;
         height: fit-content;
-        border-radius: 5px;
+        border-radius: 10px;
        
     }
 
     
     hr{
-        width:240px;
+  
         width: 100%;
         
-    }
-
-    input{
-        width: 100%;
     }
 
     label{
         margin-top: 10px;
     }
 
+    input{
+        box-sizing: border-box;
+
+        width: 100%;
+    }
+
     p{
         font-size: 10px;
+    }
 
-       a{
-           cursor: pointer;
-           color: $secondaryTextColor;
-           text-decoration: none;
-       }
+    button{
+        align-self: flex-end;
+        max-width: fit-content;
+        margin: 20px 0 5px 0;
     }
 
 }
