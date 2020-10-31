@@ -1,4 +1,4 @@
-#login_form_container{
+.login_signup_form_container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,23 +8,22 @@
     height: 100vh;
  
 
-    #login_input_and_button_container{
+    .input_and_button_container{
         border-radius: 5px;
         background-color: $primaryHeaderBGColor;
+        width: 300px;
         
     }
 
 
     .input_container{
-        width: 300px;
-        padding: 0px 20px 40px 20px;
+        
+        padding: 0px 20px 10px 20px;
         // background-color: $primaryHeaderBGColor;
         display: flex;
         flex-direction: column;
-        width: 200px;
    
         
-
         hr{
             
             width: 100%;
@@ -32,11 +31,21 @@
         }
 
         input{
-
+            width: 100%;
         }
 
         label{
             margin-top: 10px;
+        }
+
+        p{
+            font-size: 10px;
+
+           a{
+               cursor: pointer;
+               color: $secondaryTextColor;
+               text-decoration: none;
+           }
         }
 
     }
@@ -44,23 +53,28 @@
     .login_signup_button_container{
         width: 240px;
         display: flex;
-        justify-content: center;
+        justify-content:space-between;
      
         .button_right_corner{
             border-bottom-right-radius: 5px;
+  
         }
         .button_left_corner{
             border-bottom-left-radius: 5px;
+
         }
 
         button{
-            font-size: 18px;
+            font-size: 16px;
             color:$activeTextColor;
-            width: 100%;
-            margin: 0;
+            width: 30%;
+            margin-bottom: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
             padding: 0;
-            height: 60px;
+            height: 30px;
             border: none;
+            border-radius: 5px;
             background-color: $secondarymainBGColor;
             
            

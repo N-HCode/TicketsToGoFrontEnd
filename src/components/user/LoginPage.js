@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { loginUser } from '../../services/UserService';
 import { UserContext } from '../context/UserContext';
+import {NavLink} from 'react-router-dom'
 
 const LoginPage = (props) => {
     // Load User Context
@@ -33,16 +34,20 @@ const LoginPage = (props) => {
             .catch(alert)
     }
 
+    const changeToSignUpPage = () => {
+
+    }
+
     return (
             <form onSubmit={onSubmit}>
-                <div id="login_form_container">
-                    <div id="login_input_and_button_container">
+                <div className="login_signup_form_container">
+                    <div className="input_and_button_container">
 
                         <div className="input_container">
                         {/* Header */}
                         <h1>Login</h1>
                         <hr></hr>
-                        
+
                             <label htmlFor="username">Username:</label>
                             <input  type="text" required name="username" value={user.username || ""} onChange={onChange}></input>
                             {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
@@ -51,10 +56,12 @@ const LoginPage = (props) => {
                             <input  type="password" required name="password" value={user.password || ""} onChange={onChange}></input>
                             {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
+
+                            <p>Don't have a login? Sign up <NavLink to="/createOrganization" onClick={changeToSignUpPage}>here</NavLink></p>
                             
                         </div>
                         <div className="login_signup_button_container">
-                            <button className="button_left_corner" type="submit">Sign up</button>
+                            {/* <button className="button_left_corner" type="submit">Sign up</button> */}
                             <button className="button_right_corner" >Login</button>
                         
                         </div>
