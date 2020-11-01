@@ -3,7 +3,7 @@ import { createOrganization } from '../../../services/OrganizationService';
 
 
 
-function AccountInfoInput(props) {
+const AccountInfoInput =(props) => {
 
     const [ root, setRoot ] = useState({
         username: "",
@@ -11,11 +11,31 @@ function AccountInfoInput(props) {
     })
 
     var signupForm;
+    var stepDoc;
     const goBack = () =>{
         if (signupForm == undefined) {
             signupForm = document.getElementsByClassName("input_signup_container")[0];
         }
         signupForm.style.transform = "translateX(0px)";
+
+        if (stepDoc === undefined) {
+            stepDoc = document.getElementById("step_container");
+        }
+
+        let newActiveIndex;
+        for (let i = 0; i < stepDoc.children.length; i++) {
+            let stepChild = stepDoc.children[i];
+            if (stepChild.classList.contains("step_active")) {
+                stepChild.classList.remove("step_active");
+                newActiveIndex = i-1;
+                break;
+            }
+        }
+
+        if (newActiveIndex >= 0) {
+            stepDoc.children[newActiveIndex].classList.add("step_active")
+        }
+
     }
 
     const onChangeRoot = (e) => {
@@ -24,6 +44,8 @@ function AccountInfoInput(props) {
             [e.target.name]: e.target.value
         })
     }
+
+    
 
     const onSubmit = (e) => {
         e.preventDefault();

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { createOrganization } from '../../services/OrganizationService';
 import OrgInfoInput from './signupcomponents/OrgInfoInput';
 import AccountInfoInput from './signupcomponents/AccountInfoInput';
-
+import SetupSteps from './signupcomponents/SetupSteps';
 const CreateOrganizationForm = (props) => {
 
     //We keep the organization information up in here because it needs to be passed
@@ -23,12 +22,11 @@ const CreateOrganizationForm = (props) => {
     return (
         <div >
 
-            <div className="step_container">
-                 <div></div>
-                 <div></div>
-                 <div></div>
-                 <div></div>
-            </div>
+            <SetupSteps>
+                <div className="step_active"><p>1</p></div>
+                <div><p>2</p></div>
+            </SetupSteps>
+
 
             <div>
                 <div id="setup_hidden_container">
