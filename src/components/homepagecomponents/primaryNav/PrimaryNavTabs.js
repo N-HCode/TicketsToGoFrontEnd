@@ -6,7 +6,7 @@ const PrimaryNavTabs = () => {
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
     const [navTabListState, setNavTabList] = useState(["hello", "hello", "hello"]);
-    
+    var container;
     const addNewPrimaryTab = () => {
         
         //The setState will only re-render if a new object is setted.
@@ -26,7 +26,7 @@ const PrimaryNavTabs = () => {
 
         //this is to get the scrollable container
         if(container === undefined){
-            var container = document.getElementById("primary_tab__horizontal_scroll_container");
+            container = document.getElementById("primary_tab__horizontal_scroll_container");
         }
 
         container.scrollLeft += e.deltaY*85;
