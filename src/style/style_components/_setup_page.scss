@@ -60,6 +60,29 @@
         padding: 20px;
         height: fit-content;
         border-radius: 10px;
+        
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $secondaryPHBGColor;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover{
+                filter: brightness(1.25)
+            }
+
+            i{
+                color:$activeTextColor;
+                font-size: 22px;
+            }
+        }
+
+
        
     }
 
