@@ -5,11 +5,8 @@ import AccountInfoInput from './signupcomponents/AccountInfoInput';
 
 const CreateOrganizationForm = (props) => {
 
-    const [ root, setRoot ] = useState({
-        username: "",
-        password: ""
-    })
-
+    //We keep the organization information up in here because it needs to be passed
+    //down into two forms.
     const [ organization, setOrganization]= useState({
         organizationName: "",
         isForeignAddress: false,
@@ -21,14 +18,10 @@ const CreateOrganizationForm = (props) => {
         organizationPhoneNumber: ""
     })
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        createOrganization(root.username, root.password, organization)
-        .then(response => console.log(response.data))
-    }
+
 
     return (
-        <form onSubmit={onSubmit}>
+        <div >
 
             <div className="step_container">
                  <div></div>
@@ -36,21 +29,26 @@ const CreateOrganizationForm = (props) => {
                  <div></div>
                  <div></div>
             </div>
+
             <div>
-             <div id="setup_hidden_container">
-            <div className="input_signup_container">
-                <div >
+                <div id="setup_hidden_container">
+                    <div className="input_signup_container">
+                
+                        {/* We just pass down the state and it will just use a reference
+                        instead of creating a copy*/}
+                        <OrgInfoInput  
+                        organization={organization}
+                        setOrganization={setOrganization}
+                        />
 
+                        {/* This is the final form. So we pass down on the information into it
+                        Then it can call the service on submit */}
+                        <AccountInfoInput organization={organization}/>    
 
-                    <OrgInfoInput/>
-
-                </div>
-                    <AccountInfoInput />    
-
-               </div>
-               </div> 
+                    </div>
+                </div> 
             </div>
-        </form>
+        </div>
     )
 }
 

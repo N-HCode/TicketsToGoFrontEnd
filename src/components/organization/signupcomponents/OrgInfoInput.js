@@ -3,36 +3,33 @@ import React, { useState } from 'react'
 
 function OrgInfoInput(props) {
 
-    const [ organization, setOrganization]= useState({
-        organizationName: "",
-        isForeignAddress: false,
-        city: "",
-        state: "",
-        streetAddress: "",
-        zipcode: "",
-        country: "United States of America",
-        organizationPhoneNumber: ""
-    })
+    // const onChangeOrganization = (e) => {
+    //     props.onChangeOrganization(e);
+    // }
 
     const onChangeOrganization = (e) => {
-        setOrganization({
-            ...organization,
+        props.setOrganization({
+            ...props.organization,
             [e.target.name]: e.target.value
         })
     }
 
-    const formChange = (e) => {
-        let foreignAddressValue = e.target.value;
-        let toBoolean = (foreignAddressValue === "true"); 
 
-        setOrganization({
-            ...organization,
-            [e.target.name]: toBoolean
-        })
-    }
+    // const formChange = (e) => {
+    //     let foreignAddressValue = e.target.value;
+    //     let toBoolean = (foreignAddressValue === "true"); 
+
+    //     setOrganization({
+    //         ...organization,
+    //         [e.target.name]: toBoolean
+    //     })
+    // }
 
     var signupForm;
-    const continueToNext = () => {
+    const continueToNext = (e) => {
+        //form submit by defaults refreshes the page.
+        //This precent default will prevent that from
+        e.preventDefault();
         if (signupForm === undefined) {
             signupForm = document.getElementsByClassName("input_signup_container")[0];
         }
@@ -50,12 +47,12 @@ function OrgInfoInput(props) {
             <input type="text" name="organizationName" onChange={onChangeOrganization} required ></input>
 
             <label htmlFor="foreign">Foreign Address?</label>
-            <select name="isForeignAddress" onChange={formChange}> 
+            <select name="isForeignAddress" >  
                 <option value="false">false</option>
                 <option value="true">true</option>
             </select>
             
-            { organization.isForeignAddress ? 
+            { props.organization.isForeignAddress ? 
                 <div>
                     Foreign Address Form
                 </div>
