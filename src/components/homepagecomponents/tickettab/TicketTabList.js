@@ -20,10 +20,13 @@ const TicketTabList = () => {
 
     }
 
-    const deleteTab = (e,index) => {     
+    const deleteTab = (index) => {     
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
+            console.log(index);
+
+
             let newTicketTabList = ticketTabListState.slice(0);
             newTicketTabList.splice(index, 1);
             setTicketTabList( newTicketTabList );
@@ -53,6 +56,7 @@ const TicketTabList = () => {
                 keynumber={i} 
                 deleteTab={deleteTab}
                 middleMouseDeleteTab={middleMouseDeleteTab}
+                ticketNumber={ticketTabListState[i]}
                 /> )}
 
 

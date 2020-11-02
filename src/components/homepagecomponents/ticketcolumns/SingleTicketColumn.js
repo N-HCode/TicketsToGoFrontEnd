@@ -10,8 +10,10 @@ const SinglePrimaryTab = (props) => {
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
         title: "new",
         isEdit: false
-        
     });
+
+    const [ticketColumnTicketList, setTicketColumnTicketList] = useState(tickets.filter( ticket => ticket.status == ticketColumnTitle.title));
+    
     
     //this is used on the pencil icon to edit the title of the
     //columns
@@ -52,6 +54,10 @@ const SinglePrimaryTab = (props) => {
         console.log(tickets)
     }
 
+    useEffect(() => {
+
+    },[tickets])
+
     return(
         <div className="single_ticket_column" 
         key={"single_ticket_column_" + props.keynumber}
@@ -71,8 +77,11 @@ const SinglePrimaryTab = (props) => {
                     <p>{ticketColumnTitle.title}</p>
                 }
                 <NavLink className="material-icons"
-                    to="/createTicket"
+                    to={{
+                        pathname: "/createTicket",      
+                    }}
                     style={{color: 'white', textDecoration: "none"}}
+
                 
                 >add</NavLink>
             </div>
@@ -81,7 +90,7 @@ const SinglePrimaryTab = (props) => {
                 { 
                     tickets.length > 0 && 
                         <TicketList 
-                        ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
+                        ticketList={ ticketColumnTicketList }
                     />
                     
                 }
