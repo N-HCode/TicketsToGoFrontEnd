@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 
-function OrgInfoInput(props) {
-
-    // const onChangeOrganization = (e) => {
-    //     props.onChangeOrganization(e);
-    // }
+const OrgInfoInput = (props) => {
 
     const onChangeOrganization = (e) => {
         props.setOrganization({
@@ -26,6 +22,7 @@ function OrgInfoInput(props) {
     // }
 
     var signupForm;
+    var stepDoc;
     const continueToNext = (e) => {
         //form submit by defaults refreshes the page.
         //This precent default will prevent that from
@@ -34,6 +31,29 @@ function OrgInfoInput(props) {
             signupForm = document.getElementsByClassName("input_signup_container")[0];
         }
         signupForm.style.transform = "translateX(-340px)";
+
+
+        //This section is to change the step that is active on top
+        //This if is in place so that if they are in the same page and going back and forth
+        //Only need to getElement by Id once. Hopefully increasing performance
+        if (stepDoc === undefined) {
+            stepDoc = document.getElementById("step_container");
+        }
+
+        let newActiveIndex;
+        for (let i = 0; i < stepDoc.children.length; i++) {
+            let stepChild = stepDoc.children[i];
+            if (stepChild.classList.contains("step_active")) {
+                stepChild.classList.remove("step_active");
+                newActiveIndex = i+1;
+                break;
+            }
+        }
+
+        if (newActiveIndex < stepDoc.children.length) {
+            stepDoc.children[newActiveIndex].classList.add("step_active")
+        }
+
     }
 
 
