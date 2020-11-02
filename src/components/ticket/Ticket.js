@@ -12,13 +12,17 @@ const Ticket = (props) => {
 
     const addTicketTab = () => {
         
-        //The setState will only re-render if a new object is setted.
-        //Thus we have to create a new array from the old one.
-        //one way to do this is to use the .slice(0)
-        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        let newTicketTabList = ticketTabListState.slice(0);
-        newTicketTabList.push("hello");
-        setTicketTabListState(newTicketTabList);
+        //We only want 1 ticket tab for each ticket. So we check if the ticket number is NOT included
+        if (!ticketTabListState.includes(ticket.ticketNumber)) {
+            //The setState will only re-render if a new object is setted.
+            //Thus we have to create a new array from the old one.
+            //one way to do this is to use the .slice(0)
+            //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
+            let newTicketTabList = ticketTabListState.slice(0);
+            newTicketTabList.push(ticket.ticketNumber);
+            setTicketTabListState(newTicketTabList);
+        }
+
     }
 
     // Showing the parts from each Ticket Object that will be printed out here

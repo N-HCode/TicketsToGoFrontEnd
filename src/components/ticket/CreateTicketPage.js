@@ -38,9 +38,12 @@ const CreateTicketPage = (props) => {
             .then( response => setTickets( [ ...tickets, response.data] ))
             .then( props.history.push("/") )
             .catch( err => alert(err) )
+
         }else{
             return;
         }
+
+    
     }
     
     // To change the state everytime the value of the inputs are changed
@@ -48,7 +51,9 @@ const CreateTicketPage = (props) => {
         setTicket({
             ...ticket,
             [e.target.name]: e.target.value
-        })
+        });
+
+        
     }
 
     return (
