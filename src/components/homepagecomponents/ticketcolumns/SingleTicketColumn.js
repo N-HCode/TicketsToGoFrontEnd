@@ -30,6 +30,7 @@ const SinglePrimaryTab = (props) => {
 
             <SingleColumnTicketContainer
                 ticketColumnIndex = {props.keynumber}
+
             >
                 Template/TicketList
                 { 
@@ -38,9 +39,7 @@ const SinglePrimaryTab = (props) => {
                         ticketColumnTicketList={ ticketColumnTicketList }
                         setTicketColumnTicketList={setTicketColumnTicketList}
                         ticketColumnIndex = {props.keynumber}
-                        draggedItem={props.draggedItem}
-                        draggedItemIndex={props.draggedItemIndex}
-                        draggedItemTicketColumn={props.draggedItemTicketColumn}
+ 
                     />
                     
                 }           

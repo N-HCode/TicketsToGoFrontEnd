@@ -53,9 +53,7 @@ const TicketColumnList = (props) => {
     }, [])
 
 
-    const draggedItem= useRef() ;
-    const draggedItemIndex = useRef();
-    const draggedItemTicketColumn = useRef();
+
 
  
     return(
@@ -70,9 +68,6 @@ const TicketColumnList = (props) => {
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
                 {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
                     keynumber={i}
-                    draggedItem={draggedItem}
-                    draggedItemIndex={draggedItemIndex}
-                    draggedItemTicketColumn={draggedItemTicketColumn}
                     
                 /> )}
             </div>
