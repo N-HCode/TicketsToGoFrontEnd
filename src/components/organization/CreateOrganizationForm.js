@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import OrgInfoInput from './signupcomponents/OrgInfoInput';
 import AccountInfoInput from './signupcomponents/AccountInfoInput';
 import SetupSteps from './signupcomponents/SetupSteps';
-const CreateOrganizationForm = (props) => {
+
+const CreateOrganizationForm = () => {
 
     //We keep the organization information up in here because it needs to be passed
     //down into two forms.
@@ -15,6 +16,7 @@ const CreateOrganizationForm = (props) => {
         zipcode: "",
         country: "United States of America",
         organizationPhoneNumber: ""
+        
     })
 
 
