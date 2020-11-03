@@ -37,9 +37,7 @@ const TicketList = (props) => {
              ticketColumnIndex={props.ticketColumnIndex}
              setTicketColumnTicketList={props.setTicketColumnTicketList}
              ticketIndex = {index}
-             draggedItem={props.draggedItem}
-             draggedItemIndex={props.draggedItemIndex}
-             draggedItemTicketColumn={props.draggedItemTicketColumn}
+
              />  )
              : <p>Currently no Tickets Exists</p> }
         </div>
