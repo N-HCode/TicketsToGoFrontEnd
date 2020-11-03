@@ -5,7 +5,7 @@ const PrimaryNavTabs = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
-    const [navTabListState, setNavTabList] = useState(["hello", "hello", "hello"]);
+    const [navTabListState, setNavTabList] = useState(["YO", "YOYO", "hello"]);
     var container;
     const addNewPrimaryTab = () => {
         
@@ -84,7 +84,7 @@ const PrimaryNavTabs = () => {
                 keynumber={i} 
                 deleteTab={deleteTab}
                 middleMouseDeleteTab = {middleMouseDeleteTab}
-                
+                title = {navTabListState[i]}
                 /> )}
             </div>
             

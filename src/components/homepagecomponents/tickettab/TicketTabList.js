@@ -15,7 +15,7 @@ const TicketTabList = () => {
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
             e.preventDefault();
-            deleteTab(e, index);
+            deleteTab(index);
         }
 
     }
@@ -33,18 +33,6 @@ const TicketTabList = () => {
 
 
     }
-
-
-
-
-    //useEffect takes two parameter. One is a function
-    //The other is an array of this that when changed, the function happens
-    //we just need the component to re-render, we can most likely use
-    //the userEffect hook instead of cloning the array.
-    useEffect(() =>{
-     
-    },[])
-
     
     
     return(

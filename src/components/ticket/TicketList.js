@@ -13,6 +13,8 @@ const TicketList = (props) => {
         console.log(props)
         // empty dependancy array to mount component one time
     },[props])
+
+  
             
     // Update this component every 60 seconds 
     useEffect(() => {
@@ -29,7 +31,17 @@ const TicketList = (props) => {
        // mapping through the array to create a ticket component for each object in the array
     return (
         <div>
-            {props.ticketList.length > 0 ? props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
+            {props.ticketColumnTicketList.length > 0 ? props.ticketColumnTicketList.map( (ticket, index) => <Ticket ticket={ticket}
+             key={ticket.ticketNumber}
+             ticketColumnTicketList = {props.ticketColumnTicketList}
+             ticketColumnIndex={props.ticketColumnIndex}
+             setTicketColumnTicketList={props.setTicketColumnTicketList}
+             ticketIndex = {index}
+             draggedItem={props.draggedItem}
+             draggedItemIndex={props.draggedItemIndex}
+             draggedItemTicketColumn={props.draggedItemTicketColumn}
+             />  )
+             : <p>Currently no Tickets Exists</p> }
         </div>
     )
 }

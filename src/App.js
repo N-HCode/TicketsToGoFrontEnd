@@ -31,6 +31,7 @@ import { TicketProvider} from './components/context/TicketContext'
 // Context for TicketTab
 import { TicketTabContextProvider } from './components/context/TicketTabContext';
 
+import {TicketColumnsContextProvider} from './components/context/TicketColumnsContext';
 
 
 
@@ -65,32 +66,34 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
-            <TicketProvider>
-              {/* {Navbar component to navigate} */}
-              <Navbar/>
+            <TicketColumnsContextProvider>
+              <TicketProvider>
+                {/* {Navbar component to navigate} */}
+                <Navbar/>
 
-              {/* TicketTabContext to hold the ticket tabs*/}
-              <TicketTabContextProvider>
+                {/* TicketTabContext to hold the ticket tabs*/}
+                <TicketTabContextProvider>
 
-                {/* {creating a switch to swap out the component to show when on different pages} */}
-                <Switch>
-                  {/* {pages and the component assgined to them} */}
-                  <Route exact path="/editUser" component={EditUserPage} />
-                  <Route exact path="/createTicket" component={CreateTicketPage} />
-                  <Route exact path="/edit/:id" component={EditTicketPage} />
-                  <Route exact path="/login" component={LoginPage} />
-                  <Route exact path="/signUp" component={SignUpPage} />
-                  <Route exact path="/createOrganization" component={CreateOrganization} />
-                  <Route exact path="/users" component={UserList} />
-                  <Route exact path="/" component={HomePage} />
+                  {/* {creating a switch to swap out the component to show when on different pages} */}
+                  <Switch>
+                    {/* {pages and the component assgined to them} */}
+                    <Route exact path="/editUser" component={EditUserPage} />
+                    <Route exact path="/createTicket" component={CreateTicketPage} />
+                    <Route exact path="/edit/:id" component={EditTicketPage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/signUp" component={SignUpPage} />
+                    <Route exact path="/createOrganization" component={CreateOrganization} />
+                    <Route exact path="/users" component={UserList} />
+                    <Route exact path="/" component={HomePage} />
 
-                  {/* {a redirect for anypage not listed above} */}
-                  <Redirect from= "/" to="/" /> 
-                </Switch>
+                    {/* {a redirect for anypage not listed above} */}
+                    <Redirect from= "/" to="/" /> 
+                  </Switch>
 
-              </TicketTabContextProvider>
-              
-              </TicketProvider>
+                </TicketTabContextProvider>
+                
+                </TicketProvider>
+              </TicketColumnsContextProvider>
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>

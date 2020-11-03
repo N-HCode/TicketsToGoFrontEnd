@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import SingleTicketColumn from './SingleTicketColumn';
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 
 const TicketColumnList = (props) => {
 
-    const [ticketColumnListState, setticketColumnList] = useState(["hello", "hello", "hello"]);
+    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
     var container;
     const addNewColumn = () => {
         
@@ -45,13 +46,16 @@ const TicketColumnList = (props) => {
             // let newTabList = navTabListState.slice(0);
             // newTabList.splice(index, 1);
             // setNavTabList( newTabList );
-
-
     }
 
     useEffect(() =>{
         
     }, [])
+
+
+    const draggedItem= useRef() ;
+    const draggedItemIndex = useRef();
+    const draggedItemTicketColumn = useRef();
 
  
     return(
@@ -65,7 +69,11 @@ const TicketColumnList = (props) => {
             
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
                 {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
-                    keynumber={i}              
+                    keynumber={i}
+                    draggedItem={draggedItem}
+                    draggedItemIndex={draggedItemIndex}
+                    draggedItemTicketColumn={draggedItemTicketColumn}
+                    
                 /> )}
             </div>
 
