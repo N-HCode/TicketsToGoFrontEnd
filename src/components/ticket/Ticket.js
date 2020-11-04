@@ -1,5 +1,7 @@
 import React, { useState,useContext, useRef} from 'react';
+import { useDrag } from 'react-dnd';
 import { Link } from 'react-router-dom';
+import { DataTypes } from '../../datatypes/ticketdata';
 import {TicketTabContext} from '../context/TicketTabContext';
 
 // The Component for the display of each individual ticket on the ticketList
@@ -7,6 +9,23 @@ import {TicketTabContext} from '../context/TicketTabContext';
 const Ticket = (props) => {
     // deconstructing props
     const ticket = props.ticket;
+
+    //useDrag is from DND that. We get an object of the extra props from the collecting functions
+    //We also get a ref, which is used to bind the useDrag to that component.
+    const [extraProps, drag] = useDrag({
+        //it takes in the itemtype or datatype of the item
+        item: {
+            //type is required, but you can pass other data in here
+            type: DataTypes.TICKET
+        },
+        //this collect functions will get information from the DOM
+        //and then pass it to our extraProps object
+        collect: monitor => ({
+            //monitor has a property that isDragging
+            isDragging: monitor.isDragging()
+        })
+
+    });
 
     const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
     //This is the state of whether or not the item is being dragged.
@@ -24,23 +43,12 @@ const Ticket = (props) => {
     }
 
 
-
-
- 
-
-
-
-
     // Showing the parts from each Ticket Object that will be printed out here
     return (
-        //we want to make the style dynamic depending on whenever the item is being
-        //dragged. So we can use a ternary (shorthand if statement) for this.
+
         <div className="single_ticket"
-        // the draggable tag will make it so that there is a ghost item when you drag it
-        draggable
-        //When you drag the ticket onto another ticket, the ticket you drag on will
-        //be the one firing this function. NOT the ticket you are draging.
-        //this way we can get the OTHER ticket's position.
+        ref={drag}
+        style={{opacity: extraProps.isDragging? "0.3" : "1"}}
         onClick={addTicketTab}
         key={"single_ticket_" + ticket.ticketNumber}
         >

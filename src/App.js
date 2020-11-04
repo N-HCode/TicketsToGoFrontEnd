@@ -33,6 +33,11 @@ import { TicketTabContextProvider } from './components/context/TicketTabContext'
 
 import {TicketColumnsContextProvider} from './components/context/TicketColumnsContext';
 
+//Dnd library
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+
 
 
 const history = createBrowserHistory();
@@ -66,11 +71,12 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
+          <DndProvider backend={HTML5Backend}>
             <TicketColumnsContextProvider>
               <TicketProvider>
                 {/* {Navbar component to navigate} */}
                 <Navbar/>
-
+                
                 {/* TicketTabContext to hold the ticket tabs*/}
                 <TicketTabContextProvider>
 
@@ -94,6 +100,7 @@ class App extends React.Component {
                 
                 </TicketProvider>
               </TicketColumnsContextProvider>
+              </DndProvider>
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
