@@ -3,22 +3,24 @@ import TicketList from '../../ticket/TicketList';
 import { TicketContext } from '../../context/TicketContext';
 import SingleColumnTitle from './singlecolumncomponents/SingleColumnTitle';
 import SingleColumnTicketContainer from './singlecolumncomponents/SingleColumnTicketContainer'
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 const SinglePrimaryTab = (props) => {
 
-    const [ tickets ] = useContext(TicketContext);
+   // const [ tickets ] = useContext(TicketContext);
+    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        title: "new",
+        title: ticketColumnListState[props.keynumber].title,
         isEdit: false
     });
 
-    const [ticketColumnTicketList, setTicketColumnTicketList] = useState(tickets.filter( ticket => ticket.status == ticketColumnTitle.title));
+   // const [ticketColumnTicketList, setTicketColumnTicketList] = useState(tickets.filter( ticket => ticket.status == ticketColumnTitle.title));
     
 
 
     const checkTickets = () => {
-        console.log(tickets)
+        console.log(ticketColumnListState[props.keynumber].tickets)
     }
 
     return(
@@ -30,15 +32,19 @@ const SinglePrimaryTab = (props) => {
 
             <SingleColumnTicketContainer
                 ticketColumnIndex = {props.keynumber}
+                hoverTicketColumn={props.hoverTicketColumn}
+                hoverTicketIndex={props.hoverTicketIndex}
+                
 
             >
                 Template/TicketList
                 { 
-                    tickets.length > 0 && 
+                    ticketColumnListState[props.keynumber].tickets.length > 0 && 
                         <TicketList 
-                        ticketColumnTicketList={ ticketColumnTicketList }
-                        setTicketColumnTicketList={setTicketColumnTicketList}
+                        ticketColumnTicketList={ ticketColumnListState[props.keynumber].tickets }
                         ticketColumnIndex = {props.keynumber}
+                        hoverTicketColumn={props.hoverTicketColumn}
+                        hoverTicketIndex={props.hoverTicketIndex}
  
                     />
                     
