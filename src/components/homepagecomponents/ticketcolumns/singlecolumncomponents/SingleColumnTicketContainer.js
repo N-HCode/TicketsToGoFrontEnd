@@ -19,6 +19,10 @@ const SingleColumnTicketContainer = (props) => {
         drop: (item, monitor) => {
             console.log(item.index); console.log(item.columnIndex)
 
+            if (ticketColumnListState[item.columnIndex].tickets[item.index] == undefined) {
+                return;
+            }
+
             if(props.hoverTicketColumn.current != null){
                 ticketColumnListState[props.hoverTicketColumn.current].tickets
                     .push(ticketColumnListState[item.columnIndex].tickets[item.index]);
@@ -29,7 +33,7 @@ const SingleColumnTicketContainer = (props) => {
 
             }else{
 
-                ticketColumnListState[props.keynumber].tickets
+                ticketColumnListState[props.ticketColumnIndex].tickets
                     .push(ticketColumnListState[item.columnIndex].tickets[item.index]);
 
                 ticketColumnListState[item.columnIndex].tickets.splice(item.index,1)
@@ -38,6 +42,14 @@ const SingleColumnTicketContainer = (props) => {
 
 
         
+        },
+        hover: (item, monitor) => {
+            if(ticketColumnListState[props.ticketColumnIndex].tickets.length <= 0){
+                console.log("IN HERE")
+                props.hoverTicketColumn.current=null;
+                props.hoverTicketIndex.current=null;
+            }
+
         },
         collect: monitor => ({
             isOver: monitor.isOver()
