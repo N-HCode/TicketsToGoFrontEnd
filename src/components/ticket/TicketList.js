@@ -33,10 +33,11 @@ const TicketList = (props) => {
         <div>
             {props.ticketColumnTicketList.length > 0 ? props.ticketColumnTicketList.map( (ticket, index) => <Ticket ticket={ticket}
              key={ticket.ticketNumber}
-             ticketColumnTicketList = {props.ticketColumnTicketList}
              ticketColumnIndex={props.ticketColumnIndex}
              setTicketColumnTicketList={props.setTicketColumnTicketList}
              ticketIndex = {index}
+             hoverTicketColumn={props.hoverTicketColumn}
+             hoverTicketIndex={props.hoverTicketIndex}
 
              />  )
              : <p>Currently no Tickets Exists</p> }
