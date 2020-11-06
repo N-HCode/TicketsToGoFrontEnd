@@ -19,24 +19,24 @@ const SingleColumnTicketContainer = (props) => {
         drop: (item, monitor) => {
             console.log(item.index); console.log(item.columnIndex)
 
-            if (ticketColumnListState[item.columnIndex].tickets[item.index] == undefined) {
+            if (ticketColumnListState[item.columnIndex].ticketList[item.index] == undefined) {
                 return;
             }
 
             if(props.hoverTicketColumn.current != null){
-                ticketColumnListState[props.hoverTicketColumn.current].tickets
-                    .push(ticketColumnListState[item.columnIndex].tickets[item.index]);
+                ticketColumnListState[props.hoverTicketColumn.current].ticketList
+                    .push(ticketColumnListState[item.columnIndex].ticketList[item.index]);
 
-                ticketColumnListState[item.columnIndex].tickets.splice(item.index,1)
+                ticketColumnListState[item.columnIndex].ticketList.splice(item.index,1)
 
                 props.hoverTicketColumn.current = null
 
             }else{
 
-                ticketColumnListState[props.ticketColumnIndex].tickets
-                    .push(ticketColumnListState[item.columnIndex].tickets[item.index]);
+                ticketColumnListState[props.ticketColumnIndex].ticketList
+                    .push(ticketColumnListState[item.columnIndex].ticketList[item.index]);
 
-                ticketColumnListState[item.columnIndex].tickets.splice(item.index,1)
+                ticketColumnListState[item.columnIndex].ticketList.splice(item.index,1)
 
             }
 
@@ -44,8 +44,7 @@ const SingleColumnTicketContainer = (props) => {
         
         },
         hover: (item, monitor) => {
-            if(ticketColumnListState[props.ticketColumnIndex].tickets.length <= 0){
-                console.log("IN HERE")
+            if(ticketColumnListState[props.ticketColumnIndex].ticketList.length <= 0){
                 props.hoverTicketColumn.current=null;
                 props.hoverTicketIndex.current=null;
             }
