@@ -20,12 +20,13 @@ const SinglePrimaryTab = (props) => {
 
 
     const checkTickets = () => {
-        console.log(ticketColumnListState[props.keynumber].tickets)
+        console.log(ticketColumnListState[props.keynumber].ticketList)
     }
 
     return(
         <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
             <SingleColumnTitle 
+                ticketColumnIndex = {props.keynumber}
                 ticketColumnTitle={ticketColumnTitle}
                 setTicketColumnTitle={setTicketColumnTitle}
             />
@@ -39,9 +40,9 @@ const SinglePrimaryTab = (props) => {
             >
                 Template/TicketList
                 { 
-                    ticketColumnListState[props.keynumber].tickets.length > 0 && 
+                    ticketColumnListState[props.keynumber].ticketList.length > 0 && 
                         <TicketList 
-                        ticketColumnTicketList={ ticketColumnListState[props.keynumber].tickets }
+                        ticketColumnTicketList={ ticketColumnListState[props.keynumber].ticketList }
                         ticketColumnIndex = {props.keynumber}
                         hoverTicketColumn={props.hoverTicketColumn}
                         hoverTicketIndex={props.hoverTicketIndex}

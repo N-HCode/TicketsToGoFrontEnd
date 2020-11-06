@@ -20,7 +20,7 @@ const TicketColumnList = (props) => {
         let newColumnList = ticketColumnListState.slice(0);
         newColumnList.push({
             title: "new",
-            tickets: tickets.filter( ticket => ticket.status == "new")
+            ticketList: tickets.filter( ticket => ticket.status == "new"),
         });
         setticketColumnList( newColumnList );
 
@@ -63,7 +63,9 @@ const TicketColumnList = (props) => {
     const hoverTicketIndex = useRef();
 
 
-
+    const onClick = () => {
+        console.log(ticketColumnListState[0].refreshTickets);
+    }
  
     return(
         <div id="ticket_columns_container">
@@ -82,6 +84,8 @@ const TicketColumnList = (props) => {
                     
                 /> )}
             </div>
+
+            <button onClick={onClick}>HELOLOL</button>
 
 
         </div>
