@@ -1,58 +1,75 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import TicketList from '../../ticket/TicketList';
-import { TicketContext } from '../../context/TicketContext';
-import SingleColumnTitle from './singlecolumncomponents/SingleColumnTitle';
-import SingleColumnTicketContainer from './singlecolumncomponents/SingleColumnTicketContainer'
-import {TicketColumnsContext} from '../../context/TicketColumnsContext';
+import {NavLink} from 'react-router-dom';
+import { TicketContext } from '../../context/TicketContext'
 
 const SinglePrimaryTab = (props) => {
 
-   // const [ tickets ] = useContext(TicketContext);
-    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    const [ tickets ] = useContext(TicketContext);
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        title: ticketColumnListState[props.keynumber].title,
-        isEdit: false
+        ...props.ticketColumn,
+        isEdit: false,
     });
-
-   // const [ticketColumnTicketList, setTicketColumnTicketList] = useState(tickets.filter( ticket => ticket.status == ticketColumnTitle.title));
     
+    //this is used on the pencil icon to edit the title of the
+    //columns
+    const editTitle = () => {
 
+        setTicketColumnTitle({
+            //spread operator to keep the original values and not override them
+            //then you enter in the property you want to override
+            ...ticketColumnTitle,
+            isEdit: !ticketColumnTitle.isEdit})
+    }
+
+    //this onchange function takes the value of the input and
+    //update the state of the title every time you change
+    //the input real time.
+    const onChange = (e) => {
+        setTicketColumnTitle({
+            ...ticketColumnTitle,
+            title: e.target.value
+        })
+        // setTicketList(user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title))
+    }
 
     const checkTickets = () => {
-        console.log(ticketColumnListState[props.keynumber].ticketList)
+        console.log(tickets)
     }
 
     return(
         <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
-            <SingleColumnTitle 
-                ticketColumnIndex = {props.keynumber}
-                ticketColumnTitle={ticketColumnTitle}
-                setTicketColumnTitle={setTicketColumnTitle}
-            />
-
-            <SingleColumnTicketContainer
-                ticketColumnIndex = {props.keynumber}
-                hoverTicketColumn={props.hoverTicketColumn}
-                hoverTicketIndex={props.hoverTicketIndex}
+           
+            <div className="column_title">
+                <i className="material-icons" onClick={editTitle} >edit</i>
+                {ticketColumnTitle.isEdit ?
+                <input 
+                    onChange={onChange} 
+                    value={ticketColumnTitle.status}
+                    maxLength="15">
+                </input>
+                     : 
+                    <p>{ticketColumnTitle.status}</p>
+                }
+                <NavLink className="material-icons"
+                    to="/createTicket"
+                    style={{color: 'white', textDecoration: "none"}}
                 
-
-            >
+                >add</NavLink>
+            </div>
+            <div className="ticket_list_container">
                 Template/TicketList
                 { 
-                    ticketColumnListState[props.keynumber].ticketList.length > 0 && 
+                    tickets.length > 0 && 
                         <TicketList 
-                        ticketColumnTicketList={ ticketColumnListState[props.keynumber].ticketList }
-                        ticketColumnIndex = {props.keynumber}
-                        hoverTicketColumn={props.hoverTicketColumn}
-                        hoverTicketIndex={props.hoverTicketIndex}
- 
+                        id={props.id}
+                        status={ticketColumnTitle.status}
+                        ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.status) }
                     />
                     
-                }           
-            </SingleColumnTicketContainer>
-           
-
+                }
+            </div>
                 
                 <button onClick={checkTickets}>check tickets</button>
         </div>
