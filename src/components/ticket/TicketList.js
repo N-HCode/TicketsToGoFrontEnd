@@ -3,23 +3,6 @@ import Ticket from './Ticket';
 
 const TicketList = (props) => {
     
-    const drop = (e) => {
-        e.preventDefault();
-
-        const card_id = e.dataTransfer.getData('card_id');
-        const card = document.getElementById(card_id);
-        card.style.display = 'block';
-        e.target.appendChild(card);
-
-        console.log(props.status)
-        const ticket = e.dataTransfer.getData('ticket');
-        console.log(ticket)
-    }
-
-    const dragOver = (e) => {
-        e.preventDefault();
-
-    }
     // created temp data for testing because the plan is to use the Context Hook here to pull in the data
     // to pass down to each individual ticket component
 
@@ -49,15 +32,8 @@ const TicketList = (props) => {
        // mapping through the array to create a ticket component for each object in the array
     return (
 
-        <div
-            id={props.id}
-            onDrop={drop} 
-            onDragOver={dragOver}
-        >
-            <div>
-                invisible div
-            </div>
-            {props.ticketList.length > 0 ? props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
+        <div>
+            {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ) }
 
         </div>
     )
