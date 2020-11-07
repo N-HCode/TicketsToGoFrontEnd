@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import SingleTicketColumn from './SingleTicketColumn';
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
+import { TicketContext } from '../../context/TicketContext';
 
 
 const TicketColumnList = (props) => {
+
 
     const [ticketColumnListState, setticketColumnList] = useState([
         {   
@@ -18,15 +21,24 @@ const TicketColumnList = (props) => {
             id: 3,
         }
     ]);
+
+    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    const [ tickets ] = useContext(TicketContext);
+
+
     var container;
-    const addNewColumn = () => {
+
+    const AddNewColumn = () => {
         
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newColumnList = ticketColumnListState.slice(0);
-        newColumnList.push("hello");
+        newColumnList.push({
+            title: "new",
+            ticketList: tickets.filter( ticket => ticket.status == "new"),
+        });
         setticketColumnList( newColumnList );
 
 
@@ -58,30 +70,39 @@ const TicketColumnList = (props) => {
             // let newTabList = navTabListState.slice(0);
             // newTabList.splice(index, 1);
             // setNavTabList( newTabList );
-
-
     }
 
     useEffect(() =>{
         
     }, [])
 
+    const hoverTicketColumn = useRef();
+    const hoverTicketIndex = useRef();
+
+
+    const onClick = () => {
+        console.log(ticketColumnListState[0].refreshTickets);
+    }
  
     return(
         <div id="ticket_columns_container">
 
             <div id="add_new_ticket_column_icon">
-                <i className="material-icons" onClick={addNewColumn}>add_circle</i>
+                <i className="material-icons" onClick={AddNewColumn}>add_circle</i>
                 <p>add column</p>
             </div>
          
             
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
+
                 {ticketColumnListState.map((ticketColumn) => <SingleTicketColumn 
                     key = {ticketColumn.id}
                     ticketColumn={ticketColumn}
+
                 /> )}
             </div>
+
+            <button onClick={onClick}>HELOLOL</button>
 
 
         </div>

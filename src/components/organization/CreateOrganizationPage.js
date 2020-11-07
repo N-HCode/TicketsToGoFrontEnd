@@ -3,7 +3,7 @@ import CreateOrganizationForm from './CreateOrganizationForm'
 
 const CreateOrganization = () => {
     return (
-        <div>
+        <div className="login_signup_form_container">
             <CreateOrganizationForm />
         </div>
     )

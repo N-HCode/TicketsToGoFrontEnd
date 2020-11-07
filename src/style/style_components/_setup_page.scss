@@ -1,0 +1,150 @@
+#step_container{
+    height: 40px;
+    width: ($loginAndSignUpSize + 40px);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+   
+   
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $secondarymainBGColor;
+        border-radius: 50%;
+        width:40px;
+        height: 40px;
+        margin-right: 15px;
+        margin-left: 15px;
+        transition: filter 300ms;
+        user-select: none;
+        p{
+            
+            font-size: 25px;
+        }
+
+
+     
+    }
+
+    .step_active{
+        filter: brightness(1.55);
+    }
+}
+
+#setup_hidden_container{
+    width:($loginAndSignUpSize + 40px);
+    overflow: hidden;
+    
+  
+}
+
+
+
+.input_signup_container{
+
+    // background-color: $primaryHeaderBGColor;
+    display: grid;
+    grid-auto-flow: column;
+    transition:transform 300ms;
+    
+   
+    #first_step_signup{
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        min-width:$loginAndSignUpSize;
+        background-color: $primaryHeaderBGColor;
+       
+
+
+        .signup_address{
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+
+    }
+
+    #second_step_signup{
+        display: flex;
+        flex-direction: column;
+        background-color: $primaryHeaderBGColor;;
+        min-width:$loginAndSignUpSize;
+        padding: 20px;
+        height: fit-content;
+        border-radius: 10px;
+        
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $secondaryPHBGColor;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover{
+                filter: brightness(1.25)
+            }
+
+            i{
+                color:$activeTextColor;
+                font-size: 22px;
+            }
+        }
+
+
+       
+    }
+
+    
+    hr{
+  
+        width: 100%;
+        
+    }
+
+    label{
+        margin-top: 10px;
+    }
+
+    input{
+        box-sizing: border-box;
+
+        width: 100%;
+    }
+
+    p{
+        font-size: 10px;
+    }
+
+
+
+    button{
+        align-self: flex-end;
+
+        font-size: 16px;
+        color:$activeTextColor;
+        width: fit-content;
+        margin-top: 15px;
+        height: 30px;
+        border: none;
+        border-radius: 10px;
+        background-color: $secondarymainBGColor;
+        cursor: pointer;
+       
+
+        &:hover{
+            filter: brightness(1.25);
+            color:$activeTextColor;
+        }
+    }
+
+
+}

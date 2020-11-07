@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState,useContext, useRef} from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 import { Link } from 'react-router-dom';
+import { DataTypes } from '../../datatypes/ticketdata';
 import {TicketTabContext} from '../context/TicketTabContext';
 
 // The Component for the display of each individual ticket on the ticketList
@@ -8,18 +10,55 @@ const Ticket = (props) => {
     // deconstructing props
     const ticket = props.ticket;
 
+    const ref = useRef(null);
+
+    //useDrag is from DND that. We get an object of the extra props from the collecting functions
+    //We also get a ref, which is used to bind the useDrag to that component.
+    const [extraProps, drag] = useDrag({
+        //it takes in the itemtype or datatype of the item
+        item: {
+            //type is required, but you can pass other data in here
+            type: DataTypes.TICKET,
+            index: props.ticketIndex,
+            columnIndex: props.ticketColumnIndex
+        },
+        //this collect functions will get information from the DOM
+        //and then pass it to our extraProps object
+        collect: monitor => ({
+            //monitor has a property that isDragging
+            isDragging: monitor.isDragging(),
+            
+        })
+
+    });
+
+
+    const [, drop] = useDrop({
+        accept: DataTypes.TICKET,
+        hover: (item, monitor) => {
+            
+            props.hoverTicketColumn.current=props.ticketColumnIndex;
+            props.hoverTicketIndex.current=props.ticketIndex;
+        }
+    })
+
     const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
+    //This is the state of whether or not the item is being dragged.
+    //We will use this to style the object when it is dragged based on its state.
 
     const addTicketTab = () => {
         
-        //The setState will only re-render if a new object is setted.
-        //Thus we have to create a new array from the old one.
-        //one way to do this is to use the .slice(0)
-        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        let newTicketTabList = ticketTabListState.slice(0);
-        newTicketTabList.push("hello");
-        setTicketTabListState(newTicketTabList);
+        //We only want 1 ticket tab for each ticket. So we check if the ticket number is NOT included
+        if (!ticketTabListState.includes(ticket.ticketNumber)) {
+            let newTicketTabList = ticketTabListState.slice(0);
+            newTicketTabList.push(ticket.ticketNumber);
+            setTicketTabListState(newTicketTabList);
+        }
+
     }
+
+    //This is how to wrap the drop in the drag. So that we can use both hooks in one ref
+    drag(drop(ref))
 
     // Showing the parts from each Ticket Object that will be printed out here
 
@@ -39,6 +78,7 @@ const Ticket = (props) => {
     }
 
     return (
+
         <div 
             id={ticket.ticketNumber}
             className="single_ticket" 
@@ -46,6 +86,7 @@ const Ticket = (props) => {
             onDragStart={dragStart}
             onDragOver={dragOver}
             draggable="true"
+
         >
             <Link 
                 // This is how to pass data from a Link when clicking on the Link

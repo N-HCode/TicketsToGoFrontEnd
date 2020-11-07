@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import { createOrganization } from '../../services/OrganizationService'
+import React, { useState } from 'react';
+import OrgInfoInput from './signupcomponents/OrgInfoInput';
+import AccountInfoInput from './signupcomponents/AccountInfoInput';
+import SetupSteps from './signupcomponents/SetupSteps';
 
-const CreateOrganizationForm = (props) => {
+const CreateOrganizationForm = () => {
 
-    const [ root, setRoot ] = useState({
-        username: "",
-        password: ""
-    })
-
+    //We keep the organization information up in here because it needs to be passed
+    //down into two forms.
     const [ organization, setOrganization]= useState({
         organizationName: "",
         isForeignAddress: false,
@@ -17,101 +16,39 @@ const CreateOrganizationForm = (props) => {
         zipcode: "",
         country: "United States of America",
         organizationPhoneNumber: ""
+        
     })
 
-    const onChangeOrganization = (e) => {
-        setOrganization({
-            ...organization,
-            [e.target.name]: e.target.value
-        })
-    }
 
-    const onChangeRoot = (e) => {
-        setRoot({
-            ...root,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const formChange = (e) => {
-        let foreignAddressValue = e.target.value;
-        let toBoolean = (foreignAddressValue === "true"); 
-
-        setOrganization({
-            ...organization,
-            [e.target.name]: toBoolean
-        })
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        createOrganization(root.username, root.password, organization)
-        .then(response => console.log(response.data))
-    }
-
-    const checkState = (e) => {
-        e.preventDefault()
-        console.log(organization)
-    }
 
     return (
-        <form onSubmit={onSubmit}>
-            <div className="form-container">
-                <h1>Create Organization</h1>
-                <p>Please fill in this form to register your organization.</p>
-                <h4>Currently not implmented yet</h4>
-                <hr></hr>
+        <div >
 
-                <label htmlFor="name">Organization Name</label>
-                <input type="text" name="organizationName" onChange={onChangeOrganization} required ></input>
+            <SetupSteps>
+                <div className="step_active"><p>1</p></div>
+                <div><p>2</p></div>
+            </SetupSteps>
 
-                <label htmlFor="foreign">Foreign Address?</label>
-                <select name="isForeignAddress" onChange={formChange}> 
-                    <option value="false">false</option>
-                    <option value="true">true</option>
-                </select>
+
+            <div>
+                <div id="setup_hidden_container">
+                    <div className="input_signup_container">
                 
-                { organization.isForeignAddress ? 
-                    <div>
-                        Foreign Address Form
+                        {/* We just pass down the state and it will just use a reference
+                        instead of creating a copy*/}
+                        <OrgInfoInput  
+                        organization={organization}
+                        setOrganization={setOrganization}
+                        />
+
+                        {/* This is the final form. So we pass down on the information into it
+                        Then it can call the service on submit */}
+                        <AccountInfoInput organization={organization}/>    
+
                     </div>
-                    : 
-                    <div>
-                      <label htmlFor="city">City</label>
-                      <input type="text" name="city" onChange={onChangeOrganization} required ></input>
-  
-                      <label htmlFor="state">State</label>
-                      <input type="text" name="state" onChange={onChangeOrganization} required ></input>
-  
-                      <label htmlFor="street">Street Address</label>
-                      <input type="text" name="streetAddress" onChange={onChangeOrganization} required ></input>
-  
-                      <label htmlFor="zip">ZipCode</label>
-                      <input type="text" name="zipcode" onChange={onChangeOrganization} required ></input>
-
-                      <label htmlFor="country">Country</label>
-                      <select name="country" onChange={onChangeOrganization}> 
-                        <option value="United States of America">United States of America</option>
-                      </select>
-  
-                      <label htmlFor="phone">Phone Number</label>
-                      <input type="tel" name="organizationPhoneNumber" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1-800-333-3333" onChange={onChangeOrganization} required ></input>
-                      
-                      <hr></hr>
-                      <h4>Root Account Login</h4>
-
-                      <label htmlFor="username">Username</label>
-                      <input type="text" name="username" onChange={onChangeRoot} required></input>
-
-                      <label htmlFor="password">Password</label>
-                      <input type="text" name="password" onChange={onChangeRoot} required></input>
-                    </div>
-                }
-                
-                <hr></hr>
-                <button type="submit">Create Organization</button>
+                </div> 
             </div>
-        </form>
+        </div>
     )
 }
 
