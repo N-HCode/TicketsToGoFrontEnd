@@ -8,9 +8,8 @@ const SinglePrimaryTab = (props) => {
     const [ tickets ] = useContext(TicketContext);
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        title: "new",
-        isEdit: false
-        
+        ...props.ticketColumn,
+        isEdit: false,
     });
     
     //this is used on the pencil icon to edit the title of the
@@ -47,11 +46,11 @@ const SinglePrimaryTab = (props) => {
                 {ticketColumnTitle.isEdit ?
                 <input 
                     onChange={onChange} 
-                    value={ticketColumnTitle.title}
+                    value={ticketColumnTitle.status}
                     maxLength="15">
                 </input>
                      : 
-                    <p>{ticketColumnTitle.title}</p>
+                    <p>{ticketColumnTitle.status}</p>
                 }
                 <NavLink className="material-icons"
                     to="/createTicket"
@@ -64,7 +63,9 @@ const SinglePrimaryTab = (props) => {
                 { 
                     tickets.length > 0 && 
                         <TicketList 
-                        ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
+                        id={props.id}
+                        status={ticketColumnTitle.status}
+                        ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.status) }
                     />
                     
                 }

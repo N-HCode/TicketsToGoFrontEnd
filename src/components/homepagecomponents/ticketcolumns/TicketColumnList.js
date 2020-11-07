@@ -4,7 +4,20 @@ import SingleTicketColumn from './SingleTicketColumn';
 
 const TicketColumnList = (props) => {
 
-    const [ticketColumnListState, setticketColumnList] = useState(["hello", "hello", "hello"]);
+    const [ticketColumnListState, setticketColumnList] = useState([
+        {   
+            status: "new",
+            id: 1,
+        },
+        {   
+            status: "in-progress",
+            id: 2,
+        },
+        {   
+            status: "pending",
+            id: 3,
+        }
+    ]);
     var container;
     const addNewColumn = () => {
         
@@ -64,8 +77,9 @@ const TicketColumnList = (props) => {
          
             
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
-                {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
-                    keynumber={i}              
+                {ticketColumnListState.map((ticketColumn) => <SingleTicketColumn 
+                    key = {ticketColumn.id}
+                    ticketColumn={ticketColumn}
                 /> )}
             </div>
 
