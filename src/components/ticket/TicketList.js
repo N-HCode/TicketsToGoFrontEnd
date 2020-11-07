@@ -2,12 +2,31 @@ import React, {useEffect } from 'react'
 import Ticket from './Ticket';
 
 const TicketList = (props) => {
+    
+    const drop = (e) => {
+        e.preventDefault();
+
+        const card_id = e.dataTransfer.getData('card_id');
+        const card = document.getElementById(card_id);
+        card.style.display = 'block';
+        e.target.appendChild(card);
+
+        console.log(props.status)
+        const ticket = e.dataTransfer.getData('ticket');
+        console.log(ticket)
+    }
+
+    const dragOver = (e) => {
+        e.preventDefault();
+
+    }
     // created temp data for testing because the plan is to use the Context Hook here to pull in the data
     // to pass down to each individual ticket component
 
     // The state that will hold the data 
 
     // Component did Mount
+
     useEffect(() => {
         // empty dependancy array to mount component one time
         // empty dependancy array to mount component one time
@@ -29,17 +48,17 @@ const TicketList = (props) => {
 
        // mapping through the array to create a ticket component for each object in the array
     return (
-        <div>
-            {props.ticketColumnTicketList.length > 0 ? props.ticketColumnTicketList.map( (ticket, index) => <Ticket ticket={ticket}
-             key={ticket.ticketNumber}
-             ticketColumnIndex={props.ticketColumnIndex}
-             setTicketColumnTicketList={props.setTicketColumnTicketList}
-             ticketIndex = {index}
-             hoverTicketColumn={props.hoverTicketColumn}
-             hoverTicketIndex={props.hoverTicketIndex}
 
-             />  )
-             : <p>Currently no Tickets Exists</p> }
+        <div
+            id={props.id}
+            onDrop={drop} 
+            onDragOver={dragOver}
+        >
+            <div>
+                invisible div
+            </div>
+            {props.ticketList.length > 0 ? props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ): <p>Currently no Tickets Exists</p> }
+
         </div>
     )
 }

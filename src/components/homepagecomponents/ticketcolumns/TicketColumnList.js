@@ -6,25 +6,42 @@ import { TicketContext } from '../../context/TicketContext';
 
 const TicketColumnList = (props) => {
 
-    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
-    const [ tickets ] = useContext(TicketContext);
+
+    const [ticketColumnListState, setticketColumnList] = useState([
+        {   
+            status: "new",
+            id: 1,
+        },
+        {   
+            status: "in-progress",
+            id: 2,
+        },
+        {   
+            status: "pending",
+            id: 3,
+        }
+    ]);
+
+    // const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    // const [ tickets ] = useContext(TicketContext);
+
 
     var container;
 
     const AddNewColumn = () => {
-        //https://stackoverflow.com/questions/56266575/why-is-usestate-not-triggering-re-render
-        //The setState will only re-render if a new object is setted.
-        //Thus we have to create a new array from the old one.
-        //one way to do this is to use the .slice(0)
-        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
+
+        
+        // The setState will only re-render if a new object is setted.
+        // Thus we have to create a new array from the old one.
+        // one way to do this is to use the .slice(0)
+        // https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newColumnList = ticketColumnListState.slice(0);
         newColumnList.push({
-            title: "new",
-            ticketList: tickets.filter( ticket => ticket.status == "new"),
+            title: "new"
         });
         setticketColumnList( newColumnList );
 
-
+     
     }
 
 
@@ -59,9 +76,6 @@ const TicketColumnList = (props) => {
         
     }, [])
 
-    const hoverTicketColumn = useRef();
-    const hoverTicketIndex = useRef();
-
 
     const onClick = () => {
         console.log(ticketColumnListState[0].refreshTickets);
@@ -77,11 +91,11 @@ const TicketColumnList = (props) => {
          
             
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
-                {ticketColumnListState.map((tab,i) => <SingleTicketColumn 
-                    keynumber={i}
-                    hoverTicketColumn={hoverTicketColumn}
-                    hoverTicketIndex={hoverTicketIndex}
-                    
+
+                {ticketColumnListState.map((ticketColumn) => <SingleTicketColumn 
+                    key = {ticketColumn.id}
+                    ticketColumn={ticketColumn}
+
                 /> )}
             </div>
 

@@ -33,9 +33,7 @@ import { TicketTabContextProvider } from './components/context/TicketTabContext'
 
 import {TicketColumnsContextProvider} from './components/context/TicketColumnsContext';
 
-//Dnd library
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+
 
 
 
@@ -71,7 +69,7 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
-          <DndProvider backend={HTML5Backend}>
+ 
             <TicketColumnsContextProvider>
               <TicketProvider>
                 {/* {Navbar component to navigate} */}
@@ -100,7 +98,7 @@ class App extends React.Component {
                 
                 </TicketProvider>
               </TicketColumnsContextProvider>
-              </DndProvider>
+         
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
