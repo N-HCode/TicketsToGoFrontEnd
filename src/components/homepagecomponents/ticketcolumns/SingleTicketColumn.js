@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
@@ -7,35 +7,58 @@ import { TicketContext } from '../../context/TicketContext'
 const SinglePrimaryTab = (props) => {
 
     const [ tickets ] = useContext(TicketContext);
+    const [ticketColumnListState] = useContext(TicketColumnsContext);
     
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
-        ...props.ticketColumn,
-        isEdit: false,
-
+        ...props.ticketColumn
     });
+
+    //will be using it to reference a component
+    const newTitle = useRef()
     
     //this is used on the pencil icon to edit the title of the
     //columns
     const editTitle = () => {
 
-        setTicketColumnTitle({
-            //spread operator to keep the original values and not override them
-            //then you enter in the property you want to override
-            ...ticketColumnTitle,
-            isEdit: !ticketColumnTitle.isEdit})
+
+        //This will make it so the code will only write when the title is different from the current
+        //title and that the edit button is pressed after the input is done.
+        if (ticketColumnTitle.isEdit) {
+            //Whenever we use a ref, we need the .current to get the current value
+            setTicketColumnTitle({
+                //spread operator to keep the original values and not override them
+                //then you enter in the property you want to override
+                title: newTitle.current.value,
+                isEdit: !ticketColumnTitle.isEdit})
+
+            //This will change the title in the context. So that when they leave the page
+            //and come back it will still have the information.
+            ticketColumnListState[props.keyIndex].title = newTitle.current.value;
+
+        }else{
+
+            setTicketColumnTitle({
+                //spread operator to keep the original values and not override them
+                //then you enter in the property you want to override
+                ...ticketColumnTitle,
+                isEdit: !ticketColumnTitle.isEdit})
+    
+
+        }
+        
     }
 
-    //this onchange function takes the value of the input and
-    //update the state of the title every time you change
-    //the input real time.
-    const onChange = (e) => {
-        setTicketColumnTitle({
-            ...ticketColumnTitle,
-            title: e.target.value
-        })
-        // setTicketList(user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title))
-    }
+    // //this onchange function takes the value of the input and
+    // //update the state of the title every time you change
+    // //the input real time.
+    // const onChange = (e) => {
+    //     setTicketColumnTitle({
+    //         ...ticketColumnTitle,
+    //         title: e.target.value
+    //     })
+    //     // setTicketList(user.tickets.filter( ticket => ticket.status == ticketColumnTitle.title))
+    // }
 
     const checkTickets = () => {
         console.log(tickets)
@@ -48,8 +71,7 @@ const SinglePrimaryTab = (props) => {
         card.style.display = 'block';
         card.style.opacity = '1';
         e.target.appendChild(card);
-        // const ticket = e.dataTransfer.getData('ticket');
-        tickets[e.dataTransfer.getData('ticket_number')].status = ticketColumnTitle.title;
+        tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
         console.log(tickets);
 
        
@@ -61,15 +83,18 @@ const SinglePrimaryTab = (props) => {
     }
 
     return(
-        <div className="single_ticket_column" key={"single_ticket_column_" + props.keynumber}>
+        <div className="single_ticket_column" key={"single_ticket_column_" + props.keyIndex}>
 
            
             <div className="column_title">
                 <i className="material-icons" onClick={editTitle} >edit</i>
                 {ticketColumnTitle.isEdit ?
+                //We want an uncontrolled input field so that it does not keep filtering tickets
+                //or make API calls whenever we type a character.
                 <input 
-                    onChange={onChange} 
-                    value={ticketColumnTitle.title}
+                // pass in the ref here so we can reference it later
+                    ref={newTitle}
+                    defaultValue={ticketColumnTitle.title}
                     maxLength="15">
                 </input>
                      : 
@@ -82,7 +107,7 @@ const SinglePrimaryTab = (props) => {
                 >add</NavLink>
             </div>
             <div className="ticket_list_container"
-                id={props.key}
+                id={props.keyIndex}
                 onDrop={drop} 
                 onDragOver={dragOver}
             
@@ -91,8 +116,8 @@ const SinglePrimaryTab = (props) => {
                 { 
                     tickets.length > 0 && 
                         <TicketList 
-                        id={props.id}
-                        status={ticketColumnTitle.status}
+                        id={props.keyIndex}
+                        status={ticketColumnTitle.title}
                         ticketList={ tickets.filter( ticket => ticket.status == ticketColumnTitle.title) }
                     />
                     
