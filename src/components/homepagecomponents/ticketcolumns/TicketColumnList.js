@@ -22,26 +22,25 @@ const TicketColumnList = (props) => {
         }
     ]);
 
-    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
-    const [ tickets ] = useContext(TicketContext);
+    // const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    // const [ tickets ] = useContext(TicketContext);
 
 
     var container;
 
     const AddNewColumn = () => {
         
-        //The setState will only re-render if a new object is setted.
-        //Thus we have to create a new array from the old one.
-        //one way to do this is to use the .slice(0)
-        //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
+        // The setState will only re-render if a new object is setted.
+        // Thus we have to create a new array from the old one.
+        // one way to do this is to use the .slice(0)
+        // https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newColumnList = ticketColumnListState.slice(0);
         newColumnList.push({
-            title: "new",
-            ticketList: tickets.filter( ticket => ticket.status == "new"),
+            title: "new"
         });
         setticketColumnList( newColumnList );
 
-
+     
     }
 
 
@@ -75,9 +74,6 @@ const TicketColumnList = (props) => {
     useEffect(() =>{
         
     }, [])
-
-    const hoverTicketColumn = useRef();
-    const hoverTicketIndex = useRef();
 
 
     const onClick = () => {
