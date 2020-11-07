@@ -58,7 +58,7 @@ const Ticket = (props) => {
 
         <div 
 
-            id={ticket.ticketNumber}
+            id={"ticket_number_" + ticket.ticketNumber}
             className="single_ticket" 
             onClick={addTicketTab}
             onDragStart={dragStart}
