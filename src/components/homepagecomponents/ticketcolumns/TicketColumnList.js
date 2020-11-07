@@ -12,7 +12,7 @@ const TicketColumnList = (props) => {
     var container;
 
     const AddNewColumn = () => {
-        
+        //https://stackoverflow.com/questions/56266575/why-is-usestate-not-triggering-re-render
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
@@ -85,7 +85,6 @@ const TicketColumnList = (props) => {
                 /> )}
             </div>
 
-            <button onClick={onClick}>HELOLOL</button>
 
 
         </div>

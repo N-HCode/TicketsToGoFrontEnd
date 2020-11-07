@@ -12,6 +12,7 @@ const SinglePrimaryTab = (props) => {
 
     const [ticketColumnTitle, setTicketColumnTitle] = useState({
         title: ticketColumnListState[props.keynumber].title,
+        ticketList: ticketColumnListState[props.keynumber].ticketList,
         isEdit: false
     });
 
@@ -33,6 +34,8 @@ const SinglePrimaryTab = (props) => {
 
             <SingleColumnTicketContainer
                 ticketColumnIndex = {props.keynumber}
+                ticketColumnTitle={ticketColumnTitle}
+                setTicketColumnTitle={setTicketColumnTitle}
                 hoverTicketColumn={props.hoverTicketColumn}
                 hoverTicketIndex={props.hoverTicketIndex}
                 

@@ -10,7 +10,6 @@ const TicketList = (props) => {
     // Component did Mount
     useEffect(() => {
         // empty dependancy array to mount component one time
-        console.log(props)
         // empty dependancy array to mount component one time
     },[props])
 
