@@ -1,12 +1,15 @@
 import React, { useState,useContext} from 'react';
 import { Link } from 'react-router-dom';
 import {TicketTabContext} from '../context/TicketTabContext';
+import { TicketContext } from '../context/TicketContext';
 
 // The Component for the display of each individual ticket on the ticketList
 // Props is used to hold data and carry it down
 const Ticket = (props) => {
     // deconstructing props
     const ticket = props.ticket;
+
+    const [ tickets ] = useContext(TicketContext);
 
 
 
@@ -32,9 +35,11 @@ const Ticket = (props) => {
     const dragStart = (e) => {
         const target = e.target;
 
-        e.dataTransfer.setData('card_id', target.id)
-        // e.dataTransfer.setData('ticket', JSON.stringify(ticket))
-        e.dataTransfer.setData('ticket_number', ticket.ticketNumber)
+        e.dataTransfer.setData('card_id', target.id);
+        //we only need the index of the ticket to be passed. Since we are taking it from
+        //the ticket context anyways. Ticket number will not always be the index.
+        //Sometimes tickets get loaded in different order.
+        e.dataTransfer.setData('ticket_index', tickets.indexOf(ticket));
         setTimeout( ()=> {
             target.style.opacity = ".5";
         }, 0)

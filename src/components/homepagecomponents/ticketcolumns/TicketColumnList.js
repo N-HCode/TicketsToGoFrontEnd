@@ -24,7 +24,8 @@ const TicketColumnList = (props) => {
         // https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newColumnList = ticketColumnListState.slice(0);
         newColumnList.push({
-            title: "new"
+            title: "new",
+            isEdit: false
         });
         setticketColumnList( newColumnList );
 
@@ -75,11 +76,12 @@ const TicketColumnList = (props) => {
             
             <div id="ticket_column_list" onWheel={mouseWheelScroll}>
 
-                {ticketColumnListState.map((ticketColumn) => <SingleTicketColumn 
-                    key = {ticketColumn.id}
+                {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn 
+                    keyIndex = {index}
                     ticketColumn={ticketColumn}
 
-                /> )}
+                /> )
+                }
             </div>
 
 
