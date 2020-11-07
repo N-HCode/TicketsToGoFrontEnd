@@ -68,7 +68,7 @@ const SinglePrimaryTab = (props) => {
         e.preventDefault();
         const card_id = e.dataTransfer.getData('card_id');
         const card = document.getElementById(card_id);
-        card.style.display = 'block';
+  
         card.style.opacity = '1';
         e.target.appendChild(card);
         tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
@@ -107,7 +107,6 @@ const SinglePrimaryTab = (props) => {
                 >add</NavLink>
             </div>
             <div className="ticket_list_container"
-                id={props.keyIndex}
                 onDrop={drop} 
                 onDragOver={dragOver}
             
