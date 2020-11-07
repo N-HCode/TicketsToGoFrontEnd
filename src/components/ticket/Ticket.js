@@ -33,9 +33,10 @@ const Ticket = (props) => {
         const target = e.target;
 
         e.dataTransfer.setData('card_id', target.id)
-        e.dataTransfer.setData('ticket', JSON.stringify(ticket))
+        // e.dataTransfer.setData('ticket', JSON.stringify(ticket))
+        e.dataTransfer.setData('ticket_number', ticket.ticketNumber)
         setTimeout( ()=> {
-            target.style.display = "none";
+            target.style.opacity = ".5";
         }, 0)
     }
 
@@ -43,14 +44,22 @@ const Ticket = (props) => {
         e.stopPropagation();
     }
 
+    const onDragEnd = (e) => {
+        e.target.style.opacity = "1";
+    }
+
+
     return (
 
         <div 
+
             id={ticket.ticketNumber}
             className="single_ticket" 
             onClick={addTicketTab}
             onDragStart={dragStart}
             onDragOver={dragOver}
+            onDragEnd={onDragEnd}
+
             draggable="true"
 
         >

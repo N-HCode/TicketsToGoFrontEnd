@@ -7,20 +7,7 @@ import { TicketContext } from '../../context/TicketContext';
 const TicketColumnList = (props) => {
 
 
-    const [ticketColumnListState, setticketColumnList] = useState([
-        {   
-            status: "new",
-            id: 1,
-        },
-        {   
-            status: "in-progress",
-            id: 2,
-        },
-        {   
-            status: "pending",
-            id: 3,
-        }
-    ]);
+    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
 
     // const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
     // const [ tickets ] = useContext(TicketContext);
@@ -29,6 +16,7 @@ const TicketColumnList = (props) => {
     var container;
 
     const AddNewColumn = () => {
+
         
         // The setState will only re-render if a new object is setted.
         // Thus we have to create a new array from the old one.
@@ -76,10 +64,6 @@ const TicketColumnList = (props) => {
     }, [])
 
 
-    const onClick = () => {
-        console.log(ticketColumnListState[0].refreshTickets);
-    }
- 
     return(
         <div id="ticket_columns_container">
 
@@ -98,7 +82,6 @@ const TicketColumnList = (props) => {
                 /> )}
             </div>
 
-            <button onClick={onClick}>HELOLOL</button>
 
 
         </div>

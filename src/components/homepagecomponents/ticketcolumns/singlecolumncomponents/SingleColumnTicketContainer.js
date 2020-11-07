@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { useDrop } from 'react-dnd';
 import { DataTypes } from '../../../../datatypes/ticketdata';
 import {TicketColumnsContext} from '../../../context/TicketColumnsContext';
@@ -17,17 +17,21 @@ const SingleColumnTicketContainer = (props) => {
         accept: DataTypes.TICKET,
         //ondrop do what. Will take item and monitor. Item is the item being dragged
         drop: (item, monitor) => {
-            console.log(item.index); console.log(item.columnIndex)
+      
 
             if (ticketColumnListState[item.columnIndex].ticketList[item.index] == undefined) {
                 return;
             }
 
             if(props.hoverTicketColumn.current != null){
+                
                 ticketColumnListState[props.hoverTicketColumn.current].ticketList
                     .push(ticketColumnListState[item.columnIndex].ticketList[item.index]);
 
-                ticketColumnListState[item.columnIndex].ticketList.splice(item.index,1)
+                ticketColumnListState[item.columnIndex].ticketList.splice(item.index,1);
+
+                var newList = ticketColumnListState.slice(0);
+                setticketColumnList(newList);
 
                 props.hoverTicketColumn.current = null
 
@@ -37,6 +41,8 @@ const SingleColumnTicketContainer = (props) => {
                     .push(ticketColumnListState[item.columnIndex].ticketList[item.index]);
 
                 ticketColumnListState[item.columnIndex].ticketList.splice(item.index,1)
+                var newList = ticketColumnListState.slice(0);
+                setticketColumnList(newList);
 
             }
 

@@ -21,6 +21,9 @@ const SingleColumnTitle = (props) => {
             
         }
 
+
+   
+
         props.setTicketColumnTitle({
             //spread operator to keep the original values and not override them
             //then you enter in the property you want to override
