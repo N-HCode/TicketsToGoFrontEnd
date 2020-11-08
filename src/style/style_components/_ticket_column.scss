@@ -48,7 +48,31 @@
                 color: $secondaryTextColor;
                 cursor: pointer;
                 user-select: none;
-   
+
+                //This is a blinking animiation for clicking the icons.
+                //This will provide more feedback when clicking the icons.
+                &:active{
+                    animation: navClick 1s;;
+                }
+
+                &:hover{
+                    filter: brightness(1.25);
+                }
+                
+            }
+
+            a{
+
+                font-size: 24px;
+                color: $secondaryTextColor;
+                cursor: pointer;
+                user-select: none;
+                text-decoration: none;
+
+                &:active{
+                    filter: brightness(1.25);
+                }
+
             }
         }
 
@@ -71,8 +95,14 @@
             user-select: none;
             cursor: pointer;
 
+            
+
             &:active{
-                color: $activeTextColor;
+                animation: navClick 1s;;
+            }
+
+            &:hover{
+                filter: brightness(1.25);
             }
         }
 

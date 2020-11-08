@@ -59,6 +59,14 @@
 
                 i{
                     color: $activeTextColor;
+
+                    &:active{
+                        animation: navClick 1s;;
+                    }
+    
+                    &:hover{
+                        filter: brightness(1.25);
+                    }
                 }
             }
 
@@ -83,8 +91,11 @@
             user-select: none;
 
             &:active{
-                color: $activeTextColor;
+                animation: navClick 1s;;
+            }
 
+            &:hover{
+                filter: brightness(1.25);
             }
 
         }

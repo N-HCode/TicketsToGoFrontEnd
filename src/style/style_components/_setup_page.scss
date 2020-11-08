@@ -96,6 +96,14 @@
             i{
                 color:$activeTextColor;
                 font-size: 22px;
+
+                &:active{
+                    animation: navClick 1s;;
+                }
+
+                &:hover{
+                    filter: brightness(1.25);
+                }
             }
         }
 

@@ -89,6 +89,10 @@
                 user-select: none;
 
                 &:active{
+                    animation: navClick 1s;;
+                }
+
+                &:hover{
                     filter: brightness(1.25);
                 }
             }

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useContext} from 'react';
 import SingleTicketColumn from './SingleTicketColumn';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
-import { TicketContext } from '../../context/TicketContext';
+
 
 
 const TicketColumnList = (props) => {
@@ -51,20 +51,6 @@ const TicketColumnList = (props) => {
     }
 
 
-    const deleteTab = (e,index) => {     
-            //splice can remove at a specific index. 2nd parameter is number of elements to remove.
-            //The splice() method returns an array with the deleted items. So the splice changes
-            //the original array and just returns the leftover.
-            // let newTabList = navTabListState.slice(0);
-            // newTabList.splice(index, 1);
-            // setNavTabList( newTabList );
-    }
-
-    useEffect(() =>{
-        
-    }, [])
-
-
     return(
         <div id="ticket_columns_container">
 
@@ -79,6 +65,7 @@ const TicketColumnList = (props) => {
                 {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn 
                     keyIndex = {index}
                     ticketColumn={ticketColumn}
+              
 
                 /> )
                 }
