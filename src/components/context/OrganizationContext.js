@@ -1,10 +1,10 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext } from 'react';
 
 const OrganizationContext = createContext();
 
 const OrganizationProvider = (props) => {
     const [ organization, setOrganization ] = useState({
-    })
+    });
 
     return (
         <OrganizationContext.Provider

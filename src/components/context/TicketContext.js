@@ -1,9 +1,9 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext } from 'react';
 
 const TicketContext = createContext();
 
 const TicketProvider = (props) => {
-    const [ tickets, setTickets ] = useState([])
+    const [ tickets, setTickets ] = useState([]);
 
     return (
         <TicketContext.Provider

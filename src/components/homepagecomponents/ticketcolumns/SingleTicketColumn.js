@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, {useContext, useRef } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';

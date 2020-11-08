@@ -4,14 +4,9 @@ import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 
 
-const TicketColumnList = (props) => {
-
+const TicketColumnList = () => {
 
     const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
-
-    // const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
-    // const [ tickets ] = useContext(TicketContext);
-
 
     var container;
 

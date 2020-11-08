@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 const TicketColumnsContext = createContext();
 
 const TicketColumnsContextProvider = (props) => {
-    const [ ticketColumnsContext, setTicketColumnsContext] = useState([])
+    const [ ticketColumnsContext, setTicketColumnsContext] = useState([]);
 
     return (
         <TicketColumnsContext.Provider

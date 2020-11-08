@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // NavLinks for styling and isActive option
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 
 const MainNavOptions = () => {
 

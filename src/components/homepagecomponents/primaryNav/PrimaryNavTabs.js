@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SingleTab from './SinglePrimaryTab';
 
 const PrimaryNavTabs = () => {
@@ -61,19 +61,7 @@ const PrimaryNavTabs = () => {
 
 
     }
-
-
-
-
-    //useEffect takes two parameter. One is a function
-    //The other is an array of this that when changed, the function happens
-    //we just need the component to re-render, we can most likely use
-    //the userEffect hook instead of cloning the array.
-    useEffect(() =>{
-        
-    }, [])
-
-    
+ 
     
     return(
 
