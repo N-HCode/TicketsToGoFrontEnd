@@ -29,6 +29,18 @@ $mainContainer:90vw;
 $loginAndSignUpSize: 300px;
 
 
+@mixin blinkclick {
+    @keyframes navClick{
+        0%{
+            filter: brightness(1);
+        }
+      
+        100%{
+            filter: brightness(1.25);
+        }
+    }
+}
+
 
 
 

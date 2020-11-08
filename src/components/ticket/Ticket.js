@@ -53,6 +53,17 @@ const Ticket = (props) => {
         e.target.style.opacity = "1";
     }
 
+    const drop = (e) => {
+        e.preventDefault();
+        const card_id = e.dataTransfer.getData('card_id');
+        const card = document.getElementById(card_id);
+        card.style.opacity = '1';
+        e.target.parentNode.appendChild(card);
+        // tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
+        console.log(tickets);
+
+    }
+
 
     return (
 
@@ -64,7 +75,7 @@ const Ticket = (props) => {
             onDragStart={dragStart}
             onDragOver={dragOver}
             onDragEnd={onDragEnd}
-
+            onDrop={drop}
             draggable="true"
 
         >

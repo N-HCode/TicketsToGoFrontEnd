@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SingleTab from './SinglePrimaryTab';
 
 const PrimaryNavTabs = () => {
@@ -46,12 +46,12 @@ const PrimaryNavTabs = () => {
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
             e.preventDefault();
-            deleteTab(e, index);
+            deleteTab(index);
         }
 
     }
 
-    const deleteTab = (e,index) => {     
+    const deleteTab = (index) => {     
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
@@ -61,19 +61,7 @@ const PrimaryNavTabs = () => {
 
 
     }
-
-
-
-
-    //useEffect takes two parameter. One is a function
-    //The other is an array of this that when changed, the function happens
-    //we just need the component to re-render, we can most likely use
-    //the userEffect hook instead of cloning the array.
-    useEffect(() =>{
-        
-    }, [])
-
-    
+ 
     
     return(
 

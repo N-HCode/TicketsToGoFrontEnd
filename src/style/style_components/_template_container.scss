@@ -28,14 +28,19 @@
 
                 i{
                     margin-right: 10px;
+                    
                 }
             }
 
             i{
                 cursor: pointer;
-
+                
                 &:active{
-                    color:$activeTextColor;
+                    animation: navClick 1s;;
+                }
+
+                &:hover{
+                    filter: brightness(1.25);
                 }
             }
         }
