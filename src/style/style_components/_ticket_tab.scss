@@ -1,16 +1,26 @@
+#ticket_tab_hidden_container{
+    display: flex;
+    //There was a small piece on the right that was missing.
+    margin-right: -1px;
+    overflow: hidden;
+}
+
 #ticket_tab_container{
     display: flex;
-    margin-top: 5px;
-    height: 30px;
+    margin-top: -12px;
+    width: 100vw;
     overflow: hidden;
     overflow-x: auto;
-    max-width:98vw;
-    scrollbar-width: thin;
+    // scrollbar-width: thin;
     scroll-behavior: smooth;
-    padding-bottom: 10px;
+    transform:rotateX(180deg);
+    height: 50px;
+    // scrollbar-color: yellow green;
+    
     
     .single_ticket_tab{
 
+        transform:rotateX(180deg);
         //have to make the display flex in order to align
         //the text to the middle. There is a ton of other
         //ways to do this, but this seems to be an easy way
@@ -30,7 +40,6 @@
         overflow: hidden;
         font-family: $mainTextStyle;
         font-size: 14px;
-
         i{
             //Makes it so the user cannot highlight the icon
             user-select: none;
@@ -59,3 +68,4 @@
 
 
 }
+

@@ -30,12 +30,6 @@ const PrimaryNavTabs = () => {
         }
 
         container.scrollLeft += e.deltaY*85;
-        // //this is a scroll event
-        // container.scrollTo({
-        //     //The deltaY property returns a positive value when scrolling down, and a negative value when scrolling up, otherwise 0.
-        //     left: container.scrollLeft + e.deltaY*85,
-        // })
-        
 
     }
 
