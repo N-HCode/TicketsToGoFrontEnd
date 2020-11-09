@@ -7,7 +7,7 @@ const TicketTabList = () => {
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
     const [ticketTabListState, setTicketTabList] = useContext(TicketTabContext);
-    
+    var container;
     //delete tab that will be passed down. Will be passed down because the state
     //with the list of tabs is in this component.
     const middleMouseDeleteTab = (e,index) => {  
@@ -33,21 +33,35 @@ const TicketTabList = () => {
 
 
     }
+
+    const mouseWheelScroll = (e) => {
+        //this is to prevent the default vertical scroll.
+        e.preventDefault();
+
+        //this is to get the scrollable container
+        if(container === undefined){
+            container = document.getElementById("ticket_tab_container");
+        }
+
+        container.scrollLeft += e.deltaY*85;
+
+    }
     
     
     return(
+        <div id="ticket_tab_hidden_container">
+            <div id="ticket_tab_container" onWheel={mouseWheelScroll}>
 
-        <div id="ticket_tab_container">
-
-            {/* <div id="ticket_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}> */}
-                {ticketTabListState.map((tab,i) => <SingleTicketTab 
-                keynumber={i} 
-                deleteTab={deleteTab}
-                middleMouseDeleteTab={middleMouseDeleteTab}
-                ticketNumber={ticketTabListState[i]}
-                /> )}
+                {/* <div id="ticket_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}> */}
+                    {ticketTabListState.map((tab,i) => <SingleTicketTab 
+                    keynumber={i} 
+                    deleteTab={deleteTab}
+                    middleMouseDeleteTab={middleMouseDeleteTab}
+                    ticketNumber={ticketTabListState[i]}
+                    /> )}
 
 
+            </div>
         </div>
 
     );

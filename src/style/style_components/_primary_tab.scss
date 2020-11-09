@@ -23,7 +23,7 @@
             //without the overflow-x auto or scroll, it will make the items go off the page
             //if you want no scrollbar, you can use overflow hidden.
             overflow-x: auto;
-            scrollbar-width: thin;
+            // scrollbar-width: thin;
             scroll-behavior: smooth;
             
         }
