@@ -2,7 +2,12 @@
     display: flex;
     margin-top: 5px;
     height: 30px;
-  
+    overflow: hidden;
+    overflow-x: auto;
+    max-width:98vw;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
     
     .single_ticket_tab{
 
@@ -17,7 +22,7 @@
         box-sizing: border-box;
         margin-right: 5px;
         height: 30px;
-        width: 125px;
+        min-width: 125px;
         padding-left: 5px;
         padding-right: 10px;
         background-color:$primaryHeaderBGColor;

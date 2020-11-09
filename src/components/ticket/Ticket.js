@@ -10,9 +10,6 @@ const Ticket = (props) => {
     const ticket = props.ticket;
 
     const [ tickets ] = useContext(TicketContext);
-
-
-
     const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
     //This is the state of whether or not the item is being dragged.
     //We will use this to style the object when it is dragged based on its state.
@@ -20,12 +17,15 @@ const Ticket = (props) => {
     const addTicketTab = () => {
         
         //We only want 1 ticket tab for each ticket. So we check if the ticket number is NOT included
-        if (!ticketTabListState.includes(ticket.ticketNumber)) {
-            let newTicketTabList = ticketTabListState.slice(0);
-            newTicketTabList.push(ticket.ticketNumber);
-            setTicketTabListState(newTicketTabList);
-        }
+        // if (!ticketTabListState.includes(ticket.ticketNumber)) {
+        //     let newTicketTabList = ticketTabListState.slice(0);
+        //     newTicketTabList.push(ticket.ticketNumber);
+        //     setTicketTabListState(newTicketTabList);
+        // }
 
+        let newTicketTabList = ticketTabListState.slice(0);
+        newTicketTabList.push(ticket.ticketNumber);
+        setTicketTabListState(newTicketTabList);
     }
  
 
