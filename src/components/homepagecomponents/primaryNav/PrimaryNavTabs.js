@@ -14,7 +14,7 @@ const PrimaryNavTabs = () => {
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newTabList = navTabListState.slice(0);
-        newTabList.push("hello");
+        newTabList.push("New Tab");
         setNavTabList( newTabList );
     }
 
