@@ -16,6 +16,7 @@
 @import './style_components/setup_page.scss';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
+@include popupmixin;
 
 
 //The html has a default margin that you can deal with using

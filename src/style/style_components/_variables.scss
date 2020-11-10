@@ -41,6 +41,25 @@ $loginAndSignUpSize: 300px;
     }
 }
 
+@mixin popupmixin() {
+    @keyframes popUp {
+        0%{
+            min-width: 0px;
+            
+        }
+
+        100%{
+            min-width: 125px;
+    
+        }
+
+    }
+    
+}
+
+@mixin popUpAnimation{
+    animation: popUp 80ms;
+}
 
 
 

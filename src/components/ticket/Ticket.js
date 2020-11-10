@@ -23,9 +23,6 @@ const Ticket = (props) => {
             setTicketTabListState(newTicketTabList);
         }
 
-        let newTicketTabList = ticketTabListState.slice(0);
-        newTicketTabList.push(ticket.ticketNumber);
-        setTicketTabListState(newTicketTabList);
     }
  
 

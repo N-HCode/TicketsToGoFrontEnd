@@ -7,7 +7,7 @@
 
 #ticket_tab_container{
     display: flex;
-    margin-top: -12px;
+    margin-top: -11px;
     width: 100vw;
     overflow: hidden;
     overflow-x: auto;
@@ -40,6 +40,7 @@
         overflow: hidden;
         font-family: $mainTextStyle;
         font-size: 14px;
+        
         i{
             //Makes it so the user cannot highlight the icon
             user-select: none;

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import SingleTab from './SinglePrimaryTab';
 
 const PrimaryNavTabs = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
+    const [afterInitalLoad, setAfterInitalLoad] = useState(false)
     const [navTabListState, setNavTabList] = useState(["YO", "YOYO", "hello"]);
     var container;
     const addNewPrimaryTab = () => {
@@ -15,8 +16,24 @@ const PrimaryNavTabs = () => {
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newTabList = navTabListState.slice(0);
         newTabList.push("New Tab");
-        setNavTabList( newTabList );
+        setNavTabList( newTabList);
+     
     }
+
+    useEffect(() =>{
+        updateAni()
+    },[navTabListState])
+
+    const updateAni = useCallback(() => {
+            console.log("HERE!!")
+            var elements = document.getElementsByClassName("primary_tab__singletab");
+            var length = elements.length;
+            elements[length-1].classList.add("animate_singletab");
+            setTimeout(
+                () => elements[length-1].classList.remove("animate_singletab"),
+                80
+            )
+    }, [navTabListState])
 
 
     //need to use JS to implement a mouse wheel scrolling function.
@@ -55,6 +72,8 @@ const PrimaryNavTabs = () => {
 
 
     }
+
+    
  
     
     return(
