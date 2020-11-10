@@ -29,7 +29,9 @@
         }
 
         
-
+        .animate_singletab{
+            @include popUpAnimation();
+        }
 
         .primary_tab__singletab{
             //have to make the display flex in order to align
@@ -47,11 +49,14 @@
             //have a min width.
             min-width: 125px;
             padding-left: 10px;
-            padding-right: 10px;
-            
+            padding-right: 10px; 
             background-color:$primaryHeaderBGColor;
             color:$secondaryTextColor;
             overflow: hidden;
+            
+
+
+
 
             &:active{
                 background-color: $secondaryPHBGColor;
@@ -77,6 +82,8 @@
                 text-overflow: ellipsis;
                 margin-right: 3px;
             }
+
+
 
         }        
 

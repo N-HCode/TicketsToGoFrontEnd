@@ -61,7 +61,7 @@
             font-size: 16px;
 
             &:active{
-                animation: navClick 1s;;
+                animation: navClick 1s;
             }
 
             &:hover{
@@ -113,6 +113,7 @@
                 overflow: hidden;
                 border-radius: 5px;
                 padding: 5px 10px 5px 10px;
+                z-index: 1;
 
                 .dropdown_menu_item{
                     //Whenever a something happens to background it will
