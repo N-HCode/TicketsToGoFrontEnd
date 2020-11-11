@@ -45,12 +45,13 @@ $loginAndSignUpSize: 300px;
     @keyframes popUp {
         0%{
             min-width: 0px;
+            // transform: scaleX(0);
             
         }
 
         100%{
+            // transform: scaleX(1);
             min-width: 125px;
-    
         }
 
     }
@@ -58,7 +59,10 @@ $loginAndSignUpSize: 300px;
 }
 
 @mixin popUpAnimation{
-    animation: popUp 80ms;
+    
+    animation: popUp 50ms ease;
+    
+    
 }
 
 
