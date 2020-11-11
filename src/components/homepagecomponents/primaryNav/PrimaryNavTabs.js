@@ -1,39 +1,42 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SingleTab from './SinglePrimaryTab';
 
 const PrimaryNavTabs = () => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
-    const [afterInitalLoad, setAfterInitalLoad] = useState(false)
+    const [addState, setAddState] = useState(true);
+    const [deleteState, setDeleteState] = useState(0);
     const [navTabListState, setNavTabList] = useState(["YO", "YOYO", "hello"]);
     var container;
     const addNewPrimaryTab = () => {
-        
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
         let newTabList = navTabListState.slice(0);
         newTabList.push("New Tab");
+        setAddState(!addState);
         setNavTabList( newTabList);
      
     }
-
+    const animateTimeout = 50;
+    let currentAddState = useRef(addState);
+    let currentDeleteState = useRef(deleteState);
+    let elements = useRef();
     useEffect(() =>{
-        updateAni()
-    },[navTabListState])
-
-    const updateAni = useCallback(() => {
-            console.log("HERE!!")
-            var elements = document.getElementsByClassName("primary_tab__singletab");
-            var length = elements.length;
-            elements[length-1].classList.add("animate_singletab");
+        if(addState != currentAddState.current){
+            var length = elements.current.children.length;
+            var lastElement = elements.current.children[length-1];
             setTimeout(
-                () => elements[length-1].classList.remove("animate_singletab"),
-                80
+                () => lastElement.classList.remove("animate_singletab"),
+                animateTimeout
             )
-    }, [navTabListState])
+
+            currentAddState.current = addState;
+        }       
+     
+    },[navTabListState])
 
 
     //need to use JS to implement a mouse wheel scrolling function.
@@ -70,7 +73,6 @@ const PrimaryNavTabs = () => {
             newTabList.splice(index, 1);
             setNavTabList( newTabList );
 
-
     }
 
     
@@ -80,7 +82,9 @@ const PrimaryNavTabs = () => {
 
         <div id="primary_tab__tab_container">
 
-            <div id="primary_tab__horizontal_scroll_container" onWheel={mouseWheelScroll}>
+            <div id="primary_tab__horizontal_scroll_container" 
+            ref={elements}
+            onWheel={mouseWheelScroll}>
                 {navTabListState.map((tab,i) => <SingleTab 
                 keynumber={i} 
                 deleteTab={deleteTab}
