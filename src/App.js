@@ -11,6 +11,7 @@ import EditTicketPage from './components/ticket/EditTicketPage';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
+import MainNavBar from './components/homepagecomponents/mainnav/MainNavBar'
 
 // Components for Organization
 import CreateOrganization from './components/organization/CreateOrganizationPage';
@@ -33,6 +34,8 @@ import { TicketTabContextProvider } from './components/context/TicketTabContext'
 
 import {TicketColumnsContextProvider} from './components/context/TicketColumnsContext';
 
+// My Account page
+import MyAccountPage from './components/myaccountpage/MyAccount';
 
 
 
@@ -74,6 +77,7 @@ class App extends React.Component {
               <TicketProvider>
                 {/* {Navbar component to navigate} */}
                 <Navbar/>
+                <MainNavBar/>
                 
                 {/* TicketTabContext to hold the ticket tabs*/}
                 <TicketTabContextProvider>
@@ -88,6 +92,7 @@ class App extends React.Component {
                     <Route exact path="/signUp" component={SignUpPage} />
                     <Route exact path="/createOrganization" component={CreateOrganization} />
                     <Route exact path="/users" component={UserList} />
+                    <Route exact path="/myaccount" component={MyAccountPage} />
                     <Route exact path="/" component={HomePage} />
 
                     {/* {a redirect for anypage not listed above} */}

@@ -1,0 +1,14 @@
+#my_account_page_container{
+    display: grid;
+    grid-auto-flow: column;
+    margin-top: 20px;
+
+    #my_account_background{
+        background-color: $secondaryPHBGColor;
+        width: 200px;
+        height: 300px;
+        border-radius: 10px;
+    }
+
+}
+
