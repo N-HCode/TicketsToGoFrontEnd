@@ -1,6 +1,5 @@
 import React from 'react';
-import Searchbar from './homepagecomponents/mainnav/SearchBar';
-import MainNavOptions from './homepagecomponents/mainnav/MainNavOptions';
+
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
@@ -14,19 +13,9 @@ const HomePage = () => {
     return (
         //Looks like there isn't a standard for naming html/css ids and classNamees.
         //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classNamees
-        <div id="main_container">
+        <div className="main_container">
 
-            {/* Whole header container: has the top nav and the tabs */}
-            <div id="header_container">
 
-                {/* main nav and search bar */}
-                <div id="main_nav">
-
-                    <Searchbar/>
-                    <MainNavOptions/>
-
-                </div>
-            </div>
 
             {/* primary tab bar */}
             <div id="primary_tab">

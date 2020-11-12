@@ -14,6 +14,7 @@
 @import './style_components/single_ticket.scss';
 @import './style_components/ticket_form.scss';
 @import './style_components/setup_page.scss';
+@import './style_components/my_account_page';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
 @include popupmixin;
