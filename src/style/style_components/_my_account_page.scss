@@ -1,14 +1,74 @@
 #my_account_page_container{
-    display: grid;
-    grid-auto-flow: column;
-    margin-top: 20px;
+    display: flex;
+ 
+    margin-top: 30px;
 
-    #my_account_background{
-        background-color: $secondaryPHBGColor;
-        width: 200px;
-        height: 300px;
-        border-radius: 10px;
+
+    #my_account_nav_menu_container{
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+      
+
+
+        .my_account_nav_menu{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-family: $mainTextStyle;
+            color: $activeTextColor;
+        
+            // margin-right: 10px;
+            .active_tab{
+                filter: brightness(1.25);
+                transform: translateX(10px);
+            }
+            
+            li{
+                color: azure;
+                height: 30px;
+                background-color: $secondaryPHBGColor;
+                display: flex;
+        
+                align-items: center;
+                padding: 0 0 0 10px;
+         
+                cursor: pointer;
+                user-select: none;
+                transition: transform 50ms ease-in;
+
+                &:active{
+                    animation: navClick 100ms;
+                }
+
+                &:hover{
+                    filter: brightness(1.25);
+                    transform: translateX(10px);
+                }
+
+                //Apply to everything except the last element
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+
+                i{
+                    margin-right: 5px;
+                    font-size: 16px;
+                }
+
+
+
+            }
+        }
     }
+
+    .single_page_container{
+        height: 90vh;
+        flex: 1;
+        margin-left: 20px;
+        background-color: $primaryHeaderBGColor;
+    }
+
 
 }
 
