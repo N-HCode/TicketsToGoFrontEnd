@@ -5,6 +5,8 @@ const MyAccount = () => {
 
     const navbar = useRef();
 
+
+    //Will be used to change passwords
     return (
         <div className="main_container">
             <div id="my_account_page_container">
