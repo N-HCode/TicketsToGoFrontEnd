@@ -10,17 +10,6 @@ const OrgInfoInput = (props) => {
         })
     }
 
-
-    // const formChange = (e) => {
-    //     let foreignAddressValue = e.target.value;
-    //     let toBoolean = (foreignAddressValue === "true"); 
-
-    //     setOrganization({
-    //         ...organization,
-    //         [e.target.name]: toBoolean
-    //     })
-    // }
-
     var signupForm;
     var stepDoc;
     const continueToNext = (e) => {
