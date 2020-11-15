@@ -67,6 +67,24 @@
         flex: 1;
         margin-left: 20px;
         background-color: $primaryHeaderBGColor;
+        display: flex;
+
+        .my_account_single_page{
+            background-color: aquamarine;
+            flex: 1;
+            margin: 10px;
+           
+        }
+
+        #change_password_form{
+            display: flex;
+            flex-direction: column;
+
+            input{
+                width: 200px;
+            }
+        }
+
     }
 
 
