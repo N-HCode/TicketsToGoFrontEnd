@@ -1,5 +1,6 @@
-import React, {useRef, useContext, useReducer} from 'react'
-import { UserContext } from '../context/UserContext'
+import React, {useRef, useState, useContext, useReducer} from 'react';
+import { UserContext } from '../context/UserContext';
+import { editUser } from '../../services/UserService';
 
 const reducer = (state, action) =>{
     switch (action.type){
@@ -8,7 +9,18 @@ const reducer = (state, action) =>{
                 ...state,
                 changePassword: !state.changePassword
             }
-         
+        case "error":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.errorMessage
+            }
+        case "clearErrors":
+            return {
+                ...state,
+                error: false,
+                errorMessage: null
+            }    
         default:
             return state;
     }
@@ -20,17 +32,71 @@ const MyAccount = () => {
     const [state, dispatch] = useReducer(reducer, {
         changePassword: false,
         error: false,
-        errorMessage: "none"
+        errorMessage: null
 
-    })  
+    }) 
+
+    const [navState] = useState(["Security","hello", "hello"])
 
 
     const navbar = useRef();
+    const currentActiveNav = useRef(0);
+
+    const onNavClick = (index) => {
+        navbar.current.children[currentActiveNav.current].classList.remove("active_tab");
+        currentActiveNav.current = index;
+        navbar.current.children[index].classList.add("active_tab");
+
+    }
+
     const oldPassword = useRef(user.password);
+    const oldPasswordInput = useRef();
     const passwordInput = useRef();
+    const confirmPasswordInput = useRef();
 
-    const onSubmitPassword = () => {
+    const ERROR = {
+        currentPW: "Current password is incorrect",
+        samePW: "New password cannot be the same as current password",
+        confirmPW: "Confirm Password and New Password does not match"
+    }
 
+    const onSubmitPassword = (e) => {
+        e.preventDefault();
+        // if(oldPasswordInput.current.value !== oldPassword.current){
+        //     dispatch({type:"error",
+        //         errorMessage: ERROR.currentPW})
+        // }
+        // else 
+        
+        if(passwordInput.current.value === oldPassword.current) {
+            dispatch({type:"error",
+                errorMessage: ERROR.samePW})
+        }else if(passwordInput.current.value !== confirmPasswordInput.current.value){
+            dispatch({type:"error",
+                errorMessage: ERROR.confirmPW})
+        }else{
+
+            const userCopy = {
+                ...user,
+                password: passwordInput.current.value
+            }
+
+            saveNewPassword(userCopy);
+
+        }
+    }
+
+    const saveNewPassword = async (userCopy) => {
+
+        //await is just promises with syntax sugar.
+        try {
+            await editUser(userCopy.userId, userCopy);
+            //the items below the await will run AFTER the await is done.
+            alert("Password saved");
+        } catch (error) {
+            alert(error);
+        }
+        
     }
 
     const onClickPassword = () => {
@@ -44,11 +110,17 @@ const MyAccount = () => {
 
                 <div id="my_account_nav_menu_container">
                     <ul className="my_account_nav_menu" ref={navbar}>
-                        <li><i className="material-icons">lock</i>Security</li>
-                        <li className="active_tab">Hello</li>
-                        <li>Hello</li>
-                        <li>Hello</li>
-                        <li>Hello</li>
+                        {navState.map((item,index) => 
+                            <li 
+                            className={index === 0 ? "active_tab": ""}
+                            key={"my_account_nav_" + index}
+                                onClick={() => onNavClick(index)}
+                            >
+                                <i className="material-icons">lock</i>{item}
+                            
+                            </li>
+
+                        )}
                     </ul>
 
                 </div>
@@ -74,7 +146,7 @@ const MyAccount = () => {
                             <div>
 
                             {state.error? 
-                                <p>error message</p>
+                                <div className="error_message"><p>{state.errorMessage}</p></div>
 
                             : 
                                 <div></div>    
@@ -85,26 +157,29 @@ const MyAccount = () => {
 
                             {/* password */}
                             
-                            <label htmlFor="password" >Old Password</label>
+                            <label htmlFor="password" >Current Password:</label>
+                            <input type="password" 
+                            name="password"
+                            ref={oldPasswordInput}
+                            required />
+
+                            {/* new password */}
+
+                            <label htmlFor="newPassword" >New Password:</label>
                             <input type="password" 
                             name="password"
                             ref={passwordInput}
                             required />
 
-                            {/* new password */}
-
-                            <label htmlFor="newPassword" >New Password</label>
-                            <input type="password" 
-                            name="password"
-                            required />
-
                             {/* confirm new password */}
 
-                            <label htmlFor="confirmNewPassword" >Confirm New Password</label>
+                            <label htmlFor="confirmNewPassword" >Confirm New Password:</label>
                             <input type="password" 
                             name="password"
+                            ref={confirmPasswordInput}
                             required />
 
+                            <button>Submit</button>
                          </form>
                 
                     }

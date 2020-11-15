@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import { UserContext } from '../context/UserContext';
-import { editUser } from '../../services/UserService'
+import { editUser } from '../../services/UserService';
 
 const EditUserPage = (props) => {
 
