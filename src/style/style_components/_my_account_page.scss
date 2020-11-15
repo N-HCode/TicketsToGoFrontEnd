@@ -1,7 +1,7 @@
 #my_account_page_container{
     display: flex;
- 
     margin-top: 30px;
+  
 
 
     #my_account_nav_menu_container{
@@ -43,7 +43,7 @@
 
                 &:hover{
                     filter: brightness(1.25);
-                    transform: translateX(10px);
+                    // transform: translateX(10px);
                 }
 
                 //Apply to everything except the last element
@@ -68,6 +68,7 @@
         margin-left: 20px;
         background-color: $primaryHeaderBGColor;
         display: flex;
+        overflow: hidden;
 
         .my_account_single_page{
             background-color: aquamarine;
@@ -81,7 +82,28 @@
             flex-direction: column;
 
             input{
+                box-sizing: border-box;
                 width: 200px;
+            }
+
+            button{
+                width: fit-content;
+            }
+
+            .error_message{
+                word-wrap: break-word;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 400px;
+                min-height: 20px;
+                background-color: rgb(240, 100, 100);
+
+                p{
+                    width: 100%;
+                    word-wrap: break-all;
+                }
             }
         }
 
