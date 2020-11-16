@@ -17,4 +17,9 @@ const editUser = (userId, userModel) => {
     return axios.put(`http://localhost:8080/user/${userId}`, userModel);
 }
 
-export  { loginUser, signUp, addOrganizationToUser, editUser};
+const checkPassword = (userId, password) => {
+        return axios.get(`http://localhost:8080/user/check/${userId}?password=${password}`);
+  
+}
+
+export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword};

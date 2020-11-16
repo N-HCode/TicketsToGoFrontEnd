@@ -1,6 +1,6 @@
 import React, {useRef, useState, useContext, useReducer} from 'react';
 import { UserContext } from '../context/UserContext';
-import { editUser } from '../../services/UserService';
+import { editUser, checkPassword } from '../../services/UserService';
 
 const reducer = (state, action) =>{
     switch (action.type){
@@ -60,13 +60,19 @@ const MyAccount = () => {
         confirmPW: "Confirm Password and New Password does not match"
     }
 
-    const onSubmitPassword = (e) => {
+    const onSubmitPassword = async (e) => {
         e.preventDefault();
-        // if(oldPasswordInput.current.value !== oldPassword.current){
-        //     dispatch({type:"error",
-        //         errorMessage: ERROR.currentPW})
-        // }
-        // else 
+
+        try {
+            console.log(user.userId);
+            console.log(oldPasswordInput.current.value);
+            await checkPassword(user.userId, oldPasswordInput.current.value);
+        } catch (error) {
+            alert(error);
+            dispatch({type:"error",
+            errorMessage: ERROR.currentPW})
+            return;
+        }
         
         if(passwordInput.current.value === oldPassword.current) {
             dispatch({type:"error",
@@ -93,6 +99,7 @@ const MyAccount = () => {
             await editUser(userCopy.userId, userCopy);
             //the items below the await will run AFTER the await is done.
             alert("Password saved");
+            dispatch({type: "clearErrors"});
         } catch (error) {
             alert(error);
         }

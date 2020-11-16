@@ -22,6 +22,39 @@
         // background-color: $primaryHeaderBGColor;
         display: flex;
         flex-direction: column;
+
+        .error_message{
+            box-sizing: border-box;
+            display: flex;
+            justify-items: center;
+            padding-left: 10px;
+            background-color: rgb(158, 31, 31);
+            border-radius: 5px;
+            animation: shake 175ms;
+        }
+
+        @keyframes shake {
+            0%{
+                transform: translateX(0px);
+            }
+
+            25%{
+                transform: translateX(5px);
+            }
+
+            50%{
+                transform: translateX(-5px);
+            }
+
+            75%{
+                transform: translateX(5px);
+            }
+            100%{
+                transform: translateX(0px);
+            }
+
+
+        }
    
         
         hr{
@@ -31,6 +64,8 @@
         }
 
         input{
+            margin-top: 5px;
+            box-sizing: border-box;
             width: 100%;
         }
 
