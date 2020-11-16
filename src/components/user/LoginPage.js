@@ -1,9 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 import { loginUser } from '../../services/UserService';
 import { UserContext } from '../context/UserContext';
 import {NavLink} from 'react-router-dom';
 import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
+
+const reducer = (state, action) =>{
+    switch (action.type){
+        case "error":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.errorMessage
+            }
+        case "clearErrors":
+            return {
+                ...state,
+                error: false,
+                errorMessage: null
+            }    
+        default:
+            return state;
+    }
+}
 
 
 const LoginPage = (props) => {
@@ -11,6 +30,13 @@ const LoginPage = (props) => {
     const [ user, setUser] = useContext(UserContext);
     const [ organization, setOrganization ] = useContext(OrganizationContext);
     const [ tickets, setTickets ] = useContext(TicketContext);
+
+    const [state, dispatch] = useReducer(reducer, {
+        error: false,
+        errorMessage: null
+
+    })
+
 
     const onChange = (e) => {
         setUser({
@@ -21,24 +47,40 @@ const LoginPage = (props) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        
-        await loginUser(user.username, user.password)
-            .then( response => {
-                // ommiting tickets from reponse in the user object for the details key in Context
-                const { tickets, ...rest} = response.data.user;
 
-                setUser( 
-                    rest,
-                )
-                setOrganization(
-                    response.data.organization
-                )
-                setTickets(
-                    response.data.user.tickets
-                )
+        dispatch( {
+            type: "clearErrors",
+        })
+
+
+        try {
+
+            const response = await loginUser(user.username, user.password);
+
+            const { tickets, ...rest} = response.data.user;
+
+            setUser( 
+                rest,
+            )
+            setOrganization(
+                response.data.organization
+            )
+            setTickets(
+                response.data.user.tickets
+            )
+
+
+            props.history.push("/")
+            
+        } catch (error) {
+            dispatch( {
+                type: "error",
+                errorMessage: "Invalid Username or Password"
+
             })
-            .then(props.history.push("/"))
-            .catch(alert)
+        }
+        
+
     }
 
     const changeToSignUpPage = () => {
@@ -54,6 +96,12 @@ const LoginPage = (props) => {
                         {/* Header */}
                         <h1>Login</h1>
                         <hr></hr>
+
+                            {state.error? 
+                            
+                            <div className="error_message"><p>{state.errorMessage}</p></div>
+                            
+                            : <div></div>}
 
                             <label htmlFor="username">Username:</label>
                             <input  type="text" required name="username" value={user.username || ""} onChange={onChange}></input>
