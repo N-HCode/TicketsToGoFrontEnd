@@ -1,9 +1,11 @@
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import { loginUser } from '../../services/UserService';
 import { UserContext } from '../context/UserContext';
 import {NavLink} from 'react-router-dom';
 import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
+
+//"set HTTPS=true&&react-scripts start"
 
 const reducer = (state, action) =>{
     switch (action.type){
@@ -30,6 +32,11 @@ const LoginPage = (props) => {
     const [ user, setUser] = useContext(UserContext);
     const [ organization, setOrganization ] = useContext(OrganizationContext);
     const [ tickets, setTickets ] = useContext(TicketContext);
+    const [ userLogin, setUserLogin] = useState({
+        username: "",
+        password: ""
+
+    })
 
     const [state, dispatch] = useReducer(reducer, {
         error: false,
@@ -37,17 +44,21 @@ const LoginPage = (props) => {
 
     })
 
+    const ERROR = {
+        invalid: "Invalid Username and/or Password",
+        serverConnect: "Could not connect to server"
+    }
+
 
     const onChange = (e) => {
-        setUser({
-            ...user,
+        setUserLogin({
+            ...userLogin,
             [e.target.name]: e.target.value
         })
     }
 
     const onSubmit = async (event) => {
         event.preventDefault();
-
         dispatch( {
             type: "clearErrors",
         })
@@ -55,7 +66,7 @@ const LoginPage = (props) => {
 
         try {
 
-            const response = await loginUser(user.username, user.password);
+            const response = await loginUser(userLogin.username, userLogin.password);
 
             const { tickets, ...rest} = response.data.user;
 
@@ -69,15 +80,26 @@ const LoginPage = (props) => {
                 response.data.user.tickets
             )
 
+            setUserLogin({
+                username: "",
+                password: ""
+            })
+
+ 
+
 
             props.history.push("/")
             
         } catch (error) {
+            //error will have the response property so you can get the status code from that.
+            // console.log(error.response.status);
             dispatch( {
                 type: "error",
-                errorMessage: "Invalid Username or Password"
+                errorMessage: ERROR.invalid
 
             })
+
+
         }
         
 
@@ -104,11 +126,11 @@ const LoginPage = (props) => {
                             : <div></div>}
 
                             <label htmlFor="username">Username:</label>
-                            <input  type="text" required name="username" value={user.username || ""} onChange={onChange}></input>
+                            <input  type="text" required name="username" value={userLogin.username || ""} onChange={onChange}></input>
                             {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
                             <label htmlFor="password">Password:</label> 
-                            <input  type="password" required name="password" value={user.password || ""} onChange={onChange}></input>
+                            <input  type="password" required name="password" value={userLogin.password || ""} onChange={onChange}></input>
                             {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
 

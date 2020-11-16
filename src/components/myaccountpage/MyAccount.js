@@ -36,7 +36,17 @@ const MyAccount = () => {
 
     }) 
 
-    const [navState] = useState(["Security","hello", "hello"])
+    const [navState] = useState([
+        {
+            text: "Security",
+            icon: "lock"
+        },
+        {
+            text: "Settings",
+            icon: "settings"
+        },
+    
+    ])
 
 
     const navbar = useRef();
@@ -123,7 +133,7 @@ const MyAccount = () => {
                             key={"my_account_nav_" + index}
                                 onClick={() => onNavClick(index)}
                             >
-                                <i className="material-icons">lock</i>{item}
+                                <i className="material-icons">{item.icon}</i>{item.text}
                             
                             </li>
 
