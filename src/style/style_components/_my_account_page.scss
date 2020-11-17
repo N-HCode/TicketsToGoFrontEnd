@@ -1,15 +1,15 @@
 #my_account_page_container{
     display: flex;
     margin-top: 30px;
+    font-family: $mainTextStyle;
   
-
-
     #my_account_nav_menu_container{
         display: flex;
         flex-direction: column;
         width: 150px;
+        
+ 
       
-
 
         .my_account_nav_menu{
             list-style: none;
@@ -63,31 +63,91 @@
     }
 
     .single_page_container{
-        height: 90vh;
-        flex: 1;
-        margin-left: 20px;
+      
+        display: flex;
+        width: 270px;
         background-color: $primaryHeaderBGColor;
         display: flex;
         overflow: hidden;
+        color:$activeTextColor;
+        margin: auto;
+        height: fit-content;
+        padding: 0 20px 10px 20px;
+        border-radius: 5px;
+
+        p{
+            height: 20px;
+
+        }
+        
+
+        button{
+            @include buttonStyle;
+            height: fit-content;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            min-width: 100px;
+            width: 100%;
+
+            &:active{
+                animation: navClick 1s;
+            }
+  
+        }
 
         .my_account_single_page{
-            background-color: aquamarine;
             flex: 1;
-            margin: 10px;
-           
+            
+            .info_container{
+                display: flex;
+                flex: 1;
+
+                #info_tag{
+                    max-width: fit-content;
+                    
+                }
+
+                #info_details{
+                    flex: 1;
+                    margin-left: 5px;
+                    overflow: hidden;
+                    
+                    p{  
+                        display: flex;
+                        height: 20px;
+                        padding-left: 8px;
+                        background-color: $primaryHeaderBGColor2;
+                    }
+                }
+            }
+
+
+
         }
 
         #change_password_form{
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
+            background-color: $primaryHeaderBGColor2;
+            width: fit-content;
+            padding: 10px;
+            border-radius: 5px;
 
             input{
                 box-sizing: border-box;
-                width: 200px;
+                width: 250px;
+                margin-top: 3px;
+            }
+
+            label{
+                margin-top: 8px;
             }
 
             button{
+                margin-top: 20px;
                 width: fit-content;
+                @include buttonStyle;
             }
 
             .error_message{
@@ -96,9 +156,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 400px;
+                width: 250px;
                 min-height: 20px;
-                background-color: rgb(240, 100, 100);
+                background-color: $errorColor1;
+                border-radius: 5px;
+                color: white;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 10px;
 
                 p{
                     width: 100%;

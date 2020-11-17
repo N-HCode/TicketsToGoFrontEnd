@@ -7,14 +7,19 @@ $siteBackgroundColor: #383838;
 $secondaryBackgroundColor: #242424;
 
 //primary header variables
-$primaryHeaderBGColor : #264653;
+$primaryHeaderBGColor : #294b5a;
+$primaryHeaderBGColor2 : #223c46;
 $secondaryPHBGColor: #477284;
+$secondaryPHBGColor2: #74a5b9;
 ////Seach bar colors in primary header
 $activeTextColor:rgb(243, 243, 243);
 $secondaryTextColor: #A5A5A5;
 
 //Secondary coloring
-$secondarymainBGColor: rgb(32, 99, 138);;
+$secondarymainBGColor: rgb(32, 99, 138);
+
+//Error Color
+$errorColor1: rgb(158, 31, 31);
 
 //Column Title
 $columnTitleColor:#141414;
@@ -59,10 +64,27 @@ $loginAndSignUpSize: 300px;
 }
 
 @mixin popUpAnimation{
-    
     animation: popUp 50ms ease;
     
+}
+
+@mixin buttonStyle() {
+    padding: 0;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: $secondarymainBGColor;
+    font-size: 16px;
+    color:$activeTextColor;
+    cursor: pointer;
+
     
+    &:hover{
+        filter: brightness(1.25);
+        color:$activeTextColor;
+    }
+
+
 }
 
 
