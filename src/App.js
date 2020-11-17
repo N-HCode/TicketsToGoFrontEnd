@@ -36,6 +36,7 @@ import {TicketColumnsContextProvider} from './components/context/TicketColumnsCo
 
 // My Account page
 import MyAccountPage from './components/myaccountpage/MyAccount';
+import { createOrganization } from './services/OrganizationService';
 
 
 
@@ -50,7 +51,19 @@ class App extends React.Component {
   //This helps to keep some settings at the top level instead of the component level.
   //So we can easily test changes in one location.
   appConfig = {
+      
+  }
 
+  paths = {
+    editUser: "/editUser",
+    createTicket: "/createTicket",
+    editTicket: "/edit/:id",
+    login: "/login",
+    signUp: "/signup",
+    createOrganization: "/createOrganization",
+    userList: "/users",
+    myAccount: "/myaccount",
+    home: "/"
   }
 
   //the state of the program. This will usually hold data that are constantly
@@ -61,6 +74,31 @@ class App extends React.Component {
   }
 
   //this is the function section.
+  RouteWithNav = () => {
+
+
+
+    return(
+      <div>
+       
+              {window.location.pathname.toLocaleLowerCase() === this.paths.login.toLocaleLowerCase() ||
+              window.location.pathname.toLocaleLowerCase() === this.paths.createOrganization.toLocaleLowerCase()
+              ? null : <MainNavBar/>}
+
+              <Route exact path={this.paths.editUser} component={EditUserPage} />
+              <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
+              <Route exact path={this.paths.editTicket} component={EditTicketPage} />
+              <Route exact path={this.paths.login} component={LoginPage} />
+              <Route exact path={this.paths.signUp} component={SignUpPage} />
+              <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
+              <Route exact path={this.paths.userList} component={UserList} />
+              <Route exact path={this.paths.myAccount} component={MyAccountPage} />
+              <Route exact path={this.paths.home} component={HomePage} />
+
+      </div>
+    )
+  }
+
 
 
   //The render is required for all react classes
@@ -77,7 +115,7 @@ class App extends React.Component {
               <TicketProvider>
                 {/* {Navbar component to navigate} */}
                 <Navbar/>
-                <MainNavBar/>
+                
                 
                 {/* TicketTabContext to hold the ticket tabs*/}
                 <TicketTabContextProvider>
@@ -85,19 +123,14 @@ class App extends React.Component {
                   {/* {creating a switch to swap out the component to show when on different pages} */}
                   <Switch>
                     {/* {pages and the component assgined to them} */}
-                    <Route exact path="/editUser" component={EditUserPage} />
-                    <Route exact path="/createTicket" component={CreateTicketPage} />
-                    <Route exact path="/edit/:id" component={EditTicketPage} />
-                    <Route exact path="/login" component={LoginPage} />
-                    <Route exact path="/signUp" component={SignUpPage} />
-                    <Route exact path="/createOrganization" component={CreateOrganization} />
-                    <Route exact path="/users" component={UserList} />
-                    <Route exact path="/myaccount" component={MyAccountPage} />
-                    <Route exact path="/" component={HomePage} />
+                    
+                    <Route component={this.RouteWithNav}/>
+
 
                     {/* {a redirect for anypage not listed above} */}
                     <Redirect from= "/" to="/" /> 
                   </Switch>
+                  
 
                 </TicketTabContextProvider>
                 

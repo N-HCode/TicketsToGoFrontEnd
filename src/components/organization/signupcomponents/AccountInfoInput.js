@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { createOrganization } from '../../../services/OrganizationService';
+// https://reactrouter.com/web/api/Hooks/usehistory
+import { useHistory } from "react-router-dom";
 
 
 
@@ -9,6 +11,8 @@ const AccountInfoInput =(props) => {
         username: "",
         password: ""
     })
+
+    const history = useHistory();
 
     var signupForm;
     var stepDoc;
@@ -47,10 +51,18 @@ const AccountInfoInput =(props) => {
 
     
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        createOrganization(root.username, root.password, props.organization)
-        .then(response => console.log(response.data))
+
+        try {
+            const response = await createOrganization(root.username, root.password, props.organization)
+            console.log(response);
+            history.push("/login")
+        } catch (error) {
+            alert(error)
+        }
+        
+
     }
 
     

@@ -58,7 +58,7 @@
    
         
         hr{
-            
+            box-sizing: border-box;
             width: 100%;
             padding: 0;
         }
@@ -101,6 +101,7 @@
             border: none;
             border-radius: 5px;
             background-color: $secondarymainBGColor;
+            cursor: pointer;
             
            
 

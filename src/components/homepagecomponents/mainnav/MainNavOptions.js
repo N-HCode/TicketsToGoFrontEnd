@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 // NavLinks for styling and isActive option
 import {NavLink} from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+import { TicketContext } from '../../context/TicketContext';
 
 const MainNavOptions = () => {
+
+    const [user, setUser] = useContext(UserContext);
+    const [tickets, setTickets] = useContext(TicketContext);
+
+    const logOut = () => {
+        setUser({})
+        setTickets({})
+    }
+
 
     const [navMenuOpen, setNavMenuOpen] = useState(false);
 
@@ -33,7 +44,11 @@ const MainNavOptions = () => {
                     <NavLink to="/createOrganization" className="dropdown_menu_item">Create Organization</NavLink>
                     <NavLink to="/myaccount" className="dropdown_menu_item">My Account</NavLink>
                     <NavLink to="#" className="dropdown_menu_item">Admin</NavLink>
-                    <NavLink to="#" className="dropdown_menu_item">Log out</NavLink>
+                    <NavLink 
+                    to="/login" 
+                    className="dropdown_menu_item"
+                    onClick={logOut}
+                    >Log out</NavLink>
 
                 </div>
             </NavDropDown>

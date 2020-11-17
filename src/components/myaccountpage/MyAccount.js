@@ -1,5 +1,6 @@
 import React, {useRef, useState, useContext, useReducer} from 'react';
 import { UserContext } from '../context/UserContext';
+import { OrganizationContext} from '../context/OrganizationContext'
 import { editUser, checkPassword } from '../../services/UserService';
 
 const reducer = (state, action) =>{
@@ -29,6 +30,7 @@ const reducer = (state, action) =>{
 const MyAccount = () => {
 
     const [user] = useContext(UserContext);
+    const [organization] = useContext(OrganizationContext)
     const [state, dispatch] = useReducer(reducer, {
         changePassword: false,
         error: false,
@@ -36,7 +38,17 @@ const MyAccount = () => {
 
     }) 
 
-    const [navState] = useState(["Security","hello", "hello"])
+    const [navState] = useState([
+        // {
+        //     text: "Security",
+        //     icon: "lock"
+        // },
+        // {
+        //     text: "Settings",
+        //     icon: "settings"
+        // },
+    
+    ])
 
 
     const navbar = useRef();
@@ -115,7 +127,7 @@ const MyAccount = () => {
         <div className="main_container">
             <div id="my_account_page_container">
 
-                <div id="my_account_nav_menu_container">
+                {/* <div id="my_account_nav_menu_container">
                     <ul className="my_account_nav_menu" ref={navbar}>
                         {navState.map((item,index) => 
                             <li 
@@ -123,27 +135,38 @@ const MyAccount = () => {
                             key={"my_account_nav_" + index}
                                 onClick={() => onNavClick(index)}
                             >
-                                <i className="material-icons">lock</i>{item}
+                                <i className="material-icons">{item.icon}</i>{item.text}
                             
                             </li>
 
                         )}
                     </ul>
 
-                </div>
+                </div> */}
 
                 <div className="single_page_container">
 
                     <div className="my_account_single_page">
 
-                    <p>Username: {user.username}</p>
-                    <p>Email:{user.email} </p>
+                     <div className="info_container">
+                         <div id="info_tag">
+                            <p>Organization:</p>
+                            <p>Username:</p>
+                            <p>Email:</p>
+                         </div>
+                         <div id="info_details">
+                            <p>{organization.organizationName}</p>
+                            <p>{user.username}</p>
+                            <p>{user.email} </p>
+                         </div>
+
+                    </div>       
 
 
 
-
+                    <button onClick={onClickPassword}>Change Password</button>
                     {!state.changePassword? 
-                        <button onClick={onClickPassword}>change password</button>
+                            <div></div>
                         :
 
 
