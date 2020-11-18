@@ -156,17 +156,20 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 250px;
-                min-height: 20px;
+                width: 100%;
                 background-color: $errorColor1;
                 border-radius: 5px;
                 color: white;
+                height: fit-content;
                 padding-left: 10px;
                 padding-right: 10px;
                 margin-bottom: 10px;
-
+                animation: shake 175ms;
+                
                 p{
+                    margin: 5px;
                     width: 100%;
+                    height: fit-content;
                     word-wrap: break-all;
                 }
             }

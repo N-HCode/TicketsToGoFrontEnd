@@ -75,25 +75,27 @@ const MyAccount = () => {
     const onSubmitPassword = async (e) => {
         e.preventDefault();
 
+        dispatch({type: "clearErrors"});
+
         try {
-            console.log(user.userId);
-            console.log(oldPasswordInput.current.value);
             await checkPassword(user.userId, oldPasswordInput.current.value);
         } catch (error) {
-            alert(error);
+            // alert(error);
             dispatch({type:"error",
             errorMessage: ERROR.currentPW})
             return;
         }
         
         if(passwordInput.current.value === oldPassword.current) {
+            console.log("1")
             dispatch({type:"error",
                 errorMessage: ERROR.samePW})
         }else if(passwordInput.current.value !== confirmPasswordInput.current.value){
+            console.log("2")
             dispatch({type:"error",
                 errorMessage: ERROR.confirmPW})
         }else{
-
+            console.log("3")
             const userCopy = {
                 ...user,
                 password: passwordInput.current.value
@@ -111,15 +113,17 @@ const MyAccount = () => {
             await editUser(userCopy.userId, userCopy);
             //the items below the await will run AFTER the await is done.
             alert("Password saved");
-            dispatch({type: "clearErrors"});
+            
         } catch (error) {
-            alert(error);
+            // alert(error);
         }
         
     }
 
     const onClickPassword = () => {
+        dispatch({type: "clearErrors"});
         dispatch({type: "password"})
+        
     }
 
     //Will be used to change passwords
