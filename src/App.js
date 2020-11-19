@@ -36,6 +36,9 @@ import {TicketColumnsContextProvider} from './components/context/TicketColumnsCo
 
 // My Account page
 import MyAccountPage from './components/myaccountpage/MyAccount';
+
+// Admin page
+import AdminPage from './components/adminpage/AdminPage';
 import { createOrganization } from './services/OrganizationService';
 
 
@@ -63,7 +66,8 @@ class App extends React.Component {
     createOrganization: "/createOrganization",
     userList: "/users",
     myAccount: "/myaccount",
-    home: "/"
+    home: "/",
+    adminPage: "/admin"
   }
 
   //the state of the program. This will usually hold data that are constantly
@@ -94,6 +98,8 @@ class App extends React.Component {
               <Route exact path={this.paths.userList} component={UserList} />
               <Route exact path={this.paths.myAccount} component={MyAccountPage} />
               <Route exact path={this.paths.home} component={HomePage} />
+              <Route exact path={this.paths.adminPage} component={AdminPage} />
+
 
       </div>
     )
