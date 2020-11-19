@@ -1,6 +1,6 @@
 import React, {useRef, useState, useContext, useReducer} from 'react';
 import { UserContext } from '../context/UserContext';
-import { OrganizationContext} from '../context/OrganizationContext'
+import { OrganizationContext} from '../context/OrganizationContext';
 import { editUser, checkPassword } from '../../services/UserService';
 
 const reducer = (state, action) =>{
@@ -30,7 +30,7 @@ const reducer = (state, action) =>{
 const MyAccount = () => {
 
     const [user] = useContext(UserContext);
-    const [organization] = useContext(OrganizationContext)
+    const [organization] = useContext(OrganizationContext);
     const [state, dispatch] = useReducer(reducer, {
         changePassword: false,
         error: false,

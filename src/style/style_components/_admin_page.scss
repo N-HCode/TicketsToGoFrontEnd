@@ -1,0 +1,17 @@
+#admin_page_container{
+    display: flex;
+    margin-top: 30px;
+    font-family: $mainTextStyle;
+    justify-content: center;
+   
+
+    .admin_single_page{
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        height: fit-content;
+        background-color: aqua;
+        
+    }
+
+}
