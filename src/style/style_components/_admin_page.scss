@@ -3,14 +3,39 @@
     margin-top: 30px;
     font-family: $mainTextStyle;
     justify-content: center;
+    color: $activeTextColor;
    
 
     .admin_single_page{
         display: flex;
         flex-direction: column;
-        width: 150px;
-        height: fit-content;
-        background-color: aqua;
+        width: 500px;
+        height: 250px;
+        background-color: $primaryHeaderBGColor;
+        border-radius: 5px;
+
+        .table_container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin_person_table{
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            text-align: left;
+
+            th{
+                background-color: $primaryHeaderBGColor2;
+                font-weight: bold;
+            }
+
+            th,td{
+                padding: 5px 15px;
+            }
+            
+        }
         
     }
 
