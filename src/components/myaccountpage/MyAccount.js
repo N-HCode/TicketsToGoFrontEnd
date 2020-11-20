@@ -2,6 +2,7 @@ import React, {useRef, useState, useContext, useReducer} from 'react';
 import { UserContext } from '../context/UserContext';
 import { OrganizationContext} from '../context/OrganizationContext';
 import { editUser, checkPassword } from '../../services/UserService';
+import {ERROR} from '../constants/error';
 
 const reducer = (state, action) =>{
     switch (action.type){
@@ -66,11 +67,11 @@ const MyAccount = () => {
     const passwordInput = useRef();
     const confirmPasswordInput = useRef();
 
-    const ERROR = {
-        currentPW: "Current password is incorrect",
-        samePW: "New password cannot be the same as current password",
-        confirmPW: "Confirm Password and New Password does not match"
-    }
+    // const ERROR = {
+    //     currentPW: "Current password is incorrect",
+    //     samePW: "New password cannot be the same as current password",
+    //     confirmPW: "Confirm Password and New Password does not match"
+    // }
 
     const onSubmitPassword = async (e) => {
         e.preventDefault();
@@ -155,11 +156,13 @@ const MyAccount = () => {
                      <div className="info_container">
                          <div id="info_tag">
                             <p>Organization:</p>
+                            <p>Account Number: </p>
                             <p>Username:</p>
                             <p>Email:</p>
                          </div>
                          <div id="info_details">
                             <p>{organization.organizationName}</p>
+                            <p>{organization.accountNumber}</p>
                             <p>{user.username}</p>
                             <p>{user.email} </p>
                          </div>
