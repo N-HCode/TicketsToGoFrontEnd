@@ -1,9 +1,42 @@
+
+
+.modal {
+    color:$secondaryTextColor;
+    position: absolute;
+    background-color: $primaryHeaderBGColor2;
+    left: 50%; 
+    top: 50%;  
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px 15px 10px;
+    border-radius: 5px;
+    border: none;
+    z-index: 1;
+    
+}
+
+.modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //for some reason using opacity will affect the Modal as well
+    //So we use the rgba
+    background-color: rgba(5, 1, 1, 0.568);
+    z-index: 1;
+}
+
+
 #admin_page_container{
     display: flex;
     margin-top: 30px;
     font-family: $mainTextStyle;
     justify-content: center;
     color: $secondaryTextColor;
+
+
    
 
     .admin_single_page{

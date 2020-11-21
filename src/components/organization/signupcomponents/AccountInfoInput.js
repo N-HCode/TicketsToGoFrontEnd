@@ -79,6 +79,10 @@ const AccountInfoInput =(props) => {
             try {
                 const response = await createOrganization(root.username, root.password, props.organization)
                 console.log(response);
+                setError({
+                    exist: false,
+                    errorMessage: null
+                })
                 history.push("/login")
             } catch (error) {
                 alert(error)
