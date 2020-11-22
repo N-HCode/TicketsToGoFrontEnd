@@ -47,12 +47,14 @@ const AdminPage = () => {
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        perPage: 10
+        perPage: 10,
+        numOfPageBthAfter: 2,
+        numOfPageBthBefore: 2
     }
 
-    const [currentPage, setcurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [tablePages, settablePages] = useState([]);
+   
 
     const [IsOpen, setisOpen] = useState(false);
 
@@ -78,7 +80,7 @@ const AdminPage = () => {
             return;
         }
 
-
+        
         setisOpen(false);
         dispatch({ type: "clear"});
 
@@ -117,17 +119,34 @@ const AdminPage = () => {
 
     }
 
+    const [tablePages, setTablePages] = useState([])
+    const [visiblePages, setVisiblePages] = useState([])
+
     const setOrgUsersToNewList = (newList) => {
         setOrganization({
             ...organization,
             users: newList
         })
 
-        //https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
-        let pages = Array.from(new Array((Math.ceil(newList.length/tableConfig.perPage))), (x,y) => y+1);
-        settablePages(pages);
+        if(newList.length > tableConfig.perPage){
+           
+            //https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
+
+            //if the list change, then so will the number of pages.
+            //this is to calculate the number of pages there needs to be
+            let lastPage = Math.ceil(newList.length/tableConfig.perPage);
+            // let lastPage = 9;
+            let pages = Array.from(new Array(lastPage), (x,y) => y+1);
+            setTablePages(pages);
+
+            changePage(currentPage, pages);
+        }
 
     }
+
+
+
+
 
     const onChange = (e) => {
         dispatch({type: "onChange", event: e.target})
@@ -155,8 +174,51 @@ const AdminPage = () => {
     const currentUsers = organization.users.slice(firstUserIndex, lastUserIndex);
 
 
-    const changePage = (number) => {
-        setcurrentPage(number)
+
+    const changePage = (number, pages) => {
+        setCurrentPage(number);
+
+        //put upper and lower adjustment so there will only need to be one place to change the text
+        //if we change the object property name
+        const upperAdjustment = tableConfig.numOfPageBthAfter;
+        //we add one here to include the active number in the total. We could have put it in the
+        //BtnAfter, then we would just have to adjust some calculations
+        const lowerAdjustment = tableConfig.numOfPageBthBefore +1;
+
+        //These upper and lower limit is to be used to get the index for the slice.
+        const upperLimit = number + upperAdjustment;
+        const lowerLimit = number - lowerAdjustment;
+
+        //this is just the total number of pagination button that would be shown.
+        //That will just be the combined adjustments.
+        const totalPages = upperAdjustment + lowerAdjustment;
+
+        //The last page is the length as slice is non-inclusive at the end. So we need to have the last index+1
+        const lastPage = pages.length;
+
+        //This is to calculate the page number that will trigger the logic to not add anymore pages.
+        //We need this for the edge case where the we have the last page already already appearing
+        const lastMinusTotal = lastPage - totalPages;
+
+        if (number >= tableConfig.numOfPageBthBefore + 1 && number <= lastPage - (upperAdjustment + 1) ) {
+            
+            //we only want a subsection of the total page array. So we can slice it
+            //Just make sure that slice is non-inclusive for the upperlimit.
+            return setVisiblePages(pages.slice(lowerLimit, upperLimit));
+
+        }else if(number < lowerAdjustment){
+            console.log("hello2");
+            console.log(pages.slice(0, totalPages))
+            return setVisiblePages(pages.slice(0, totalPages));
+ 
+        }else{
+            console.log("hello3");
+            //if the totalpages is more that the available pages, the lower limit will be a negative
+            //slice goes backwards if it has a negaive number. We do not want that, so we have a logic
+            //to make sure that the lower limit does not go below 0
+            return setVisiblePages(pages.slice(lastMinusTotal > 0? lastMinusTotal : 0, lastPage))
+
+        }
     }
 
 
@@ -189,7 +251,9 @@ const AdminPage = () => {
                             <input type="text" name="email" required onChange={onChange}></input>
 
                             <label htmlFor="phoneNumber">PhoneNumber</label>
-                            <input type="text" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={onChange} required></input>
+                            <input type="text" name="phoneNumber" 
+                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                            onChange={onChange} required></input>
                         </div>
 
                         <div className="modal_column">
@@ -277,8 +341,8 @@ const AdminPage = () => {
 
 
                         <div className="pagination">
-                                {tablePages.map((num)=>
-                                    <button type="button" onClick={() => changePage(num)}>{num}</button>
+                                {visiblePages.map((num)=>
+                                    <button type="button" onClick={() => changePage(num, tablePages)}>{num}</button>
                                 )}
                         </div>
 
