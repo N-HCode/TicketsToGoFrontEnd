@@ -43,14 +43,18 @@ const AdminPage = () => {
         email: null,
         phoneNumber: null,
         userRole: null
-    })
+    });
 
-    const table_config = {
+    const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        data: organization.users
+        perPage: 10
     }
 
-    const [IsOpen, setisOpen] = useState(false)
+    const [currentPage, setcurrentPage] = useState(1);
+
+    const [tablePages, settablePages] = useState([]);
+
+    const [IsOpen, setisOpen] = useState(false);
 
     const openModal = () => {
         setisOpen(true);
@@ -67,11 +71,7 @@ const AdminPage = () => {
 
             const newList = organization.users.slice(0);
             newList.push(response.data);
-
-            setOrganization({
-                ...organization,
-                users: newList
-            })
+            setOrgUsersToNewList(newList);
 
         } catch (error) {
             alert(error);
@@ -108,16 +108,24 @@ const AdminPage = () => {
         try {
             const response = await getAllUsesInOrg(organization.id);
             response.data.sort(sortForUsers);
-            setOrganization({
-                ...organization,
-                users: response.data
-
-            })
+            setOrgUsersToNewList(response.data);
 
         } catch (error) {
             alert(error);
         
         }
+
+    }
+
+    const setOrgUsersToNewList = (newList) => {
+        setOrganization({
+            ...organization,
+            users: newList
+        })
+
+        //https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
+        let pages = Array.from(new Array((Math.ceil(newList.length/tableConfig.perPage))), (x,y) => y+1);
+        settablePages(pages);
 
     }
 
@@ -130,7 +138,7 @@ const AdminPage = () => {
         //test
     }
 
-    //sorting funvtions for users
+    //sorting functions for users
     const sortForUsers = (a,b) =>{
         if (a.username < b.username) {
             return -1;
@@ -141,32 +149,36 @@ const AdminPage = () => {
 
     }
 
+    //pagination logic
+    const lastUserIndex = currentPage * tableConfig.perPage;
+    const firstUserIndex = lastUserIndex - tableConfig.perPage;
+    const currentUsers = organization.users.slice(firstUserIndex, lastUserIndex);
+
+
+    const changePage = (number) => {
+        setcurrentPage(number)
+    }
+
 
     return (
         <div className="main_container">
                 
            
-                <Modal 
-                className="modal"
-                overlayClassName ="modal_overlay"   
-                isOpen={IsOpen} 
-                shouldCloseOnOverlayClick={false}
-                onRequestClose={cancelAddUser}>
-                    <form onSubmit={addUser}>
-                        <h2>User Profile</h2>
-                        <p>Add in details to create a new user</p>
-                        <hr></hr>
+            <Modal 
+            className="modal"
+            overlayClassName ="modal_overlay"   
+            isOpen={IsOpen} 
+            shouldCloseOnOverlayClick={false}
+            onRequestClose={cancelAddUser}>
+                <form onSubmit={addUser}>
+                    <h2>Add User</h2>
+                    <p>Add in details to create a new user</p>
+                    <hr></hr>
 
-                        <div className="modal_form_inputs">
+                    <div className="modal_form_inputs">
 
-                            <button type="button" onClick={check}>check</button>
-
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="username" required onChange={onChange}></input>
-
-                            <label htmlFor="password">Password</label>
-                            <input type="text" name="password" required onChange={onChange}></input>
-
+                        {/* <button type="button" onClick={check}>check</button> */}
+                        <div className="modal_column">
                             <label htmlFor="firstName">First Name</label>
                             <input type="text" name="firstName" required onChange={onChange}></input>
 
@@ -177,7 +189,19 @@ const AdminPage = () => {
                             <input type="text" name="email" required onChange={onChange}></input>
 
                             <label htmlFor="phoneNumber">PhoneNumber</label>
-                            <input type="text" name="phoneNumber" onChange={onChange} required></input>
+                            <input type="text" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" onChange={onChange} required></input>
+                        </div>
+
+                        <div className="modal_column">
+                            <label htmlFor="username">Username</label>
+                            <input type="text" name="username" required onChange={onChange}></input>
+
+                            <label htmlFor="password">Password</label>
+                            <input type="password" name="password" required onChange={onChange}></input>
+
+                            <label htmlFor="password">Confirm Password</label>
+                            <input type="password" name="password" required onChange={onChange}></input>
+
 
                             {/* if option value is "" it will cause a validation error if the 
                             required tagged is there. */}
@@ -187,23 +211,29 @@ const AdminPage = () => {
                                 <option value="user">user</option>
                                 <option value="admin">admin</option>
                             </select>
-                        </div>    
+                        </div>
+                    </div>    
 
-                        <div className="modal_btn">
-                            {/* this creates a reset button that will rest all the values
-                            in the form */}
-                            {/* <input type="reset" value="reset"/> */}
+                    <div className="modal_btn">
+                        {/* this creates a reset button that will rest all the values
+                        in the form */}
+                        {/* <input type="reset" value="reset"/> */}
 
-                            <button type="button" onClick={cancelAddUser}>Cancel</button>
-                            <button>Add User</button>
-                        </div>    
-                    </form>
+                        <button type="button" onClick={cancelAddUser}>Cancel</button>
+                        <button>Add User</button>
+                    </div>    
+                </form>
 
-                </Modal>
+            </Modal>
+
+            <Modal>
+
+            </Modal>
 
 
 
             <div id="admin_page_container">
+
                 <div className="admin_single_page">
                     <div className="admin_single_page_content">
 
@@ -214,7 +244,7 @@ const AdminPage = () => {
                             <table className="admin_person_table">
                                 <thead>
                                     <tr>
-                                        {table_config.headers.map((header) => 
+                                        {tableConfig.headers.map((header) => 
                                             <th>{header}</th>
                                         )}
 
@@ -223,7 +253,7 @@ const AdminPage = () => {
                                 </thead>
                                 <tbody>
 
-                                {table_config.data !== undefined && table_config.data.length > 0 && table_config.data.map((user, index) =>
+                                {organization.users !== undefined && organization.users.length > 0 && currentUsers.map((user) =>
                                     
                                     <tr>
                                         <td><div><i className="material-icons">edit</i></div></td>
@@ -243,9 +273,17 @@ const AdminPage = () => {
 
                             </table>
 
-                    </div>
+                        </div>
 
-                </div>
+
+                        <div className="pagination">
+                                {tablePages.map((num)=>
+                                    <button type="button" onClick={() => changePage(num)}>{num}</button>
+                                )}
+                        </div>
+
+
+                    </div>
 
 
                 </div>

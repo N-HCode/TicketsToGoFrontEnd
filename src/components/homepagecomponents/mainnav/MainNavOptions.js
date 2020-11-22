@@ -44,7 +44,6 @@ const MainNavOptions = () => {
                 <div className="dropdown">
                     <NavLink to="/createTicket" className="dropdown_menu_item">Create Ticket</NavLink>
                     <NavLink to="/login" className="dropdown_menu_item">Log in</NavLink>
-                    <NavLink to="/signUp" className="dropdown_menu_item">Sign up</NavLink>
                     <NavLink to="/createOrganization" className="dropdown_menu_item">Create Organization</NavLink>
                     <NavLink to="/myaccount" className="dropdown_menu_item">My Account</NavLink>
                     <NavLink to="/admin" className="dropdown_menu_item">Admin</NavLink>

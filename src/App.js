@@ -18,7 +18,6 @@ import CreateOrganization from './components/organization/CreateOrganizationPage
 
 // Components for User
 import LoginPage from './components/user/LoginPage';
-import SignUpPage from './components/user/SignUpPage';
 import UserList from './components/user/UserList';
 import EditUserPage from './components/user/EditUserPage';
 
@@ -62,7 +61,6 @@ class App extends React.Component {
     createTicket: "/createTicket",
     editTicket: "/edit/:id",
     login: "/login",
-    signUp: "/signup",
     createOrganization: "/createOrganization",
     userList: "/users",
     myAccount: "/myaccount",
@@ -93,7 +91,6 @@ class App extends React.Component {
               <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
               <Route exact path={this.paths.editTicket} component={EditTicketPage} />
               <Route exact path={this.paths.login} component={LoginPage} />
-              <Route exact path={this.paths.signUp} component={SignUpPage} />
               <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
               <Route exact path={this.paths.userList} component={UserList} />
               <Route exact path={this.paths.myAccount} component={MyAccountPage} />
