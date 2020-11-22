@@ -17,14 +17,24 @@
     .modal_form_inputs{
         box-sizing: border-box;
         display: flex;
-        flex-direction: column;
+   
 
         label{
             margin-top: 5px;
         }
 
-        input{
+        input,select{
+            box-sizing: border-box;
             margin-top: 2px;
+            height: 23px;
+        }
+
+        .modal_column{
+            display: flex;
+            flex-direction: column;
+            &:not(:last-child){
+                margin-right: 10px;
+            }
         }
 
     }
@@ -92,6 +102,45 @@
                 align-self: flex-end;
 
             }
+
+            .pagination{
+                margin-top: 10px;
+                display: flex;
+
+                justify-self: center;
+                align-self: flex-end;
+
+                button{
+                    //a tags are by default display inline which is not affected by width and height
+                    //can override the disply
+                    height: 22px;
+                    width: 22px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px;
+                    border: 1px solid black;
+                    user-select: none;
+                    cursor: pointer;
+                  
+                    background-color: green;
+
+                    &:active{
+                        animation: navClick 2s;
+                    }
+
+                    &:not(:last-child){
+                        border-right: 0px;
+                  
+                    }
+
+                    &:hover{
+                        filter: brightness(1.25);
+                    }
+                }
+
+            }
+
         }
 
         .table_container{
