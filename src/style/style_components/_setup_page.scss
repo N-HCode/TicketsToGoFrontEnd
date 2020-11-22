@@ -77,8 +77,33 @@
         padding: 20px;
         height: fit-content;
         border-radius: 10px;
+
+        .error_message{
+            word-wrap: break-word;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: $errorColor1;
+            border-radius: 5px;
+            color: white;
+            height: fit-content;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-bottom: 10px;
+            animation: shake 175ms;
+            
+            p{  
+                font-size: 14px;
+                margin: 5px 0px;
+                width: 100%;
+                height: fit-content;
+                word-wrap: break-all;
+            }
+        }
         
-        div{
+        .go_back{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,7 +123,7 @@
                 font-size: 22px;
 
                 &:active{
-                    animation: navClick 1s;;
+                    animation: navClick 2s;;
                 }
 
                 &:hover{
@@ -124,7 +149,6 @@
 
     input{
         box-sizing: border-box;
-
         width: 100%;
     }
 
@@ -136,7 +160,6 @@
 
     button{
         align-self: flex-end;
-
         font-size: 16px;
         color:$activeTextColor;
         width: fit-content;
@@ -147,10 +170,12 @@
         background-color: $secondarymainBGColor;
         cursor: pointer;
        
-
         &:hover{
             filter: brightness(1.25);
-            color:$activeTextColor;
+        }
+
+        &:active{
+            animation: navClick 2s;
         }
     }
 

@@ -1,38 +1,141 @@
+
+
+.modal {
+    color:$activeTextColor;
+    position: absolute;
+    background-color: $primaryHeaderBGColor2;
+    left: 50%; 
+    top: 50%;  
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px 15px 10px;
+    border-radius: 5px;
+    border: none;
+    z-index: 1;
+
+    .modal_form_inputs{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+
+        label{
+            margin-top: 5px;
+        }
+
+        input{
+            margin-top: 2px;
+        }
+
+    }
+
+    .modal_btn{
+        padding: 0;
+        margin-top: 15px;
+
+        button{
+            margin: 0;
+        
+            box-sizing: border-box;
+        }
+    }
+    
+}
+
+.modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //for some reason using opacity will affect the Modal as well
+    //So we use the rgba
+    background-color: rgba(5, 1, 1, 0.568);
+    z-index: 1;
+}
+
+
 #admin_page_container{
     display: flex;
     margin-top: 30px;
     font-family: $mainTextStyle;
     justify-content: center;
-    color: $activeTextColor;
-   
+    color: $secondaryTextColor;
+    margin-bottom: 50px;
+
 
     .admin_single_page{
-        display: flex;
-        flex-direction: column;
-        width: 500px;
-        height: 250px;
+        width: fit-content;
+        height: fit-content;
         background-color: $primaryHeaderBGColor;
         border-radius: 5px;
+   
+        .admin_single_page_content{
+            margin: 15px;
+            display: flex;
+            flex-direction: column;
+
+            i{
+                user-select: none;
+                cursor: pointer;
+
+                &:active{
+                    animation: navClick 2s;
+                }
+
+                &:hover{
+                    filter: brightness(1.25);
+                }
+            }
+            
+            .admin_icon_right{
+                align-self: flex-end;
+
+            }
+        }
 
         .table_container{
             display: flex;
             align-items: center;
             justify-content: center;
+         
         }
 
         .admin_person_table{
             border-collapse: collapse;
-            margin: 25px 0;
             font-size: 0.9em;
             text-align: left;
 
             th{
                 background-color: $primaryHeaderBGColor2;
-                font-weight: bold;
+                font-weight: normal;
             }
 
-            th,td{
-                padding: 5px 15px;
+            div{
+                padding: 0;
+                margin: 0;
+                max-width: 125px;
+                overflow-x: auto;
+                scrollbar-width: none; //remove scrollbar while still allowing to scroll Firefox
+                -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            }
+
+            th, td{
+                padding: 10px 15px 10px 15px
+            }
+            
+            tbody{
+                tr:nth-child(odd){
+                    background-color: $secondarymainBGColor;
+                }
+
+                tr:nth-child(even){
+                    background-color: $secondaryPHBGColor;
+                }
+            }
+
+            i{
+                font-size: 16px;
             }
             
         }

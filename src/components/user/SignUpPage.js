@@ -26,12 +26,21 @@ const SignUpPage = (props) => {
     const onSubmit = async (event) => {
         event.preventDefault();
 
-        await signUp(user)
-            .then( response => response.data.userId)
-            .then( userId => addOrganizationToUser(userId, context.organization.id))
-            .then(alert("success"))
-            .then(props.history.push("/"))
-            .catch(alert);
+
+        try {
+            const response = await signUp(user);
+            const userId = response.data.userId;
+            await addOrganizationToUser(userId, context.organization.id);
+            alert("success");
+            props.history.push("/");
+
+        } catch (error) {
+            alert(error);
+        }
+
+        
+
+            
     }
     
     return (

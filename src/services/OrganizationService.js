@@ -8,4 +8,10 @@ const findByUserId = (userId) => {
     return axios.get(`http://localhost:8080/organization/user/${userId}`)
 }
 
-export { createOrganization, findByUserId };
+const getAllUsesInOrg = (orgId) => {
+    return axios.get(`http://localhost:8080/organization/getAllUser/${orgId}`)
+}
+
+
+
+export { createOrganization, findByUserId, getAllUsesInOrg };
