@@ -3,6 +3,7 @@ import { OrganizationContext} from '../context/OrganizationContext';
 import { UserContext } from '../context/UserContext';
 import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
+import { signUp, addOrganizationToUser } from '../../services/UserService'
 
 Modal.setAppElement('#root')
 
@@ -56,8 +57,28 @@ const AdminPage = () => {
         dispatch({ type: "clear"});
     }
 
-    const addUser = (e) => {
+    const addUser = async (e) => {
         e.preventDefault();
+
+        try {
+            const response = await signUp(state);
+            const userId = response.data.userId;
+            await addOrganizationToUser(userId, organization.id);
+
+            const newList = organization.users.slice(0);
+            newList.push(response.data);
+
+            setOrganization({
+                ...organization,
+                users: newList
+            })
+
+        } catch (error) {
+            alert(error);
+            return;
+        }
+
+
         setisOpen(false);
         dispatch({ type: "clear"});
 
@@ -71,7 +92,12 @@ const AdminPage = () => {
 
     useEffect(() => {
 
-        updateToCurrentUsers();
+        //if object has no keys then it most likely is empty and the context
+        //was not updated properly
+        if (Object.keys(organization).length !== 0) {
+            updateToCurrentUsers();
+        }
+       
         
     }, [])
 
@@ -81,15 +107,16 @@ const AdminPage = () => {
         //We want to get the latest user data and then add it to our context.
         try {
             const response = await getAllUsesInOrg(organization.id);
+            response.data.sort(sortForUsers);
             setOrganization({
                 ...organization,
                 users: response.data
 
             })
-            console.log(response);
 
         } catch (error) {
             alert(error);
+        
         }
 
     }
@@ -99,7 +126,19 @@ const AdminPage = () => {
     }
 
     const check = () => {
-        console.log(state);
+     
+        //test
+    }
+
+    //sorting funvtions for users
+    const sortForUsers = (a,b) =>{
+        if (a.username < b.username) {
+            return -1;
+        }else if (a.username > b.username){
+            return 1;
+        }
+        return 0;
+
     }
 
 
@@ -118,42 +157,46 @@ const AdminPage = () => {
                         <p>Add in details to create a new user</p>
                         <hr></hr>
 
-                        <button type="button" onClick={check}></button>
+                        <div className="modal_form_inputs">
 
-                        <label htmlFor="username">Username</label>
-                        <input type="text" name="username" required onChange={onChange}></input>
+                            <button type="button" onClick={check}>check</button>
 
-                        <label htmlFor="password">Password</label>
-                        <input type="text" name="password" required onChange={onChange}></input>
+                            <label htmlFor="username">Username</label>
+                            <input type="text" name="username" required onChange={onChange}></input>
 
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" name="firstName" required onChange={onChange}></input>
+                            <label htmlFor="password">Password</label>
+                            <input type="text" name="password" required onChange={onChange}></input>
 
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" name="lastName" required onChange={onChange}></input>
+                            <label htmlFor="firstName">First Name</label>
+                            <input type="text" name="firstName" required onChange={onChange}></input>
 
-                        <label htmlFor="email">Username</label>
-                        <input type="text" name="email" required onChange={onChange}></input>
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="text" name="lastName" required onChange={onChange}></input>
 
-                        <label htmlFor="phoneNumber">Username</label>
-                        <input type="text" name="phoneNumber" onChange={onChange} required></input>
+                            <label htmlFor="email">Email</label>
+                            <input type="text" name="email" required onChange={onChange}></input>
 
-                        {/* if option value is "" it will cause a validation error if the 
-                        required tagged is there. */}
-                        <label htmlFor="userRole">User Role:</label>
-                        <select name="userRole" onChange={onChange} required>
-                            <option value="" disabled selected>Select Role...</option>
-                            <option value="user">user</option>
-                            <option value="admin">admin</option>
-                        </select>
+                            <label htmlFor="phoneNumber">PhoneNumber</label>
+                            <input type="text" name="phoneNumber" onChange={onChange} required></input>
 
+                            {/* if option value is "" it will cause a validation error if the 
+                            required tagged is there. */}
+                            <label htmlFor="userRole">User Role:</label>
+                            <select name="userRole" onChange={onChange} required>
+                                <option value="" disabled selected>Select Role...</option>
+                                <option value="user">user</option>
+                                <option value="admin">admin</option>
+                            </select>
+                        </div>    
 
-                        {/* this creates a reset button that will rest all the values
-                        in the form */}
-                        <input type="reset" value="reset"/>
+                        <div className="modal_btn">
+                            {/* this creates a reset button that will rest all the values
+                            in the form */}
+                            {/* <input type="reset" value="reset"/> */}
 
-                        <button type="button" onClick={cancelAddUser}>Cancel</button>
-                        <button>Add User</button>
+                            <button type="button" onClick={cancelAddUser}>Cancel</button>
+                            <button>Add User</button>
+                        </div>    
                     </form>
 
                 </Modal>

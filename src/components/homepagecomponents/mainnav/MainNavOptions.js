@@ -3,15 +3,19 @@ import React, { useState, useContext } from 'react';
 import {NavLink} from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { TicketContext } from '../../context/TicketContext';
+import { OrganizationContext} from '../../context/OrganizationContext';
+
 
 const MainNavOptions = () => {
 
     const [user, setUser] = useContext(UserContext);
     const [tickets, setTickets] = useContext(TicketContext);
+    const [organization, setOrganization] = useContext(OrganizationContext);
 
     const logOut = () => {
-        setUser({})
-        setTickets({})
+        setUser({});
+        setTickets({});
+        setOrganization({});
     }
 
 

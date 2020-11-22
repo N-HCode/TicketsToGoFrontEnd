@@ -1,7 +1,7 @@
 
 
 .modal {
-    color:$secondaryTextColor;
+    color:$activeTextColor;
     position: absolute;
     background-color: $primaryHeaderBGColor2;
     left: 50%; 
@@ -13,6 +13,32 @@
     border-radius: 5px;
     border: none;
     z-index: 1;
+
+    .modal_form_inputs{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+
+        label{
+            margin-top: 5px;
+        }
+
+        input{
+            margin-top: 2px;
+        }
+
+    }
+
+    .modal_btn{
+        padding: 0;
+        margin-top: 15px;
+
+        button{
+            margin: 0;
+        
+            box-sizing: border-box;
+        }
+    }
     
 }
 
@@ -35,9 +61,8 @@
     font-family: $mainTextStyle;
     justify-content: center;
     color: $secondaryTextColor;
+    margin-bottom: 50px;
 
-
-   
 
     .admin_single_page{
         width: fit-content;
