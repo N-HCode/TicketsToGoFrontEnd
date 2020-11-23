@@ -106,38 +106,58 @@
             .pagination{
                 margin-top: 10px;
                 display: flex;
-
                 justify-self: center;
                 align-self: flex-end;
-
-                button{
-                    //a tags are by default display inline which is not affected by width and height
-                    //can override the disply
-                    height: 22px;
-                    width: 22px;
+                
+                .page_numbers{
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 5px;
-                    border: 1px solid black;
-                    user-select: none;
-                    cursor: pointer;
-                  
-                    background-color: green;
 
-                    &:active{
-                        animation: navClick 2s;
-                    }
-
-                    &:not(:last-child){
-                        border-right: 0px;
-                  
-                    }
-
-                    &:hover{
-                        filter: brightness(1.25);
+                    button{
+                        //a tags are by default display inline which is not affected by width and height
+                        //can override the disply
+                        height: 22px;
+                        width: 22px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 5px;
+                        border: 1px solid black;
+                        user-select: none;
+                        cursor: pointer;
+                      
+                        background-color: green;
+    
+                        &:active{
+                            animation: navClick 2s;
+                        }
+    
+                        &:not(:last-child){
+                            border-right: 0px;
+                      
+                        }
+    
+                        &:hover{
+                            filter: brightness(1.25);
+                        }
                     }
                 }
+
+                .page_input{
+
+                    input{
+                        width: 20px;
+                        appearance: textfield; //Firefox
+                        text-align: end;
+
+                        &::-webkit-inner-spin-button,
+                        &::-webkit-outter-spin-button{ //Chome
+                            -webkit-appearance: none;
+                        }
+
+                    }
+                    
+                }
+
 
             }
 
@@ -161,13 +181,19 @@
             }
 
             div{
+                white-space: nowrap;
                 padding: 0;
                 margin: 0;
-              
                 max-width: 125px;
+                overflow: hidden;
                 overflow-x: auto;
                 scrollbar-width: none; //remove scrollbar while still allowing to scroll Firefox
                 -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+                &::-webkit-scrollbar{ //Chrome
+                    display: none;
+                    background: transparent;
+                }
             }
 
             th, td{

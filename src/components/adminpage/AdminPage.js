@@ -47,7 +47,7 @@ const AdminPage = () => {
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        perPage: 10,
+        perPage: 5,
         numOfPageBthAfter: 2,
         numOfPageBthBefore: 2
     }
@@ -207,12 +207,10 @@ const AdminPage = () => {
             return setVisiblePages(pages.slice(lowerLimit, upperLimit));
 
         }else if(number < lowerAdjustment){
-            console.log("hello2");
-            console.log(pages.slice(0, totalPages))
             return setVisiblePages(pages.slice(0, totalPages));
  
         }else{
-            console.log("hello3");
+       
             //if the totalpages is more that the available pages, the lower limit will be a negative
             //slice goes backwards if it has a negaive number. We do not want that, so we have a logic
             //to make sure that the lower limit does not go below 0
@@ -340,11 +338,23 @@ const AdminPage = () => {
                         </div>
 
 
-                        <div className="pagination">
-                                {visiblePages.map((num)=>
-                                    <button type="button" onClick={() => changePage(num, tablePages)}>{num}</button>
-                                )}
-                        </div>
+                        {tablePages.length > 1? 
+                        
+                            <div className="pagination">
+                                    <div className="page_numbers"> 
+                                        {visiblePages.map((num)=>
+                                            <button type="button" onClick={() => changePage(num, tablePages)}>{num}</button>
+                                        )}
+
+                                    </div>
+                                    <div className="page_input">
+                                        <input type="number"  min={1} max={2}></input>
+
+                                    </div>
+                            </div>
+                          :                        
+                            <div></div>
+                        }            
 
 
                     </div>
