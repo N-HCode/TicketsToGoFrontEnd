@@ -3,20 +3,20 @@
 
 //The variables will be needed to be imported first.
 //This is because the other components will use the variables.
-@import './style_components/variables.scss';
+@import './style_components/variables';
 @import './style_components/login_form';
 @import './style_components/main_container';
-@import './style_components/header_container.scss';
+@import './style_components/header_container';
 @import './style_components/ticket_column';
-@import './style_components/tab_line.scss';
-@import './style_components/primary_tab.scss';
-@import './style_components/template_container.scss';
-@import './style_components/footer.scss';
-@import './style_components/ticket_tab.scss';
-@import './style_components/main_nav.scss';
-@import './style_components/single_ticket.scss';
-@import './style_components/ticket_form.scss';
-@import './style_components/setup_page.scss';
+@import './style_components/tab_line';
+@import './style_components/primary_tab';
+@import './style_components/template_container';
+@import './style_components/footer';
+@import './style_components/ticket_tab';
+@import './style_components/main_nav';
+@import './style_components/single_ticket';
+@import './style_components/ticket_form';
+@import './style_components/setup_page';
 @import './style_components/my_account_page';
 @import './style_components/animations';
 @import './style_components//admin_page';

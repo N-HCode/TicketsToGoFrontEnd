@@ -13,18 +13,25 @@ const MainNavOptions = () => {
     const [organization, setOrganization] = useContext(OrganizationContext);
 
     const logOut = () => {
+        closeMenu();
         setUser({});
         setTickets({});
         setOrganization({});
+        
     }
 
 
     const [navMenuOpen, setNavMenuOpen] = useState(false);
 
+    const closeMenu = () => {
+        setNavMenuOpen(false);
+    }
+
     const NavDropDown = (props) =>{
 
         return (
             <div id="main_nav__drop_down">
+
                 <i className="material-icons" 
                 onClick={() => setNavMenuOpen(!navMenuOpen)} >menu</i>
 
@@ -42,11 +49,11 @@ const MainNavOptions = () => {
         <nav id="main_nav__menu_container">
             <NavDropDown>
                 <div className="dropdown">
-                    <NavLink to="/createTicket" className="dropdown_menu_item">Create Ticket</NavLink>
-                    <NavLink to="/login" className="dropdown_menu_item">Log in</NavLink>
-                    <NavLink to="/createOrganization" className="dropdown_menu_item">Create Organization</NavLink>
-                    <NavLink to="/myaccount" className="dropdown_menu_item">My Account</NavLink>
-                    <NavLink to="/admin" className="dropdown_menu_item">Admin</NavLink>
+                    <NavLink to="/createTicket" className="dropdown_menu_item" onClick={closeMenu}>Create Ticket</NavLink>
+                    <NavLink to="/login" className="dropdown_menu_item" onClick={closeMenu}>Log in</NavLink>
+                    <NavLink to="/createOrganization" className="dropdown_menu_item"onClick={closeMenu}>Create Organization</NavLink>
+                    <NavLink to="/myaccount" className="dropdown_menu_item"onClick={closeMenu}>My Account</NavLink>
+                    <NavLink to="/admin" className="dropdown_menu_item"onClick={closeMenu}>Admin</NavLink>
                     <NavLink to="/login" className="dropdown_menu_item" onClick={logOut}>Log out</NavLink>
 
                 </div>

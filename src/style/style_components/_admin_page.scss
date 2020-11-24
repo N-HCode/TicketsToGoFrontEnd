@@ -108,9 +108,17 @@
                 display: flex;
                 justify-self: center;
                 align-self: flex-end;
+
+
                 
                 .page_numbers{
                     display: flex;
+                    margin-right: 10px;
+
+                    .active{
+                        background-color: $secondaryPHBGColor;
+                        color: white;
+                    }
 
                     button{
                         //a tags are by default display inline which is not affected by width and height
@@ -121,14 +129,29 @@
                         align-items: center;
                         justify-content: center;
                         padding: 5px;
-                        border: 1px solid black;
+                        border: 1px solid $secondaryPHBGColor;
                         user-select: none;
                         cursor: pointer;
-                      
-                        background-color: green;
+                        color:$secondaryTextColor;
+                        
+                        background-color: $primaryHeaderBGColor2;
     
                         &:active{
-                            animation: navClick 2s;
+                            animation: navClick1 100ms;
+                        }
+
+                        @keyframes navClick1 {
+                            0%{
+                                background-color: $secondaryPHBGColor
+                            }
+
+                            50%{
+                                background-color: $primaryHeaderBGColor2
+                            }
+
+                            100%{
+                                background-color: $secondaryPHBGColor
+                            }
                         }
     
                         &:not(:last-child){
@@ -137,6 +160,8 @@
                         }
     
                         &:hover{
+                            // background-color: $secondaryPHBGColor;
+                            // color: white;
                             filter: brightness(1.25);
                         }
                     }
@@ -145,9 +170,16 @@
                 .page_input{
 
                     input{
-                        width: 20px;
+                        box-sizing: border-box;
+                        padding: 0;
+                        width: 30px;
+                        padding: 0 2px;
                         appearance: textfield; //Firefox
                         text-align: end;
+                        height: 22px;
+                        color:$secondaryTextColor;
+                        border: 1px solid $secondaryPHBGColor;
+                        background-color: $secondaryBackgroundColor;
 
                         &::-webkit-inner-spin-button,
                         &::-webkit-outter-spin-button{ //Chome
