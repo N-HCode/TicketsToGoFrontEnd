@@ -85,8 +85,9 @@ const PrimaryNavTabs = () => {
             <div id="primary_tab__horizontal_scroll_container" 
             ref={elements}
             onWheel={mouseWheelScroll}>
-                {navTabListState.map((tab,i) => <SingleTab 
-                keynumber={i} 
+                {navTabListState.map((tab,i) => 
+                <SingleTab 
+                key={"primary_tab_"+i}
                 deleteTab={deleteTab}
                 middleMouseDeleteTab = {middleMouseDeleteTab}
                 title = {navTabListState[i]}

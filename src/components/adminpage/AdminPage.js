@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect, useReducer} from 'react';
+import React, {useContext, useState, useEffect, useReducer, useRef} from 'react';
 import { OrganizationContext} from '../context/OrganizationContext';
 import { UserContext } from '../context/UserContext';
 import Modal from 'react-modal';
@@ -47,7 +47,7 @@ const AdminPage = () => {
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        perPage: 10,
+        perPage: 1,
         numOfPageBthAfter: 2,
         numOfPageBthBefore: 2
     }
@@ -131,11 +131,11 @@ const AdminPage = () => {
         if(newList.length > tableConfig.perPage){
            
             //https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-a-range-within-the-supp
-
+            
             //if the list change, then so will the number of pages.
             //this is to calculate the number of pages there needs to be
             let lastPage = Math.ceil(newList.length/tableConfig.perPage);
-            // let lastPage = 9;
+            // let lastPage = 90;
             let pages = Array.from(new Array(lastPage), (x,y) => y+1);
             setTablePages(pages);
 
@@ -173,10 +173,14 @@ const AdminPage = () => {
     const firstUserIndex = lastUserIndex - tableConfig.perPage;
     const currentUsers = organization.users.slice(firstUserIndex, lastUserIndex);
 
-
+    const pageNum = useRef();
+    const currentActivePageNum = useRef(0);
 
     const changePage = (number, pages) => {
+        //This will change the data shown in the table
         setCurrentPage(number);
+
+        ////Everything else below is the pagination logic
 
         //put upper and lower adjustment so there will only need to be one place to change the text
         //if we change the object property name
@@ -200,25 +204,65 @@ const AdminPage = () => {
         //We need this for the edge case where the we have the last page already already appearing
         const lastMinusTotal = lastPage - totalPages;
 
+        //This will change the active className to the page that is clicked.
+        if(pageNum.current.children.length > 1){
+            pageNum.current.children[currentActivePageNum.current].classList.remove("active");
+        }
+
         if (number >= tableConfig.numOfPageBthBefore + 1 && number <= lastPage - (upperAdjustment + 1) ) {
+
+            //The active page will always be in the middle if there are enough pages and the total pages
+            //does not cover the whole page.
+            if(pageNum.current.children.length > 1){
+                currentActivePageNum.current = lowerAdjustment-1;
+                pageNum.current.children[lowerAdjustment-1].classList.add("active");
+            }
+
             
             //we only want a subsection of the total page array. So we can slice it
             //Just make sure that slice is non-inclusive for the upperlimit.
             return setVisiblePages(pages.slice(lowerLimit, upperLimit));
 
         }else if(number < lowerAdjustment){
-            console.log("hello2");
-            console.log(pages.slice(0, totalPages))
+          
+            if(pageNum.current.children.length > 1){
+                let pageIndex = (number % totalPages);
+                pageIndex = pageIndex === 0? totalPages -1: pageIndex -1;
+                currentActivePageNum.current = pageIndex;
+                pageNum.current.children[pageIndex].classList.add("active");
+            }
+
             return setVisiblePages(pages.slice(0, totalPages));
  
         }else{
-            console.log("hello3");
+           
+       
+            if(pageNum.current.children.length > 1){
+                let pageIndex = (number % totalPages);
+                pageIndex = pageIndex === 0? totalPages -1: pageIndex -1;
+                currentActivePageNum.current = pageIndex;
+                pageNum.current.children[pageIndex].classList.add("active");
+            }
             //if the totalpages is more that the available pages, the lower limit will be a negative
             //slice goes backwards if it has a negaive number. We do not want that, so we have a logic
             //to make sure that the lower limit does not go below 0
             return setVisiblePages(pages.slice(lastMinusTotal > 0? lastMinusTotal : 0, lastPage))
 
         }
+    }
+
+
+
+    const onKeyPress = (e) => {
+        let value = e.target.value;
+        if(e.key === "Enter"){
+            //need to parse int because the value we get is in string format
+            if(Number.isInteger(parseInt(value)) && value > 0 && value <= tablePages.length){
+                changePage(parseInt(value), tablePages);
+            }
+            e.target.value = '';
+        }
+
     }
 
 
@@ -250,10 +294,10 @@ const AdminPage = () => {
                             <label htmlFor="email">Email</label>
                             <input type="text" name="email" required onChange={onChange}></input>
 
-                            <label htmlFor="phoneNumber">PhoneNumber</label>
+                            <label htmlFor="phoneNumber">PhoneNumber (Opt)</label>
                             <input type="text" name="phoneNumber" 
                             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
-                            onChange={onChange} required></input>
+                            onChange={onChange}></input>
                         </div>
 
                         <div className="modal_column">
@@ -308,8 +352,8 @@ const AdminPage = () => {
                             <table className="admin_person_table">
                                 <thead>
                                     <tr>
-                                        {tableConfig.headers.map((header) => 
-                                            <th>{header}</th>
+                                        {tableConfig.headers.map((header, index) => 
+                                            <th key={"admin_header_"+index}>{header}</th>
                                         )}
 
                                     </tr>
@@ -317,9 +361,9 @@ const AdminPage = () => {
                                 </thead>
                                 <tbody>
 
-                                {organization.users !== undefined && organization.users.length > 0 && currentUsers.map((user) =>
+                                {organization.users !== undefined && organization.users.length > 0 && currentUsers.map((user,index) =>
                                     
-                                    <tr>
+                                    <tr key={"admin_table_row_" + index}>
                                         <td><div><i className="material-icons">edit</i></div></td>
                                         <td><div>{user.firstName}</div></td>
                                         <td><div>{user.lastName}</div></td>
@@ -340,11 +384,28 @@ const AdminPage = () => {
                         </div>
 
 
-                        <div className="pagination">
-                                {visiblePages.map((num)=>
-                                    <button type="button" onClick={() => changePage(num, tablePages)}>{num}</button>
-                                )}
-                        </div>
+                        {tablePages.length > 1? 
+                        
+                            <div className="pagination">
+                                    <div className="page_numbers" ref={pageNum}> 
+                                        {visiblePages.map((num, index)=>
+                                            <button key={"page_btn_num_" + index}
+                                            className={index === 0? "active": ""}
+                                            type="button" onClick={() => changePage(num, tablePages)}>{num}</button>
+                                        )}
+
+                                    </div>
+                                    <div className="page_input">
+                                        <input type="number" min={1} max={tablePages.length}    
+                                        placeholder="pg#"
+                                        
+                                        onKeyPress={(e) => onKeyPress(e)}></input>
+
+                                    </div>
+                            </div>
+                          :                        
+                            <div></div>
+                        }            
 
 
                     </div>

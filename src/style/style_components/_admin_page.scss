@@ -106,38 +106,90 @@
             .pagination{
                 margin-top: 10px;
                 display: flex;
-
                 justify-self: center;
                 align-self: flex-end;
 
-                button{
-                    //a tags are by default display inline which is not affected by width and height
-                    //can override the disply
-                    height: 22px;
-                    width: 22px;
+
+                
+                .page_numbers{
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 5px;
-                    border: 1px solid black;
-                    user-select: none;
-                    cursor: pointer;
-                  
-                    background-color: green;
+                    margin-right: 10px;
 
-                    &:active{
-                        animation: navClick 2s;
+                    .active{
+                        background-color: $secondaryPHBGColor;
+                        color: white;
                     }
 
-                    &:not(:last-child){
-                        border-right: 0px;
-                  
-                    }
+                    button{
+                        //a tags are by default display inline which is not affected by width and height
+                        //can override the disply
+                        height: 22px;
+                        width: 22px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 5px;
+                        border: 1px solid $secondaryPHBGColor;
+                        user-select: none;
+                        cursor: pointer;
+                        color:$secondaryTextColor;
+                        
+                        background-color: $primaryHeaderBGColor2;
+    
+                        &:active{
+                            animation: navClick1 100ms;
+                        }
 
-                    &:hover{
-                        filter: brightness(1.25);
+                        @keyframes navClick1 {
+                            0%{
+                                background-color: $secondaryPHBGColor
+                            }
+
+                            50%{
+                                background-color: $primaryHeaderBGColor2
+                            }
+
+                            100%{
+                                background-color: $secondaryPHBGColor
+                            }
+                        }
+    
+                        &:not(:last-child){
+                            border-right: 0px;
+                      
+                        }
+    
+                        &:hover{
+                            // background-color: $secondaryPHBGColor;
+                            // color: white;
+                            filter: brightness(1.25);
+                        }
                     }
                 }
+
+                .page_input{
+
+                    input{
+                        box-sizing: border-box;
+                        padding: 0;
+                        width: 30px;
+                        padding: 0 2px;
+                        appearance: textfield; //Firefox
+                        text-align: end;
+                        height: 22px;
+                        color:$secondaryTextColor;
+                        border: 1px solid $secondaryPHBGColor;
+                        background-color: $secondaryBackgroundColor;
+
+                        &::-webkit-inner-spin-button,
+                        &::-webkit-outter-spin-button{ //Chome
+                            -webkit-appearance: none;
+                        }
+
+                    }
+                    
+                }
+
 
             }
 
@@ -161,13 +213,19 @@
             }
 
             div{
+                white-space: nowrap;
                 padding: 0;
                 margin: 0;
-              
                 max-width: 125px;
+                overflow: hidden;
                 overflow-x: auto;
                 scrollbar-width: none; //remove scrollbar while still allowing to scroll Firefox
                 -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+                &::-webkit-scrollbar{ //Chrome
+                    display: none;
+                    background: transparent;
+                }
             }
 
             th, td{
