@@ -59,10 +59,7 @@ const LoginPage = (props) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        dispatch( {
-            type: "clearErrors",
-        })
-
+        setShake(true);
 
         try {
 
@@ -86,24 +83,26 @@ const LoginPage = (props) => {
             })
 
  
-
-
+            dispatch( {
+                type: "clearErrors",
+            })
             props.history.push("/")
             
         } catch (error) {
             //error will have the response property so you can get the status code from that.
             // console.log(error.response.status);
+            
             dispatch( {
                 type: "error",
                 errorMessage: ERROR.invalid
-
             })
-
 
         }
         
 
     }
+
+    const [shake, setShake] = useState(false);
 
     const changeToSignUpPage = () => {
 
@@ -119,11 +118,11 @@ const LoginPage = (props) => {
                         <h1>Login</h1>
                         <hr></hr>
 
-                            {state.error? 
+                            {state.error &&
                             
-                            <div className="error_message"><p>{state.errorMessage}</p></div>
-                            
-                            : <div></div>}
+                            <div className={shake? "error_message shake" : "error_message"}
+                                onAnimationEnd={() => setShake(false)}
+                            ><p>{state.errorMessage}</p></div>}
 
                             <label htmlFor="username">Username:</label>
                             <input  type="text" required name="username" value={userLogin.username || ""} onChange={onChange}></input>

@@ -7,12 +7,20 @@
     left: 50%; 
     top: 50%;  
     transform: translate(-50%, -50%);
-    width: fit-content;
+    width: 300px;
     height: fit-content;
     padding: 0 10px 15px 10px;
     border-radius: 5px;
     border: none;
     z-index: 1;
+
+    .error_message{
+        @include errorStyling;
+    }
+
+    .shake{
+        animation: shake 175ms;
+    }
 
     .modal_form_inputs{
         box-sizing: border-box;

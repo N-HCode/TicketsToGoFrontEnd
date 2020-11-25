@@ -4,6 +4,7 @@ import { UserContext } from '../context/UserContext';
 import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
 import { signUp, addOrganizationToUser } from '../../services/UserService'
+import {ERROR} from '../constants/error';
 
 Modal.setAppElement('#root')
 
@@ -30,6 +31,23 @@ const reducer = (state, action) => {
     }
 }
 
+const errorReducer = (state, action) => {
+    switch(action.type){
+        case "error":
+            return{
+                exist: true,
+                errorMessage: action.errorMessage
+            }
+        case "clearErrors":
+            return {
+                exist: false,
+                errorMessage: ""
+            }
+        default:
+            return state;
+    }
+}
+
 const AdminPage = () => {
 
     const [organization, setOrganization] = useContext(OrganizationContext);
@@ -44,6 +62,11 @@ const AdminPage = () => {
         phoneNumber: null,
         userRole: null
     });
+
+    const [error, errorDispatch] = useReducer(errorReducer, {
+        exist: false,
+        errorMessage: ""
+    })
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
@@ -63,32 +86,48 @@ const AdminPage = () => {
         dispatch({ type: "clear"});
     }
 
+    const confirmPassword = useRef();
+
     const addUser = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await signUp(state);
-            const userId = response.data.userId;
-            await addOrganizationToUser(userId, organization.id);
+        
 
-            const newList = organization.users.slice(0);
-            newList.push(response.data);
-            setOrgUsersToNewList(newList);
+        if (state.password !== confirmPassword.current.value) {
+            setShake(true);
+            return errorDispatch({type: "error", errorMessage: ERROR.confirmPW})
 
-        } catch (error) {
-            alert(error);
-            return;
+        }else{
+            
+            try {
+                const response = await signUp(state);
+                const userId = response.data.userId;
+                await addOrganizationToUser(userId, organization.id);
+    
+                const newList = organization.users.slice(0);
+                newList.push(response.data);
+                setOrgUsersToNewList(newList);
+    
+            } catch (error) {
+                alert(error);
+                return;
+            }
+    
+            
+            confirmPassword.current.value = null;
+            dispatch({ type: "clear"});
+            errorDispatch({type: "clearErrors"});
+            setisOpen(false);
         }
 
-        
-        setisOpen(false);
-        dispatch({ type: "clear"});
 
     }
 
     const cancelAddUser = () => {
-        setisOpen(false)
+        
+        errorDispatch({type: "clearErrors"});
         dispatch({ type: "clear"});
+        setisOpen(false)
     }
 
 
@@ -201,7 +240,7 @@ const AdminPage = () => {
         const lastPage = pages.length;
 
         //This is to calculate the page number that will trigger the logic to not add anymore pages.
-        //We need this for the edge case where the we have the last page already already appearing
+        //We need this for the edge case where the we have the last page already appearing
         const lastMinusTotal = lastPage - totalPages;
 
         //This will change the active className to the page that is clicked.
@@ -266,6 +305,8 @@ const AdminPage = () => {
     }
 
 
+    const [shake, setShake] = useState(false)
+
     return (
         <div className="main_container">
                 
@@ -276,10 +317,23 @@ const AdminPage = () => {
             isOpen={IsOpen} 
             shouldCloseOnOverlayClick={false}
             onRequestClose={cancelAddUser}>
+
+
                 <form onSubmit={addUser}>
                     <h2>Add User</h2>
                     <p>Add in details to create a new user</p>
                     <hr></hr>
+
+                    { error.exist && 
+                
+                    // this is how you do animiation. You use a useState and then add the class in
+                    <div className={shake? "error_message shake" : "error_message" }
+                        onAnimationEnd={() => setShake(false)}
+                    >
+                        <p>{error.errorMessage}</p>
+                    </div>
+                    
+                    }
 
                     <div className="modal_form_inputs">
 
@@ -308,14 +362,14 @@ const AdminPage = () => {
                             <input type="password" name="password" required onChange={onChange}></input>
 
                             <label htmlFor="password">Confirm Password</label>
-                            <input type="password" name="password" required onChange={onChange}></input>
+                            <input type="password" name="password" required ref={confirmPassword}></input>
 
 
                             {/* if option value is "" it will cause a validation error if the 
                             required tagged is there. */}
                             <label htmlFor="userRole">User Role:</label>
                             <select name="userRole" onChange={onChange} required>
-                                <option value="" disabled selected>Select Role...</option>
+                                <option value="" disabled>Select Role...</option>
                                 <option value="user">user</option>
                                 <option value="admin">admin</option>
                             </select>
