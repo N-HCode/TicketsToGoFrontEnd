@@ -39,64 +39,42 @@ const MyAccount = () => {
 
     }) 
 
-    const [navState] = useState([
-        // {
-        //     text: "Security",
-        //     icon: "lock"
-        // },
-        // {
-        //     text: "Settings",
-        //     icon: "settings"
-        // },
-    
-    ])
-
+    const [shake, setShake] = useState(false);
 
     const navbar = useRef();
     const currentActiveNav = useRef(0);
 
-    const onNavClick = (index) => {
-        navbar.current.children[currentActiveNav.current].classList.remove("active_tab");
-        currentActiveNav.current = index;
-        navbar.current.children[index].classList.add("active_tab");
-
-    }
 
     const oldPassword = useRef(user.password);
     const oldPasswordInput = useRef();
     const passwordInput = useRef();
     const confirmPasswordInput = useRef();
 
-    // const ERROR = {
-    //     currentPW: "Current password is incorrect",
-    //     samePW: "New password cannot be the same as current password",
-    //     confirmPW: "Confirm Password and New Password does not match"
-    // }
 
     const onSubmitPassword = async (e) => {
         e.preventDefault();
 
-        dispatch({type: "clearErrors"});
-
+        //Looks like a console log is created when there is a failed fetch request and this is browser dependent
         try {
             await checkPassword(user.userId, oldPasswordInput.current.value);
         } catch (error) {
             // alert(error);
+            setShake(true);
             dispatch({type:"error",
             errorMessage: ERROR.currentPW})
             return;
         }
         
         if(passwordInput.current.value === oldPassword.current) {
-            console.log("1")
+            setShake(true);
             dispatch({type:"error",
                 errorMessage: ERROR.samePW})
         }else if(passwordInput.current.value !== confirmPasswordInput.current.value){
-            console.log("2")
+            setShake(true);
             dispatch({type:"error",
                 errorMessage: ERROR.confirmPW})
         }else{
-            console.log("3")
+     
             const userCopy = {
                 ...user,
                 password: passwordInput.current.value
@@ -132,22 +110,6 @@ const MyAccount = () => {
         <div className="main_container">
             <div id="my_account_page_container">
 
-                {/* <div id="my_account_nav_menu_container">
-                    <ul className="my_account_nav_menu" ref={navbar}>
-                        {navState.map((item,index) => 
-                            <li 
-                            className={index === 0 ? "active_tab": ""}
-                            key={"my_account_nav_" + index}
-                                onClick={() => onNavClick(index)}
-                            >
-                                <i className="material-icons">{item.icon}</i>{item.text}
-                            
-                            </li>
-
-                        )}
-                    </ul>
-
-                </div> */}
 
                 <div className="single_page_container">
 
@@ -182,11 +144,10 @@ const MyAccount = () => {
 
                             <div>
 
-                            {state.error? 
-                                <div className="error_message"><p>{state.errorMessage}</p></div>
-
-                            : 
-                                <div></div>    
+                            {state.error && 
+                                <div className={shake?"error_message shake": "error_message"}
+                                    onAnimationEnd={() => setShake(false)}
+                                ><p>{state.errorMessage}</p></div>
 
                             }
 

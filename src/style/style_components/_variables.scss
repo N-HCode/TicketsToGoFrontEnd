@@ -87,5 +87,22 @@ $loginAndSignUpSize: 300px;
 
 }
 
+@mixin errorStyling {
+    word-wrap: break-word;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: $errorColor1;
+    border-radius: 5px;
+    color: white;
+    height: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    // animation: shake 175ms;
+}
+
 
 

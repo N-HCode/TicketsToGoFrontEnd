@@ -151,6 +151,10 @@
                 @include buttonStyle;
             }
 
+            .shake{
+                animation: shake 175ms;
+            }
+
             .error_message{
                 word-wrap: break-word;
                 box-sizing: border-box;
@@ -165,7 +169,7 @@
                 padding-left: 10px;
                 padding-right: 10px;
                 margin-bottom: 10px;
-                animation: shake 175ms;
+                
                 
                 p{
                     margin: 5px 0px;;
