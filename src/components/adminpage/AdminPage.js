@@ -5,6 +5,9 @@ import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
 import { signUp, addOrganizationToUser } from '../../services/UserService'
 import {ERROR} from '../constants/error';
+import AdminAddUser from './admincomponents/AdminAddUser'
+import AdminEditUser from './admincomponents/AdminEditUser';
+
 
 Modal.setAppElement('#root')
 
@@ -26,6 +29,9 @@ const reducer = (state, action) => {
                 phoneNumber: null,
                 userRole: null
             }
+        case "setUser":
+            return action.user
+  
         default:
             return state;
     }
@@ -51,7 +57,6 @@ const errorReducer = (state, action) => {
 const AdminPage = () => {
 
     const [organization, setOrganization] = useContext(OrganizationContext);
-    const [user] = useContext(UserContext);
 
     const [state, dispatch] = useReducer(reducer,{ 
         username: null,
@@ -70,14 +75,12 @@ const AdminPage = () => {
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        perPage: 1,
+        perPage: 10,
         numOfPageBthAfter: 2,
         numOfPageBthBefore: 2
     }
 
     const [currentPage, setCurrentPage] = useState(1);
-
-   
 
     const [IsOpen, setisOpen] = useState(false);
 
@@ -90,8 +93,6 @@ const AdminPage = () => {
 
     const addUser = async (e) => {
         e.preventDefault();
-
-        
 
         if (state.password !== confirmPassword.current.value) {
             setShake(true);
@@ -308,98 +309,25 @@ const AdminPage = () => {
     const [shake, setShake] = useState(false)
     const [editUser, setEditUser] = useState(false)
 
+    const currentEditUser = useRef()
     const editUserBtn = (user) => {
-        setEditUser(!editUser);
+        setEditUser(true);
+        currentEditUser.current = user;
+    }
+
+    
+    const cancelEditUser = () => {
+        currentEditUser.current = null;
+        setEditUser(false);
     }
 
     return (
         <div className="main_container">
                 
-           
-            <Modal 
-            className="modal"
-            overlayClassName ="modal_overlay"   
-            isOpen={IsOpen} 
-            shouldCloseOnOverlayClick={false}
-            onRequestClose={cancelAddUser}>
+            { IsOpen && <AdminAddUser IsOpen={IsOpen} cancelAddUser={cancelAddUser} onChange={onChange} 
+            shake={shake} setShake={setShake} error={error} addUser={addUser} confirmPassword={confirmPassword}/>}
 
-
-                <form onSubmit={addUser}>
-                    <h2>Add User</h2>
-                    <p>Add in details to create a new user</p>
-                    <hr></hr>
-
-                    { error.exist && 
-                
-                    // this is how you do animiation. You use a useState and then add the class in
-                    <div className={shake? "error_message shake" : "error_message" }
-                        onAnimationEnd={() => setShake(false)}
-                    >
-                        <p>{error.errorMessage}</p>
-                    </div>
-                    
-                    }
-
-                    <div className="modal_form_inputs">
-
-                        {/* <button type="button" onClick={check}>check</button> */}
-                        <div className="modal_column">
-                            <label htmlFor="firstName">First Name</label>
-                            <input type="text" name="firstName" required onChange={onChange}></input>
-
-                            <label htmlFor="lastName">Last Name</label>
-                            <input type="text" name="lastName" required onChange={onChange}></input>
-
-                            <label htmlFor="email">Email</label>
-                            <input type="text" name="email" required onChange={onChange}></input>
-
-                            <label htmlFor="phoneNumber">PhoneNumber (Opt)</label>
-                            <input type="text" name="phoneNumber" 
-                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
-                            onChange={onChange}></input>
-                        </div>
-
-                        <div className="modal_column">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="username" required onChange={onChange}></input>
-
-                            <label htmlFor="password">Password</label>
-                            <input type="password" name="password" required onChange={onChange}></input>
-
-                            <label htmlFor="password">Confirm Password</label>
-                            <input type="password" name="password" required ref={confirmPassword}></input>
-
-
-                            {/* if option value is "" it will cause a validation error if the 
-                            required tagged is there. */}
-                            <label htmlFor="userRole">User Role:</label>
-                            <select name="userRole" onChange={onChange} required>
-                                <option value="" disabled>Select Role...</option>
-                                <option value="user">user</option>
-                                <option value="admin">admin</option>
-                            </select>
-                        </div>
-                    </div>    
-
-                    <div className="modal_btn">
-                        {/* this creates a reset button that will rest all the values
-                        in the form */}
-                        {/* <input type="reset" value="reset"/> */}
-
-                        <button type="button" onClick={cancelAddUser}>Cancel</button>
-                        <button>Add User</button>
-                    </div>    
-                </form>
-
-            </Modal>
-
-            <Modal
-                isOpen={IsOpen} 
-            >
-
-                
-
-            </Modal>
+            { editUser && <AdminEditUser currentEditUser={currentEditUser} editUser={editUser} cancelEditUser={cancelEditUser}/>}
 
 
 
@@ -447,7 +375,7 @@ const AdminPage = () => {
                         </div>
 
 
-                        {tablePages.length > 1? 
+                        {tablePages.length > 1 && 
                         
                             <div className="pagination">
                                     <div className="page_numbers" ref={pageNum}> 
@@ -466,8 +394,6 @@ const AdminPage = () => {
 
                                     </div>
                             </div>
-                          :                        
-                            <div></div>
                         }            
 
 
