@@ -306,6 +306,11 @@ const AdminPage = () => {
 
 
     const [shake, setShake] = useState(false)
+    const [editUser, setEditUser] = useState(false)
+
+    const editUserBtn = (user) => {
+        setEditUser(!editUser);
+    }
 
     return (
         <div className="main_container">
@@ -388,7 +393,11 @@ const AdminPage = () => {
 
             </Modal>
 
-            <Modal>
+            <Modal
+                isOpen={IsOpen} 
+            >
+
+                
 
             </Modal>
 
@@ -418,7 +427,7 @@ const AdminPage = () => {
                                 {organization.users !== undefined && organization.users.length > 0 && currentUsers.map((user,index) =>
                                     
                                     <tr key={"admin_table_row_" + index}>
-                                        <td><div><i className="material-icons">edit</i></div></td>
+                                        <td><div><i className="material-icons" onClick={() => editUserBtn(user)}>edit</i></div></td>
                                         <td><div>{user.firstName}</div></td>
                                         <td><div>{user.lastName}</div></td>
                                         <td><div>{user.email}</div></td>
