@@ -60,7 +60,7 @@ const AdminAddUser = ({IsOpen, cancelAddUser, onChange, shake, setShake, error, 
                         {/* if option value is "" it will cause a validation error if the 
                         required tagged is there. */}
                         <label htmlFor="userRole">User Role:</label>
-                        <select name="userRole" onChange={onChange} defaultValue="Select Role..." required>
+                        <select name="userRole" onChange={onChange} required>
                             <option value="" disabled selected>Select Role...</option>
                             <option value="user">user</option>
                             <option value="admin">admin</option>
