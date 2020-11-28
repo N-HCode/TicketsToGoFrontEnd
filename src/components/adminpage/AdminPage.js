@@ -75,7 +75,7 @@ const AdminPage = () => {
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
-        perPage: 10,
+        perPage: 1,
         numOfPageBthAfter: 2,
         numOfPageBthBefore: 2
     }
@@ -244,16 +244,22 @@ const AdminPage = () => {
         //We need this for the edge case where the we have the last page already appearing
         const lastMinusTotal = lastPage - totalPages;
 
+        //we need this incase the current page displayed is less than the total pages we want.
+        const currentPageLength = pageNum.current.children.length;
+
         //This will change the active className to the page that is clicked.
-        if(pageNum.current.children.length > 1){
+        if(currentPageLength > 1){
             pageNum.current.children[currentActivePageNum.current].classList.remove("active");
         }
 
-        if (number >= tableConfig.numOfPageBthBefore + 1 && number <= lastPage - (upperAdjustment + 1) ) {
+        console.log(number)
 
+
+        if (number >= tableConfig.numOfPageBthBefore + 1 && number <= lastPage - (upperAdjustment + 1) ) {
+          
             //The active page will always be in the middle if there are enough pages and the total pages
             //does not cover the whole page.
-            if(pageNum.current.children.length > 1){
+            if(currentPageLength > 1){
                 currentActivePageNum.current = lowerAdjustment-1;
                 pageNum.current.children[lowerAdjustment-1].classList.add("active");
             }
@@ -264,10 +270,9 @@ const AdminPage = () => {
             return setVisiblePages(pages.slice(lowerLimit, upperLimit));
 
         }else if(number < lowerAdjustment){
-          
-            if(pageNum.current.children.length > 1){
-                let pageIndex = (number % totalPages);
-                pageIndex = pageIndex === 0? totalPages -1: pageIndex -1;
+        
+            if(currentPageLength > 1){
+                let pageIndex = (number -1);
                 currentActivePageNum.current = pageIndex;
                 pageNum.current.children[pageIndex].classList.add("active");
             }
@@ -276,10 +281,11 @@ const AdminPage = () => {
  
         }else{
            
-       
-            if(pageNum.current.children.length > 1){
-                let pageIndex = (number % totalPages);
-                pageIndex = pageIndex === 0? totalPages -1: pageIndex -1;
+      
+            if(currentPageLength > 1){
+                //total minus 1 will get us the total index since it is 0 based.
+                //we use the length bec - the number will give us the amount away from the final index
+                let pageIndex = (currentPageLength - 1) - (lastPage - number); 
                 currentActivePageNum.current = pageIndex;
                 pageNum.current.children[pageIndex].classList.add("active");
             }
@@ -374,6 +380,12 @@ const AdminPage = () => {
 
                         </div>
 
+                                    <div style={{
+                                        "display" : "flex",
+                                        "alignItems" : "end",
+                                        "justifyContent" : "end"
+
+                                    }}>
 
                         {tablePages.length > 1 && 
                         
@@ -395,6 +407,8 @@ const AdminPage = () => {
                                     </div>
                             </div>
                         }            
+
+                                    </div>
 
 
                     </div>
