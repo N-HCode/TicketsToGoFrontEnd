@@ -20,6 +20,7 @@
 @import './style_components/my_account_page';
 @import './style_components/animations';
 @import './style_components//admin_page';
+@import './style_components//edit_admin_content';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
 @include popupmixin;

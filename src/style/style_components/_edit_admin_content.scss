@@ -1,0 +1,18 @@
+.edit_contents{
+    display: flex;
+
+    p, input, select{
+        box-sizing: border-box;
+        margin: 0;
+        margin-top: 5px;
+        height: 25px;
+    }
+
+
+
+    .edit_inputs{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+}
