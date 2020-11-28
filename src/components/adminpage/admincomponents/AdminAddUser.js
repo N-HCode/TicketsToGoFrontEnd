@@ -13,7 +13,7 @@ const AdminAddUser = ({IsOpen, cancelAddUser, onChange, shake, setShake, error, 
 
             <form onSubmit={addUser}>
                 <h2>Add User</h2>
-                <p>Add in details to create a new user</p>
+                <p className="sub_title_text">Add in details to create a new user</p>
                 <hr></hr>
 
                 { error.exist && 
