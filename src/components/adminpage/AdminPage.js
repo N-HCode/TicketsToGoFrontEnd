@@ -313,7 +313,7 @@ const AdminPage = () => {
 
 
     const [shake, setShake] = useState(false)
-    const [editUser, setEditUser] = useState(false)
+    const [editingUser, setEditUser] = useState(false)
 
     const currentEditUser = useRef()
     const editUserBtn = (user) => {
@@ -333,7 +333,8 @@ const AdminPage = () => {
             { IsOpen && <AdminAddUser IsOpen={IsOpen} cancelAddUser={cancelAddUser} onChange={onChange} 
             shake={shake} setShake={setShake} error={error} addUser={addUser} confirmPassword={confirmPassword}/>}
 
-            { editUser && <AdminEditUser currentEditUser={currentEditUser} editUser={editUser} cancelEditUser={cancelEditUser}/>}
+            { editingUser && <AdminEditUser currentEditUser={currentEditUser} editingUser={editingUser} cancelEditUser={cancelEditUser}
+            updateToCurrentUsers={updateToCurrentUsers}/>}
 
 
 
