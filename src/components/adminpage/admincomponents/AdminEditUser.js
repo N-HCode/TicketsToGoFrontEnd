@@ -1,4 +1,4 @@
-import React, { useState,useReducer, useRef} from 'react';
+import React, { useState,useReducer, useRef, useEffect} from 'react';
 import Modal from 'react-modal';
 import { OrganizationContext} from '../../context/OrganizationContext';
 import {editUser} from '../../../services/UserService';
@@ -27,12 +27,22 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
 
         if(changeInfo){
             setUserState(currentEditUser.current);
+            setChangesMade(false);
         }
 
         setChangeInfo(!changeInfo);
     }
 
+    
+    const oldUsername = useRef(userState.username);
+    const oldFirstName = useRef(userState.firstName);
+    const oldLastName = useRef(userState.lastName);
+    const oldEmail = useRef(userState.email);
+    const oldPhoneNumber = useRef(userState.phoneNumber);
     const oldRole = useRef(userState.userRole);
+    const oldArray = [oldUsername.current, oldFirstName.current, 
+        oldLastName.current, oldEmail.current, oldPhoneNumber.current,
+        oldRole.current]
 
     const onChange = (e) => {
 
@@ -40,41 +50,27 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
         setUserState({
             ...userState,
             [e.target.name]: e.target.value
-        })
-        
+        });
 
     }
+
+    useEffect(() => {
+    
+        //We use stringify to compare two objects
+        //We put this in a useEffect, because we need this logic to happens
+        //AFTER the state has been changed. setState is Async, so if we do not do this
+        //it would compare old information instead of the new one
+        if (JSON.stringify(currentEditUser.current) !==  JSON.stringify(userState)) {
+            setChangesMade(true);
+        }else{
+            setChangesMade(false);
+        }  
+    }, [userState])
 
     const check = () => {
-        console.log(userState);
-
+        console.log(oldArray);
     }
     
-    const UserRole = () => {
-        return(
-            <div>
-                {userState.userRole !== "root"?
-                    <div>
-                        { changeInfo? 
-                            <div>                             
-                                <select name="userRole" onChange={() => onChange()}>
-                                <option value="" disabled selected>{userState.userRole}</option>
-                                <option value="user">user</option>
-                                <option value="admin">admin</option>
-                                </select>
-                            </div>
-                            :
-                            <p>{userState.userRole}</p>
-                        }
-                   </div>
-                    :
-                    <p>{userState.userRole === null? <br/> : userState.userRole}</p>
-                }
-            </div>
-        )
-    }
-
-
 
     return (
         <Modal
@@ -155,11 +151,6 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
                         </div>
                         }
                  
-                
-
-                   
-
-                        
                     </div>
 
 
