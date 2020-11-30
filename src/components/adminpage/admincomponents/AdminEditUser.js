@@ -1,9 +1,9 @@
-import React, { useState,useReducer, useRef, useEffect} from 'react';
+import React, { useState, useReducer, useRef, useEffect} from 'react';
 import Modal from 'react-modal';
 import { OrganizationContext} from '../../context/OrganizationContext';
 import {editUser} from '../../../services/UserService';
 
-const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
+const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCurrentUsers}) => {
 
     // username: null,
     // password: null,
@@ -12,7 +12,14 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
     // email: null,
     // phoneNumber: null,
     // userRole: null
+    const user = currentEditUser.current;
     const [userState, setUserState] = useState(currentEditUser.current);
+    const [error, setError] = useState({
+        exist: false,
+        errorMessage: ""
+
+
+    })
     const [changeInfo, setChangeInfo] = useState(false);
     const [changesMade, setChangesMade] = useState(false);
 
@@ -70,13 +77,28 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
     const check = () => {
         console.log(oldArray);
     }
+
+    const save = async (e) => {
+        e.preventDefault();
+
+        try {
+            await editUser(user.userId, userState);
+            updateToCurrentUsers();
+            currentEditUser.current = userState;
+            alert("Success")
+            
+        } catch (error) {
+            alert(error)
+        }
+        
+    }
     
 
     return (
         <Modal
             className="modal"
             overlayClassName ="modal_overlay"  
-            isOpen={editUser}
+            isOpen={editingUser}
             shouldCloseOnOverlayClick={false}
             onRequestClose={close}
         >
@@ -95,9 +117,9 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
                         <p>Email :</p>
                         <p>Phone Number :</p>
                         <p>User Role :</p>
-                        <p>Date Created :</p>
+                        {/* <p>Date Created :</p>
                         <p>Last Login:</p>
-                        <p>Last Modified :</p>
+                        <p>Last Modified :</p> */}
                     </div>
 
                     <div >
@@ -105,14 +127,14 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
                         {/* <p>{userState.username === null? <br/> : userState.username}</p> */}
                         {/* <ChangeToInput name="username" value={userState.username}/> */}
 
-                        {changeInfo?
+                        {changeInfo && userState.userRole.toLowerCase() !== "root"?
                         
-                        <div className="edit_inputs">
-                            <input type="text" name="username" value={userState.username} onChange={ onChange}></input>
+                        <form id="edit_form" className="edit_inputs" onSubmit={save}>
+                            <input type="text" name="username" required value={userState.username} onChange={ onChange}></input>
                             <p>{userState.password === null? <br/> : userState.password}</p>
-                            <input type="text" name="firstName" value={userState.firstName} onChange={ onChange}></input>
-                            <input type="text" name="lastName" value={userState.lastName} onChange={ onChange}></input>
-                            <input type="text" name="email" value={userState.email} onChange={ onChange}></input>
+                            <input type="text" name="firstName" required value={userState.firstName} onChange={ onChange}></input>
+                            <input type="text" name="lastName" required value={userState.lastName} onChange={ onChange}></input>
+                            <input type="text" name="email"  required value={userState.email} onChange={ onChange}></input>
                             <input type="text" name="phoneNumber" value={userState.phoneNumber} onChange={ onChange}></input>
                             {userState.userRole !== "root"?
                                 <div>
@@ -131,11 +153,12 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
                                 :
                                 <p>{userState.userRole === null? <br/> : userState.userRole}</p>
                             }
-                            <p>{userState.dateCreated === null? <br/> : userState.dateCreated}</p>
+                            {/* <p>{userState.dateCreated === null? <br/> : userState.dateCreated}</p>
                             <p>{userState.lastLogin === null? <br/> : userState.lastLogin}</p>
-                            <p>{userState.lastModified === null? <br/> : userState.lastModified}</p>
+                            <p>{userState.lastModified === null? <br/> : userState.lastModified}</p> */}
+                       
 
-                        </div>
+                        </form>
                         :
                         <div className="edit_inputs">
                             <p>{userState.username === null? <br/> : userState.username}</p>
@@ -162,11 +185,15 @@ const AdminEditUser = ({currentEditUser, editUser, cancelEditUser}) => {
                 <button onClick={check}>Check</button>
                 <div>
                 <button onClick={close}>Close</button>
-                <button onClick={changingInfo}> {changeInfo? "Cancel" : "Edit"}</button>
+                {userState.userRole.toLowerCase() !== "root" &&
+                     <button onClick={changingInfo}> {changeInfo? "Cancel" : "Edit"}</button>
+                }
                 <button>Reset Password</button>
            
+                {/* HTML5 has a form attribute for button that uses the form id.
+                This way we can put the button outside of the form, for styling purposes*/}
                 {changesMade && 
-                    <button>Save</button>
+                    <button type="submit" form="edit_form" >Save</button>
                 }
                 </div>
 
