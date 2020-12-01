@@ -12,8 +12,12 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     // email: null,
     // phoneNumber: null,
     // userRole: null
+    
+
+    //we put this here so that we don't have to 
     const user = currentEditUser.current;
-    const [userState, setUserState] = useState(currentEditUser.current);
+
+    const [userState, setUserState] = useState(user);
     const [error, setError] = useState({
         exist: false,
         errorMessage: ""
@@ -168,9 +172,9 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                             <p>{userState.email === null? <br/> : userState.email}</p>
                             <p>{userState.phoneNumber === null? <br/> : userState.phoneNumber}</p>
                             <p>{userState.userRole === null? <br/> : userState.userRole}</p>
-                            <p>{userState.dateCreated === null? <br/> : userState.dateCreated}</p>
+                            {/* <p>{userState.dateCreated === null? <br/> : userState.dateCreated}</p>
                             <p>{userState.lastLogin === null? <br/> : userState.lastLogin}</p>
-                            <p>{userState.lastModified === null? <br/> : userState.lastModified}</p>
+                            <p>{userState.lastModified === null? <br/> : userState.lastModified}</p> */}
                         </div>
                         }
                  
