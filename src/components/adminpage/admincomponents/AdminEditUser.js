@@ -21,9 +21,8 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     const [error, setError] = useState({
         exist: false,
         errorMessage: ""
-
-
     })
+
     const [changeInfo, setChangeInfo] = useState(false);
     const [changesMade, setChangesMade] = useState(false);
 
@@ -106,12 +105,14 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
             shouldCloseOnOverlayClick={false}
             onRequestClose={close}
         >
-            <div>
+            <div className="edit_modal_content">
                 <h2>Edit User</h2>
                 <p className="sub_title_text">Change user info or make inactive</p>
                 <hr></hr>
+
+                <div className="error_message"><p>YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</p></div>
                 
-                <div className="edit_contents" style={{"display" : "flex"}}>
+                <div className="edit_contents">
 
                     <div>
                         <p>Username :</p>            
