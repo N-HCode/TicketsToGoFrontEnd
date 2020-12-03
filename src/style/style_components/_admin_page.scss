@@ -6,9 +6,11 @@
     position: absolute;
     background-color: $primaryHeaderBGColor2;
     left: 50%; 
-    top: 50%;  
+    top: 50%; 
     transform: translate(-50%, -50%);
+    
     // width: fit-content;
+  
     height: fit-content;
     padding: 0 10px 15px 10px;
     border-radius: 5px;
@@ -16,10 +18,15 @@
     z-index: 1;
     font-family: $mainTextStyle;
 
+    .edit_modal_content{
+        width:100%;
+    }
+
+
     h2{
         margin-top: 10px;
         margin-bottom: 0;
-
+      
     }
 
     .sub_title_text{
@@ -31,13 +38,6 @@
 
     .error_message{
         @include errorStyling;
-
-        p{
-            max-width: 280px;
-        }
-      
-        
-
     }
 
     .shake{
