@@ -1,7 +1,7 @@
 import React, { useState, useReducer, useRef, useEffect} from 'react';
 import Modal from 'react-modal';
-import { OrganizationContext} from '../../context/OrganizationContext';
 import {editUser} from '../../../services/UserService';
+import {ERROR} from '../../constants/error'
 
 const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCurrentUsers}) => {
 
@@ -110,7 +110,9 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                 <p className="sub_title_text">Change user info or make inactive</p>
                 <hr></hr>
 
-                <div className="error_message"><p>YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</p></div>
+                {error.exist &&
+                 <div className="error_message"><p>{error.errorMessage}</p></div>
+                }
                 
                 <div className="edit_contents">
 
