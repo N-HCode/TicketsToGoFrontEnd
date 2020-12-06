@@ -20,7 +20,7 @@ const Pagination = ({numberOfPages, paginationConfig, changeShownDataByPageNum})
         //There is not reason to send the data to the pagination component.
         //However, we need to rerender everytime there is a change to numberofPage
         //for ref, you can do this and it will return a true if it exist or false
-        console.log("useEffect " + numberOfPages);
+        
         if (pageNum.current) {
             changePage(currentPage, arrayOfPages);
         }

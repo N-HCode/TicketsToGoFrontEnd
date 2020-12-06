@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useRef, useEffect} from 'react';
 import Modal from 'react-modal';
-import {editUser} from '../../../services/UserService';
+import {editUser, checkUsername} from '../../../services/UserService';
 import {ERROR} from '../../constants/error'
 
 const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCurrentUsers}) => {
@@ -55,12 +55,11 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
         oldRole.current]
 
     const onChange = (e) => {
-
-        console.log(e.target.name);
         setUserState({
             ...userState,
             [e.target.name]: e.target.value
         });
+
 
     }
 
@@ -84,11 +83,26 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     const save = async (e) => {
         e.preventDefault();
 
+
+        try {
+            await checkUsername(userState.username);
+        } catch (error) {
+            return setError({
+                exist: true,
+                errorMessage: ERROR.usernameTaken
+            })
+        }
+
         try {
             await editUser(user.userId, userState);
             updateToCurrentUsers();
             currentEditUser.current = userState;
             alert("Success")
+
+            setError({
+                exist: false,
+                errorMessage: ""
+            })
             
         } catch (error) {
             alert(error)
