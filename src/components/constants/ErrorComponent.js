@@ -2,18 +2,18 @@ import React, {useReducer} from 'react'
 
 const errorReducer = (state, action) =>{
     switch (action.type){
-        case "password":
+        case ERRORACTIONS.passwordAction:
             return {
                 ...state,
                 changePassword: !state.changePassword
             }
-        case "error":
+        case ERRORACTIONS.errorIsOn:
             return{
                 ...state,
                 error: true,
                 errorMessage: action.errorMessage
             }
-        case "clearErrors":
+        case ERRORACTIONS.clearErrors:
             return {
                 ...state,
                 error: false,
@@ -30,6 +30,12 @@ const ErrorComponent = () => {
         doesExist: false,
         errorMessage: null
     }) 
+
+    const ERRORACTIONS = {
+        passwordAction : "password",
+        errorIsOn: "error",
+        clearErrors: "clearErrors",
+    }
 
 
 
