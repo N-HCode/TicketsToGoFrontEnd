@@ -1,51 +1,29 @@
-import React, {useRef, useState, useContext, useReducer} from 'react';
+import React, {useRef, useState, useContext} from 'react';
 import { UserContext } from '../context/UserContext';
 import { OrganizationContext} from '../context/OrganizationContext';
 import { editUser, checkPassword } from '../../services/UserService';
-import {ERROR} from '../constants/Error';
+import {ERROR, ERRORACTIONS} from '../constants/Error';
+import ErrorComponent from '../constants/ErrorComponent';
 
-const reducer = (state, action) =>{
-    switch (action.type){
-        case "password":
-            return {
-                ...state,
-                changePassword: !state.changePassword
-            }
-        case "error":
-            return{
-                ...state,
-                error: true,
-                errorMessage: action.errorMessage
-            }
-        case "clearErrors":
-            return {
-                ...state,
-                error: false,
-                errorMessage: null
-            }    
-        default:
-            return state;
-    }
-}
+
 
 const MyAccount = () => {
 
     const [user] = useContext(UserContext);
     const [organization] = useContext(OrganizationContext);
-    const [state, dispatch] = useReducer(reducer, {
-        changePassword: false,
-        error: false,
-        errorMessage: null
 
-    }) 
+    const [errorState, setErrorState] = useState(
+        {
+            actionType: "",
+            errorMessage: ""
+        }
+    )
 
-    const [shake, setShake] = useState(false);
+    const [changePasswordState, setChangePasswordState] = useState(false);
 
-    const navbar = useRef();
-    const currentActiveNav = useRef(0);
+    // const navbar = useRef();
+    // const currentActiveNav = useRef(0);
 
-
-    const oldPassword = useRef(user.password);
     const oldPasswordInput = useRef();
     const passwordInput = useRef();
     const confirmPasswordInput = useRef();
@@ -59,20 +37,30 @@ const MyAccount = () => {
             await checkPassword(user.userId, oldPasswordInput.current.value);
         } catch (error) {
             // alert(error);
-            setShake(true);
-            dispatch({type:"error",
-            errorMessage: ERROR.currentPW})
-            return;
+
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.currentPWIncorrect
+                }
+            )
+   
         }
         
-        if(passwordInput.current.value === oldPassword.current) {
-            setShake(true);
-            dispatch({type:"error",
-                errorMessage: ERROR.samePW})
+        if(passwordInput.current.value === oldPasswordInput.current.value) {
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.newPWSameAsOldPW
+                }
+            )
         }else if(passwordInput.current.value !== confirmPasswordInput.current.value){
-            setShake(true);
-            dispatch({type:"error",
-                errorMessage: ERROR.confirmPW})
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.confirmPWIncorrect
+                }
+            )
         }else{
      
             const userCopy = {
@@ -100,8 +88,12 @@ const MyAccount = () => {
     }
 
     const onClickPassword = () => {
-        dispatch({type: "clearErrors"});
-        dispatch({type: "password"})
+        setErrorState(
+            {
+                actionType: ERRORACTIONS.clearErrors,
+            }
+        )
+        setChangePasswordState(!changePasswordState)
         
     }
 
@@ -134,24 +126,11 @@ const MyAccount = () => {
 
 
                     <button onClick={onClickPassword}>Change Password</button>
-                    {!state.changePassword? 
-                            <div></div>
-                        :
-
-
+                    {changePasswordState &&
 
                         <form id="change_password_form" onSubmit={onSubmitPassword}>
 
-                            <div>
-
-                            {state.error && 
-                                <div className={shake?"error_message shake": "error_message"}
-                                    onAnimationEnd={() => setShake(false)}
-                                ><p>{state.errorMessage}</p></div>
-
-                            }
-
-                            </div>
+                            <ErrorComponent errorState={errorState}/>
 
                             {/* password */}
                             
