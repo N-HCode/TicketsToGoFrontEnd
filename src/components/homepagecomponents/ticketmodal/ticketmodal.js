@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ticketmodal = () => {
+const TicketModal = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const ticketmodal = () => {
     )
 }
 
-export default ticketmodal
+export default TicketModal

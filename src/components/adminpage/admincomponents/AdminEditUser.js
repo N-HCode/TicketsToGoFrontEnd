@@ -1,7 +1,8 @@
 import React, { useState, useReducer, useRef, useEffect} from 'react';
 import Modal from 'react-modal';
-import {editUser} from '../../../services/UserService';
-import {ERROR} from '../../constants/error'
+import {editUser, checkUsername} from '../../../services/UserService';
+import {ERROR, ERRORACTIONS} from '../../constants/Error'
+import ErrorComponent from '../../constants/ErrorComponent'
 
 const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCurrentUsers}) => {
 
@@ -18,10 +19,13 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     const user = currentEditUser.current;
 
     const [userState, setUserState] = useState(user);
-    const [error, setError] = useState({
-        exist: false,
-        errorMessage: ""
-    })
+
+    const [errorState, setErrorState] = useState(
+        {
+            actionType: "",
+            errorMessage: ""
+        }
+    )
 
     const [changeInfo, setChangeInfo] = useState(false);
     const [changesMade, setChangesMade] = useState(false);
@@ -37,7 +41,13 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
 
         if(changeInfo){
             setUserState(currentEditUser.current);
+            setErrorState(
+                {
+                    actionType: ERRORACTIONS.clearErrors
+                }
+            )
             setChangesMade(false);
+
         }
 
         setChangeInfo(!changeInfo);
@@ -55,12 +65,11 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
         oldRole.current]
 
     const onChange = (e) => {
-
-        console.log(e.target.name);
         setUserState({
             ...userState,
             [e.target.name]: e.target.value
         });
+
 
     }
 
@@ -84,11 +93,30 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     const save = async (e) => {
         e.preventDefault();
 
+
+        try {
+            await checkUsername(userState.username);
+        } catch (error) {
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.usernameTaken
+                }
+            )
+        }
+
         try {
             await editUser(user.userId, userState);
             updateToCurrentUsers();
             currentEditUser.current = userState;
             alert("Success")
+
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.clearErrors,
+                    errorMessage: ""
+                }
+            )
             
         } catch (error) {
             alert(error)
@@ -110,9 +138,12 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                 <p className="sub_title_text">Change user info or make inactive</p>
                 <hr></hr>
 
-                {error.exist &&
+
+                <ErrorComponent errorState={errorState}/>
+
+                {/* {error.exist &&
                  <div className="error_message"><p>{error.errorMessage}</p></div>
-                }
+                } */}
                 
                 <div className="edit_contents">
 

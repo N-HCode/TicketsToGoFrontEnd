@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createOrganization } from '../../../services/OrganizationService';
 // https://reactrouter.com/web/api/Hooks/usehistory
 import { useHistory } from "react-router-dom";
-import { ERROR } from '../../constants/error';
+import { ERROR } from '../../constants/Error';
 
 
 

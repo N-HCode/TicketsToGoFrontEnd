@@ -2,7 +2,7 @@ import React, {useRef, useState, useContext, useReducer} from 'react';
 import { UserContext } from '../context/UserContext';
 import { OrganizationContext} from '../context/OrganizationContext';
 import { editUser, checkPassword } from '../../services/UserService';
-import {ERROR} from '../constants/error';
+import {ERROR} from '../constants/Error';
 
 const reducer = (state, action) =>{
     switch (action.type){

@@ -22,4 +22,9 @@ const checkPassword = (userId, password) => {
   
 }
 
-export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword};
+const checkUsername = (username) => {
+    return axios.get(`http://localhost:8080/user/checkusername?username=${username}`);
+
+}
+
+export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername};
