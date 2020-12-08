@@ -3,7 +3,7 @@ import { OrganizationContext} from '../context/OrganizationContext';
 import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
 import { signUp, addOrganizationToUser } from '../../services/UserService'
-import {ERROR} from '../constants/error';
+import {ERROR} from '../constants/Error';
 import AdminAddUser from './admincomponents/AdminAddUser'
 import AdminEditUser from './admincomponents/AdminEditUser';
 import Pagination from '../pagination/Pagination'
