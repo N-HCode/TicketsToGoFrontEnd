@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { createOrganization } from '../../../services/OrganizationService';
 // https://reactrouter.com/web/api/Hooks/usehistory
 import { useHistory } from "react-router-dom";
-import { ERROR } from '../../constants/Error';
+import { ERROR, ERRORACTIONS } from '../../constants/Error';
+import ErrorComponent from '../../constants/ErrorComponent'
 
 
 
@@ -14,11 +15,12 @@ const AccountInfoInput =(props) => {
         confirmPassword: ""
     })
 
-    const [error, setError] = useState({
-        exist: false,
-        errorMessage: null
-
-    })
+    const [errorState, setErrorState] = useState(
+        {
+            actionType: "",
+            errorMessage: ""
+        }
+    )
 
     const history = useHistory();
 
@@ -61,28 +63,26 @@ const AccountInfoInput =(props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        setError({
-            exist: false,
-            errorMessage: null
-        })
-
-        
+       
         if(root.password !== root.confirmPassword){
             //use set timeout so it had time to update the clearing so that it shakes again
-            setTimeout(() => setError({
-                exist: true,
-                errorMessage: ERROR.confirmPW
-            }), 0)
-            return
+           return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.confirmPWIncorrect
+                }
+            )
+
         }else{
             try {
                 const response = await createOrganization(root.username, root.password, props.organization)
                 console.log(response);
-                setError({
-                    exist: false,
-                    errorMessage: null
-                })
+                setErrorState(
+                    {
+                        actionType: ERRORACTIONS.clearErrors,
+                    }
+                )
+                
                 history.push("/login")
             } catch (error) {
                 alert(error)
@@ -105,7 +105,7 @@ const AccountInfoInput =(props) => {
             <p>This will be your initial admin account with full access</p>
             <hr></hr>
 
-            {error.exist && <div className="error_message"><p>{error.errorMessage}</p></div>}
+            <ErrorComponent errorState={errorState}/>
             
 
             <label htmlFor="username">Username</label>

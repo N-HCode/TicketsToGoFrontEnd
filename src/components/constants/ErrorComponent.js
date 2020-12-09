@@ -40,12 +40,12 @@ const ErrorComponent = ({errorState}) => {
     const [shake, setShake] = useState(false);
 
     useEffect(() => {
-        errorDispatch({actionType: errorState.actionType, errorMessage: errorState.errorMessage})
 
         if (errorState.actionType === ERRORACTIONS.errorIsOn) {
             setShake(true);
         }
       
+        errorDispatch({actionType: errorState.actionType, errorMessage: errorState.errorMessage})
 
     }, [errorState])
 
