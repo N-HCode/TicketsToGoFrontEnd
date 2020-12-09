@@ -1,7 +1,7 @@
 const ERROR = {
-    currentPW: "Current password is incorrect",
-    samePW: "New password cannot be the same as current password",
-    confirmPW: "Confirm Password and New Password do not match",
+    currentPWIncorrect: "Current password is incorrect",
+    newPWSameAsOldPW: "New password cannot be the same as current password",
+    confirmPWIncorrect: "Confirm Password and New Password do not match",
     usernameTaken: "Please use another username"
 }
 
