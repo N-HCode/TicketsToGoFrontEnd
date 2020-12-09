@@ -4,27 +4,10 @@ import { UserContext } from '../context/UserContext';
 import {NavLink} from 'react-router-dom';
 import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
+import { ERROR, ERRORACTIONS} from '../constants/Error';
+import ErrorComponent from '../constants/ErrorComponent'
 
 //"set HTTPS=true&&react-scripts start"
-
-const reducer = (state, action) =>{
-    switch (action.type){
-        case "error":
-            return{
-                ...state,
-                error: true,
-                errorMessage: action.errorMessage
-            }
-        case "clearErrors":
-            return {
-                ...state,
-                error: false,
-                errorMessage: null
-            }    
-        default:
-            return state;
-    }
-}
 
 
 const LoginPage = (props) => {
@@ -38,17 +21,12 @@ const LoginPage = (props) => {
 
     })
 
-    const [state, dispatch] = useReducer(reducer, {
-        error: false,
-        errorMessage: null
-
-    })
-
-    const ERROR = {
-        invalid: "Invalid Username and/or Password",
-        serverConnect: "Could not connect to server"
-    }
-
+    const [errorState, setErrorState] = useState(
+        {
+            actionType: "",
+            errorMessage: ""
+        }
+    )
 
     const onChange = (e) => {
         setUserLogin({
@@ -59,8 +37,7 @@ const LoginPage = (props) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        setShake(true);
-
+       
         try {
 
             const response = await loginUser(userLogin.username, userLogin.password);
@@ -83,30 +60,29 @@ const LoginPage = (props) => {
             })
 
  
-            dispatch( {
-                type: "clearErrors",
-            })
+            setErrorState(
+                {
+                    actionType: ERRORACTIONS.clearErrors,
+                }
+            )
             props.history.push("/")
             
-        } catch (error) {
+        } catch (e) {
             //error will have the response property so you can get the status code from that.
             // console.log(error.response.status);
             
-            dispatch( {
-                type: "error",
-                errorMessage: ERROR.invalid
-            })
+            setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.loginIncorrect
+                }
+            )
 
         }
         
 
     }
 
-    const [shake, setShake] = useState(false);
-
-    const changeToSignUpPage = () => {
-
-    }
 
     return (
             <form onSubmit={onSubmit}>
@@ -118,11 +94,7 @@ const LoginPage = (props) => {
                         <h1>Login</h1>
                         <hr></hr>
 
-                            {state.error &&
-                            
-                            <div className={shake? "error_message shake" : "error_message"}
-                                onAnimationEnd={() => setShake(false)}
-                            ><p>{state.errorMessage}</p></div>}
+                        <ErrorComponent errorState={errorState}/>
 
                             <label htmlFor="username">Username:</label>
                             <input  type="text" required name="username" value={userLogin.username || ""} onChange={onChange}></input>
@@ -133,7 +105,7 @@ const LoginPage = (props) => {
                             {/* uncontrolled state in Context so value needs to have an initial value or empty string*/}
 
 
-                            <p>Don't have a login? Sign up <NavLink to="/createOrganization" onClick={changeToSignUpPage}>here</NavLink></p>
+                            <p>Don't have a login? Sign up <NavLink to="/createOrganization">here</NavLink></p>
                             
                         </div>
                         <div className="login_signup_button_container">
