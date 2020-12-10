@@ -19,4 +19,8 @@
             transform: translateX(0px);
         }
     }
+
+    .shake{
+        animation: shake 175ms;
+    }
 }
