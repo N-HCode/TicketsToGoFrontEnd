@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createOrganization } from '../../../services/OrganizationService';
+import { checkUsername } from '../../../services/UserService'
 // https://reactrouter.com/web/api/Hooks/usehistory
 import { useHistory } from "react-router-dom";
 import { ERROR, ERRORACTIONS } from '../../constants/Error';
@@ -26,6 +27,7 @@ const AccountInfoInput =(props) => {
 
     var signupForm;
     var stepDoc;
+
     const goBack = () =>{
         if (signupForm == undefined) {
             signupForm = document.getElementsByClassName("input_signup_container")[0];
@@ -63,6 +65,24 @@ const AccountInfoInput =(props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+
+        try {
+
+            await checkUsername(root.username)
+            
+        } catch (error) {
+        
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.usernameTaken
+                }
+            )
+            
+        }
+
+
        
         if(root.password !== root.confirmPassword){
             //use set timeout so it had time to update the clearing so that it shakes again
@@ -82,7 +102,7 @@ const AccountInfoInput =(props) => {
                         actionType: ERRORACTIONS.clearErrors,
                     }
                 )
-                
+
                 history.push("/login")
             } catch (error) {
                 alert(error)
@@ -112,10 +132,10 @@ const AccountInfoInput =(props) => {
             <input type="text" name="username" onChange={onChangeRoot} required></input>
 
             <label htmlFor="password">Password</label>
-            <input type="text" name="password" onChange={onChangeRoot} required></input>
+            <input type="password" name="password" onChange={onChangeRoot} required></input>
 
             <label htmlFor="confirm_password">Confirm Password</label>
-            <input type="text" name="confirmPassword" onChange={onChangeRoot} required></input>
+            <input type="password" name="confirmPassword" onChange={onChangeRoot} required></input>
             
             <button type="submit">Complete</button>
 

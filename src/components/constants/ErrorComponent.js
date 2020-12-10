@@ -42,6 +42,7 @@ const ErrorComponent = ({errorState}) => {
     useEffect(() => {
 
         if (errorState.actionType === ERRORACTIONS.errorIsOn) {
+            console.log("TRUE?")
             setShake(true);
         }
       
