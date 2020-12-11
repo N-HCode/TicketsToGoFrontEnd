@@ -87,7 +87,7 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     }, [userState])
 
     const check = () => {
-        console.log(oldArray);
+        // console.log(oldArray);
     }
 
     const save = async (e) => {
