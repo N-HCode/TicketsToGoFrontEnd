@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import Modal from 'react-modal';
 import {editUser, checkUsername} from '../../../services/UserService';
 import {ERROR, ERRORACTIONS} from '../../constants/Error'
@@ -6,6 +6,7 @@ import ErrorComponent from '../../constants/ErrorComponent'
 
 const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCurrentUsers}) => {
 
+    // example of what data is in the user object
     // username: null,
     // password: null,
     // firstName: null,
@@ -13,9 +14,8 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
     // email: null,
     // phoneNumber: null,
     // userRole: null
-    
 
-    //we put this here so that we don't have to 
+    //we put this here so that we don't have to keep writing the whole thing out
     const user = currentEditUser.current;
 
     const [userState, setUserState] = useState(user);
@@ -53,24 +53,12 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
         setChangeInfo(!changeInfo);
     }
 
-    
-    const oldUsername = useRef(userState.username);
-    const oldFirstName = useRef(userState.firstName);
-    const oldLastName = useRef(userState.lastName);
-    const oldEmail = useRef(userState.email);
-    const oldPhoneNumber = useRef(userState.phoneNumber);
-    const oldRole = useRef(userState.userRole);
-    const oldArray = [oldUsername.current, oldFirstName.current, 
-        oldLastName.current, oldEmail.current, oldPhoneNumber.current,
-        oldRole.current]
 
     const onChange = (e) => {
         setUserState({
             ...userState,
             [e.target.name]: e.target.value
         });
-
-
     }
 
     useEffect(() => {
@@ -122,6 +110,14 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
             alert(error)
         }
         
+    }
+
+    const deleteUser = () => {
+
+        if (window.confirm("Would you like to delete the user?")) {
+            
+        }
+
     }
     
 
@@ -233,6 +229,8 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                 {changesMade && 
                     <button type="submit" form="edit_form" >Save</button>
                 }
+
+                <button onClick={deleteUser}>Delete</button>
                 </div>
 
             </div>
