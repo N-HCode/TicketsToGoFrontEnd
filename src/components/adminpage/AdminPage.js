@@ -2,8 +2,7 @@ import React, {useContext, useState, useEffect, useReducer, useRef} from 'react'
 import { OrganizationContext} from '../context/OrganizationContext';
 import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
-import { signUp, addOrganizationToUser } from '../../services/UserService'
-import {ERROR} from '../constants/Error';
+import { signUp, addOrganizationToUser } from '../../services/UserService';
 import AdminAddUser from './admincomponents/AdminAddUser'
 import AdminEditUser from './admincomponents/AdminEditUser';
 import Pagination from '../pagination/Pagination'
@@ -12,66 +11,11 @@ import Pagination from '../pagination/Pagination'
 Modal.setAppElement('#root')
 
 
-const reducer = (state, action) => {
-    switch(action.type){
-        case "onChange":
-            return{
-                ...state,
-                [action.event.name]: action.event.value
-            }
-        case "clear":
-            return {
-                username: null,
-                password: null,
-                firstName: null,
-                lastName: null,
-                email: null,
-                phoneNumber: null,
-                userRole: null
-            }
-        case "setUser":
-            return action.user
-  
-        default:
-            return state;
-    }
-}
-
-const errorReducer = (state, action) => {
-    switch(action.type){
-        case "error":
-            return{
-                exist: true,
-                errorMessage: action.errorMessage
-            }
-        case "clearErrors":
-            return {
-                exist: false,
-                errorMessage: ""
-            }
-        default:
-            return state;
-    }
-}
 
 const AdminPage = () => {
 
     const [organization, setOrganization] = useContext(OrganizationContext);
 
-    const [state, dispatch] = useReducer(reducer,{ 
-        username: null,
-        password: null,
-        firstName: null,
-        lastName: null,
-        email: null,
-        phoneNumber: null,
-        userRole: null
-    });
-
-    const [error, errorDispatch] = useReducer(errorReducer, {
-        exist: false,
-        errorMessage: ""
-    })
 
     const tableConfig = {
         headers:["Action","First Name", "Last Name", "Email","Username","Role", "Last Modified"],
@@ -89,48 +33,11 @@ const AdminPage = () => {
 
     const openModal = () => {
         setisOpen(true);
-        dispatch({ type: "clear"});
     }
 
     const confirmPassword = useRef();
 
-    const addUser = async (e) => {
-        e.preventDefault();
-
-        if (state.password !== confirmPassword.current.value) {
-            setShake(true);
-            return errorDispatch({type: "error", errorMessage: ERROR.confirmPW})
-
-        }else{
-            
-            try {
-                const response = await signUp(state);
-                const userId = response.data.userId;
-                await addOrganizationToUser(userId, organization.id);
-    
-                const newList = organization.users.slice(0);
-                newList.push(response.data);
-                setOrgUsersToNewList(newList);
-    
-            } catch (error) {
-                alert(error);
-                return;
-            }
-    
-            
-            confirmPassword.current.value = null;
-            dispatch({ type: "clear"});
-            errorDispatch({type: "clearErrors"});
-            setisOpen(false);
-        }
-
-
-    }
-
     const cancelAddUser = () => {
-        
-        errorDispatch({type: "clearErrors"});
-        dispatch({ type: "clear"});
         setisOpen(false)
     }
 
@@ -195,17 +102,6 @@ const AdminPage = () => {
     }
 
 
-
-
-
-    const onChange = (e) => {
-        dispatch({type: "onChange", event: e.target})
-    }
-
-    // const check = () => { 
-    //     console.log(totalNumOfPages)
-    // }
-
     //sorting functions for users
     const sortForUsers = (a,b) =>{
         if (a.username < b.username) {
@@ -218,7 +114,6 @@ const AdminPage = () => {
     }
 
 
-    const [shake, setShake] = useState(false)
     const [editingUser, setEditUser] = useState(false)
 
     const currentEditUser = useRef()
@@ -236,8 +131,8 @@ const AdminPage = () => {
     return (
         <div className="main_container">
                 
-            { IsOpen && <AdminAddUser IsOpen={IsOpen} cancelAddUser={cancelAddUser} onChange={onChange} 
-            shake={shake} setShake={setShake} error={error} addUser={addUser} confirmPassword={confirmPassword}/>}
+            { IsOpen && <AdminAddUser IsOpen={IsOpen} cancelAddUser={cancelAddUser}
+             confirmPassword={confirmPassword} organization={organization} setOrgUsersToNewList={setOrgUsersToNewList}/>}
 
             { editingUser && <AdminEditUser currentEditUser={currentEditUser} editingUser={editingUser} cancelEditUser={cancelEditUser}
             updateToCurrentUsers={updateToCurrentUsers}/>}

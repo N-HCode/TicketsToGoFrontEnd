@@ -1,7 +1,110 @@
-import React from 'react';
+import React, {useReducer, useState} from  'react';
 import Modal from 'react-modal';
+import {ERROR, ERRORACTIONS} from '../../constants/Error';
+import ErrorComponent from '../../constants/ErrorComponent';
+import { signUp, addOrganizationToUser } from '../../../services/UserService';
 
-const AdminAddUser = ({IsOpen, cancelAddUser, onChange, shake, setShake, error, addUser, confirmPassword}) => {
+const reducer = (state, action) => {
+    switch(action.type){
+        case "onChange":
+            return{
+                ...state,
+                [action.event.name]: action.event.value
+            }
+        case "clear":
+            return {
+                username: null,
+                password: null,
+                firstName: null,
+                lastName: null,
+                email: null,
+                phoneNumber: null,
+                userRole: null
+            }
+        case "setUser":
+            return action.user
+  
+        default:
+            return state;
+    }
+}
+
+const AdminAddUser = ({IsOpen, cancelAddUser, confirmPassword, organization, setOrgUsersToNewList}) => {
+
+    const [state, dispatch] = useReducer(reducer,{ 
+        username: null,
+        password: null,
+        firstName: null,
+        lastName: null,
+        email: null,
+        phoneNumber: null,
+        userRole: null
+    });
+
+
+    const [errorState, setErrorState] = useState(
+        {
+            actionType: "",
+            errorMessage: ""
+        }
+    )
+
+    const onChange = (e) => {
+        dispatch({type: "onChange", event: e.target})
+    }
+
+    const addUser = async (e) => {
+        e.preventDefault();
+
+        if (state.password !== confirmPassword.current.value) {
+            return setErrorState(
+                {
+                    actionType: ERRORACTIONS.errorIsOn,
+                    errorMessage: ERROR.confirmPWIncorrect
+                }
+            )
+
+        }else{
+            
+            try {
+                const response = await signUp(state);
+                const userId = response.data.userId;
+                await addOrganizationToUser(userId, organization.id);
+    
+                const newList = organization.users.slice(0);
+                newList.push(response.data);
+                setOrgUsersToNewList(newList);
+    
+            } catch (error) {
+                alert(error);
+                return;
+            }
+    
+            
+            confirmPassword.current.value = null;
+            dispatch({ type: "clear"});
+            setErrorState(
+                {
+                    actionType: ERRORACTIONS.clearErrors,
+                }
+            )
+            cancelAddUser();
+        }
+
+
+    }
+
+    const close = () =>{
+        setErrorState(
+            {
+                actionType: ERRORACTIONS.clearErrors,
+            }
+        )
+        cancelAddUser()
+
+    }
+
+
     return (
         <Modal 
         className="modal"
@@ -16,16 +119,7 @@ const AdminAddUser = ({IsOpen, cancelAddUser, onChange, shake, setShake, error, 
                 <p className="sub_title_text">Add in details to create a new user</p>
                 <hr></hr>
 
-                { error.exist && 
-            
-                // this is how you do animiation. You use a useState and then add the class in
-                <div className={shake? "error_message shake" : "error_message" }
-                    onAnimationEnd={() => setShake(false)}
-                >
-                    <p>{error.errorMessage}</p>
-                </div>
-                
-                }
+                <ErrorComponent errorState={errorState}/>
 
                 <div className="modal_form_inputs">
 
@@ -73,7 +167,7 @@ const AdminAddUser = ({IsOpen, cancelAddUser, onChange, shake, setShake, error, 
                     in the form */}
                     {/* <input type="reset" value="reset"/> */}
 
-                    <button type="button" onClick={cancelAddUser}>Cancel</button>
+                    <button type="button" onClick={close}>Cancel</button>
                     <button>Add User</button>
                 </div>    
             </form>
