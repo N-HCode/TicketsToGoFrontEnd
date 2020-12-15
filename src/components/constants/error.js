@@ -6,9 +6,13 @@ const ERROR = {
     loginIncorrect: "Username or Password is Incorrect"
 }
 
+const TICKETERROR = {
+    missingSubject: "Please enter a subject line"
+}
+
 const ERRORACTIONS = {
     errorIsOn: "error",
     clearErrors: "clearErrors",
 }
 
-export {ERROR, ERRORACTIONS}
+export {ERROR, ERRORACTIONS, TICKETERROR}

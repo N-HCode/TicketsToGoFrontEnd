@@ -1,8 +1,7 @@
-import React, {useContext, useState, useEffect, useReducer, useRef} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import { OrganizationContext} from '../context/OrganizationContext';
 import Modal from 'react-modal';
 import {getAllUsesInOrg} from '../../services/OrganizationService';
-import { signUp, addOrganizationToUser } from '../../services/UserService';
 import AdminAddUser from './admincomponents/AdminAddUser'
 import AdminEditUser from './admincomponents/AdminEditUser';
 import Pagination from '../pagination/Pagination'
