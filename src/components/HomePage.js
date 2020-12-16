@@ -1,10 +1,10 @@
 import React from 'react';
-
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from './homepagecomponents/tickettab/TicketTabList';
-import TickColumnList from './homepagecomponents/ticketcolumns/TicketColumnList';
+import TicketColumnList from './homepagecomponents/ticketcolumns/TicketColumnList';
+import TicketModal from './homepagecomponents/ticketmodal/ticketmodal';
 
 const HomePage = () => {
 
@@ -48,7 +48,7 @@ const HomePage = () => {
                 < TicketTabList />
 
                 {/* Ticket column container */}
-                <TickColumnList />
+                <TicketColumnList />
             </div>
 
             {/* Footer if needed*/}
