@@ -23,7 +23,18 @@ const TicketModal = () => {
     return (
         <div>
             <Modal>
+                <div>
+                    <div>
 
+                    </div>
+                    <div>
+                        
+                    </div>
+
+                </div>
+                <div>
+
+                </div>
 
 
             </Modal>      
