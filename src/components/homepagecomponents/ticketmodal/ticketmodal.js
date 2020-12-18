@@ -29,11 +29,15 @@ const TicketModal = () => {
                             We then map through that array
                         */}
                         {Object.keys(ticketInfo).map((prop,index) => 
-                            <p>{ticketInfo[prop]}</p>
+                            <p>{prop}</p>
                         
                         )}
                     </div>
                     <div>
+                        {Object.keys(ticketInfo).map((prop,index) => 
+                            <p>{ticketInfo[prop]}</p>
+                        
+                        )}
                         
                     </div>
 
