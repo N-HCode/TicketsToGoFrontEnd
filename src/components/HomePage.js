@@ -1,12 +1,29 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from './homepagecomponents/tickettab/TicketTabList';
 import TicketColumnList from './homepagecomponents/ticketcolumns/TicketColumnList';
-import TicketModal from './homepagecomponents/ticketmodal/ticketmodal';
+import TicketInfo from './homepagecomponents/ticketinfo/TicketInfo';
+
+
+
 
 const HomePage = () => {
+
+    const [ticketIsOpen, setTicketIsOpen] = useState(false);
+
+
+    //Modal functions to open and close.
+
+    const onClick = () => {
+        setTicketIsOpen(!ticketIsOpen);
+
+    }
+
+    const closeTicketModal = () => {
+        setTicketIsOpen(false);
+    }
 
     //need the const to create the function
 
@@ -48,7 +65,14 @@ const HomePage = () => {
                 < TicketTabList />
 
                 {/* Ticket column container */}
+
+                <button onClick={onClick}>Change</button>
+
                 <TicketColumnList />
+
+                {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
+
+                
             </div>
 
             {/* Footer if needed*/}

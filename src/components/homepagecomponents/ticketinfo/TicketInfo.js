@@ -3,7 +3,9 @@ import Modal from 'react-modal';
 import {TICKETERROR, ERRORACTIONS} from '../../constants/Error';
 import ErrorComponent from '../../constants/ErrorComponent';
 
-const TicketModal = () => {
+Modal.setAppElement('#root');
+
+const TicketInfo = ({ticketIsOpen, closeTicketModal, ticket}) => {
 
     const [ticketInfo, setTicketInfo] = useState({
         ticketNumber: 1,
@@ -21,21 +23,31 @@ const TicketModal = () => {
     })
 
     return (
-        <div>
-            <Modal>
+            <Modal
+            className="modal"
+            overlayClassName ="modal_overlay"   
+            isOpen={ticketIsOpen} 
+            shouldCloseOnOverlayClick={false}
+            onRequestClose={closeTicketModal}>
+
+                {/* Error Messages */}
+                <div></div>    
+    
+                {/* Buttons */}
+
                 <div>
-                    <div>
+                    <div className="ticket_info_container">
                         {/* Object.keys gives an array of the properties
                             We then map through that array
                         */}
                         {Object.keys(ticketInfo).map((prop,index) => 
-                            <p>{prop}</p>
+                            <p key={"ticket_info_prop_" + index}>{prop}</p>
                         
                         )}
                     </div>
                     <div>
                         {Object.keys(ticketInfo).map((prop,index) => 
-                            <p>{ticketInfo[prop]}</p>
+                            <p key={"ticket_info" + index}>{ticketInfo[prop]}</p>
                         
                         )}
                         
@@ -48,8 +60,8 @@ const TicketModal = () => {
 
 
             </Modal>      
-        </div>
+      
     )
 }
 
-export default TicketModal
+export default TicketInfo
