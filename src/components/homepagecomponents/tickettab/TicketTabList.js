@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import SingleTicketTab from './SingleTicketTab';
 import {TicketTabContext} from '../../context/TicketTabContext';
 
-const TicketTabList = () => {
+
+const TicketTabList = ({openTicketModal}) => {
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
@@ -58,6 +59,7 @@ const TicketTabList = () => {
                     deleteTab={deleteTab}
                     middleMouseDeleteTab={middleMouseDeleteTab}
                     ticketNumber={ticketTabListState[i]}
+                    openTicketModal={openTicketModal}
                     /> )}
 
 

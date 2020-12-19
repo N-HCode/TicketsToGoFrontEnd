@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Modal from 'react-modal';
 import {TICKETERROR, ERRORACTIONS} from '../../constants/Error';
 import ErrorComponent from '../../constants/ErrorComponent';
+import { OpenTicketContext} from '../../context/OpenTicketContext';
 
 Modal.setAppElement('#root');
 
-const TicketInfo = ({ticketIsOpen, closeTicketModal, ticket}) => {
+
+
+const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
+
+    const [openTicketState] = useContext(OpenTicketContext);
 
     const [ticketInfo, setTicketInfo] = useState({
         ticketNumber: 1,
@@ -21,6 +26,13 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal, ticket}) => {
         assignedTo: null
 
     })
+
+    // useEffect(() => {
+    //     effect
+    //     return () => {
+    //         cleanup
+    //     }
+    // }, [input])
 
     return (
             <Modal

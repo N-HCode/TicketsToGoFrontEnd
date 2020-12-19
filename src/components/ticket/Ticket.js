@@ -1,7 +1,8 @@
-import React, { useState,useContext} from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import {TicketTabContext} from '../context/TicketTabContext';
 import { TicketContext } from '../context/TicketContext';
+import { OpenTicketContext} from '../context/OpenTicketContext';
 
 // The Component for the display of each individual ticket on the ticketList
 // Props is used to hold data and carry it down
@@ -11,10 +12,11 @@ const Ticket = (props) => {
 
     const [ tickets ] = useContext(TicketContext);
     const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
+    const [openTicketState, setOpenTicketState] = useContext(OpenTicketContext);
     //This is the state of whether or not the item is being dragged.
     //We will use this to style the object when it is dragged based on its state.
 
-    const addTicketTab = () => {
+    const addTicketTabAndOpenModal = () => {
         
         //We only want 1 ticket tab for each ticket. So we check if the ticket number is NOT included
         if (!ticketTabListState.includes(ticket.ticketNumber)) {
@@ -22,6 +24,9 @@ const Ticket = (props) => {
             newTicketTabList.push(ticket.ticketNumber);
             setTicketTabListState(newTicketTabList);
         }
+
+        setOpenTicketState(ticket.ticketNumber);
+        props.openTicketModal();
 
     }
  
@@ -68,7 +73,7 @@ const Ticket = (props) => {
 
             id={"ticket_number_" + ticket.ticketNumber}
             className="single_ticket" 
-            onClick={addTicketTab}
+            onClick={addTicketTabAndOpenModal}
             onDragStart={dragStart}
             onDragOver={dragOver}
             onDragEnd={onDragEnd}
