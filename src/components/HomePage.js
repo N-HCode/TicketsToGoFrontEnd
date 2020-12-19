@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
@@ -16,14 +16,14 @@ const HomePage = () => {
 
     //Modal functions to open and close.
 
-    const onClick = () => {
-        setTicketIsOpen(!ticketIsOpen);
-
+    const openTicketModal = () => {
+        setTicketIsOpen(true);
     }
 
     const closeTicketModal = () => {
         setTicketIsOpen(false);
     }
+    //useRef to store the ticket that was clicked on so we can pass it down to the Modal
 
     //need the const to create the function
 
@@ -62,15 +62,15 @@ const HomePage = () => {
                 <div className="tab_line"></div>
 
                 {/* ticket tabs */}
-                < TicketTabList />
+                < TicketTabList openTicketModal={openTicketModal}/>
 
                 {/* Ticket column container */}
 
-                <button onClick={onClick}>Change</button>
+                <button onClick={openTicketModal}>Change</button>
 
-                <TicketColumnList />
+                <TicketColumnList openTicketModal={openTicketModal}/>
 
-                {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
+                <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>
 
                 
             </div>

@@ -33,7 +33,11 @@ const TicketList = (props) => {
     return (
 
         <div>
-            {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} />  ) }
+            {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} 
+                openTicketModal={props.openTicketModal}
+            
+            
+            />  ) }
 
         </div>
     )

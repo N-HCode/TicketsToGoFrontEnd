@@ -4,7 +4,7 @@ import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 
 
-const TicketColumnList = () => {
+const TicketColumnList = ({openTicketModal}) => {
 
     const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
 
@@ -60,7 +60,7 @@ const TicketColumnList = () => {
                 {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn 
                     keyIndex = {index}
                     ticketColumn={ticketColumn}
-              
+                    openTicketModal={openTicketModal}
 
                 /> )
                 }

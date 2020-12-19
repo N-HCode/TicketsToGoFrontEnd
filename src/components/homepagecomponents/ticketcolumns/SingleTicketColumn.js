@@ -117,6 +117,7 @@ const SinglePrimaryTab = (props) => {
                         id={props.keyIndex}
                         status={currentColumn.title}
                         ticketList={ tickets.filter( ticket => ticket.status == currentColumn.title) }
+                        openTicketModal={props.openTicketModal}
                     />
                     
                 }

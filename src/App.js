@@ -1,13 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
 // The Router library used to navigate the site
 import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // Components for Tickets
-import EditTicketPage from './components/ticket/EditTicketPage';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
@@ -32,6 +28,8 @@ import { TicketProvider} from './components/context/TicketContext'
 import { TicketTabContextProvider } from './components/context/TicketTabContext';
 
 import {TicketColumnsContextProvider} from './components/context/TicketColumnsContext';
+
+import {OpenTicketContextProvider} from './components/context/OpenTicketContext';
 
 // My Account page
 import MyAccountPage from './components/myaccountpage/MyAccount';
@@ -59,7 +57,7 @@ class App extends React.Component {
   paths = {
     editUser: "/editUser",
     createTicket: "/createTicket",
-    editTicket: "/edit/:id",
+  
     login: "/login",
     createOrganization: "/createOrganization",
     userList: "/users",
@@ -89,7 +87,7 @@ class App extends React.Component {
 
               <Route exact path={this.paths.editUser} component={EditUserPage} />
               <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
-              <Route exact path={this.paths.editTicket} component={EditTicketPage} />
+
               <Route exact path={this.paths.login} component={LoginPage} />
               <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
               <Route exact path={this.paths.userList} component={UserList} />
@@ -113,33 +111,33 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
- 
-            <TicketColumnsContextProvider>
-              <TicketProvider>
-                {/* {Navbar component to navigate} */}
-                <Navbar/>
-                
-                
-                {/* TicketTabContext to hold the ticket tabs*/}
-                <TicketTabContextProvider>
-
-                  {/* {creating a switch to swap out the component to show when on different pages} */}
-                  <Switch>
-                    {/* {pages and the component assgined to them} */}
-                    
-                    <Route component={this.RouteWithNav}/>
-
-
-                    {/* {a redirect for anypage not listed above} */}
-                    <Redirect from= "/" to="/" /> 
-                  </Switch>
+            <OpenTicketContextProvider>
+              <TicketColumnsContextProvider>
+                <TicketProvider>
+                  {/* {Navbar component to navigate} */}
+                  <Navbar/>
                   
+                  
+                  {/* TicketTabContext to hold the ticket tabs*/}
+                  <TicketTabContextProvider>
 
-                </TicketTabContextProvider>
-                
-                </TicketProvider>
-              </TicketColumnsContextProvider>
-         
+                    {/* {creating a switch to swap out the component to show when on different pages} */}
+                    <Switch>
+                      {/* {pages and the component assgined to them} */}
+                      
+                      <Route component={this.RouteWithNav}/>
+
+
+                      {/* {a redirect for anypage not listed above} */}
+                      <Redirect from= "/" to="/" /> 
+                    </Switch>
+                    
+
+                  </TicketTabContextProvider>
+                  
+                  </TicketProvider>
+                </TicketColumnsContextProvider>
+              </OpenTicketContextProvider>
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>
