@@ -1,0 +1,81 @@
+.ticket_info_container{
+    display: flex;
+    flex-direction: column;
+
+    .ticket_info_input_container{
+        display: flex;
+        align-items: center;
+        height: 40px;
+    }
+
+
+
+    @mixin sideStyling {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+    }
+
+    .ticket_info_side_one{
+        @include sideStyling();
+    }
+
+    .ticket_info_side_two{
+        @include sideStyling();
+        margin-left: 30px;
+    }
+
+    .ticket_info_section_container{
+        display: flex;
+        margin-top: 10px;
+    }
+
+
+      //basic styling for the form fields
+      input, textarea, select {
+        //the box sizing will make it so that all the form fields
+        //will be the same length. By default the select is shorter
+        -ms-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box; 
+        box-sizing:border-box;
+        border: 1px solid grey;
+        background: #242424;
+        font-family: $mainTextStyle;
+        color: $activeTextColor;
+        margin-top: 10px;
+        font-size: 16px;
+        
+    }
+
+    input, textarea{
+        padding: 5px 5px;
+        border-radius: 2px;
+    }
+
+    select{
+        padding: 2px 5px;
+    }
+
+    select{
+        min-width: 50px;
+    }
+    
+    input, textarea, select, label{
+        margin-top: 10px;
+    }
+
+    
+
+    textarea{
+        font-size: 16px;
+        //If we let the text are expand horizontally. It will expand outside the container and
+        //spill into the container over the right. Even with an overflow hidden, that will cause
+        //the inputted characters to disappear.
+        resize: vertical;
+        min-height: 100px;
+        max-height: 300px;
+     
+    }
+    
+}

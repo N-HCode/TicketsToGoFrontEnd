@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 const OpenTicketContext = createContext();
 
 const OpenTicketContextProvider = (props) => {
-    const [ openTicketContext, setOpenTicketContext ] = useState([]);
+    const [ openTicketContext, setOpenTicketContext ] = useState(null);
 
     return (
         <OpenTicketContext.Provider

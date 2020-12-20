@@ -4,6 +4,11 @@ import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 
 
+
+//https://github.com/willmcpo/body-scroll-lock#readme
+
+
+
 const TicketColumnList = ({openTicketModal}) => {
 
     const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
@@ -28,22 +33,24 @@ const TicketColumnList = ({openTicketModal}) => {
     }
 
 
-    //need to use JS to implement a mouse wheel scrolling function.
-    const mouseWheelScroll = (e) => {
-        //this is to prevent the default vertical scroll.
-        e.preventDefault();
+    // //need to use JS to implement a mouse wheel scrolling function.
+    // const mouseWheelScroll = (e) => {
+    //     e.preventDefault();
 
-        //this is to get the scrollable container
-        if(container === undefined){
-            container = document.getElementById("ticket_column_list");
-        }
+    //     //this is to get the scrollable container
+    //     if(container === undefined){
+    //         container = document.getElementById("ticket_column_list");
+    //     }
         
-        //this is a scroll event
-        container.scrollLeft += e.deltaY*150;
- 
-   
+    //     //this is a scroll event
+    //     container.scrollLeft += e.deltaY*150;
+        
+    // }
 
-    }
+
+
+
+
 
 
     return(
@@ -55,9 +62,12 @@ const TicketColumnList = ({openTicketModal}) => {
             </div>
          
             
-            <div id="ticket_column_list" onWheel={mouseWheelScroll}>
+            <div id="ticket_column_list" 
+                // onWheel={(e) => mouseWheelScroll(e)}  
+            >
 
-                {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn 
+                {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn
+                    key = {"single_ticket_column_" + index}
                     keyIndex = {index}
                     ticketColumn={ticketColumn}
                     openTicketModal={openTicketModal}

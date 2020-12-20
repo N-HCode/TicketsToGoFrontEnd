@@ -53,7 +53,8 @@ const MainNavOptions = () => {
                     <NavLink to="/login" className="dropdown_menu_item" onClick={closeMenu}>Log in</NavLink>
                     <NavLink to="/createOrganization" className="dropdown_menu_item"onClick={closeMenu}>Create Organization</NavLink>
                     <NavLink to="/myaccount" className="dropdown_menu_item"onClick={closeMenu}>My Account</NavLink>
-                    <NavLink to="/admin" className="dropdown_menu_item"onClick={closeMenu}>Admin</NavLink>
+                    <NavLink to="/admin" className="dropdown_menu_item" onClick={closeMenu}>Admin</NavLink>
+                    <NavLink to="/admin" className="dropdown_menu_item" onClick={closeMenu}>Organization List</NavLink>
                     <NavLink to="/login" className="dropdown_menu_item" onClick={logOut}>Log out</NavLink>
 
                 </div>

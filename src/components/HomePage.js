@@ -70,7 +70,7 @@ const HomePage = () => {
 
                 <TicketColumnList openTicketModal={openTicketModal}/>
 
-                <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>
+                {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
 
                 
             </div>

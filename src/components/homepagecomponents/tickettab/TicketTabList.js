@@ -35,23 +35,25 @@ const TicketTabList = ({openTicketModal}) => {
 
     }
 
-    const mouseWheelScroll = (e) => {
-        //this is to prevent the default vertical scroll.
-        e.preventDefault();
+    // const mouseWheelScroll = (e) => {
+    //     //this is to prevent the default vertical scroll.
+    //     e.preventDefault();
 
-        //this is to get the scrollable container
-        if(container === undefined){
-            container = document.getElementById("ticket_tab_container");
-        }
+    //     //this is to get the scrollable container
+    //     if(container === undefined){
+    //         container = document.getElementById("ticket_tab_container");
+    //     }
 
-        container.scrollLeft += e.deltaY*85;
+    //     container.scrollLeft += e.deltaY*85;
 
-    }
+    // }
     
     
     return(
         <div id="ticket_tab_hidden_container">
-            <div id="ticket_tab_container" onWheel={mouseWheelScroll}>
+            <div id="ticket_tab_container" 
+            // onWheel={mouseWheelScroll}
+            >
 
                 {/* <div id="ticket_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}> */}
                     {ticketTabListState.map((tab,i) => <SingleTicketTab 
