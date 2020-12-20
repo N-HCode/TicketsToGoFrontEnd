@@ -74,7 +74,7 @@ const SinglePrimaryTab = (props) => {
     }
 
     return(
-        <div className="single_ticket_column" key={"single_ticket_column_" + props.keyIndex}>
+        <div className="single_ticket_column" >
 
            
             <div className="column_title">

@@ -18,7 +18,7 @@ const editUser = (userId, userModel) => {
 }
 
 const checkPassword = (userId, password) => {
-        return axios.get(`http://localhost:8080/user/check/${userId}?password=${password}`);
+    return axios.get(`http://localhost:8080/user/check/${userId}?password=${password}`);
   
 }
 

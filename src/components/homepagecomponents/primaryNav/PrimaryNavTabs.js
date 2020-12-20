@@ -39,19 +39,19 @@ const PrimaryNavTabs = () => {
     },[navTabListState])
 
 
-    //need to use JS to implement a mouse wheel scrolling function.
-    const mouseWheelScroll = (e) => {
-        //this is to prevent the default vertical scroll.
-        e.preventDefault();
+    // //need to use JS to implement a mouse wheel scrolling function.
+    // const mouseWheelScroll = (e) => {
+    //     //this is to prevent the default vertical scroll.
+    //     e.preventDefault();
 
-        //this is to get the scrollable container
-        if(container === undefined){
-            container = document.getElementById("primary_tab__horizontal_scroll_container");
-        }
+    //     //this is to get the scrollable container
+    //     if(container === undefined){
+    //         container = document.getElementById("primary_tab__horizontal_scroll_container");
+    //     }
 
-        container.scrollLeft += e.deltaY*85;
+    //     container.scrollLeft += e.deltaY*85;
 
-    }
+    // }
 
     //delete tab that will be passed down. Will be passed down because the state
     //with the list of tabs is in this component.
@@ -84,7 +84,8 @@ const PrimaryNavTabs = () => {
 
             <div id="primary_tab__horizontal_scroll_container" 
             ref={elements}
-            onWheel={mouseWheelScroll}>
+            // onWheel={mouseWheelScroll}
+            >
                 {navTabListState.map((tab,i) => 
                 <SingleTab 
                 key={"primary_tab_"+i}
