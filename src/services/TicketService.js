@@ -9,4 +9,9 @@ const getTicketById = (ticketId) => {
     return axios.get(`http://localhost:8080/ticket/${ticketId}`);
 }
 
-export  { createTicket, findAll, editTicket, deleteTicket, getTicketById };
+const closeTicket = (ticketId) => {
+    return axios.put(`http://localhost:8080/ticket/close/${ticketId}`);
+
+}
+
+export  { createTicket, findAll, editTicket, deleteTicket, getTicketById, closeTicket };

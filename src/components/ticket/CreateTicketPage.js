@@ -13,10 +13,15 @@ const CreateTicketPage = (props) => {
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
-        subject: "",
-        description: "",
+        ticketNumber: null,
+        subject: null,
+        description: null,
+        resolution: null,
         priority: "low",
-        status: "new"
+        ticketNotes: null,
+        responses: null,
+        status: "new",
+        assignedTo: null
     });
 
      // the method that runs when the create button is hit
@@ -96,18 +101,18 @@ const CreateTicketPage = (props) => {
 
                             {/* Ticket Owner */}
                             
-                            <label htmlFor="ticketOwner">Ticket Owner:</label>
-                            <input type="text" name="ticketNumber" ></input> 
+                            <label htmlFor="assignedTo">Assigned To:</label>
+                            <input type="text" name="assignedTo" onChange={onChange}></input> 
 
 
                             {/* Resolution */}
-                            <label htmlFor="Resolution">Resolution:</label>
-                            <textarea name="description" rows="3" cols="40"  ></textarea>
+                            <label htmlFor="resolution">Resolution:</label>
+                            <textarea name="resolution" rows="3" cols="40" onChange={onChange}></textarea>
 
                             {/* Status */}
                             <label htmlFor="status">Status:</label>
                             <select name="status" onChange={onChange}>
-                                <option value="new">new</option>
+                                <option value="new" selected>new</option>
                                 <option value="in progress">in progress</option>
                                 <option value="resolved">resolved</option>
                             </select>

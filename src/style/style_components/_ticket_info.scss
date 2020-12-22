@@ -1,3 +1,16 @@
+.overall_ticket_info_container{
+    display: flex;
+    flex-direction: column;
+
+    .ticket_info_buttons{
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-content: center;
+    }
+}
+
+
 .ticket_info_container{
     display: flex;
     flex-direction: column;
