@@ -1,9 +1,17 @@
-import React, { useContext, useReducer, useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+//Services
 import { loginUser } from '../../services/UserService';
+import { getAllStatus } from '../../services/StatusListService'
+
+//Contexts
 import { UserContext } from '../context/UserContext';
 import {NavLink} from 'react-router-dom';
 import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
+import { StatusListContext} from '../context/StatusListContext';
+
+//Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
 import ErrorComponent from '../constants/ErrorComponent'
 
@@ -15,6 +23,10 @@ const LoginPage = (props) => {
     const [ user, setUser] = useContext(UserContext);
     const [ organization, setOrganization ] = useContext(OrganizationContext);
     const [ tickets, setTickets ] = useContext(TicketContext);
+    const [ statusList, setStatusList ] = useContext(StatusListContext);
+
+
+
     const [ userLogin, setUserLogin] = useState({
         username: "",
         password: ""
@@ -42,6 +54,30 @@ const LoginPage = (props) => {
 
             const response = await loginUser(userLogin.username, userLogin.password);
 
+            setUserLogin({
+                username: "",
+                password: ""
+            })
+
+            try {
+
+                const statusListResponse = await getAllStatus(response.data.organization.statusListId)
+
+                setStatusList({
+                    ...statusList,
+                    statusListArray:statusListResponse.data})
+                
+            } catch (error) {
+
+                return setErrorState(
+                    {
+                        actionType: ERRORACTIONS.errorIsOn,
+                        errorMessage: ERROR.connectionIssue
+                    }
+                )
+                
+            }
+
             const { tickets, ...rest} = response.data.user;
 
             setUser( 
@@ -54,10 +90,9 @@ const LoginPage = (props) => {
                 response.data.user.tickets
             )
 
-            setUserLogin({
-                username: "",
-                password: ""
-            })
+
+
+
 
  
             setErrorState(
@@ -71,7 +106,7 @@ const LoginPage = (props) => {
             //error will have the response property so you can get the status code from that.
             // console.log(error.response.status);
             
-            setErrorState(
+            return setErrorState(
                 {
                     actionType: ERRORACTIONS.errorIsOn,
                     errorMessage: ERROR.loginIncorrect

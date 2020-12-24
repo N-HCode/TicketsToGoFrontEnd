@@ -3,7 +3,8 @@ const ERROR = {
     newPWSameAsOldPW: "New password cannot be the same as current password",
     confirmPWIncorrect: "Confirm Password and New Password do not match",
     usernameTaken: "Please use another username",
-    loginIncorrect: "Username or Password is Incorrect"
+    loginIncorrect: "Username or Password is Incorrect",
+    connectionIssue: "Problem connecting, please try again later",
 }
 
 const TICKETERROR = {

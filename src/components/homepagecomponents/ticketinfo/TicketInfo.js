@@ -1,31 +1,34 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import Modal from 'react-modal';
+
+
+//Contexts
+import { OpenTicketContext} from '../../context/OpenTicketContext';
+import { StatusListContext } from '../../context/StatusListContext'
+
+//Services
+import {getTicketById, closeTicket} from '../../../services/TicketService'
+
+//Other
 import {TICKETERROR, ERRORACTIONS} from '../../constants/Error';
 import ErrorComponent from '../../constants/ErrorComponent';
-import { OpenTicketContext} from '../../context/OpenTicketContext';
-import {getTicketById, closeTicket} from '../../../services/TicketService'
 
 Modal.setAppElement('#root');
 
 
 
 const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
-
+    
+    //openTicketConext is to tell which ticket is currently active and which one we should show data for.
     const [openTicketState] = useContext(OpenTicketContext);
 
-    // ticketNumber: 1,
-    // subject: null,
-    // description: null,
-    //resolution: null,
-    // priority: null,
-    // dateCreated: null,
-    // dateClosed: null,
-    // lastModified: null,
-    // ticketNotes: null,
-    // responses: null,
-    // status: null,
-    // assignedTo: null
+    //This context is to populate the status list. This is a context because we want status to be consistent
+    //throughout the user session.
+    const [statusList] = useContext(StatusListContext);
 
+    //We only want a save button to appear if the user change something. So we need
+    //a reference to the old ticket data to compare to the current one.
+    //We want to try to limit the number of API calls if possible.
     const oldTicketData = useRef();
 
     const [changesMade, setChangesMade] = useState(false)
@@ -84,6 +87,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
     }
 
     const closingTicket = async () => {
+        console.log(statusList);
 
         if(window.confirm("Do you want to close the case?")){
             try {
@@ -161,8 +165,13 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                     <label htmlFor="subject">Status:</label>
                                     <select name="status">
                                             <option value="" disabled selected>{ticketInfo.status}</option>
-                                            <option value="user">user</option>
-                                            <option value="admin">admin</option>
+                                            {statusList.statusListArray.map((status, index) => 
+                                            <option
+                                                key = {"status_list_option" + index}
+                                                value="user"
+
+                                            >{status} </option>)
+                                            }
                                     </select>
                                 </div>
 
@@ -170,6 +179,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                     <label htmlFor="subject">Priority:</label>
                                     <select name="status">
                                             <option value="" disabled selected>{ticketInfo.priority}</option>
+
                                             <option value="user">user</option>
                                             <option value="admin">admin</option>
                                     </select>
