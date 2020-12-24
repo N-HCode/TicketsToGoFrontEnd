@@ -2,14 +2,19 @@ import React, {useContext, useRef } from 'react';
 import TicketList from '../../ticket/TicketList';
 import {NavLink} from 'react-router-dom';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
-import { TicketContext } from '../../context/TicketContext'
+import { TicketContext } from '../../context/TicketContext';
+import {StatusListContext} from '../../context/StatusListContext';
+import { useHistory } from "react-router-dom";
 
 const SinglePrimaryTab = (props) => {
 
     const [ tickets ] = useContext(TicketContext);
     const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    const [statusList, setStatusList] = useContext(StatusListContext);
+
+    const history = useHistory();
     
-    const newTitle = useRef()
+    const newTitle = useRef();
     //save the currentColumn here so we can use throughout the code.
     const currentColumn = ticketColumnListState[props.keyIndex];
 
@@ -70,7 +75,16 @@ const SinglePrimaryTab = (props) => {
         newList.splice(index,1);
         setticketColumnList(newList);
       
-     
+    }
+
+    const createTicketpage = () => {
+        setStatusList({
+            ...statusList,
+            currentStatus: currentColumn.title
+        })
+
+        history.push("/createTicket")
+
     }
 
     return(
@@ -100,9 +114,10 @@ const SinglePrimaryTab = (props) => {
             
                     :
 
-                    <NavLink className="material-icons"
-                        to="/createTicket"         
-                    >add</NavLink>
+                    <i className="material-icons"
+                        onClick={createTicketpage}
+      
+                    >add</i>
                 }
             </div>
             <div className="ticket_list_container"

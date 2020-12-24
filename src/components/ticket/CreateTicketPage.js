@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { createTicket } from '../../services/TicketService';
 import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
+import {StatusListContext} from '../context/StatusListContext';
+
 
 import axios from 'axios';
 
@@ -10,6 +12,8 @@ const CreateTicketPage = (props) => {
     // get user Context to know who is creating the ticket
     const [user] = useContext(UserContext);
     const [tickets, setTickets ] = useContext(TicketContext);
+
+    const [statusList] = useContext(StatusListContext);
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
@@ -20,7 +24,7 @@ const CreateTicketPage = (props) => {
         priority: "low",
         ticketNotes: null,
         responses: null,
-        status: "new",
+        status: statusList.currentStatus,
         assignedTo: null
     });
 
@@ -57,6 +61,8 @@ const CreateTicketPage = (props) => {
             ...ticket,
             [e.target.name]: e.target.value
         });
+
+        console.log(ticket);
 
         
     }
@@ -112,9 +118,15 @@ const CreateTicketPage = (props) => {
                             {/* Status */}
                             <label htmlFor="status">Status:</label>
                             <select name="status" onChange={onChange}>
-                                <option value="new" selected>new</option>
-                                <option value="in progress">in progress</option>
-                                <option value="resolved">resolved</option>
+                                <option value="new" selected disabled>{statusList.currentStatus}</option>
+                                {statusList.statusListArray.map((status, index) => 
+                                    <option
+                                        key = {"new_ticket_status_list_option" + index}
+                                        value="user"
+
+                                    >{status} </option>)
+                                }
+
                             </select>
 
                         </div>
