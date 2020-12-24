@@ -59,7 +59,6 @@ class App extends React.Component {
   paths = {
     editUser: "/editUser",
     createTicket: "/createTicket",
-  
     login: "/login",
     createOrganization: "/createOrganization",
     userList: "/users",
