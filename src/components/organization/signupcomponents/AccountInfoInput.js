@@ -95,8 +95,8 @@ const AccountInfoInput =(props) => {
 
         }else{
             try {
-                const response = await createOrganization(root.username, root.password, props.organization)
-                console.log(response);
+                await createOrganization(root.username, root.password, props.organization)
+                
                 setErrorState(
                     {
                         actionType: ERRORACTIONS.clearErrors,

@@ -46,6 +46,7 @@
     grid-auto-flow: column;
     column-gap: 20px;
     max-width: 850px;
+    font-family: $mainTextStyle;
 
     .ticket_form__oneside{
 
@@ -54,6 +55,7 @@
       //For flex the min-width is auto. Need this to override it so that it will get smaller
       min-width: 0;
       overflow: hidden;
+      
       
       
   
@@ -71,11 +73,13 @@
           background: #242424;
           border-radius: 5px;
           color: $activeTextColor;
+          font-family: $mainTextStyle;
+          font-size: 16px;
           
       }
   
       textarea{
-        font-size: 20px;
+        font-size: 16px;
         //If we let the text are expand horizontally. It will expand outside the container and
         //spill into the container over the right. Even with an overflow hidden, that will cause
         //the inputted characters to disappear.
