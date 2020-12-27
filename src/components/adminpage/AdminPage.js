@@ -1,14 +1,9 @@
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import { OrganizationContext} from '../context/OrganizationContext';
-import {getAllUsesInOrg} from '../../services/OrganizationService';
+import {getAllUserInOrg} from '../../services/OrganizationService';
 import AdminAddUser from './admincomponents/AdminAddUser'
 import AdminEditUser from './admincomponents/AdminEditUser';
 import Pagination from '../pagination/Pagination'
-
-
-
-
-
 
 const AdminPage = () => {
 
@@ -57,7 +52,7 @@ const AdminPage = () => {
         //Since there could be other admin adding users, while we are logged in.
         //We want to get the latest user data and then add it to our context.
         try {
-            const response = await getAllUsesInOrg(organization.id);
+            const response = await getAllUserInOrg(organization.id);
             response.data.sort(sortForUsers);
             setOrgUsersToNewList(response.data);
 

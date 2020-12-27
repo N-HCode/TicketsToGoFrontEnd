@@ -38,6 +38,11 @@ import MyAccountPage from './components/myaccountpage/MyAccount';
 
 // Admin page
 import AdminPage from './components/adminpage/AdminPage';
+
+// Ticket Admin page
+
+import TicketAdminPage from './components/ticketadminpage/TicketAdminPage';
+
 import { createOrganization } from './services/OrganizationService';
 
 
@@ -64,7 +69,8 @@ class App extends React.Component {
     userList: "/users",
     myAccount: "/myaccount",
     home: "/",
-    adminPage: "/admin"
+    adminPage: "/admin",
+    ticketAdminPage: "/ticketadmin"
   }
 
   //the state of the program. This will usually hold data that are constantly
@@ -95,6 +101,7 @@ class App extends React.Component {
               <Route exact path={this.paths.myAccount} component={MyAccountPage} />
               <Route exact path={this.paths.home} component={HomePage} />
               <Route exact path={this.paths.adminPage} component={AdminPage} />
+              <Route exact path={this.paths.ticketAdminPage} component={TicketAdminPage} />
 
 
       </div>

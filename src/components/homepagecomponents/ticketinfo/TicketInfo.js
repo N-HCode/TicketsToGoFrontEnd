@@ -65,6 +65,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
         }else{
             setChangesMade(false);
         }  
+
     }, [ticketInfo])
 
 
@@ -162,13 +163,13 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                             <div className="ticket_info_side_two">
 
                                 <div className="ticket_info_input_container">
-                                    <label htmlFor="subject">Status:</label>
-                                    <select name="status">
-                                            <option value="" disabled selected>{ticketInfo.status}</option>
+                                    <label htmlFor="status">Status:</label>
+                                    <select name="status" onChange={onChange}>
+                                            <option value={ticketInfo.status} disabled selected>{ticketInfo.status}</option>
                                             {statusList.statusListArray.map((status, index) => 
                                             <option
                                                 key = {"status_list_option" + index}
-                                                value="user"
+                                                value={status}
 
                                             >{status} </option>)
                                             }
@@ -176,8 +177,8 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                 </div>
 
                                 <div className="ticket_info_input_container">
-                                    <label htmlFor="subject">Priority:</label>
-                                    <select name="status">
+                                    <label htmlFor="priority">Priority:</label>
+                                    <select name="priority" onChange={onChange}>
                                             <option value="" disabled selected>{ticketInfo.priority}</option>
 
                                             <option value="user">user</option>
