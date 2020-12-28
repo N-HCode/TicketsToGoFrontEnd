@@ -33,6 +33,8 @@ import {OpenTicketContextProvider} from './components/context/OpenTicketContext'
 
 import {StatusListProvider} from './components/context/StatusListContext'
 
+import {PriorityListProvider} from './components/context/PriorityListContext'
+
 // My Account page
 import MyAccountPage from './components/myaccountpage/MyAccount';
 
@@ -121,31 +123,33 @@ class App extends React.Component {
           <OrganizationProvider>
             <OpenTicketContextProvider>
               <StatusListProvider>
-                <TicketColumnsContextProvider>
-                  <TicketProvider>
-                    {/* {Navbar component to navigate} */}
-                    <Navbar/>
-                    
-                    
-                    {/* TicketTabContext to hold the ticket tabs*/}
-                    <TicketTabContextProvider>
-
-                      {/* {creating a switch to swap out the component to show when on different pages} */}
-                      <Switch>
-                        {/* {pages and the component assgined to them} */}
-                        
-                        <Route component={this.RouteWithNav}/>
-
-
-                        {/* {a redirect for anypage not listed above} */}
-                        <Redirect from= "/" to="/" /> 
-                      </Switch>
+                <PriorityListProvider>
+                  <TicketColumnsContextProvider>
+                    <TicketProvider>
+                      {/* {Navbar component to navigate} */}
+                      <Navbar/>
                       
+                      
+                      {/* TicketTabContext to hold the ticket tabs*/}
+                      <TicketTabContextProvider>
 
-                    </TicketTabContextProvider>
-                    
-                    </TicketProvider>
-                  </TicketColumnsContextProvider>
+                        {/* {creating a switch to swap out the component to show when on different pages} */}
+                        <Switch>
+                          {/* {pages and the component assgined to them} */}
+                          
+                          <Route component={this.RouteWithNav}/>
+
+
+                          {/* {a redirect for anypage not listed above} */}
+                          <Redirect from= "/" to="/" /> 
+                        </Switch>
+                        
+
+                      </TicketTabContextProvider>
+                      
+                      </TicketProvider>
+                    </TicketColumnsContextProvider>
+                  </PriorityListProvider>
                 </StatusListProvider>
               </OpenTicketContextProvider>
             </OrganizationProvider>
