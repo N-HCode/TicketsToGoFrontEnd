@@ -40,6 +40,8 @@
     
   }
 
+  
+
   .ticket_form__allsides{
     display: grid;
     //grid auto flow and you change the direction like flex-direction
@@ -47,6 +49,8 @@
     column-gap: 20px;
     max-width: 850px;
     font-family: $mainTextStyle;
+
+    
 
     .ticket_form__oneside{
 
@@ -57,8 +61,6 @@
       overflow: hidden;
       
       
-      
-  
       //basic styling for the form fields
       input[type=text], input[type=password], input[type=email], input[type=tel], textarea, select {
           //the box sizing will make it so that all the form fields
@@ -69,7 +71,7 @@
           box-sizing:border-box;
           padding: 15px;
           margin: 5px 0 22px 0;
-          border: none;
+          border: 1px solid gray;
           background: #242424;
           border-radius: 5px;
           color: $activeTextColor;
@@ -77,6 +79,13 @@
           font-size: 16px;
           
       }
+
+      input[readonly]{
+        background: #2424249c;
+        color: #a8a8a8;
+      }
+
+
   
       textarea{
         font-size: 16px;

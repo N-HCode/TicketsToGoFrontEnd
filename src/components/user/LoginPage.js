@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 
 //Services
 import { loginUser } from '../../services/UserService';
-import { getAllStatus } from '../../services/StatusListService'
+import { getAllStatus } from '../../services/StatusListService';
+import { getAllPriorities} from '../../services/PriorityListService';
 
 //Contexts
 import { UserContext } from '../context/UserContext';
@@ -10,6 +11,7 @@ import {NavLink} from 'react-router-dom';
 import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
 import { StatusListContext} from '../context/StatusListContext';
+import { PriorityListContext } from '../context/PriorityListContext';
 
 //Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
@@ -24,6 +26,7 @@ const LoginPage = (props) => {
     const [ organization, setOrganization ] = useContext(OrganizationContext);
     const [ tickets, setTickets ] = useContext(TicketContext);
     const [ statusList, setStatusList ] = useContext(StatusListContext);
+    const [ priorityList, setPriorityList] = useContext(PriorityListContext);
 
 
 
@@ -65,7 +68,10 @@ const LoginPage = (props) => {
 
                 setStatusList({
                     ...statusList,
-                    statusListArray:statusListResponse.data})
+                    statusListArray:statusListResponse.data});
+
+                const priorityListReponse = await getAllPriorities(response.data.organization.priorityListId);
+                setPriorityList(priorityListReponse.data);
                 
             } catch (error) {
 

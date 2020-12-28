@@ -22,6 +22,7 @@
 @import './style_components//admin_page';
 @import './style_components//edit_admin_content';
 @import './style_components/ticket_info';
+@import './style_components/ticket_admin';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
 @include popupmixin;

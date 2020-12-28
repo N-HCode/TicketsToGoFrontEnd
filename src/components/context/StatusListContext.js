@@ -6,7 +6,6 @@ const StatusListProvider = (props) => {
     const [ statusList, setStatusList ] = useState({
         currentStatus: null,
         statusListArray: []
-
     });
 
     return (

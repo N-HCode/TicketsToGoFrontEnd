@@ -3,6 +3,7 @@ import { createTicket } from '../../services/TicketService';
 import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
 import {StatusListContext} from '../context/StatusListContext';
+import {PriorityListContext} from '../context/PriorityListContext';
 
 
 import axios from 'axios';
@@ -14,6 +15,7 @@ const CreateTicketPage = (props) => {
     const [tickets, setTickets ] = useContext(TicketContext);
 
     const [statusList] = useContext(StatusListContext);
+    const [priorityList] = useContext(PriorityListContext);
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
@@ -21,7 +23,7 @@ const CreateTicketPage = (props) => {
         subject: null,
         description: null,
         resolution: null,
-        priority: "low",
+        priority: priorityList[0],
         ticketNotes: null,
         responses: null,
         status: statusList.currentStatus,
@@ -61,10 +63,7 @@ const CreateTicketPage = (props) => {
             ...ticket,
             [e.target.name]: e.target.value
         });
-
-        console.log(ticket);
-
-        
+        // console.log(ticket);      
     }
 
     return (
@@ -94,11 +93,15 @@ const CreateTicketPage = (props) => {
 
                             {/* Priority */}
                             <label htmlFor="priority">Priority:</label>
-                            <select name="priority" onChange={onChange}>
-                                <option value="low">Low</option>
-                                <option value="medium">Medium</option>
-                                <option value="high">High</option>
-                                <option value="escalate">Escalate</option>
+                            <select name="priority" onChange={onChange} >
+                            <option value={priorityList[0]} disabled>{priorityList[0]}</option>
+                                {priorityList.map((priority, index) => 
+                                    <option
+                                        key = {"new_ticket_priority_list_option" + index}
+                                        value={priority}
+
+                                    >{priority} </option>)
+                                }
                             </select>
 
 
@@ -106,9 +109,11 @@ const CreateTicketPage = (props) => {
                         <div className="ticket_form__oneside">
 
                             {/* Ticket Owner */}
+
+
                             
                             <label htmlFor="assignedTo">Assigned To:</label>
-                            <input type="text" name="assignedTo" onChange={onChange}></input> 
+                            <input type="text" name="assignedTo" defaultValue={user.fullName} readOnly></input> 
 
 
                             {/* Resolution */}
@@ -118,11 +123,11 @@ const CreateTicketPage = (props) => {
                             {/* Status */}
                             <label htmlFor="status">Status:</label>
                             <select name="status" onChange={onChange}>
-                                <option value="new" selected disabled>{statusList.currentStatus}</option>
+                                <option value={statusList.currentStatus} disabled>{statusList.currentStatus}</option>
                                 {statusList.statusListArray.map((status, index) => 
                                     <option
                                         key = {"new_ticket_status_list_option" + index}
-                                        value="user"
+                                        value={status}
 
                                     >{status} </option>)
                                 }

@@ -4,7 +4,8 @@ import Modal from 'react-modal';
 
 //Contexts
 import { OpenTicketContext} from '../../context/OpenTicketContext';
-import { StatusListContext } from '../../context/StatusListContext'
+import { StatusListContext } from '../../context/StatusListContext';
+import { PriorityListContext} from '../../context/PriorityListContext'
 
 //Services
 import {getTicketById, closeTicket} from '../../../services/TicketService'
@@ -26,6 +27,8 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
     //throughout the user session.
     const [statusList] = useContext(StatusListContext);
 
+    const [priorityList] = useContext(PriorityListContext);
+
     //We only want a save button to appear if the user change something. So we need
     //a reference to the old ticket data to compare to the current one.
     //We want to try to limit the number of API calls if possible.
@@ -35,18 +38,18 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
 
     const [ticketInfo, setTicketInfo] = useState({
-        ticketNumber: null,
-        subject: null,
-        description: null,
-        resolution: null,
-        priority: null,
-        dateCreated: null,
-        dateClosed: null,
-        lastModified: null,
-        ticketNotes: null,
-        responses: null,
-        status: null,
-        assignedTo: null
+        // ticketNumber: null,
+        // subject: null,
+        // description: null,
+        // resolution: null,
+        // priority: null,
+        // dateCreated: null,
+        // dateClosed: null,
+        // lastModified: null,
+        // ticketNotes: null,
+        // responses: null,
+        // status: null,
+        // assignedTo: null
 
     })
 
@@ -143,9 +146,11 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                     <label htmlFor="ticketNumber">Ticket Number: {ticketInfo.ticketNumber}</label>
                                 </div>
 
+                                
+
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="assignedTo">Assigned To:</label>
-                                    <input name="assignedTo" value={ticketInfo.assignedTo} onChange={onChange}/>
+                                    <input name="assignedTo" value={ticketInfo.assignedTo || ''} onChange={onChange}/>
                                 </div>
 
 
@@ -155,7 +160,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                 <label htmlFor="subject">Subject:</label>
                                 </div>
                             
-                                <input type="text" name="subject" value={ticketInfo.subject} onChange={onChange}></input>
+                                <input type="text" name="subject" value={ticketInfo.subject || ''} onChange={onChange}></input>
                                 
 
                             </div>
@@ -165,7 +170,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="status">Status:</label>
                                     <select name="status" onChange={onChange}>
-                                            <option value={ticketInfo.status} disabled selected>{ticketInfo.status}</option>
+                                            <option value={ticketInfo.status} disabled>{ticketInfo.status}</option>
                                             {statusList.statusListArray.map((status, index) => 
                                             <option
                                                 key = {"status_list_option" + index}
@@ -179,10 +184,14 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="priority">Priority:</label>
                                     <select name="priority" onChange={onChange}>
-                                            <option value="" disabled selected>{ticketInfo.priority}</option>
+                                            <option value="" disabled>{ticketInfo.priority}</option>
+                                            {priorityList.map((priority, index) => 
+                                            <option
+                                                key = {"priority_list_option" + index}
+                                                value={priority}
 
-                                            <option value="user">user</option>
-                                            <option value="admin">admin</option>
+                                            >{priority} </option>)
+                                            }
                                     </select>
                                 </div>
 

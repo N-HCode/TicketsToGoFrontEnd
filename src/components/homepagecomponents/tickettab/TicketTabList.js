@@ -56,7 +56,8 @@ const TicketTabList = ({openTicketModal}) => {
             >
 
                 {/* <div id="ticket_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}> */}
-                    {ticketTabListState.map((tab,i) => <SingleTicketTab 
+                    {ticketTabListState.map((tab,i) => <SingleTicketTab
+                    key={"ticket_tab_"+ i} 
                     keynumber={i} 
                     deleteTab={deleteTab}
                     middleMouseDeleteTab={middleMouseDeleteTab}
