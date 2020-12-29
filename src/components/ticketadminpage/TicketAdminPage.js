@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import InformationScreen from './components/InformationScreen';
+import {StatusListContext} from '../context/StatusListContext';
+import {PriorityListContext} from '../context/PriorityListContext';
 
 const TicketAdminPage = () => {
+
+    const [statusList] = useContext(StatusListContext);
+
+    const [priorityList] = useContext(PriorityListContext);
 
 
     return (
@@ -12,9 +18,9 @@ const TicketAdminPage = () => {
                     <div className="ticket_admin_content">
 
                         
-                    <InformationScreen />
+                    <InformationScreen title={"Statuses"} data={statusList.statusListArray}/>
 
-                    <InformationScreen />
+                    <InformationScreen title={"Priorities"} data={priorityList}/>
 
 
                     </div>

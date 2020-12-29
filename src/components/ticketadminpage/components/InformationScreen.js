@@ -1,13 +1,39 @@
 import React from 'react'
 
-const InformationScreen = () => {
+const InformationScreen = ({title, data}) => {
 
 
 
     return (
-        <div>
-            <div>Title</div>
-            <div>Data</div>
+        <div className="Information_screen_container">
+            <div className="info_title">{title}</div>
+            <div className="info_data">
+                <table>
+                    <tbody>
+                    {
+
+                    
+                        data.map((currentData, index) => 
+                            
+                            <tr>
+                               
+                                <td><div>{currentData}</div></td>
+                            </tr>
+
+
+                        )
+
+
+                    }
+
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
             <div></div>
 
             
