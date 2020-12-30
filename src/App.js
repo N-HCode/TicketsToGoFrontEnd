@@ -96,7 +96,6 @@ class App extends React.Component {
 
               <Route exact path={this.paths.editUser} component={EditUserPage} />
               <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
-
               <Route exact path={this.paths.login} component={LoginPage} />
               <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
               <Route exact path={this.paths.userList} component={UserList} />

@@ -39,6 +39,7 @@ const AdminPage = () => {
 
         //if object has no keys then it most likely is empty and the context
         //was not updated properly
+     
         if (Object.keys(organization).length !== 0) {
    
             updateToCurrentUsers();

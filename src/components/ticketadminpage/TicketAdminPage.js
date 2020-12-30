@@ -3,11 +3,15 @@ import InformationScreen from './components/InformationScreen';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
 
+
 const TicketAdminPage = () => {
 
+    
     const [statusList] = useContext(StatusListContext);
 
     const [priorityList] = useContext(PriorityListContext);
+
+
 
 
     return (
