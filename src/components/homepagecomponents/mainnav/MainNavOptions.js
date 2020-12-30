@@ -58,7 +58,7 @@ const MainNavOptions = () => {
                     <NavLink to="/admin" className="dropdown_menu_item" onClick={closeMenu}>Organization List</NavLink>
                     <NavLink to="/" className="dropdown_menu_item" onClick={closeMenu}>Home</NavLink>
                     <NavLink to="/login" className="dropdown_menu_item" onClick={logOut}>Log out</NavLink>
-                    <NavLink to="/ticketadmin" className="dropdown_menu_item" onClick={logOut}>Ticket Admin</NavLink>
+                    <NavLink to="/ticketadmin" className="dropdown_menu_item" onClick={closeMenu}>Ticket Admin</NavLink>
                     
 
                 </div>
