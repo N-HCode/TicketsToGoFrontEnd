@@ -6,7 +6,14 @@ const InformationScreen = ({title, data}) => {
 
     return (
         <div className="information_screen_container">
-            <div className="info_title">{title}</div>
+            <div className="info_title">{title}
+            
+                <span>
+                    <i className="material-icons">remove</i>
+                    <i className="material-icons">add</i>
+                </span>
+
+            </div>
             <div className="info_data">
                 {/* <table>
                     <tbody>

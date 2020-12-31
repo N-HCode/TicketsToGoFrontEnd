@@ -8,9 +8,22 @@
     .info_title{
         box-sizing: border-box;
         background-color: $primaryHeaderBGColor2;
-        font-size: 1.3em;
+        font-size: 1.2em;
         width: 100%;
         padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span{
+            display: flex;
+            align-items: center;
+        }
+
+        i{
+            align-items: center;
+            font-size: .9em;
+        }
     
     }
 
