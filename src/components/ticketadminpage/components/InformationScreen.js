@@ -1,12 +1,35 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 
 const InformationScreen = ({title, data}) => {
+
+
+    const currentlyActive = useRef();
+
+    const onDataClick = (e) => {
+
+        if (currentlyActive.current != undefined) {
+            currentlyActive.current.classList.remove("active");
+        }
+        
+        currentlyActive.current = e.currentTarget;
+        e.currentTarget.classList.add("active");
+
+    
+
+    }
 
 
 
     return (
         <div className="information_screen_container">
-            <div className="info_title">{title}</div>
+            <div className="info_title">{title}
+            
+                <span>
+                    <i className="material-icons">remove</i>
+                    <i className="material-icons">add</i>
+                </span>
+
+            </div>
             <div className="info_data">
                 {/* <table>
                     <tbody>
@@ -39,7 +62,7 @@ const InformationScreen = ({title, data}) => {
                     
                     data.map((currentData, index) => 
                         
-                        <li key ={title +"_data_" + index}>
+                        <li key ={title +"_data_" + index} onClick={onDataClick}>
                         
                             <div>{currentData}</div>
                         </li>
