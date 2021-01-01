@@ -49,6 +49,7 @@
 
         li{
             padding: 5px;
+            cursor: pointer;
         }
 
         li:nth-child(odd){
@@ -59,6 +60,15 @@
         li:nth-child(even){
             background-color: $secondaryPHBGColor;
 
+        }
+
+        .active {
+            filter: brightness(1.3);
+        }
+
+        &:active{
+
+            
         }
 
 

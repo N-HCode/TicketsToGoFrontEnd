@@ -1,6 +1,22 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 
 const InformationScreen = ({title, data}) => {
+
+
+    const currentlyActive = useRef();
+
+    const onDataClick = (e) => {
+
+        if (currentlyActive.current != undefined) {
+            currentlyActive.current.classList.remove("active");
+        }
+        
+        currentlyActive.current = e.currentTarget;
+        e.currentTarget.classList.add("active");
+
+    
+
+    }
 
 
 
@@ -46,7 +62,7 @@ const InformationScreen = ({title, data}) => {
                     
                     data.map((currentData, index) => 
                         
-                        <li key ={title +"_data_" + index}>
+                        <li key ={title +"_data_" + index} onClick={onDataClick}>
                         
                             <div>{currentData}</div>
                         </li>
