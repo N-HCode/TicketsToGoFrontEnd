@@ -24,7 +24,11 @@ const checkPassword = (userId, password) => {
 
 const checkUsername = (username) => {
     return axios.get(`http://localhost:8080/user/checkusername?username=${username}`);
+}
+
+const deleteUser = (userId) => {
+    return axios.delete(`http://localhost:8080/user/${userId}`);
 
 }
 
-export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername};
+export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};

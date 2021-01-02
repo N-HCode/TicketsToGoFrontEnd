@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Modal from 'react-modal';
-import {editUser, checkUsername} from '../../../services/UserService';
+import {editUser, checkUsername, deleteUser} from '../../../services/UserService';
 import {ERROR, ERRORACTIONS} from '../../constants/Error'
 import ErrorComponent from '../../constants/ErrorComponent'
 
@@ -95,6 +95,7 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
 
         try {
             await editUser(user.userId, userState);
+            // this functions updates the table so that it has the latest data.
             updateToCurrentUsers();
             currentEditUser.current = userState;
             alert("Success")
@@ -112,10 +113,30 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
         
     }
 
-    const deleteUser = () => {
+    const deletingUser = async () => {
 
         if (window.confirm("Would you like to delete the user?")) {
-            
+            if(user.userRole.toLowerCase != "root"){
+
+                try {
+
+                    await deleteUser(user.userId);
+
+                    //This functions updates the table so that it has the latest data.
+                    //Needs to update the table as we are deleting a user.
+                    updateToCurrentUsers();
+
+                    //This closes the Modal. Do not need the Modal if the user is deleted.
+                    cancelEditUser();
+                    
+                } catch (error) {
+                    alert(error);
+                }
+
+
+
+
+            }
         }
 
     }
@@ -219,7 +240,7 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                 <button onClick={check}>Check</button>
                 <div>
                 <button onClick={close}>Close</button>
-                {userState.userRole.toLowerCase() !== "root" &&
+                {user.userRole.toLowerCase() !== "root" &&
                      <button onClick={changingInfo}> {changeInfo? "Cancel" : "Edit"}</button>
                 }
                 <button>Reset Password</button>
@@ -230,7 +251,10 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
                     <button type="submit" form="edit_form" >Save</button>
                 }
 
-                <button onClick={deleteUser}>Delete</button>
+                {/* We are making it so the delete button doesnt show up for the root user */}
+                {user.userRole.toLowerCase() !== "root" &&
+                    <button onClick={deletingUser}>Delete</button>
+                }    
                 </div>
 
             </div>

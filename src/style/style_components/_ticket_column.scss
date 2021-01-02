@@ -1,8 +1,6 @@
 #ticket_columns_container{
 
     margin-top: 20px;
-    
-   
 
     #ticket_column_list{     
         display: flex;
@@ -20,6 +18,8 @@
         //when we rotate 180 for the scrollbar, we rotate the elements too
         //we have to rotate them back.
         transform:rotateX(180deg);
+        display: flex;
+        flex-direction: column;
         
         .column_title{
             
@@ -80,7 +80,7 @@
             width: 275px;
             background-color: $secondaryBackgroundColor;
             padding: 10px;
-            height: auto;
+            flex: 1;
         }
 
     }
