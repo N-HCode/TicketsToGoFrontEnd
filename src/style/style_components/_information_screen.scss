@@ -50,6 +50,12 @@
         li{
             padding: 5px;
             cursor: pointer;
+
+            
+            &:active{
+
+                animation: navClick 250ms;
+            }
         }
 
         li:nth-child(odd){
@@ -66,10 +72,6 @@
             filter: brightness(1.3);
         }
 
-        &:active{
-
-            
-        }
 
 
         // tr, td{

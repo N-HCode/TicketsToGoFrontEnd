@@ -126,7 +126,7 @@ class App extends React.Component {
                   <TicketColumnsContextProvider>
                     <TicketProvider>
                       {/* {Navbar component to navigate} */}
-                      <Navbar/>
+                      {/* <Navbar/> */}
                       
                       
                       {/* TicketTabContext to hold the ticket tabs*/}

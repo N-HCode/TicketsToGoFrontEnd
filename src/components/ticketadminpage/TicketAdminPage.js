@@ -2,14 +2,84 @@ import React, {useContext} from 'react';
 import InformationScreen from './components/InformationScreen';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
+import {OrganizationContext} from '../context/OrganizationContext'
+import { addAStatus, removeAStatus } from '../../services/StatusListService';
+import { addAPriority, removeAPriority} from '../../services/PriorityListService'
 
 
 const TicketAdminPage = () => {
 
     
-    const [statusList] = useContext(StatusListContext);
+    const [statusList, setStatusList] = useContext(StatusListContext);
 
-    const [priorityList] = useContext(PriorityListContext);
+    const [priorityList, setPriorityList] = useContext(PriorityListContext);
+
+    const [organization] = useContext(OrganizationContext);
+
+
+    const saveToStatusList = async (status) => {
+        try {
+            await addAStatus(organization.statusListId, status);
+
+            const newStatusList = statusList.statusListArray.slice(0);
+            newStatusList.push(status);
+            setStatusList({
+                ...statusList,
+                statusListArray: newStatusList
+            });
+            
+        } catch (error) {
+            alert(error);
+        }
+
+    }
+
+    const removeFromStatusList = async (index,status) => {
+        try {
+            await removeAStatus(organization.statusListId, status);
+
+            const newStatusList = statusList.statusListArray.slice(0);
+            newStatusList.splice(index, 1);
+            setStatusList({
+                ...statusList,
+                statusListArray: newStatusList
+            });
+            
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    const saveToPriorityList = async (priority) => {
+        try {
+            await addAPriority(organization.priorityListId, priority);
+
+            const newPriorityList = priorityList.slice(0);
+            newPriorityList.push(priority);
+            setPriorityList(newPriorityList);
+            
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    const removeFromPriorityList = async ( index,priority) => {
+
+        console.log(priority);
+
+        try {
+            const response = await removeAPriority(organization.priorityListId, priority);
+            console.log(response);
+
+            const newPriorityList = priorityList.slice(0);
+            newPriorityList.splice(index, 1);
+            setPriorityList(newPriorityList);
+            
+        } catch (error) {
+            alert(error);
+        }
+
+    }
 
 
 
@@ -22,10 +92,16 @@ const TicketAdminPage = () => {
                     <div className="ticket_admin_content">
 
                         
-                    <InformationScreen title={"Statuses"} data={statusList.statusListArray}/>
+                    <InformationScreen title={"Statuses"} 
+                    data={statusList.statusListArray}
+                    add={saveToStatusList}
+                    remove={removeFromStatusList}
+                    />
 
-                    <InformationScreen title={"Priorities"} data={priorityList}/>
-
+                    <InformationScreen title={"Priorities"} 
+                    data={priorityList}
+                    add={saveToPriorityList}
+                    remove={removeFromPriorityList} />                       
 
                     </div>
 
