@@ -13,8 +13,7 @@ const TicketColumnList = ({openTicketModal}) => {
 
     const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
 
-    var container;
-
+    var container
     const AddNewColumn = () => {
 
         

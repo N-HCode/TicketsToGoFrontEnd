@@ -7,7 +7,7 @@ const PrimaryNavTabs = () => {
     //and possibly the name of the tab
     const [addState, setAddState] = useState(true);
     const [deleteState, setDeleteState] = useState(0);
-    const [navTabListState, setNavTabList] = useState(["YO", "YOYO", "hello"]);
+    const [navTabListState, setNavTabList] = useState([]);
     var container;
     const addNewPrimaryTab = () => {
         //The setState will only re-render if a new object is setted.
@@ -79,27 +79,35 @@ const PrimaryNavTabs = () => {
  
     
     return(
+        <div id="primary_tab">
 
-        <div id="primary_tab__tab_container">
 
-            <div id="primary_tab__horizontal_scroll_container" 
-            ref={elements}
-            // onWheel={mouseWheelScroll}
-            >
-                {navTabListState.map((tab,i) => 
-                <SingleTab 
-                key={"primary_tab_"+i}
-                deleteTab={deleteTab}
-                middleMouseDeleteTab = {middleMouseDeleteTab}
-                title = {navTabListState[i]}
-                /> )}
-            </div>
+            <div id="primary_tab__tab_container">
+
+                <div id="primary_tab__horizontal_scroll_container" 
+                ref={elements}
+                // onWheel={mouseWheelScroll}
+                >
+                    {navTabListState.map((tab,i) => 
+                    <SingleTab 
+                    key={"primary_tab_"+i}
+                    deleteTab={deleteTab}
+                    middleMouseDeleteTab = {middleMouseDeleteTab}
+                    title = {navTabListState[i]}
+                    /> )}
+                </div>
+                
             
-        
-            <i className="material-icons" onClick={addNewPrimaryTab} >add</i>
-        
+                <i className="material-icons" onClick={addNewPrimaryTab} >add</i>
+            
 
-        </div>
+            </div>
+
+            <div className="tab_line"></div>
+
+        </div>        
+
+
 
     );
 

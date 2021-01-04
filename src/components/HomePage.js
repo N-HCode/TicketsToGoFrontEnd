@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
-import TemplateDropdown from './homepagecomponents/tickettemplateoptions/TemplateDropdown';
-import CurrentTemplateOptions from './homepagecomponents/tickettemplateoptions/CurrentTemplateOptions';
-import TicketTabList from './homepagecomponents/tickettab/TicketTabList';
-import TicketColumnList from './homepagecomponents/ticketcolumns/TicketColumnList';
-import TicketInfo from './homepagecomponents/ticketinfo/TicketInfo';
-
+import TicketTemplateContainer from './homepagecomponents/tickettemplatecontainer/TicketTemplateContainer'
 
 
 
@@ -23,7 +18,7 @@ const HomePage = () => {
     const closeTicketModal = () => {
         setTicketIsOpen(false);
     }
-    //useRef to store the ticket that was clicked on so we can pass it down to the Modal
+
 
     //need the const to create the function
 
@@ -35,20 +30,27 @@ const HomePage = () => {
 
 
             {/* primary tab bar */}
-            <div id="primary_tab">
+            {/* <div id="primary_tab"> */}
 
 
                 <PrimaryNavTabs />
 
 
-                <div className="tab_line"></div>
-            </div>
+                {/* <div className="tab_line"></div>
+            </div> */}
+
+
+            <TicketTemplateContainer 
+                ticketIsOpen={ticketIsOpen}
+                openTicketModal={openTicketModal}
+                closeTicketModal={closeTicketModal}
+            />
             
 
 
-            {/* Whole container for ticket template */}
-            <div id="template_container">
-                {/* template selection */}
+            {/* Whole container for ticket template }
+            <div className="template_container">
+                {/* template selection }
                 <div className="template_options">
                    
                     
@@ -58,22 +60,22 @@ const HomePage = () => {
 
                 </div>
 
-                {/* tab line */}
+                {/* tab line }
                 <div className="tab_line"></div>
 
-                {/* ticket tabs */}
+                {/* ticket tabs }
                 < TicketTabList openTicketModal={openTicketModal}/>
 
-                {/* Ticket column container */}
+                {/* Ticket column container }
 
-                <button onClick={openTicketModal}>Change</button>
+                {/* <button onClick={openTicketModal}>Change</button> }
 
                 <TicketColumnList openTicketModal={openTicketModal}/>
 
                 {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
 
                 
-            </div>
+            </div> */}
 
             {/* Footer if needed*/}
             <div id="footer">

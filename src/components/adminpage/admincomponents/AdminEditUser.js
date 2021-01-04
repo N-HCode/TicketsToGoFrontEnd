@@ -74,9 +74,6 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
         }  
     }, [userState])
 
-    const check = () => {
-        // console.log(oldArray);
-    }
 
     const save = async (e) => {
         e.preventDefault();
@@ -237,7 +234,7 @@ const AdminEditUser = ({currentEditUser, editingUser, cancelEditUser, updateToCu
 
 
 
-                <button onClick={check}>Check</button>
+                {/* <button onClick={check}>Check</button> */}
                 <div>
                 <button onClick={close}>Close</button>
                 {user.userRole.toLowerCase() !== "root" &&

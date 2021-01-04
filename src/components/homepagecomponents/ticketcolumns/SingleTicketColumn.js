@@ -68,13 +68,13 @@ const SinglePrimaryTab = (props) => {
 
     }
 
-    const deleteColumn = (index) => {
-        console.log(index);
+    const deleteColumn = (index) => {        
+        // console.log(index);
         let newList = ticketColumnListState.slice(0);
-        console.log(newList);
+        // console.log(newList);
         newList.splice(index,1);
         setticketColumnList(newList);
-      
+       
     }
 
     const createTicketpage = () => {
