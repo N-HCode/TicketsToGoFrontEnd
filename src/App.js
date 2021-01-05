@@ -20,9 +20,13 @@ import EditUserPage from './components/user/EditUserPage';
 // Context for User
 import { UserProvider } from './components/context/UserContext';
 // Context for Organization
-import { OrganizationProvider } from './components/context/OrganizationContext'
+import { OrganizationProvider } from './components/context/OrganizationContext';
+
+// Context for Primary Nav
+import { PrimaryNavSelectedProvider } from './components/context/PrimaryNavSelectedContext'
+
 // Context for Tickets
-import { TicketProvider} from './components/context/TicketContext'
+import { TicketProvider} from './components/context/TicketContext';
 
 // Context for TicketTab
 import { TicketTabContextProvider } from './components/context/TicketTabContext';
@@ -120,6 +124,7 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
+          <PrimaryNavSelectedProvider>
             <OpenTicketContextProvider>
               <StatusListProvider>
                 <PriorityListProvider>
@@ -151,6 +156,7 @@ class App extends React.Component {
                   </PriorityListProvider>
                 </StatusListProvider>
               </OpenTicketContextProvider>
+              </PrimaryNavSelectedProvider>
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>

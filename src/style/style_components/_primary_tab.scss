@@ -33,6 +33,10 @@
             @include popUpAnimation();
         }
 
+        .active{
+            filter: brightness(1.25);
+        }
+
         .primary_tab__singletab{
             //have to make the display flex in order to align
             //the text to the middle. There is a ton of other

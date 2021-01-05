@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
-import TicketTemplateContainer from './homepagecomponents/tickettemplatecontainer/TicketTemplateContainer'
+import TicketTemplateContainer from './homepagecomponents/tickettemplatecontainer/TicketTemplateContainer';
+import { PrimaryNavSelectedContext } from './context/PrimaryNavSelectedContext';
 
 
 
 const HomePage = () => {
 
     const [ticketIsOpen, setTicketIsOpen] = useState(false);
+
+    const [primaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
 
 
     //Modal functions to open and close.
@@ -39,14 +42,14 @@ const HomePage = () => {
                 {/* <div className="tab_line"></div>
             </div> */}
 
+            {primaryNavSelectedContext.array.length > 0 
+            && 
+            primaryNavSelectedContext.index < primaryNavSelectedContext.array.length
+            &&
+            primaryNavSelectedContext.array[primaryNavSelectedContext.index]
+            }
 
-            <TicketTemplateContainer 
-                ticketIsOpen={ticketIsOpen}
-                openTicketModal={openTicketModal}
-                closeTicketModal={closeTicketModal}
-            />
-            
-
+    
 
             {/* Whole container for ticket template }
             <div className="template_container">
