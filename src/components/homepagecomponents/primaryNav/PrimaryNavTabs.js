@@ -1,40 +1,52 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import SingleTab from './SinglePrimaryTab';
+import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
+import TicketTemplateContainer  from '../tickettemplatecontainer/TicketTemplateContainer';
 
 const PrimaryNavTabs = () => {
+
+    const [primaryNavSelectedContext, setPrimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
     const [addState, setAddState] = useState(true);
-    const [deleteState, setDeleteState] = useState(0);
     const [navTabListState, setNavTabList] = useState([]);
-    var container;
+   
     const addNewPrimaryTab = () => {
         //The setState will only re-render if a new object is setted.
         //Thus we have to create a new array from the old one.
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
+
+        const selectedIndex = primaryNavSelectedContext.array.length;
+        primaryNavSelectedContext.array.push(<TicketTemplateContainer/>)
+
+        setPrimaryNavSelectedContext({
+            ...primaryNavSelectedContext,
+            index: selectedIndex
+        })
+
         let newTabList = navTabListState.slice(0);
         newTabList.push("New Tab");
         setAddState(!addState);
         setNavTabList( newTabList);
-     
+  
     }
-    const animateTimeout = 50;
-    let currentAddState = useRef(addState);
-    let currentDeleteState = useRef(deleteState);
-    let elements = useRef();
-    useEffect(() =>{
-        if(addState != currentAddState.current){
-            var length = elements.current.children.length;
-            var lastElement = elements.current.children[length-1];
-            setTimeout(
-                () => lastElement.classList.remove("animate_singletab"),
-                animateTimeout
-            )
 
-            currentAddState.current = addState;
-        }       
+    
+ 
+    const elements = useRef();
+    const oldActiveTab = useRef();
+    useEffect(() =>{
+    
+
+        elements.current.children[oldActiveTab.current]?.classList.remove("active");
+        oldActiveTab.current = primaryNavSelectedContext.index;
+        //We need the ? because by default, the index is -1. Which is make an undefined.
+        //The ? will make it so this code only happens if the object is not null/undefined.
+        elements.current.children[primaryNavSelectedContext.index]?.classList.add("active");
+
+
      
     },[navTabListState])
 
@@ -66,16 +78,46 @@ const PrimaryNavTabs = () => {
     }
 
     const deleteTab = (index) => {     
+
+            // console.log(index === primaryNavSelectedContext.index);
+            // console.log(primaryNavSelectedContext.array.length -1);
+
+            //We need this logic here as the user can delete tabs that is
+            //below the current active index, the active index, or a tab above the active index
+            const selectedIndex = (index === primaryNavSelectedContext.index?
+                index < primaryNavSelectedContext.array.length -1?
+                    index
+                    :
+                    index -1
+                :
+                index < primaryNavSelectedContext.index?
+                    primaryNavSelectedContext.index -1
+                    :
+                    primaryNavSelectedContext.index)
+
+
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
+            //We do this because we would like the components to rerender whenever the user deletes
+            //a tab. And React will only rerender if there is a change in the state.
+            primaryNavSelectedContext.array.splice(index, 1);
+            const newArray = primaryNavSelectedContext.array.slice(0);
+
+            setPrimaryNavSelectedContext({
+                index: selectedIndex,
+                array: newArray
+            })
+
             let newTabList = navTabListState.slice(0);
             newTabList.splice(index, 1);
             setNavTabList( newTabList );
 
     }
 
-    
+    const onPrimaryTabClick = (index) => {
+
+    }
  
     
     return(
@@ -90,9 +132,11 @@ const PrimaryNavTabs = () => {
                 >
                     {navTabListState.map((tab,i) => 
                     <SingleTab 
+                    index = {i}
                     key={"primary_tab_"+i}
                     deleteTab={deleteTab}
                     middleMouseDeleteTab = {middleMouseDeleteTab}
+                    onPrimaryTabClick = {onPrimaryTabClick}
                     title = {navTabListState[i]}
                     /> )}
                 </div>
