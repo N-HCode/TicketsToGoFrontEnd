@@ -10,7 +10,7 @@ const SinglePrimaryTab = (props) => {
             onClick = {() => props.onPrimaryTabClick(props.index)}
             onMouseDown={(e) => props.middleMouseDeleteTab(e,props.index)}>
             <p>{props.title}</p>
-            <i className="material-icons" onClick={() => props.deleteTab(props.index)}>close</i>
+            <i className="material-icons" onClick={(e) => props.deleteTab(e,props.index)}>close</i>
         </div>
     );
 

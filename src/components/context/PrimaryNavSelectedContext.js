@@ -6,7 +6,13 @@ const PrimaryNavSelectedProvider = (props) => {
     const [ PrimaryNavSelected, setPrimaryNavSelected] = useState(
         {
             index: -1,
-            array: []
+            array: [
+                // type: COMPONENTTYPENUMBER.TicketTemplateContainer,
+                // state: {
+                //     selectedTemplate: "",
+                //     columns: []
+                // }
+            ]
         }
 
 
