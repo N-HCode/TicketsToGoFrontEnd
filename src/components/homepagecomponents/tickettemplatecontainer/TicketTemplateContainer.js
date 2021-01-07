@@ -1,18 +1,75 @@
-import React from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import TemplateDropdown from '../tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from '../tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from '../tickettab/TicketTabList';
 import TicketColumnList from '../ticketcolumns/TicketColumnList';
 import TicketInfo from '../ticketinfo/TicketInfo';
+import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
 
-const TicketTemplateContainer = ({ticketIsOpen, openTicketModal, closeTicketModal}) => {
+const TicketTemplateContainer = () => {
+
+    
+    const [primaryNavSelectedContext, setprimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+    const selectedIndex = primaryNavSelectedContext.index;
+
+
+    const [ticketIsOpen, setTicketIsOpen] = useState(false);
+
+    const [state, setState] = useState(primaryNavSelectedContext.array[selectedIndex].state);
+
+    // state: {
+    //     selectedTemplate: "",
+    //     columns: []
+    // }
+
+
+    //Modal functions to open and close.
+
+
+    useEffect(() => {
+        primaryNavSelectedContext.array[selectedIndex].state = state;
+        const newArray = primaryNavSelectedContext.array.slice(0);
+        setprimaryNavSelectedContext({
+            ...primaryNavSelectedContext,
+            array: newArray
+        })
+
+
+    }, [state])
+
+    useEffect(() => {
+        setState(primaryNavSelectedContext.array[selectedIndex].state);
+    }, [primaryNavSelectedContext])
+
+
+    const onTemplateChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const openTicketModal = () => {
+        setTicketIsOpen(true);
+    }
+
+    const closeTicketModal = () => {
+        setTicketIsOpen(false);
+    }
+
+
     return (
-            <div className="template_container">
+            <div className="template_container"
+               
+            
+            >
+
+         
                 {/* template options selection */}
                 <div className="template_options">
                    
                     
-                    <TemplateDropdown/>
+                    <TemplateDropdown selectedIndex={selectedIndex} onTemplateChange={onTemplateChange}/>
                     <CurrentTemplateOptions/>
 
                 </div>
@@ -27,7 +84,7 @@ const TicketTemplateContainer = ({ticketIsOpen, openTicketModal, closeTicketModa
 
                 {/* <button onClick={openTicketModal}>Change</button> */}
 
-                <TicketColumnList openTicketModal={openTicketModal}/>
+                <TicketColumnList selectedIndex={selectedIndex} state={state} setState={setState} openTicketModal={openTicketModal}/>
 
                 {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
 

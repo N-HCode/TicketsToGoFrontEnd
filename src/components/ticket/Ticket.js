@@ -3,26 +3,37 @@ import { Link } from 'react-router-dom';
 import {TicketTabContext} from '../context/TicketTabContext';
 import { TicketContext } from '../context/TicketContext';
 import { OpenTicketContext} from '../context/OpenTicketContext';
+import { PrimaryNavSelectedContext } from '../context/PrimaryNavSelectedContext';
 
 // The Component for the display of each individual ticket on the ticketList
 // Props is used to hold data and carry it down
 const Ticket = (props) => {
+
+    const [primaryNavSelectedContext, setPrimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+    const ticketTabState = primaryNavSelectedContext.array[primaryNavSelectedContext.index]
+
     // deconstructing props
     const ticket = props.ticket;
 
     const [ tickets ] = useContext(TicketContext);
     const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
     const [openTicketState, setOpenTicketState] = useContext(OpenTicketContext);
+
+
     //This is the state of whether or not the item is being dragged.
     //We will use this to style the object when it is dragged based on its state.
 
     const addTicketTabAndOpenModal = () => {
         
         //We only want 1 ticket tab for each ticket. So we check if the ticket number is NOT included
-        if (!ticketTabListState.includes(ticket.ticketNumber)) {
-            let newTicketTabList = ticketTabListState.slice(0);
-            newTicketTabList.push(ticket.ticketNumber);
-            setTicketTabListState(newTicketTabList);
+        if (!ticketTabState.state.ticketTab.includes(ticket.ticketNumber)) {
+            ticketTabState.state.ticketTab.push(ticket.ticketNumber);
+            const newState = primaryNavSelectedContext.array.slice(0);
+            setPrimaryNavSelectedContext({
+                ...primaryNavSelectedContext,
+                array: newState
+
+            })
         }
 
         setOpenTicketState(ticket.ticketNumber);

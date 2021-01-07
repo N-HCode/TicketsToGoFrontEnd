@@ -17,7 +17,7 @@ const SingleTicketTab = (props) => {
         onMouseDown={(e) => props.middleMouseDeleteTab(e,props.keynumber)}
         onClick={() => onClick()}>
             <p>Ticket#{props.ticketNumber}</p>
-            <i className="material-icons" onClick={() => props.deleteTab(props.keynumber)}>close</i>
+            <i className="material-icons" onClick={(e) => props.deleteTab(e,props.keynumber)}>close</i>
         </div>
 
     );

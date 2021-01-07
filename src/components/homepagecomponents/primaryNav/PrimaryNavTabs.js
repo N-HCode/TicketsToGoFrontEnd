@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import SingleTab from './SinglePrimaryTab';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
-import TicketTemplateContainer  from '../tickettemplatecontainer/TicketTemplateContainer';
+import { COMPONENTTYPENUMBER } from '../../constants/Components';
 
 const PrimaryNavTabs = () => {
 
@@ -19,7 +19,19 @@ const PrimaryNavTabs = () => {
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
 
         const selectedIndex = primaryNavSelectedContext.array.length;
-        primaryNavSelectedContext.array.push(<TicketTemplateContainer/>)
+
+        primaryNavSelectedContext.array.push(
+            {
+                type: COMPONENTTYPENUMBER.TicketTemplateContainer,
+                tabTitle: "",
+                state: {
+                    selectedTemplate: "New Tab",
+                    ticketTab:[],
+                    columns: []
+                }
+            }
+
+        )
 
         setPrimaryNavSelectedContext({
             ...primaryNavSelectedContext,
@@ -39,15 +51,12 @@ const PrimaryNavTabs = () => {
     const oldActiveTab = useRef();
     useEffect(() =>{
     
-
         elements.current.children[oldActiveTab.current]?.classList.remove("active");
         oldActiveTab.current = primaryNavSelectedContext.index;
         //We need the ? because by default, the index is -1. Which is make an undefined.
         //The ? will make it so this code only happens if the object is not null/undefined.
         elements.current.children[primaryNavSelectedContext.index]?.classList.add("active");
 
-
-     
     },[navTabListState])
 
 
@@ -72,12 +81,14 @@ const PrimaryNavTabs = () => {
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
             e.preventDefault();
-            deleteTab(index);
+            deleteTab(e,index);
         }
 
     }
 
-    const deleteTab = (index) => {     
+    const deleteTab = (e, index) => {
+            //Since the Delete icon is in a div that is also clickable. We need it to stop from Propagating
+            e.stopPropagation();
 
             // console.log(index === primaryNavSelectedContext.index);
             // console.log(primaryNavSelectedContext.array.length -1);
@@ -109,13 +120,26 @@ const PrimaryNavTabs = () => {
                 array: newArray
             })
 
+        
+
             let newTabList = navTabListState.slice(0);
             newTabList.splice(index, 1);
             setNavTabList( newTabList );
 
+
+
     }
 
     const onPrimaryTabClick = (index) => {
+
+        setPrimaryNavSelectedContext({
+            ...primaryNavSelectedContext,
+            index: index,
+        })
+
+        let newTabList = navTabListState.slice(0);
+        setNavTabList( newTabList );
+
 
     }
  
@@ -130,14 +154,14 @@ const PrimaryNavTabs = () => {
                 ref={elements}
                 // onWheel={mouseWheelScroll}
                 >
-                    {navTabListState.map((tab,i) => 
+                    {primaryNavSelectedContext.array.map((tab,i) => 
                     <SingleTab 
                     index = {i}
                     key={"primary_tab_"+i}
                     deleteTab={deleteTab}
                     middleMouseDeleteTab = {middleMouseDeleteTab}
                     onPrimaryTabClick = {onPrimaryTabClick}
-                    title = {navTabListState[i]}
+                    title = {primaryNavSelectedContext.array[i].state.selectedTemplate}
                     /> )}
                 </div>
                 

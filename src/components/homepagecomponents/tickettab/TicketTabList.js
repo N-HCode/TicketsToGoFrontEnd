@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import SingleTicketTab from './SingleTicketTab';
 import {TicketTabContext} from '../../context/TicketTabContext';
+import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
 
 
 const TicketTabList = ({openTicketModal}) => {
+
+    const [primaryNavSelectedContext,setPrimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+    const ticketTabState = primaryNavSelectedContext.array[primaryNavSelectedContext.index]
 
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
@@ -16,21 +20,25 @@ const TicketTabList = ({openTicketModal}) => {
         //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/button
         if (e.button == 1) {
             e.preventDefault();
-            deleteTab(index);
+            deleteTab(e,index);
         }
 
     }
 
-    const deleteTab = (index) => {     
+    const deleteTab = (e,index) => {     
+            e.stopPropagation()
             //splice can remove at a specific index. 2nd parameter is number of elements to remove.
             //The splice() method returns an array with the deleted items. So the splice changes
             //the original array and just returns the leftover.
-            console.log(index);
 
+            ticketTabState.state.ticketTab.splice(index, 1);
+            const newState = primaryNavSelectedContext.array.slice(0);
+            setPrimaryNavSelectedContext({
+                ...primaryNavSelectedContext,
+                array: newState
 
-            let newTicketTabList = ticketTabListState.slice(0);
-            newTicketTabList.splice(index, 1);
-            setTicketTabList( newTicketTabList );
+            })
+
 
 
     }
@@ -56,12 +64,12 @@ const TicketTabList = ({openTicketModal}) => {
             >
 
                 {/* <div id="ticket_tab__horizontal_scroll_container" onWheel={(e) => mouseWheelScroll(e)}> */}
-                    {ticketTabListState.map((tab,i) => <SingleTicketTab
+                    {ticketTabState.state.ticketTab.map((tab,i) => <SingleTicketTab
                     key={"ticket_tab_"+ i} 
                     keynumber={i} 
                     deleteTab={deleteTab}
                     middleMouseDeleteTab={middleMouseDeleteTab}
-                    ticketNumber={ticketTabListState[i]}
+                    ticketNumber={tab}
                     openTicketModal={openTicketModal}
                     /> )}
 
