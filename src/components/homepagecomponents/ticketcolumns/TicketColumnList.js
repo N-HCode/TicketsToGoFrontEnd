@@ -3,17 +3,18 @@ import SingleTicketColumn from './SingleTicketColumn';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 
-
-
 //https://github.com/willmcpo/body-scroll-lock#readme
 
 
 
-const TicketColumnList = ({openTicketModal}) => {
+const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
 
-    const [ticketColumnListState, setticketColumnList] = useContext(TicketColumnsContext);
+    // state: {
+    //     selectedTemplate: "",
+    //     ticketTab:[],
+    //     columns: []
+    // }
 
-    var container
     const AddNewColumn = () => {
 
         
@@ -21,12 +22,17 @@ const TicketColumnList = ({openTicketModal}) => {
         // Thus we have to create a new array from the old one.
         // one way to do this is to use the .slice(0)
         // https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
-        let newColumnList = ticketColumnListState.slice(0);
+        let newColumnList = state.columns.slice(0);
         newColumnList.push({
-            title: "new",
+            title: "New",
             isEdit: false
+
         });
-        setticketColumnList( newColumnList );
+
+        setState({
+            ...state,
+            columns: newColumnList
+        });
 
      
     }
@@ -48,10 +54,6 @@ const TicketColumnList = ({openTicketModal}) => {
 
 
 
-
-
-
-
     return(
         <div id="ticket_columns_container">
 
@@ -65,10 +67,18 @@ const TicketColumnList = ({openTicketModal}) => {
                 // onWheel={(e) => mouseWheelScroll(e)}  
             >
 
-                {ticketColumnListState.map((ticketColumn, index) => <SingleTicketColumn
-                    key = {"single_ticket_column_" + index}
+                {state.columns.map((columnData, index) => <SingleTicketColumn
+                    //Need that Random number, so that each can have a unique key when it deletes
+                    //Key is used to identify the multiple components. If two component have the same key,
+                    //There may be some overlap in component-level state information.
+                    //This is important if the components can be deleted as another component can get
+                    //the key of a previously deleted component.
+                    key = {"single_ticket_column"+ index + "_pri_nav_" + selectedIndex + "random_" + Math.random()*10000000}
+                    selectedIndex={selectedIndex}
+                    state = {state}
+                    setState = {setState}
                     keyIndex = {index}
-                    ticketColumn={ticketColumn}
+                    columnData ={columnData}
                     openTicketModal={openTicketModal}
 
                 /> )

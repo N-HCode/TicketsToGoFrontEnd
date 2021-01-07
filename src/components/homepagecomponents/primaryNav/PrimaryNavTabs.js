@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import SingleTab from './SinglePrimaryTab';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
-import { COMPONENTTYPENUMBER } from '../../constants/Components'
+import { COMPONENTTYPENUMBER } from '../../constants/Components';
 
 const PrimaryNavTabs = () => {
 
@@ -23,8 +23,10 @@ const PrimaryNavTabs = () => {
         primaryNavSelectedContext.array.push(
             {
                 type: COMPONENTTYPENUMBER.TicketTemplateContainer,
+                tabTitle: "",
                 state: {
-                    selectedTemplate: "",
+                    selectedTemplate: "New Tab",
+                    ticketTab:[],
                     columns: []
                 }
             }
@@ -152,14 +154,14 @@ const PrimaryNavTabs = () => {
                 ref={elements}
                 // onWheel={mouseWheelScroll}
                 >
-                    {navTabListState.map((tab,i) => 
+                    {primaryNavSelectedContext.array.map((tab,i) => 
                     <SingleTab 
                     index = {i}
                     key={"primary_tab_"+i}
                     deleteTab={deleteTab}
                     middleMouseDeleteTab = {middleMouseDeleteTab}
                     onPrimaryTabClick = {onPrimaryTabClick}
-                    title = {navTabListState[i]}
+                    title = {primaryNavSelectedContext.array[i].state.selectedTemplate}
                     /> )}
                 </div>
                 

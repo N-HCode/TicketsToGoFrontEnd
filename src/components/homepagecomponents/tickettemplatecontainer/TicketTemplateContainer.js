@@ -4,12 +4,12 @@ import CurrentTemplateOptions from '../tickettemplateoptions/CurrentTemplateOpti
 import TicketTabList from '../tickettab/TicketTabList';
 import TicketColumnList from '../ticketcolumns/TicketColumnList';
 import TicketInfo from '../ticketinfo/TicketInfo';
-import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext'
+import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
 
 const TicketTemplateContainer = () => {
 
     
-    const [primaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+    const [primaryNavSelectedContext, setprimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
     const selectedIndex = primaryNavSelectedContext.index;
 
 
@@ -26,13 +26,15 @@ const TicketTemplateContainer = () => {
     //Modal functions to open and close.
 
 
-    const Check =() => {
-        console.log(primaryNavSelectedContext)
-
-    }
-
     useEffect(() => {
         primaryNavSelectedContext.array[selectedIndex].state = state;
+        const newArray = primaryNavSelectedContext.array.slice(0);
+        setprimaryNavSelectedContext({
+            ...primaryNavSelectedContext,
+            array: newArray
+        })
+
+
     }, [state])
 
     useEffect(() => {
@@ -62,12 +64,12 @@ const TicketTemplateContainer = () => {
             
             >
 
-                <button onClick={Check}>check</button>
+         
                 {/* template options selection */}
                 <div className="template_options">
                    
                     
-                    <TemplateDropdown state={state} onTemplateChange={onTemplateChange}/>
+                    <TemplateDropdown selectedIndex={selectedIndex} onTemplateChange={onTemplateChange}/>
                     <CurrentTemplateOptions/>
 
                 </div>
@@ -82,7 +84,7 @@ const TicketTemplateContainer = () => {
 
                 {/* <button onClick={openTicketModal}>Change</button> */}
 
-                <TicketColumnList openTicketModal={openTicketModal}/>
+                <TicketColumnList selectedIndex={selectedIndex} state={state} setState={setState} openTicketModal={openTicketModal}/>
 
                 {ticketIsOpen && <TicketInfo ticketIsOpen={ticketIsOpen} closeTicketModal={closeTicketModal}/>}
 
