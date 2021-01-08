@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import SingleTab from './SinglePrimaryTab';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 import { COMPONENTTYPENUMBER } from '../../constants/Components';
+
 
 const PrimaryNavTabs = () => {
 
     const [primaryNavSelectedContext, setPrimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
-
+    const [ticketColumnsContext] = useContext(TicketColumnsContext);
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
     const [addState, setAddState] = useState(true);
@@ -25,7 +27,7 @@ const PrimaryNavTabs = () => {
                 type: COMPONENTTYPENUMBER.TicketTemplateContainer,
                 tabTitle: "",
                 state: {
-                    selectedTemplate: "New Tab",
+                    selectedTemplate: 0,
                     ticketTab:[],
                     columns: []
                 }
@@ -161,7 +163,7 @@ const PrimaryNavTabs = () => {
                     deleteTab={deleteTab}
                     middleMouseDeleteTab = {middleMouseDeleteTab}
                     onPrimaryTabClick = {onPrimaryTabClick}
-                    title = {primaryNavSelectedContext.array[i].state.selectedTemplate}
+                    title = {ticketColumnsContext[primaryNavSelectedContext.array[i].state.selectedTemplate].templateName}
                     /> )}
                 </div>
                 

@@ -1,6 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
+import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
 
 const CurrentTemplateOptions = () => {
+
+    const [ticketColumnsContext] = useContext(TicketColumnsContext);
+    const [primaryNavSelectedContext, setprimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+
+    const onSaveClick = () => {
+
+
+    }
 
 
     return (
@@ -8,6 +18,7 @@ const CurrentTemplateOptions = () => {
             <div>
                 <i className="material-icons">settings</i>
                 <i className="material-icons">people</i>
+                <i className="material-icons" onClick={onSaveClick}>save</i>
             </div>
 
             <i className="material-icons">delete_forever</i>
