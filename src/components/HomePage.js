@@ -13,9 +13,6 @@ const HomePage = () => {
 
     //need the const to create the function
 
-    useEffect(() => {
-        console.log(PRIMARYCOMPONENTS[primaryNavSelectedContext.array[primaryNavSelectedContext.index]?.type])
-    }, [])
 
     return (
         //Looks like there isn't a standard for naming html/css ids and classNamees.
