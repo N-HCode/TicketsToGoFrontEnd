@@ -5,12 +5,15 @@ import TicketTabList from '../tickettab/TicketTabList';
 import TicketColumnList from '../ticketcolumns/TicketColumnList';
 import TicketInfo from '../ticketinfo/TicketInfo';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 const TicketTemplateContainer = () => {
 
     
     const [primaryNavSelectedContext, setprimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
     const selectedIndex = primaryNavSelectedContext.index;
+
+    const ticketColumnsContext = useContext(TicketColumnsContext);
 
 
     const [ticketIsOpen, setTicketIsOpen] = useState(false);

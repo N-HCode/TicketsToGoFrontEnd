@@ -9,6 +9,9 @@ import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 
 const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
 
+    const ticketColumnsContext = useContext(TicketColumnsContext)
+    
+
     // state: {
     //     selectedTemplate: "",
     //     ticketTab:[],
@@ -26,8 +29,8 @@ const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
         newColumnList.push({
             title: "New",
             isEdit: false
-
         });
+
 
         setState({
             ...state,
