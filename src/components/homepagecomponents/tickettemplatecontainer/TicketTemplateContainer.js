@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import TemplateDropdown from '../tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from '../tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from '../tickettab/TicketTabList';
@@ -14,7 +14,6 @@ const TicketTemplateContainer = () => {
     const selectedIndex = primaryNavSelectedContext.index;
 
     const ticketColumnsContext = useContext(TicketColumnsContext);
-
 
     const [ticketIsOpen, setTicketIsOpen] = useState(false);
 
@@ -50,6 +49,7 @@ const TicketTemplateContainer = () => {
             ...state,
             [e.target.name] : e.target.selectedIndex
         })
+
     }
 
     const openTicketModal = () => {
@@ -61,13 +61,12 @@ const TicketTemplateContainer = () => {
     }
 
 
-    return (
-            <div className="template_container"
-               
-            
-            >
 
-         
+
+    return (
+            <div className="template_container" >
+
+       
                 {/* template options selection */}
                 <div className="template_options">
                    
