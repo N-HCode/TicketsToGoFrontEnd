@@ -3,11 +3,13 @@ import TicketList from '../../ticket/TicketList';
 import { TicketContext } from '../../context/TicketContext';
 import {StatusListContext} from '../../context/StatusListContext';
 import { useHistory } from "react-router-dom";
+import {TicketColumnsContext} from '../../context/TicketColumnsContext'
 
-const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, openTicketModal}) => {
+const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openTicketModal, templateIndex}) => {
 
     const [ tickets ] = useContext(TicketContext);
     const [statusList, setStatusList] = useContext(StatusListContext);
+    const [ticketColumnsContext, setTicketColumnsContext] = useContext(TicketColumnsContext);
 
     const history = useHistory();
     
@@ -17,33 +19,29 @@ const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, 
     //this is used on the pencil icon to edit the title of the
     //columns
     const editTitle = () => {
-
+ 
         //This will make it so the code will only write when the title is different from the current
         //title and that the edit button is pressed after the input is done.
-        if (columnData.isEdit) {
+        if (columnState.isEdit) {
+            console.log("HERERE " + newTitle.current.value)
 
-
-                const newColumns = state.columns.slice(0);
-                newColumns[keyIndex].title = newTitle.current.value;
-                newColumns[keyIndex].isEdit = false;
-                setState({
-                    ...state,
-                    columns: newColumns
-                })
+                columnState.title = newTitle.current.value;
+                columnState.isEdit = false;
+                const newTemplateContext = ticketColumnsContext.slice(0);
+                setTicketColumnsContext(
+                    newTemplateContext
+                )
                 
     
 
             
    
         }else{
-
-            
-            const newColumns = state.columns.slice(0);
-            newColumns[keyIndex].isEdit = true;
-            setState({
-                ...state,
-                columns: newColumns
-            })
+            columnState.isEdit = true;
+            const newTemplateContext = ticketColumnsContext.slice(0);
+            setTicketColumnsContext(
+                newTemplateContext
+            )
         }
         
     }
@@ -60,7 +58,7 @@ const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, 
   
         card.style.opacity = '1';
         e.target.appendChild(card);
-        tickets[e.dataTransfer.getData('ticket_index')].status = state.columns[keyIndex].title;
+        tickets[e.dataTransfer.getData('ticket_index')].status = columnState.title;
 
        
     }
@@ -72,20 +70,20 @@ const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, 
 
     const deleteColumn = (index) => {        
         // console.log(index);
-        const newColumns = state.columns.slice(0);
+
+        ticketColumnsContext[templateIndex].columnStates.splice(index,1);
+        const newTemplateState = ticketColumnsContext.slice(0);
         // console.log(newList);
-        newColumns.splice(index,1);
-        setState({
-            ...state,
-            columns: newColumns
-        })
+        setTicketColumnsContext(
+            newTemplateState
+        )
        
     }
 
     const createTicketpage = () => {
         setStatusList({
             ...statusList,
-            currentStatus: columnData.title
+            currentStatus: columnState.title
         })
 
         history.push("/createTicket")
@@ -101,20 +99,20 @@ const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, 
                     onClick={editTitle} >edit</i>
                 
  
-                {columnData.isEdit ?
+                {columnState.isEdit ?
                     //We want an uncontrolled input field so that it does not keep filtering tickets
                     //or make API calls whenever we type a character.
                     <input 
                     // pass in the ref here so we can reference it later
                         ref={newTitle}
-                        defaultValue={columnData.title}
+                        defaultValue={columnState.title}
                         maxLength="15">
                     </input>
                      : 
-                    <p>{columnData.title}</p>
+                    <p>{columnState.title}</p>
                 }
 
-                {columnData.isEdit ? 
+                {columnState.isEdit ? 
                     <i className="material-icons" onClick={() => deleteColumn(keyIndex)}> delete_outline</i>
             
                     :
@@ -135,8 +133,8 @@ const SinglePrimaryTab = ({selectedIndex,state, setState, keyIndex, columnData, 
                     tickets.length > 0 && 
                         <TicketList 
                         key={"ticket_list_"+ keyIndex +"_column_" + keyIndex + "pri_nav" + selectedIndex}
-                        status={columnData.title}
-                        ticketList={ tickets.filter( ticket => ticket.status == columnData.title) }
+                        status={columnState.title}
+                        ticketList={ tickets.filter( ticket => ticket.status == columnState.title) }
                         openTicketModal={openTicketModal}
                     />
                     

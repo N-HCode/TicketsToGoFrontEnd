@@ -11,7 +11,6 @@ const PrimaryNavTabs = () => {
     const [ticketColumnsContext] = useContext(TicketColumnsContext);
     //This is the state for the list. This will tell how much tabs there are
     //and possibly the name of the tab
-    const [addState, setAddState] = useState(true);
     const [navTabListState, setNavTabList] = useState([]);
    
     const addNewPrimaryTab = () => {
@@ -29,7 +28,6 @@ const PrimaryNavTabs = () => {
                 state: {
                     selectedTemplate: 0,
                     ticketTab:[],
-                    columns: []
                 }
             }
 
@@ -40,10 +38,6 @@ const PrimaryNavTabs = () => {
             index: selectedIndex
         })
 
-        let newTabList = navTabListState.slice(0);
-        newTabList.push("New Tab");
-        setAddState(!addState);
-        setNavTabList( newTabList);
   
     }
 
@@ -123,11 +117,9 @@ const PrimaryNavTabs = () => {
             })
 
         
-
             let newTabList = navTabListState.slice(0);
             newTabList.splice(index, 1);
             setNavTabList( newTabList );
-
 
 
     }
@@ -163,7 +155,9 @@ const PrimaryNavTabs = () => {
                     deleteTab={deleteTab}
                     middleMouseDeleteTab = {middleMouseDeleteTab}
                     onPrimaryTabClick = {onPrimaryTabClick}
-                    title = {ticketColumnsContext[primaryNavSelectedContext.array[i].state.selectedTemplate].templateName}
+                    title = {
+                        ticketColumnsContext[primaryNavSelectedContext.array[i].state.selectedTemplate].templateName
+                    }
                     /> )}
                 </div>
                 
