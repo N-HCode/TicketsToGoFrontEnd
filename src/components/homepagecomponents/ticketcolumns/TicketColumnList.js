@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext} from 'react';
 import SingleTicketColumn from './SingleTicketColumn';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
@@ -11,11 +11,6 @@ const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
     const [ticketColumnsContext, setTicketColumnsContext] = useContext(TicketColumnsContext);
     const [primaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
     const templateIndex = primaryNavSelectedContext.array[selectedIndex].state.selectedTemplate
-
-
-    useEffect(() => {
-        console.log("TESGBNISGDBNISD")
-    }, [ticketColumnsContext]);
 
     const AddNewColumn = () => {
 
