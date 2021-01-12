@@ -69,11 +69,9 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     }
 
     const deleteColumn = (index) => {        
-        // console.log(index);
 
         ticketColumnsContext[templateIndex].columnStates.splice(index,1);
         const newTemplateState = ticketColumnsContext.slice(0);
-        // console.log(newList);
         setTicketColumnsContext(
             newTemplateState
         )
