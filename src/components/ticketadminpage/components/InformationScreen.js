@@ -45,7 +45,6 @@ const InformationScreen = ({title, data, add, remove}) => {
             <div className="info_title">{title}
             
                 <span>
-                    {/* <i className="material-icons" onClick={onRemoveBtnClick}>remove</i> */}
                     <i className="material-icons" onClick={onAddBtnClick}>add</i>
                 </span>
 

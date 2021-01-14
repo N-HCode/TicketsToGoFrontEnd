@@ -84,7 +84,7 @@ const TicketTemplateContainer = () => {
 
                 {/* Ticket column container */}
 
-                {/* <button onClick={openTicketModal}>Change</button> */}
+  
 
                 <TicketColumnList selectedIndex={selectedIndex} state={state} setState={setState} openTicketModal={openTicketModal}/>
 
