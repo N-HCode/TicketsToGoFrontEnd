@@ -1,7 +1,20 @@
 import axios from 'axios';
 
+//There is an "auth" parameter for Basic Auth:
+//https://github.com/axios/axios
+
 const loginUser = (username, password) => {
-    return axios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`)
+    return axios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`,{},
+    {
+
+        auth: {
+            username: username,
+            password: password
+        }
+    }
+    
+    
+    )
 }
 
 const signUp = (user) => {
