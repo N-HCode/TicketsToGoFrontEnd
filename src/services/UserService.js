@@ -3,17 +3,22 @@ import axios from 'axios';
 //There is an "auth" parameter for Basic Auth:
 //https://github.com/axios/axios
 
+const loginAPI = () => {
+    return axios.post(`http://localhost:8080/login`,{},
+
+    )
+    
+}
+
 const loginUser = (username, password) => {
     return axios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`,{},
-    {
+        {
 
-        auth: {
-            username: username,
-            password: password
+            auth: {
+                username: username,
+                password: password
+            }
         }
-    }
-    
-    
     )
 }
 
@@ -44,4 +49,4 @@ const deleteUser = (userId) => {
 
 }
 
-export  { loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};
+export  { loginAPI, loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};

@@ -1,7 +1,8 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TicketTemplateContainer from './homepagecomponents/tickettemplatecontainer/TicketTemplateContainer';
 import { PrimaryNavSelectedContext } from './context/PrimaryNavSelectedContext';
+import {loginAPI} from '../services/UserService'
 // import {PRIMARYCOMPONENTS} from './constants/Components';
 
 
@@ -14,6 +15,8 @@ const HomePage = () => {
     //need the const to create the function
 
 
+
+
     return (
         //Looks like there isn't a standard for naming html/css ids and classNamees.
         //https://stackoverflow.com/questions/6028211/what-is-the-standard-naming-convention-for-html-css-ids-and-classNamees
@@ -21,6 +24,8 @@ const HomePage = () => {
 
             {/* primary tab bar */}
             {/* <div id="primary_tab"> */}
+
+        
 
 
             <PrimaryNavTabs/>
