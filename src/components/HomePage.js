@@ -1,7 +1,9 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useContext} from 'react';
 import PrimaryNavTabs from './homepagecomponents/primaryNav/PrimaryNavTabs';
 import TicketTemplateContainer from './homepagecomponents/tickettemplatecontainer/TicketTemplateContainer';
 import { PrimaryNavSelectedContext } from './context/PrimaryNavSelectedContext';
+import {loginAPI} from '../services/UserService'
+import axios from 'axios';
 // import {PRIMARYCOMPONENTS} from './constants/Components';
 
 
@@ -21,6 +23,7 @@ const HomePage = () => {
 
             {/* primary tab bar */}
             {/* <div id="primary_tab"> */}
+
 
 
             <PrimaryNavTabs/>
