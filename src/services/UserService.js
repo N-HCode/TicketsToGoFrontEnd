@@ -1,4 +1,5 @@
 import axios from 'axios';
+import customAxios from "./config/AxiosConfig"
 
 //There is an "auth" parameter for Basic Auth:
 //https://github.com/axios/axios
