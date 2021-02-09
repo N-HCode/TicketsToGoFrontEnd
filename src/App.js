@@ -49,7 +49,13 @@ import AdminPage from './components/adminpage/AdminPage';
 
 import TicketAdminPage from './components/ticketadminpage/TicketAdminPage';
 
-import { createOrganization } from './services/OrganizationService';
+// import { createOrganization } from './services/OrganizationService';
+
+//importing the paths constants
+import {PATHS} from './routing/Paths'
+
+//Protected Routing
+import ProtectedRoute from './routing/ProtectedRoute';
 
 
 
@@ -67,17 +73,6 @@ class App extends React.Component {
       
   }
 
-  paths = {
-    editUser: "/editUser",
-    createTicket: "/createTicket",
-    login: "/login",
-    createOrganization: "/createOrganization",
-    userList: "/users",
-    myAccount: "/myaccount",
-    home: "/",
-    adminPage: "/admin",
-    ticketAdminPage: "/ticketadmin"
-  }
 
   //the state of the program. This will usually hold data that are constantly
   //changing. We need a state to temporarily keep data that need to be referred
@@ -92,24 +87,27 @@ class App extends React.Component {
 
 
     return(
-      <div>
+  
+            <div>
        
-              {window.location.pathname.toLocaleLowerCase() === this.paths.login.toLocaleLowerCase() ||
-              window.location.pathname.toLocaleLowerCase() === this.paths.createOrganization.toLocaleLowerCase()
+              {window.location.pathname.toLocaleLowerCase() === PATHS.login.toLocaleLowerCase() ||
+              window.location.pathname.toLocaleLowerCase() === PATHS.createOrganization.toLocaleLowerCase()
               ? null : <MainNavBar/>}
 
-              <Route exact path={this.paths.editUser} component={EditUserPage} />
-              <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
-              <Route exact path={this.paths.login} component={LoginPage} />
-              <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
-              <Route exact path={this.paths.userList} component={UserList} />
-              <Route exact path={this.paths.myAccount} component={MyAccountPage} />
-              <Route exact path={this.paths.home} component={HomePage} />
-              <Route exact path={this.paths.adminPage} component={AdminPage} />
-              <Route exact path={this.paths.ticketAdminPage} component={TicketAdminPage} />
+              <Switch>
 
-
-      </div>
+              <Route exact path={PATHS.editUser} component={EditUserPage} />
+              <Route exact path={PATHS.createTicket} component={CreateTicketPage} />
+              <Route exact path={PATHS.login} component={LoginPage} />
+              <Route exact path={PATHS.createOrganization} component={CreateOrganization} />
+              <Route exact path={PATHS.userList} component={UserList} />
+              <Route exact path={PATHS.myAccount} component={MyAccountPage} />
+              <ProtectedRoute exact path={PATHS.home} component={HomePage} />
+              <Route exact path={PATHS.adminPage} component={AdminPage} />
+              <Route exact path={PATHS.ticketAdminPage} component={TicketAdminPage} />
+              <ProtectedRoute component={() => {return "404 not foundFFDSFDSFDSFDSFDSFSDFSDFDSFSDFD"}}/>
+              </Switch>
+            </div>
     )
   }
 
@@ -137,17 +135,12 @@ class App extends React.Component {
                       {/* TicketTabContext to hold the ticket tabs*/}
                       <TicketTabContextProvider>
 
-                        {/* {creating a switch to swap out the component to show when on different pages} */}
-                        <Switch>
-                          {/* {pages and the component assgined to them} */}
-                          
-                          <Route component={this.RouteWithNav}/>
-
-
-                          {/* {a redirect for anypage not listed above} */}
-                          <Redirect from= "/" to="/" /> 
-                        </Switch>
                         
+                        {/* {creating a switch to swap out the component to show when on different pages} */}
+                          
+                          {/* {pages and the component assgined to them} */}
+                  
+                          <Route component={this.RouteWithNav}/>
 
                       </TicketTabContextProvider>
                       
