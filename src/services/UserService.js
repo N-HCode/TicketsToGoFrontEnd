@@ -1,4 +1,5 @@
 import axios from 'axios';
+import customAxios from "./config/AxiosConfig"
 
 //There is an "auth" parameter for Basic Auth:
 //https://github.com/axios/axios
@@ -7,10 +8,9 @@ const loginAPI = (username, passsword) => {
     
     //For spring security form login or we need to use 'application/x-www-form-urlencoded'
     //axios is smart enough when you use a string it will have the content type.
-    return axios.post(`http://localhost:8080/login`, `username=${username}&password=${passsword}`,
+    return customAxios.post(`http://localhost:8080/login`, `username=${username}&password=${passsword}`,
         {
             //This with Credentials will allow us to get the cookie and session ID and use it for our request
-            withCredentials: true,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -20,7 +20,7 @@ const loginAPI = (username, passsword) => {
 }
 
 const loginUser = (username, password) => {
-    return axios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`,{},
+    return customAxios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`,{},
         {
 
             auth: {

@@ -49,7 +49,16 @@ import AdminPage from './components/adminpage/AdminPage';
 
 import TicketAdminPage from './components/ticketadminpage/TicketAdminPage';
 
-import { createOrganization } from './services/OrganizationService';
+// import { createOrganization } from './services/OrganizationService';
+
+//importing the paths constants
+import {PATHS, NoNavPATHS} from './routing/Paths'
+
+//Protected Routing
+import ProtectedRoute from './routing/ProtectedRoute';
+
+//Error page
+import ErrorPage from './components/error/ErrorPage'
 
 
 
@@ -67,17 +76,6 @@ class App extends React.Component {
       
   }
 
-  paths = {
-    editUser: "/editUser",
-    createTicket: "/createTicket",
-    login: "/login",
-    createOrganization: "/createOrganization",
-    userList: "/users",
-    myAccount: "/myaccount",
-    home: "/",
-    adminPage: "/admin",
-    ticketAdminPage: "/ticketadmin"
-  }
 
   //the state of the program. This will usually hold data that are constantly
   //changing. We need a state to temporarily keep data that need to be referred
@@ -89,27 +87,29 @@ class App extends React.Component {
   //this is the function section.
   RouteWithNav = () => {
 
-
-
     return(
-      <div>
-       
-              {window.location.pathname.toLocaleLowerCase() === this.paths.login.toLocaleLowerCase() ||
-              window.location.pathname.toLocaleLowerCase() === this.paths.createOrganization.toLocaleLowerCase()
-              ? null : <MainNavBar/>}
+  
+            <div>
+              {/* The Object.value returns an array of all the values of the object */}
+              {/* This makes it so that the Nav only show on certain paths */}
+              {Object.values(PATHS).includes(window.location.pathname.toLocaleLowerCase())? <MainNavBar/> : null}
 
-              <Route exact path={this.paths.editUser} component={EditUserPage} />
-              <Route exact path={this.paths.createTicket} component={CreateTicketPage} />
-              <Route exact path={this.paths.login} component={LoginPage} />
-              <Route exact path={this.paths.createOrganization} component={CreateOrganization} />
-              <Route exact path={this.paths.userList} component={UserList} />
-              <Route exact path={this.paths.myAccount} component={MyAccountPage} />
-              <Route exact path={this.paths.home} component={HomePage} />
-              <Route exact path={this.paths.adminPage} component={AdminPage} />
-              <Route exact path={this.paths.ticketAdminPage} component={TicketAdminPage} />
+              <Switch>
+                {/* Path with no Nav. Put it in a seperate object for easy Nav logic */}
+                <Route exact path={NoNavPATHS.login} component={LoginPage} />
+                <Route exact path={NoNavPATHS.createOrganization} component={CreateOrganization} />
 
-
-      </div>
+                {/* Paths with Main Nav bar */}
+                <ProtectedRoute exact path={PATHS.editUser} component={EditUserPage} />
+                <ProtectedRoute exact path={PATHS.createTicket} component={CreateTicketPage} />
+                <ProtectedRoute exact path={PATHS.userList} component={UserList} />
+                <ProtectedRoute exact path={PATHS.myAccount} component={MyAccountPage} />
+                <ProtectedRoute exact path={PATHS.home} component={HomePage} />
+                <ProtectedRoute exact path={PATHS.adminPage} component={AdminPage} />
+                <ProtectedRoute exact path={PATHS.ticketAdminPage} component={TicketAdminPage} />
+                <ProtectedRoute component={ErrorPage}/>
+              </Switch>
+            </div>
     )
   }
 
@@ -137,17 +137,12 @@ class App extends React.Component {
                       {/* TicketTabContext to hold the ticket tabs*/}
                       <TicketTabContextProvider>
 
-                        {/* {creating a switch to swap out the component to show when on different pages} */}
-                        <Switch>
-                          {/* {pages and the component assgined to them} */}
-                          
-                          <Route component={this.RouteWithNav}/>
-
-
-                          {/* {a redirect for anypage not listed above} */}
-                          <Redirect from= "/" to="/" /> 
-                        </Switch>
                         
+                        {/* {creating a switch to swap out the component to show when on different pages} */}
+                          
+                          {/* {pages and the component assgined to them} */}
+                  
+                          <Route component={this.RouteWithNav}/>
 
                       </TicketTabContextProvider>
                       
