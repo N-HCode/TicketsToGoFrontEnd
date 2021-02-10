@@ -1,11 +1,16 @@
-export const PATHS = {
-    editUser: "/editUser",
-    createTicket: "/createTicket",
-    login: "/login",
-    createOrganization: "/createOrganization",
+const PATHS = {
+    editUser: "/edituser",
+    createTicket: "/createticket",
     userList: "/users",
     myAccount: "/myaccount",
     home: "/",
     adminPage: "/admin",
     ticketAdminPage: "/ticketadmin"
 }
+
+const NoNavPATHS = {
+    login: "/login",
+    createOrganization: "/createorganization",
+}
+
+export {PATHS, NoNavPATHS}

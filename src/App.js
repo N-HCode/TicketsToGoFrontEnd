@@ -52,10 +52,13 @@ import TicketAdminPage from './components/ticketadminpage/TicketAdminPage';
 // import { createOrganization } from './services/OrganizationService';
 
 //importing the paths constants
-import {PATHS} from './routing/Paths'
+import {PATHS, NoNavPATHS} from './routing/Paths'
 
 //Protected Routing
 import ProtectedRoute from './routing/ProtectedRoute';
+
+//Error page
+import ErrorPage from './components/error/ErrorPage'
 
 
 
@@ -84,28 +87,27 @@ class App extends React.Component {
   //this is the function section.
   RouteWithNav = () => {
 
-
-
     return(
   
             <div>
-       
-              {window.location.pathname.toLocaleLowerCase() === PATHS.login.toLocaleLowerCase() ||
-              window.location.pathname.toLocaleLowerCase() === PATHS.createOrganization.toLocaleLowerCase()
-              ? null : <MainNavBar/>}
+              {/* The Object.value returns an array of all the values of the object */}
+              {/* This makes it so that the Nav only show on certain paths */}
+              {Object.values(PATHS).includes(window.location.pathname.toLocaleLowerCase())? <MainNavBar/> : null}
 
               <Switch>
+                {/* Path with no Nav. Put it in a seperate object for easy Nav logic */}
+                <Route exact path={NoNavPATHS.login} component={LoginPage} />
+                <Route exact path={NoNavPATHS.createOrganization} component={CreateOrganization} />
 
-              <Route exact path={PATHS.editUser} component={EditUserPage} />
-              <Route exact path={PATHS.createTicket} component={CreateTicketPage} />
-              <Route exact path={PATHS.login} component={LoginPage} />
-              <Route exact path={PATHS.createOrganization} component={CreateOrganization} />
-              <Route exact path={PATHS.userList} component={UserList} />
-              <Route exact path={PATHS.myAccount} component={MyAccountPage} />
-              <ProtectedRoute exact path={PATHS.home} component={HomePage} />
-              <Route exact path={PATHS.adminPage} component={AdminPage} />
-              <Route exact path={PATHS.ticketAdminPage} component={TicketAdminPage} />
-              <ProtectedRoute component={() => {return "404 not foundFFDSFDSFDSFDSFDSFSDFSDFDSFSDFD"}}/>
+                {/* Paths with Main Nav bar */}
+                <ProtectedRoute exact path={PATHS.editUser} component={EditUserPage} />
+                <ProtectedRoute exact path={PATHS.createTicket} component={CreateTicketPage} />
+                <ProtectedRoute exact path={PATHS.userList} component={UserList} />
+                <ProtectedRoute exact path={PATHS.myAccount} component={MyAccountPage} />
+                <ProtectedRoute exact path={PATHS.home} component={HomePage} />
+                <ProtectedRoute exact path={PATHS.adminPage} component={AdminPage} />
+                <ProtectedRoute exact path={PATHS.ticketAdminPage} component={TicketAdminPage} />
+                <ProtectedRoute component={ErrorPage}/>
               </Switch>
             </div>
     )
