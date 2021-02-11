@@ -15,7 +15,8 @@ import { PriorityListContext } from '../context/PriorityListContext';
 
 //Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
-import ErrorComponent from '../constants/ErrorComponent'
+import ErrorComponent from '../constants/ErrorComponent';
+import Auth from '../../routing/Auth';
 
 //"set HTTPS=true&&react-scripts start"
 
@@ -61,6 +62,8 @@ const LoginPage = (props) => {
                 username: "",
                 password: ""
             })
+
+            Auth.login();
 
             try {
 
