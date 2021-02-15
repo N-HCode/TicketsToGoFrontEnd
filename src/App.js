@@ -1,11 +1,10 @@
 import React from 'react';
 // The Router library used to navigate the site
-import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 // Components for Tickets
 import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
 import CreateTicketPage from './components/ticket/CreateTicketPage';
 import MainNavBar from './components/homepagecomponents/mainnav/MainNavBar'
 

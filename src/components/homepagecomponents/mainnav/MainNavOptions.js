@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { TicketContext } from '../../context/TicketContext';
 import { OrganizationContext} from '../../context/OrganizationContext';
+import Auth from '../../../routing/Auth';
 
 
 const MainNavOptions = () => {
@@ -17,6 +18,7 @@ const MainNavOptions = () => {
         setUser({});
         setTickets({});
         setOrganization({});
+        Auth.logout();
         
     }
 
