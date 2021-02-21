@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 //Services
-import { loginUser } from '../../services/UserService';
+import { loginAPI } from '../../services/UserService';
 import { getAllStatus } from '../../services/StatusListService';
 import { getAllPriorities} from '../../services/PriorityListService';
 
@@ -56,25 +56,21 @@ const LoginPage = (props) => {
        
         try {
 
-            const response = await loginUser(userLogin.username, userLogin.password);
 
-            setUserLogin({
-                username: "",
-                password: ""
-            })
+            await loginAPI(userLogin.username, userLogin.password)
 
             Auth.login();
 
             try {
 
-                const statusListResponse = await getAllStatus(response.data.organization.statusListId)
+                // const statusListResponse = await getAllStatus(response.data.organization.statusListId)
 
-                setStatusList({
-                    ...statusList,
-                    statusListArray:statusListResponse.data});
+                // setStatusList({
+                //     ...statusList,
+                //     statusListArray:statusListResponse.data});
 
-                const priorityListReponse = await getAllPriorities(response.data.organization.priorityListId);
-                setPriorityList(priorityListReponse.data);
+                // const priorityListReponse = await getAllPriorities(response.data.organization.priorityListId);
+                // setPriorityList(priorityListReponse.data);
                 
             } catch (error) {
 
@@ -87,17 +83,22 @@ const LoginPage = (props) => {
                 
             }
 
-            const { tickets, ...rest} = response.data.user;
+            setUserLogin({
+                username: "",
+                password: ""
+            })
 
-            setUser( 
-                rest,
-            )
-            setOrganization(
-                response.data.organization
-            )
-            setTickets(
-                response.data.user.tickets
-            )
+            // const { tickets, ...rest} = response.data.user;
+
+            // setUser( 
+            //     rest,
+            // )
+            // setOrganization(
+            //     response.data.organization
+            // )
+            // setTickets(
+            //     response.data.user.tickets
+            // )
 
 
 
@@ -114,6 +115,11 @@ const LoginPage = (props) => {
         } catch (e) {
             //error will have the response property so you can get the status code from that.
             // console.log(error.response.status);
+
+            setUserLogin({
+                username: "",
+                password: ""
+            })
             
             return setErrorState(
                 {
@@ -137,6 +143,7 @@ const LoginPage = (props) => {
                         {/* Header */}
                         <h1>Login</h1>
                         <hr></hr>
+    
 
                         <ErrorComponent errorState={errorState}/>
 

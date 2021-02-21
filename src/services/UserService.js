@@ -4,32 +4,18 @@ import customAxios from "./config/AxiosConfig"
 //There is an "auth" parameter for Basic Auth:
 //https://github.com/axios/axios
 
-const loginAPI = (username, passsword) => {
+const loginAPI = (username, password) => {
     
     //For spring security form login or we need to use 'application/x-www-form-urlencoded'
     //axios is smart enough when you use a string it will have the content type.
-    return customAxios.post(`http://localhost:8080/login`, `username=${username}&password=${passsword}`,
-        {
-            //This with Credentials will allow us to get the cookie and session ID and use it for our request
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-    )
+    return customAxios.post(`http://localhost:8080/login`,
+    { 
+        username: username,
+        password: password
+    })
     
 }
 
-const loginUser = (username, password) => {
-    return customAxios.get(`http://localhost:8080/user/login?username=${username}&password=${password}`,{},
-        {
-
-            auth: {
-                username: username,
-                password: password
-            }
-        }
-    )
-}
 
 const signUp = (user) => {
     return axios.post("http://localhost:8080/user/create", user)
@@ -58,4 +44,4 @@ const deleteUser = (userId) => {
 
 }
 
-export  { loginAPI, loginUser, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};
+export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};
