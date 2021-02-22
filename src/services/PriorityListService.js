@@ -1,4 +1,5 @@
 import axios from 'axios';
+import customAxios from "./config/AxiosConfig";
 
 const getAllPriorities = (priorityListId) => {
     return axios.get(`http://localhost:8080/prioritylist/${priorityListId}`);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import customAxios from "./config/AxiosConfig";
 
 const getAllStatus = (statusListId) => {
     return axios.get(`http://localhost:8080/statuslist/${statusListId}`);
