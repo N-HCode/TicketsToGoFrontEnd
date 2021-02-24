@@ -16,7 +16,8 @@ import { PriorityListContext } from '../context/PriorityListContext';
 //Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
 import ErrorComponent from '../constants/ErrorComponent';
-import Auth from '../../routing/Auth';
+import {Auth} from "../../routing/Auth"
+import { useHistory } from "react-router-dom";
 
 //"set HTTPS=true&&react-scripts start"
 
@@ -28,6 +29,8 @@ const LoginPage = (props) => {
     const [ tickets, setTickets ] = useContext(TicketContext);
     const [ statusList, setStatusList ] = useContext(StatusListContext);
     const [ priorityList, setPriorityList] = useContext(PriorityListContext);
+
+    const history = useHistory();
 
 
 
@@ -56,77 +59,51 @@ const LoginPage = (props) => {
        
         try {
 
+            const response = await loginAPI(userLogin.username, userLogin.password);
 
-            await loginAPI(userLogin.username, userLogin.password)
+            setUserLogin({
+                username: "",
+                password: ""
+            });
 
-            Auth.login();
+            switch (response.status) {
+                case 200:
 
-            try {
+                    Auth.login();
+                    history.push("/");
+                    
+                    
+                    break;
 
-                // const statusListResponse = await getAllStatus(response.data.organization.statusListId)
+                case 403:
 
-                // setStatusList({
-                //     ...statusList,
-                //     statusListArray:statusListResponse.data});
-
-                // const priorityListReponse = await getAllPriorities(response.data.organization.priorityListId);
-                // setPriorityList(priorityListReponse.data);
-                
-            } catch (error) {
-
-                return setErrorState(
-                    {
-                        actionType: ERRORACTIONS.errorIsOn,
-                        errorMessage: ERROR.connectionIssue
-                    }
-                )
-                
+                    return setErrorState(
+                        {
+                            actionType: ERRORACTIONS.errorIsOn,
+                            errorMessage: ERROR.loginIncorrect
+                        }
+                    )
+            
+                default:
+                    return setErrorState(
+                        {
+                            actionType: ERRORACTIONS.errorIsOn,
+                            errorMessage: ERROR.connectionIssue
+                        }
+                    )
+                 
             }
 
-            setUserLogin({
-                username: "",
-                password: ""
-            })
-
-            // const { tickets, ...rest} = response.data.user;
-
-            // setUser( 
-            //     rest,
-            // )
-            // setOrganization(
-            //     response.data.organization
-            // )
-            // setTickets(
-            //     response.data.user.tickets
-            // )
-
-
-
-
-
- 
-            setErrorState(
-                {
-                    actionType: ERRORACTIONS.clearErrors,
-                }
-            )
-            props.history.push("/")
-            
+      
         } catch (e) {
-            //error will have the response property so you can get the status code from that.
-            // console.log(error.response.status);
-
-            setUserLogin({
-                username: "",
-                password: ""
-            })
             
             return setErrorState(
                 {
                     actionType: ERRORACTIONS.errorIsOn,
-                    errorMessage: ERROR.loginIncorrect
+                    errorMessage: ERROR.connectionIssue
                 }
             )
+
 
         }
         
