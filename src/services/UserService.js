@@ -44,4 +44,8 @@ const deleteUser = (userId) => {
 
 }
 
-export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser};
+const verify = () => {
+    return axios.get(`http://localhost:8080/user/verify`);
+}
+
+export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser, verify};

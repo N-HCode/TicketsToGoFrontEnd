@@ -40,12 +40,8 @@ const AdminPage = () => {
         //if object has no keys then it most likely is empty and the context
         //was not updated properly
      
-        if (Object.keys(organization).length !== 0) {
-   
-            updateToCurrentUsers();
-        }
-       
-        
+        updateToCurrentUsers();
+
     }, [])
 
     const updateToCurrentUsers = async () =>{
@@ -154,7 +150,7 @@ const AdminPage = () => {
                                 </thead>
                                 <tbody>
 
-                                {organization.users !== undefined && organization.users.length > 0 && currentUsers.map((user,index) =>
+                                {organization?.users !== undefined && organization?.users.length > 0 && currentUsers.map((user,index) =>
                                     
                                     <tr key={"admin_table_row_" + index}>
                                         <td><div><i className="material-icons" onClick={() => editUserBtn(user)}>edit</i></div></td>

@@ -58,22 +58,25 @@ const LoginPage = (props) => {
         event.preventDefault();
        
         try {
-
-            const response = await loginAPI(userLogin.username, userLogin.password);
-
             setUserLogin({
                 username: "",
                 password: ""
             });
 
-            switch (response.status) {
-                case 200:
+            const response = await loginAPI(userLogin.username, userLogin.password);
+            
+            //the code below will only excute when there is an successful response.
+            //otherwise it will be in the catch.
 
-                    Auth.login();
-                    history.push("/");
-                    
-                    
-                    break;
+            Auth.login();
+            history.push("/");
+
+
+      
+        } catch (e) {
+            //the error is an object that will contain the response when you catch it
+            
+            switch (e.response.status) {
 
                 case 403:
 
@@ -91,22 +94,9 @@ const LoginPage = (props) => {
                             errorMessage: ERROR.connectionIssue
                         }
                     )
-                 
+
             }
-
-      
-        } catch (e) {
-            
-            return setErrorState(
-                {
-                    actionType: ERRORACTIONS.errorIsOn,
-                    errorMessage: ERROR.connectionIssue
-                }
-            )
-
-
         }
-        
 
     }
 

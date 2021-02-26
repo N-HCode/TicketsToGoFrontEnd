@@ -2,29 +2,26 @@ import React from 'react'
 import {Route, Redirect} from 'react-router-dom';
 import {Auth} from './Auth';
 import {NoNavPATHS} from './Paths';
+import {verify} from "../services/UserService";
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
+
+
     return (
 
         <Route {...rest} 
             render={
 
                 
-                async (props) => {
+                (props) => {
                     //if authenticated then we will load the component
                     if (Auth.authenticated) {
              
                         return <Component {...props}/>
                     } else {
-
-
-                        
-
-
-
+                   
                     //else we redirect to the login page
                     //The to takes an object
-  
                         return <Redirect to={
                             {
                                 pathname: NoNavPATHS.login,
@@ -33,6 +30,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
                                 }
                             }
                         }/>
+
                     }
 
                     
