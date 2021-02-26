@@ -10,7 +10,7 @@ const findByUserId = (userId) => {
 }
 
 const getAllUserInOrg = (orgId) => {
-    return axios.get(`http://localhost:8080/organization/getAllUser/${orgId}`)
+    return customAxios.get(`http://localhost:8080/organization/getAllUser/${orgId}`)
 }
 
 

@@ -1,20 +1,7 @@
 import React from 'react';
 // The Router library used to navigate the site
-import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import { BrowserRouter, Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-
-// Components for Tickets
-import HomePage from './components/HomePage';
-import CreateTicketPage from './components/ticket/CreateTicketPage';
-import MainNavBar from './components/homepagecomponents/mainnav/MainNavBar'
-
-// Components for Organization
-import CreateOrganization from './components/organization/CreateOrganizationPage';
-
-// Components for User
-import LoginPage from './components/user/LoginPage';
-import UserList from './components/user/UserList';
-import EditUserPage from './components/user/EditUserPage';
 
 // Context for User
 import { UserProvider } from './components/context/UserContext';
@@ -34,30 +21,16 @@ import {TicketColumnsContextProvider} from './components/context/TicketColumnsCo
 
 import {OpenTicketContextProvider} from './components/context/OpenTicketContext';
 
-import {StatusListProvider} from './components/context/StatusListContext'
+import {StatusListProvider} from './components/context/StatusListContext';
 
-import {PriorityListProvider} from './components/context/PriorityListContext'
+import {PriorityListProvider} from './components/context/PriorityListContext';
 
-// My Account page
-import MyAccountPage from './components/myaccountpage/MyAccount';
 
-// Admin page
-import AdminPage from './components/adminpage/AdminPage';
+import {VerifyStatusProvider} from './components/context/VerifyStatusContext';
 
-// Ticket Admin page
 
-import TicketAdminPage from './components/ticketadminpage/TicketAdminPage';
 
-// import { createOrganization } from './services/OrganizationService';
-
-//importing the paths constants
-import {PATHS, NoNavPATHS} from './routing/Paths'
-
-//Protected Routing
-import ProtectedRoute from './routing/ProtectedRoute';
-
-//Error page
-import ErrorPage from './components/error/ErrorPage'
+import {AllRoutes} from './routing/AllRoutes';
 
 
 
@@ -83,35 +56,6 @@ class App extends React.Component {
 
   }
 
-  //this is the function section.
-  RouteWithNav = () => {
-
-    return(
-  
-            <div>
-              {/* The Object.value returns an array of all the values of the object */}
-              {/* This makes it so that the Nav only show on certain paths */}
-              {Object.values(PATHS).includes(window.location.pathname.toLocaleLowerCase())? <MainNavBar/> : null}
-
-              <Switch>
-                {/* Path with no Nav. Put it in a seperate object for easy Nav logic */}
-                <Route exact path={NoNavPATHS.login} component={LoginPage} />
-                <Route exact path={NoNavPATHS.createOrganization} component={CreateOrganization} />
-
-                {/* Paths with Main Nav bar */}
-                <ProtectedRoute exact path={PATHS.editUser} component={EditUserPage} />
-                <ProtectedRoute exact path={PATHS.createTicket} component={CreateTicketPage} />
-                <ProtectedRoute exact path={PATHS.userList} component={UserList} />
-                <ProtectedRoute exact path={PATHS.myAccount} component={MyAccountPage} />
-                <ProtectedRoute exact path={PATHS.home} component={HomePage} />
-                <ProtectedRoute exact path={PATHS.adminPage} component={AdminPage} />
-                <ProtectedRoute exact path={PATHS.ticketAdminPage} component={TicketAdminPage} />
-                <ProtectedRoute component={ErrorPage}/>
-              </Switch>
-            </div>
-    )
-  }
-
 
 
   //The render is required for all react classes
@@ -123,6 +67,7 @@ class App extends React.Component {
         {/* The Main Context Providers */}
         <UserProvider>
           <OrganizationProvider>
+          <VerifyStatusProvider>
           <PrimaryNavSelectedProvider>
             <OpenTicketContextProvider>
               <StatusListProvider>
@@ -135,13 +80,15 @@ class App extends React.Component {
                       
                       {/* TicketTabContext to hold the ticket tabs*/}
                       <TicketTabContextProvider>
+                        
 
                         
                         {/* {creating a switch to swap out the component to show when on different pages} */}
                           
                           {/* {pages and the component assgined to them} */}
                   
-                          <Route component={this.RouteWithNav}/>
+                          <Route component={AllRoutes}/>
+                        
 
                       </TicketTabContextProvider>
                       
@@ -151,6 +98,7 @@ class App extends React.Component {
                 </StatusListProvider>
               </OpenTicketContextProvider>
               </PrimaryNavSelectedProvider>
+              </VerifyStatusProvider>
             </OrganizationProvider>
         </UserProvider>
       </BrowserRouter>

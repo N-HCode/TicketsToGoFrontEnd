@@ -65,7 +65,7 @@ const AdminPage = () => {
     const [totalNumOfPages, setTotalNumOfPages] = useState(0);
     const lastUserIndex = currentPage * paginationConfig.perPage;
     const firstUserIndex = lastUserIndex - paginationConfig.perPage;
-    const currentUsers = organization.users.slice(firstUserIndex, lastUserIndex);
+    const currentUsers = organization.users? organization.users.slice(firstUserIndex, lastUserIndex) : [];
 
     const setOrgUsersToNewList = (newList) => {
         setOrganization({
