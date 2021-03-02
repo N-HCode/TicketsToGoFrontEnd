@@ -1,4 +1,3 @@
-import axios from 'axios';
 import customAxios from "./config/AxiosConfig";
 
 const createTicket = "http://localhost:8080/ticket/create";
