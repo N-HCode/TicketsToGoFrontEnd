@@ -1,13 +1,13 @@
-import axios from 'axios';
+import customAxios from "./config/AxiosConfig";
 
 const getAllStatus = (statusListId) => {
-    return axios.get(`http://localhost:8080/statuslist/${statusListId}`);
+    return customAxios.get(`http://localhost:8080/statuslist/${statusListId}`);
 }
 
 
 //Need to change the header so that it expects a String for the body and not an entity
 const addAStatus = (statusListId, status) => {
-    return axios.put(`http://localhost:8080/statuslist/add/${statusListId}`
+    return customAxios.put(`http://localhost:8080/statuslist/add/${statusListId}`
     , status
     , {
 
@@ -17,7 +17,7 @@ const addAStatus = (statusListId, status) => {
 }
 
 const removeAStatus = (statusListId, status) => {
-    return axios.put(`http://localhost:8080/statuslist/remove/${statusListId}`
+    return customAxios.put(`http://localhost:8080/statuslist/remove/${statusListId}`
     , status
     , {
 

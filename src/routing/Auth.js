@@ -1,7 +1,11 @@
 const Auth = {
     authenticated: false,
-    login: () => {this.authenticated = true},
-    logout: () => {this.authenticated = false},
+    //Arrow functions does not support this. So you need to use a function
+    login: function () {
+        this.authenticated = true;
+
+    },
+    logout: function () {this.authenticated = false},
 }
 
-export default Auth
+export  {Auth}

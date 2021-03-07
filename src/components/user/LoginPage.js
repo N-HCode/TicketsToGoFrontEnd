@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 //Services
-import { loginUser } from '../../services/UserService';
+import { loginAPI } from '../../services/UserService';
 import { getAllStatus } from '../../services/StatusListService';
 import { getAllPriorities} from '../../services/PriorityListService';
 
@@ -16,7 +16,8 @@ import { PriorityListContext } from '../context/PriorityListContext';
 //Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
 import ErrorComponent from '../constants/ErrorComponent';
-import Auth from '../../routing/Auth';
+import {Auth} from "../../routing/Auth"
+import { useHistory } from "react-router-dom";
 
 //"set HTTPS=true&&react-scripts start"
 
@@ -28,6 +29,8 @@ const LoginPage = (props) => {
     const [ tickets, setTickets ] = useContext(TicketContext);
     const [ statusList, setStatusList ] = useContext(StatusListContext);
     const [ priorityList, setPriorityList] = useContext(PriorityListContext);
+
+    const history = useHistory();
 
 
 
@@ -55,75 +58,45 @@ const LoginPage = (props) => {
         event.preventDefault();
        
         try {
-
-            const response = await loginUser(userLogin.username, userLogin.password);
-
             setUserLogin({
                 username: "",
                 password: ""
-            })
+            });
+
+            const response = await loginAPI(userLogin.username, userLogin.password);
+            
+            //the code below will only excute when there is an successful response.
+            //otherwise it will be in the catch.
 
             Auth.login();
-
-            try {
-
-                const statusListResponse = await getAllStatus(response.data.organization.statusListId)
-
-                setStatusList({
-                    ...statusList,
-                    statusListArray:statusListResponse.data});
-
-                const priorityListReponse = await getAllPriorities(response.data.organization.priorityListId);
-                setPriorityList(priorityListReponse.data);
-                
-            } catch (error) {
-
-                return setErrorState(
-                    {
-                        actionType: ERRORACTIONS.errorIsOn,
-                        errorMessage: ERROR.connectionIssue
-                    }
-                )
-                
-            }
-
-            const { tickets, ...rest} = response.data.user;
-
-            setUser( 
-                rest,
-            )
-            setOrganization(
-                response.data.organization
-            )
-            setTickets(
-                response.data.user.tickets
-            )
+            history.push("/");
 
 
-
-
-
- 
-            setErrorState(
-                {
-                    actionType: ERRORACTIONS.clearErrors,
-                }
-            )
-            props.history.push("/")
-            
+      
         } catch (e) {
-            //error will have the response property so you can get the status code from that.
-            // console.log(error.response.status);
+            //the error is an object that will contain the response when you catch it
             
-            return setErrorState(
-                {
-                    actionType: ERRORACTIONS.errorIsOn,
-                    errorMessage: ERROR.loginIncorrect
-                }
-            )
+            switch (e.response.status) {
 
+                case 403:
+
+                    return setErrorState(
+                        {
+                            actionType: ERRORACTIONS.errorIsOn,
+                            errorMessage: ERROR.loginIncorrect
+                        }
+                    )
+            
+                default:
+                    return setErrorState(
+                        {
+                            actionType: ERRORACTIONS.errorIsOn,
+                            errorMessage: ERROR.connectionIssue
+                        }
+                    )
+
+            }
         }
-        
 
     }
 
@@ -137,6 +110,7 @@ const LoginPage = (props) => {
                         {/* Header */}
                         <h1>Login</h1>
                         <hr></hr>
+    
 
                         <ErrorComponent errorState={errorState}/>
 
