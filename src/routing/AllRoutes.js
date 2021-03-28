@@ -55,13 +55,14 @@ const AllRoutes = () => {
             try {
               
                 await verify();
-    
+                
                 Auth.authenticated = true;
     
                 setIsVerified(true);
                 
                 
             } catch (error) {
+            
                 Auth.authenticated = false;
                 setIsVerified(true);
                 

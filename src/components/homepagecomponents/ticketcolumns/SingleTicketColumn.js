@@ -1,4 +1,4 @@
-import React, {useContext, useRef } from 'react';
+import React, {useContext, useRef, useEffect } from 'react';
 import TicketList from '../../ticket/TicketList';
 import { TicketContext } from '../../context/TicketContext';
 import {StatusListContext} from '../../context/StatusListContext';
@@ -18,12 +18,17 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
 
     //this is used on the pencil icon to edit the title of the
     //columns
+
+    useEffect(() => {
+
+    }, [])
+
+
     const editTitle = () => {
  
         //This will make it so the code will only write when the title is different from the current
         //title and that the edit button is pressed after the input is done.
         if (columnState.isEdit) {
-            console.log("HERERE " + newTitle.current.value)
 
                 columnState.title = newTitle.current.value;
                 columnState.isEdit = false;
@@ -87,6 +92,8 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
         history.push("/createTicket")
 
     }
+
+
 
     return(
         <div className="single_ticket_column" >

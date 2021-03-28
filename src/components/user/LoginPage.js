@@ -56,14 +56,14 @@ const LoginPage = (props) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-       
+               
         try {
             setUserLogin({
                 username: "",
                 password: ""
             });
 
-            const response = await loginAPI(userLogin.username, userLogin.password);
+            await loginAPI(userLogin.username, userLogin.password);
             
             //the code below will only excute when there is an successful response.
             //otherwise it will be in the catch.
