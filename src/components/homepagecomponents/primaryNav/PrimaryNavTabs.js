@@ -19,7 +19,7 @@ const PrimaryNavTabs = () => {
         //one way to do this is to use the .slice(0)
         //https://stackoverflow.com/questions/3978492/fastest-way-to-duplicate-an-array-in-javascript-slice-vs-for-loop
 
-        const selectedIndex = primaryNavSelectedContext.array.length;
+        let selectedIndex = primaryNavSelectedContext.array.length;
 
         primaryNavSelectedContext.array.push(
             {
@@ -45,6 +45,7 @@ const PrimaryNavTabs = () => {
  
     const elements = useRef();
     const oldActiveTab = useRef();
+
     useEffect(() =>{
     
         elements.current.children[oldActiveTab.current]?.classList.remove("active");
@@ -53,7 +54,7 @@ const PrimaryNavTabs = () => {
         //The ? will make it so this code only happens if the object is not null/undefined.
         elements.current.children[primaryNavSelectedContext.index]?.classList.add("active");
 
-    },[navTabListState])
+    },[primaryNavSelectedContext])
 
 
     // //need to use JS to implement a mouse wheel scrolling function.
