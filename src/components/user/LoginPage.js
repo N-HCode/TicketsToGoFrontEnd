@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react';
 import { loginAPI } from '../../services/UserService';
 import { getAllStatus } from '../../services/StatusListService';
 import { getAllPriorities} from '../../services/PriorityListService';
+import { getAllTemplates } from '../../services/TicketColumnTempleService'
 
 //Contexts
 import { UserContext } from '../context/UserContext';
@@ -12,6 +13,7 @@ import { OrganizationContext } from '../context/OrganizationContext';
 import { TicketContext } from '../context/TicketContext';
 import { StatusListContext} from '../context/StatusListContext';
 import { PriorityListContext } from '../context/PriorityListContext';
+import { TicketColumnsContext } from '../context/TicketColumnsContext';
 
 //Others
 import { ERROR, ERRORACTIONS} from '../constants/Error';
@@ -29,6 +31,7 @@ const LoginPage = (props) => {
     const [ tickets, setTickets ] = useContext(TicketContext);
     const [ statusList, setStatusList ] = useContext(StatusListContext);
     const [ priorityList, setPriorityList] = useContext(PriorityListContext);
+    const [ticketColumnsContext, setTicketColumnsContext] = useContext(TicketColumnsContext);
 
     const history = useHistory();
 
@@ -58,44 +61,86 @@ const LoginPage = (props) => {
         event.preventDefault();
                
         try {
+
+
+            await loginAPI(userLogin.username, userLogin.password);
+            //the code below will only excute when there is an successful response.
+            //otherwise it will be in the catch.
+            Auth.login();
+
             setUserLogin({
                 username: "",
                 password: ""
             });
 
-            await loginAPI(userLogin.username, userLogin.password);
-            
-            //the code below will only excute when there is an successful response.
-            //otherwise it will be in the catch.
 
-            Auth.login();
+            const ticketColumnResponse = await getAllTemplates();
+
+            console.log("TicketColumnResponse");
+            console.log(ticketColumnResponse);
+
+            if (ticketColumnResponse.data.length > 0) {
+
+                const ticketColumnArray = [];
+                
+                ticketColumnResponse.data.forEach(element => {
+
+
+                    const columnNameStates = [];
+
+
+                    element.columnNames.forEach(name => {
+
+                        columnNameStates.push({
+                            title: name
+                            ,isEdit: false
+                        })
+
+                    })
+
+
+                    ticketColumnArray.push({
+                        id: element.id,
+                        templateName:element.templateName,
+                        columnStates: columnNameStates
+                    })
+                });
+
+                setTicketColumnsContext(ticketColumnArray);
+
+            }
+
             history.push("/");
+
+
 
 
       
         } catch (e) {
             //the error is an object that will contain the response when you catch it
+
+            console.log(e);
             
-            switch (e.response.status) {
+            // switch (e.response.status) {
 
-                case 403:
+            //     case 403:
 
-                    return setErrorState(
-                        {
-                            actionType: ERRORACTIONS.errorIsOn,
-                            errorMessage: ERROR.loginIncorrect
-                        }
-                    )
+            //         return setErrorState(
+            //             {
+            //                 actionType: ERRORACTIONS.errorIsOn,
+            //                 errorMessage: ERROR.loginIncorrect
+            //             }
+            //         )
             
-                default:
-                    return setErrorState(
-                        {
-                            actionType: ERRORACTIONS.errorIsOn,
-                            errorMessage: ERROR.connectionIssue
-                        }
-                    )
+            //     default:
+            //         return setErrorState(
+            //             {
+            //                 actionType: ERRORACTIONS.errorIsOn,
+            //                 errorMessage: ERROR.connectionIssue
+            //             }
+            //         )
 
-            }
+            // }
         }
 
     }

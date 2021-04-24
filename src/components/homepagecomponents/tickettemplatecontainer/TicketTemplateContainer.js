@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect, useRef} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import TemplateDropdown from '../tickettemplateoptions/TemplateDropdown';
 import CurrentTemplateOptions from '../tickettemplateoptions/CurrentTemplateOptions';
 import TicketTabList from '../tickettab/TicketTabList';

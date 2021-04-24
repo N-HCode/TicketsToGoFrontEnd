@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { TicketContext } from '../../context/TicketContext';
 import { OrganizationContext} from '../../context/OrganizationContext';
+
 import {Auth} from '../../../routing/Auth';
 
 
@@ -19,6 +20,8 @@ const MainNavOptions = () => {
         setTickets({});
         setOrganization({});
         Auth.logout();
+        //reloading the session will clear a lot of the session data.
+        window.location.reload();
         
     }
 

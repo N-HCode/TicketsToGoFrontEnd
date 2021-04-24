@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect} from 'react';
 import SingleTicketColumn from './SingleTicketColumn';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
@@ -10,7 +10,8 @@ const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
 
     const [ticketColumnsContext, setTicketColumnsContext] = useContext(TicketColumnsContext);
     const [primaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
-    const templateIndex = primaryNavSelectedContext.array[selectedIndex].state.selectedTemplate
+    const templateIndex = primaryNavSelectedContext.array[selectedIndex].state.selectedTemplate;
+
 
     const AddNewColumn = () => {
 
@@ -70,7 +71,7 @@ const TicketColumnList = ({selectedIndex,state,setState, openTicketModal}) => {
                     //There may be some overlap in component-level state information.
                     //This is important if the components can be deleted as another component can get
                     //the key of a previously deleted component.
-                    key = {"single_ticket_column"+ index + "_pri_nav_" + selectedIndex + "random_" + Math.random()*10000000}
+                    key = {"single_ticket_column"+ index + "_pri_nav_" + selectedIndex}
                     selectedIndex={selectedIndex}
                     setState = {setState}
                     keyIndex = {index}

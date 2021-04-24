@@ -17,7 +17,12 @@ const TicketColumnsContextProvider = (props) => {
             columnStates: [{
                 title: "ZOOM"
                 ,isEdit: false
-            }],
+            },{
+                title:"FHUIAFHI"
+                ,isEdit: false
+            }
+        
+        ],
         },
         {
             templateName:"DREAM",

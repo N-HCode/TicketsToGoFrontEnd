@@ -57,6 +57,9 @@ const PrimaryNavTabs = () => {
     },[primaryNavSelectedContext])
 
 
+ 
+
+
     // //need to use JS to implement a mouse wheel scrolling function.
     // const mouseWheelScroll = (e) => {
     //     //this is to prevent the default vertical scroll.
