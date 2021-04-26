@@ -20,8 +20,8 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     //columns
 
     useEffect(() => {
-
-    }, [])
+        console.log("change");
+    }, [columnState])
 
 
     const editTitle = () => {

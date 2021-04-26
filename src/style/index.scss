@@ -26,6 +26,7 @@
 @import './style_components//information_screen';
 @import '../components/error/error_page';
 @import '../components/homepagecomponents/tickettemplateoptions/optionsModals/template_modals';
+@import '../components/ticket/clientorgmodal/client_org_modal';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
 @include popupmixin;

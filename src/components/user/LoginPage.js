@@ -76,9 +76,6 @@ const LoginPage = (props) => {
 
             const ticketColumnResponse = await getAllTemplates();
 
-            console.log("TicketColumnResponse");
-            console.log(ticketColumnResponse);
-
             if (ticketColumnResponse.data.length > 0) {
 
                 const ticketColumnArray = [];

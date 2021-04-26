@@ -18,6 +18,9 @@ const CurrentTemplateOptions = () => {
         if (window.confirm("Would you like to save the Ticket Template")) {
             const newColumnNames = ticketColumnsContext[templateIndex].columnStates.map(state => {return state.title})
 
+            console.log(ticketColumnsContext[templateIndex].id)
+            console.log(newColumnNames);
+
             await editTicketTemplate({
                 id: ticketColumnsContext[templateIndex].id,
                 templateName: ticketColumnsContext[templateIndex].templateName,

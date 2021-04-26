@@ -1,0 +1,22 @@
+.client_org_modal{
+    display: grid;
+    margin-top: 15px;
+    gap: 5px;
+    font-family: $mainTextStyle;
+    grid-auto-flow: column;
+
+    button{
+        color: $activeTextColor ;
+        padding: 20px;
+        font-size: 1rem;
+        background-color: rgb(58, 146, 117);
+        border: rgb(117, 117, 117) solid 2px;
+        max-width: 200px;
+
+        &:hover{
+            filter: brightness(1.25);
+            color:$activeTextColor;
+            cursor: pointer;
+        }
+    }
+}
