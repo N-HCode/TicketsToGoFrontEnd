@@ -1,3 +1,14 @@
+.client_org_modal_container{
+
+    //transition: <property> <duration> <timing-function> <delay>;
+    //you want to use ms for duration as that is standard for javascript
+   transition: max-height 10350ms;
+   max-height: 800px;
+}
+
+
+
+
 .client_org_modal{
     display: grid;
     margin-top: 15px;

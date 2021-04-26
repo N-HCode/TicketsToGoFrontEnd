@@ -1,0 +1,42 @@
+.form_modal{
+    display: grid;
+    margin-top: 15px;
+    gap: 5px;
+    font-family: $mainTextStyle;
+    overflow: hidden;
+    
+
+    input, div{
+        margin-bottom: 5px;
+    }
+
+    input:not([type='checkbox']){
+        width: 50%;
+    }
+
+    
+
+    
+}
+
+.open_form_modal{
+    animation: heightChange 550ms linear;
+}
+
+.close_form_modal{
+    animation: heightChange 500ms reverse ease-in;
+}
+
+@keyframes heightChange {
+    0%{
+        max-height: 0px;
+        // transform: scaleX(0);
+        
+    }
+
+    100%{
+        // transform: scaleX(1);
+        max-height: 600px;
+    }
+
+}

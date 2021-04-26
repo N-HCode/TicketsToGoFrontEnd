@@ -7,8 +7,21 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
 
+    //This is to signal to the lower component that it is about to be dismounted.
+    //The reason we want this is so we can apply a dismount animation before it actually get dismounted.
+    //After the animation, then we can just get rid of the component.
+    const [signalAddNewClientCloseState, setSignalAddNewClientCloseState] = useState(false);
+
     const expandNewClientOrgForm = () =>{
-        setAddNewClientOrgState(!addNewClientOrgState);
+
+        if (addNewClientOrgState) {
+            setSignalAddNewClientCloseState(true);
+        }else{
+            setAddNewClientOrgState(true);
+        }
+
+
+      
     }
 
 
@@ -21,7 +34,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         shouldCloseOnOverlayClick={false}
         onRequestClose={closeFindModal}>
 
-            <div>
+            <div className="client_org_modal_container">
 
                 <h3>Find/Add Client Organization</h3>
 
@@ -35,7 +48,11 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
                 </div>
 
-               {addNewClientOrgState && <AddNewClientOrgForm /> }
+               {addNewClientOrgState && 
+               <AddNewClientOrgForm 
+               signalAddNewClientCloseState = {signalAddNewClientCloseState}
+               setSignalAddNewClientCloseState= {setSignalAddNewClientCloseState}
+               setAddNewClientOrgState={setAddNewClientOrgState}/> }
 
 
             </div>
