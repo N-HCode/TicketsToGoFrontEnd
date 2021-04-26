@@ -1,0 +1,74 @@
+.modal_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    hr{
+        width: 100%;
+    }
+
+    h3{
+        margin: 15px 0px 5px 0;
+    }
+
+    font-family: $mainTextStyle;
+}
+
+.form_modal_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+
+    label{
+        margin-top: 5px;
+    }
+
+    input{
+        margin-top: 8px;
+    }
+
+}
+
+.form_button_modal_container{
+    margin-top: 10px;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+    justify-content:flex-end;
+
+    button{
+        @include buttonStyle();
+        padding: 5px;
+
+    }
+
+    
+
+}
+
+.modal_window_bar{
+    display: flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+    user-select: none;
+
+    i{
+        font-size: 1rem;
+        user-select: none;
+        cursor: pointer;
+        color:$secondaryTextColor;
+
+        &:active{
+            animation: navClick 1s;;
+        }
+
+        &:hover{
+            filter: brightness(1.25);
+        }
+    }
+}

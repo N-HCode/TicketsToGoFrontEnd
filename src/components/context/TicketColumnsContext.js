@@ -6,25 +6,7 @@ const TicketColumnsContextProvider = (props) => {
     const [ ticketColumnsContext, setTicketColumnsContext] = useState([
         {
             templateName:"New Tab",
-            columnStates: [{
-                title: "TOOOM"
-                ,isEdit: false
-            }],
-         
-        },
-        {
-            templateName:"TEST",
-            columnStates: [{
-                title: "ZOOM"
-                ,isEdit: false
-            }],
-        },
-        {
-            templateName:"DREAM",
-            columnStates: [{
-                title: "DOOOM"
-                ,isEdit: false
-            }],
+            columnStates: []
         }
     ]);
 

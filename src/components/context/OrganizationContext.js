@@ -4,7 +4,11 @@ const OrganizationContext = createContext();
 
 const OrganizationProvider = (props) => {
     const [ organization, setOrganization ] = useState({
+
+  
+
     });
+    
 
     return (
         <OrganizationContext.Provider
@@ -12,6 +16,8 @@ const OrganizationProvider = (props) => {
         > 
            {props.children}
        </OrganizationContext.Provider>
+
+       
     )
 }
 

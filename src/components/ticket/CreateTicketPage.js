@@ -4,6 +4,7 @@ import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
+import ClientOrgModal from './clientorgmodal/ClientOrgModal'
 
 
 import axios from 'axios';
@@ -66,11 +67,24 @@ const CreateTicketPage = (props) => {
         // console.log(ticket);      
     }
 
+    const [openClientOrgModal, setopenClientOrgModal] = useState(false)
+
+    const openFindModal = () =>{
+        setopenClientOrgModal(true);
+    }
+
+    const closeFindModal = () =>{
+        setopenClientOrgModal(false);
+    }
+
+
     return (
         // form for creating tickets
             <form onSubmit={onSubmit}>
                 <div className="ticket_form_container">
                     <div>
+
+
 
                     {/* Instructions */}
                     <h1>Create a new ticket</h1>
@@ -80,7 +94,12 @@ const CreateTicketPage = (props) => {
                     <div className="ticket_form__allsides">
                         <div className="ticket_form__oneside">
 
- 
+                            {/* client organization */}
+
+                            <label htmlFor="client_organization">Client Organization:</label>
+                            <select type="text" name="client_organization" onClick={openFindModal} onChange={onChange}></select>
+
+                            <ClientOrgModal openClientOrgModal={openClientOrgModal} closeFindModal={closeFindModal} />
 
                             {/* Subject */}
                             
@@ -108,9 +127,12 @@ const CreateTicketPage = (props) => {
                         </div>
                         <div className="ticket_form__oneside">
 
+                            {/* client organization */}
+
+                            <label htmlFor="contact">Contact:</label>
+                            <select type="text" name="contact" onChange={onChange}></select>
+
                             {/* Ticket Owner */}
-
-
                             
                             <label htmlFor="assignedTo">Assigned To:</label>
                             <input type="text" name="assignedTo" defaultValue={user.fullName} readOnly></input> 

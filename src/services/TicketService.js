@@ -6,7 +6,11 @@ const findAll = "http://localhost:8080/ticket/all";
 const deleteTicket= "http://localhost:8080/ticket/";
 
 const getTicketById = (ticketId) => {
+
+   
+
     return axiosForGetRequests.get(`http://localhost:8080/ticket/${ticketId}`);
+    
 }
 
 const closeTicket = (ticketId) => {

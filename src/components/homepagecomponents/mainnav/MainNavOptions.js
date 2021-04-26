@@ -4,6 +4,8 @@ import {NavLink} from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { TicketContext } from '../../context/TicketContext';
 import { OrganizationContext} from '../../context/OrganizationContext';
+import {logoutApplication} from '../../../services/RefreshAndLogoutService';
+
 import {Auth} from '../../../routing/Auth';
 
 
@@ -13,12 +15,22 @@ const MainNavOptions = () => {
     const [tickets, setTickets] = useContext(TicketContext);
     const [organization, setOrganization] = useContext(OrganizationContext);
 
-    const logOut = () => {
-        closeMenu();
-        setUser({});
-        setTickets({});
-        setOrganization({});
-        Auth.logout();
+    const logOut = async() => {
+
+        try {
+
+            await logoutApplication();
+            closeMenu();
+            setUser({});
+            setTickets({});
+            setOrganization({});
+            Auth.logout();
+            //reloading the session will clear a lot of the session data.
+            window.location.reload();
+        } catch (error) {
+            
+        }
+
         
     }
 

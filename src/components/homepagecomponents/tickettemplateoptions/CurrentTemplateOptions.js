@@ -1,15 +1,44 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 import { PrimaryNavSelectedContext } from '../../context/PrimaryNavSelectedContext';
+import CreateNewTemplateModal from './optionsModals/CreateNewTemplateModal';
+import {editTicketTemplate} from '../../../services/TicketColumnTempleService'
 
 const CurrentTemplateOptions = () => {
 
     const [ticketColumnsContext] = useContext(TicketColumnsContext);
-    const [primaryNavSelectedContext, setprimaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
+    const [primaryNavSelectedContext] = useContext(PrimaryNavSelectedContext);
 
-    const onSaveClick = () => {
+    const [newTemplateState, setNewTemplateState] = useState(false)
+    const selectedIndex = primaryNavSelectedContext.index;
+    const templateIndex = primaryNavSelectedContext.array[selectedIndex].state.selectedTemplate;
 
+    const onSaveClick = async () => {
 
+        if (window.confirm("Would you like to save the Ticket Template")) {
+            const newColumnNames = ticketColumnsContext[templateIndex].columnStates.map(state => {return state.title})
+
+            console.log(ticketColumnsContext[templateIndex].id)
+            console.log(newColumnNames);
+
+            await editTicketTemplate({
+                id: ticketColumnsContext[templateIndex].id,
+                templateName: ticketColumnsContext[templateIndex].templateName,
+                columnNames: newColumnNames
+            })
+            
+        }
+
+        
+
+    }
+
+    const openCreateNewTemplateModal = () => {
+        setNewTemplateState(true)
+    }
+
+    const closeCreateNewTemplateModal = () => {
+        setNewTemplateState(false)
     }
 
 
@@ -19,9 +48,12 @@ const CurrentTemplateOptions = () => {
                 <i className="material-icons">settings</i>
                 <i className="material-icons">people</i>
                 <i className="material-icons" onClick={onSaveClick}>save</i>
+                <i className="material-icons" onClick={openCreateNewTemplateModal}>add</i>
             </div>
 
             <i className="material-icons">delete_forever</i>
+
+            <CreateNewTemplateModal modalIsOpen={newTemplateState} closeModalFunction={closeCreateNewTemplateModal}/>
         </div>
 
     )

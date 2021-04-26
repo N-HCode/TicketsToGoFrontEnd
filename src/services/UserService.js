@@ -5,6 +5,8 @@ import {axiosForGetRequests, axiosForRequestsOtherThanGet} from "./config/AxiosC
 //https://github.com/axios/axios
 
 const loginAPI = (username, password) => {
+
+    axiosForRequestsOtherThanGet.defaults.headers.common["X-XSRF-TOKEN"] = document.cookie.match("XSRF-TOKEN").input.replace("XSRF-TOKEN=","");
     
     //For spring security form login or we need to use 'application/x-www-form-urlencoded'
     //axios is smart enough when you use a string it will have the content type.
@@ -36,7 +38,9 @@ const checkPassword = (userId, password) => {
 }
 
 const checkUsername = (username) => {
-    return axiosForGetRequests.get(`http://localhost:8080/user/checkusername?username=${username}`);
+    //get don't support form data.
+
+    return axiosForGetRequests.get(`http://localhost:8080/user/check_username?username=${username}`);
 }
 
 const deleteUser = (userId) => {
