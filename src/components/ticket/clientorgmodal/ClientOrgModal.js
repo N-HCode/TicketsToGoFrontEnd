@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm'
+import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
+import ExpandAndCollapseAnimation from './clientorgmodalcomponents/ExpandAndCollapseAnimation';
 
 const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
@@ -13,15 +14,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
     const [signalAddNewClientCloseState, setSignalAddNewClientCloseState] = useState(false);
 
     const expandNewClientOrgForm = () =>{
-
-        if (addNewClientOrgState) {
-            setSignalAddNewClientCloseState(true);
-        }else{
-            setAddNewClientOrgState(true);
-        }
-
-
-      
+        setAddNewClientOrgState(!addNewClientOrgState);
     }
 
 
@@ -48,11 +41,16 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
                 </div>
 
-               {addNewClientOrgState && 
-               <AddNewClientOrgForm 
-               signalAddNewClientCloseState = {signalAddNewClientCloseState}
-               setSignalAddNewClientCloseState= {setSignalAddNewClientCloseState}
-               setAddNewClientOrgState={setAddNewClientOrgState}/> }
+                <ExpandAndCollapseAnimation isActive={addNewClientOrgState}>
+
+                    <AddNewClientOrgForm 
+                    signalAddNewClientCloseState = {signalAddNewClientCloseState}
+                    setSignalAddNewClientCloseState= {setSignalAddNewClientCloseState}
+                    setAddNewClientOrgState={setAddNewClientOrgState}/>
+
+
+                </ExpandAndCollapseAnimation>
+
 
 
             </div>

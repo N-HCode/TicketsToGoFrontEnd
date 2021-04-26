@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState} from 'react'
 
-const AddNewClientOrgForm = ({signalAddNewClientCloseState,setSignalAddNewClientCloseState, setAddNewClientOrgState}) => {
+const AddNewClientOrgForm = () => {
 
     const [clientOrgInfoState, setClientOrgInfoState] = useState(
         {
@@ -14,8 +14,6 @@ const AddNewClientOrgForm = ({signalAddNewClientCloseState,setSignalAddNewClient
         }
         
     )
-
-    const [state, setstate] = useState(false)
 
     const onChangeCheckBox = (e) => {
 
@@ -33,45 +31,12 @@ const AddNewClientOrgForm = ({signalAddNewClientCloseState,setSignalAddNewClient
         });
     }
 
-    const closeForm = () => {
-  
-        //This display set to none is placed here because the setState is aynsc.
-        //Meaning that the component may take a while to dismount even AFTER the animation is over.
-        //So to make sure the dismount animation look smooth, we need to make the display to be none
-        //as soon as the animation is over. Then we can dismount the component while it is invisible.
-        formModalRef.current.style.display = "none";
-
-        //Since the component will be dismounted we do not need to set this to false. As when we
-        //remount it the state will be defaulted to false again.
-        setstate(true);
-    }
-
-    const formModalRef = useRef();
-
-    useEffect(() => {
-        if (state) {
-            //React will not allow you to change the state of one component from another component.
-            //You will get the Cannot update Component error message.
-            //In rare cases you can bypass this by putting it in a useEffect.
-            //I want this to get dismount this component after the animation end, 
-            //and the rendering depends on the state of the parent component, so I believe this is valid.
-            setSignalAddNewClientCloseState(false)
-            setAddNewClientOrgState(false);
-        }
-
-    }, [state])
-
-
 
 
     return (
-        <div className={signalAddNewClientCloseState?"form_modal close_form_modal" :"form_modal open_form_modal"}
-        // So animation will only play when the component is mounted. TO make react see that this is a different
-        // component from an earlier component, we need to change the key. So now when we change the class,
-        // the new animation will play as well.
-            key={signalAddNewClientCloseState?1:2}
-            onAnimationEnd={signalAddNewClientCloseState?() => closeForm(): null}
-            ref={formModalRef}
+        <div className="form_modal"
+
+
         >
             <div>
                 <label htmlFor="isForeignAddress">Foreign Address?:</label>
