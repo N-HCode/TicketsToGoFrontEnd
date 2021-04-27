@@ -80,92 +80,99 @@ const CreateTicketPage = (props) => {
 
     return (
         // form for creating tickets
-            <form onSubmit={onSubmit}>
-                <div className="ticket_form_container">
-                    <div>
+        <div>
+
+                <ClientOrgModal openClientOrgModal={openClientOrgModal} closeFindModal={closeFindModal} />
+
+
+       
+                <form onSubmit={onSubmit}>
+                    <div className="ticket_form_container">
+                        <div>
 
 
 
-                    {/* Instructions */}
-                    <h1>Create a new ticket</h1>
-                    <p>Please fill in this form to create a new ticket.</p>
-                    <hr></hr>
+                        {/* Instructions */}
+                        <h1>Create a new ticket</h1>
+                        <p>Please fill in this form to create a new ticket.</p>
+                        <hr></hr>
 
-                    <div className="ticket_form__allsides">
-                        <div className="ticket_form__oneside">
+                        <div className="ticket_form__allsides">
+                            <div className="ticket_form__oneside">
 
-                            {/* client organization */}
+                                {/* client organization */}
 
-                            <label htmlFor="client_organization">Client Organization:</label>
-                            <select type="text" name="client_organization" onClick={openFindModal} onChange={onChange}></select>
+                                <label htmlFor="client_organization">Client Organization:</label>
+                                <select type="text" name="client_organization" onClick={openFindModal} onChange={onChange}></select>
 
-                            <ClientOrgModal openClientOrgModal={openClientOrgModal} closeFindModal={closeFindModal} />
+                                
 
-                            {/* Subject */}
-                            
-                            <label htmlFor="subject">Subject:</label>
-                            <input type="text" name="subject" onChange={onChange}></input>
+                                {/* Subject */}
+                                
+                                <label htmlFor="subject">Subject:</label>
+                                <input type="text" name="subject" onChange={onChange}></input>
 
-                            {/* Description */}
-                            <label htmlFor="description">Description:</label>
-                            <textarea name="description" rows="3" cols="40" onChange={onChange} ></textarea>
+                                {/* Description */}
+                                <label htmlFor="description">Description:</label>
+                                <textarea name="description" rows="3" cols="40" onChange={onChange} ></textarea>
 
-                            {/* Priority */}
-                            <label htmlFor="priority">Priority:</label>
-                            <select name="priority" onChange={onChange} >
-                            <option value={priorityList[0]} disabled>{priorityList[0]}</option>
-                                {priorityList.map((priority, index) => 
-                                    <option
-                                        key = {"new_ticket_priority_list_option" + index}
-                                        value={priority}
+                                {/* Priority */}
+                                <label htmlFor="priority">Priority:</label>
+                                <select name="priority" onChange={onChange} >
+                                <option value={priorityList[0]} disabled>{priorityList[0]}</option>
+                                    {priorityList.map((priority, index) => 
+                                        <option
+                                            key = {"new_ticket_priority_list_option" + index}
+                                            value={priority}
 
-                                    >{priority} </option>)
-                                }
-                            </select>
+                                        >{priority} </option>)
+                                    }
+                                </select>
 
 
+                            </div>
+                            <div className="ticket_form__oneside">
+
+                                {/* client organization */}
+
+                                <label htmlFor="contact">Contact:</label>
+                                <select type="text" name="contact" onChange={onChange}></select>
+
+                                {/* Ticket Owner */}
+                                
+                                <label htmlFor="assignedTo">Assigned To:</label>
+                                <input type="text" name="assignedTo" defaultValue={user.fullName} readOnly></input> 
+
+
+                                {/* Resolution */}
+                                <label htmlFor="resolution">Resolution:</label>
+                                <textarea name="resolution" rows="3" cols="40" onChange={onChange}></textarea>
+
+                                {/* Status */}
+                                <label htmlFor="status">Status:</label>
+                                <select name="status" onChange={onChange}>
+                                    <option value={statusList.currentStatus} disabled>{statusList.currentStatus}</option>
+                                    {statusList.statusListArray.map((status, index) => 
+                                        <option
+                                            key = {"new_ticket_status_list_option" + index}
+                                            value={status}
+
+                                        >{status} </option>)
+                                    }
+
+                                </select>
+
+                            </div>
                         </div>
-                        <div className="ticket_form__oneside">
 
-                            {/* client organization */}
+                        <div ></div>
 
-                            <label htmlFor="contact">Contact:</label>
-                            <select type="text" name="contact" onChange={onChange}></select>
-
-                            {/* Ticket Owner */}
-                            
-                            <label htmlFor="assignedTo">Assigned To:</label>
-                            <input type="text" name="assignedTo" defaultValue={user.fullName} readOnly></input> 
-
-
-                            {/* Resolution */}
-                            <label htmlFor="resolution">Resolution:</label>
-                            <textarea name="resolution" rows="3" cols="40" onChange={onChange}></textarea>
-
-                            {/* Status */}
-                            <label htmlFor="status">Status:</label>
-                            <select name="status" onChange={onChange}>
-                                <option value={statusList.currentStatus} disabled>{statusList.currentStatus}</option>
-                                {statusList.statusListArray.map((status, index) => 
-                                    <option
-                                        key = {"new_ticket_status_list_option" + index}
-                                        value={status}
-
-                                    >{status} </option>)
-                                }
-
-                            </select>
-
-                        </div>
+                        {/* Submit */}
+                        <button type="submit" >Create</button>
+                        </div> 
                     </div>
-
-                    <div ></div>
-
-                    {/* Submit */}
-                    <button type="submit" >Create</button>
-                    </div> 
-                </div>
-            </form>
+                </form>
+            </div>
     )
 }
 

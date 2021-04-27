@@ -1,21 +1,28 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
+
 import ExpandAndCollapseAnimation from './clientorgmodalcomponents/ExpandAndCollapseAnimation';
+import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
+import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg;'
 
 const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
-
+    
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
+    const [findExistingOrg, setFindExistingOrg] = useState(false);
 
-    //This is to signal to the lower component that it is about to be dismounted.
-    //The reason we want this is so we can apply a dismount animation before it actually get dismounted.
-    //After the animation, then we can just get rid of the component.
-    const [signalAddNewClientCloseState, setSignalAddNewClientCloseState] = useState(false);
-
-    const expandNewClientOrgForm = () =>{
+    const expandNewClientOrgForm = (e) =>{
         setAddNewClientOrgState(!addNewClientOrgState);
+
+        e.target.classList.toggle("active");
     }
+
+    const closeMainModal = () => {
+        closeFindModal();
+        //Need to do this so that the state resets to false whenever we close the modal
+        setAddNewClientOrgState(false);
+    }
+
 
 
 
@@ -25,7 +32,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         overlayClassName ="modal_overlay"   
         isOpen={openClientOrgModal} 
         shouldCloseOnOverlayClick={false}
-        onRequestClose={closeFindModal}>
+        onRequestClose={closeMainModal}>
 
             <div className="client_org_modal_container">
 
@@ -34,7 +41,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                 <hr></hr>
 
 
-                <div className="client_org_modal">
+                <div className="client_org_modal_button">
 
                     <button>Existing Client Organization</button>
                     <button onClick={expandNewClientOrgForm}>New Client Organization</button>
@@ -42,13 +49,11 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                 </div>
 
                 <ExpandAndCollapseAnimation isActive={addNewClientOrgState}>
+                    <AddNewClientOrgForm />
+                </ExpandAndCollapseAnimation>
 
-                    <AddNewClientOrgForm 
-                    signalAddNewClientCloseState = {signalAddNewClientCloseState}
-                    setSignalAddNewClientCloseState= {setSignalAddNewClientCloseState}
-                    setAddNewClientOrgState={setAddNewClientOrgState}/>
-
-
+                <ExpandAndCollapseAnimation isActive={findExistingOrg}>
+                    <FindExistingOrg />
                 </ExpandAndCollapseAnimation>
 
 

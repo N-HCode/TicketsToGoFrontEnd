@@ -1,15 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {addClientOrg} from '../../../../services/ClientOrgService';
+
 
 const AddNewClientOrgForm = () => {
 
     const [clientOrgInfoState, setClientOrgInfoState] = useState(
         {
-            isForeignAddress: null,
+            isForeignAddress: false,
             city: null,
             state: null,
             streetAddress: null,
             zipcode: null,
             country: null,
+            organizationName: null,
             organizationPhoneNumber: null,
         }
         
@@ -31,18 +34,30 @@ const AddNewClientOrgForm = () => {
         });
     }
 
+    const onSubmit = async (e) =>{
+        e.preventDefault();
+        try {
+
+            const response = await addClientOrg(clientOrgInfoState);
+            console.log(response);
+            
+        } catch (error) {
+            
+        }
+    }
+
 
 
     return (
-        <div className="form_modal"
-
-
-        >
+        <form className="form_modal" id="client_org_modal_create" onSubmit={onSubmit}>
             <div>
-                <label htmlFor="isForeignAddress">Foreign Address?:</label>
-                <input  type="checkbox" required name="isForeignAddress" onChange={onChangeCheckBox}></input>
+                <label htmlFor="isForeignAddress">Foreign Address:</label>
+                <input  type="checkbox" name="isForeignAddress" onChange={onChangeCheckBox}></input>
 
             </div>
+
+            <label htmlFor="organizationName">Organization Name:</label>
+            <input  type="text" required name="organizationName" onChange={onChange}></input>
 
 
             <label htmlFor="city">City:</label>
@@ -62,8 +77,13 @@ const AddNewClientOrgForm = () => {
 
             <label htmlFor="organizationPhoneNumber">Phone # (Optional):</label>
             <input  type="text" name="organizationPhoneNumber" onChange={onChange}></input>
+
+            <div className="client_org_modal_button">
+         
+                <button form="client_org_modal_create"> Submit</button>
+            </div>
   
-        </div>
+        </form>
     )
 }
 
