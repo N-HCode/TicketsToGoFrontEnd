@@ -1,15 +1,28 @@
 import React, {useState} from 'react';
 import Modal from 'react-modal';
-import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm'
+
+import ExpandAndCollapseAnimation from './clientorgmodalcomponents/ExpandAndCollapseAnimation';
+import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
+import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg;'
 
 const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
-
+    
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
+    const [findExistingOrg, setFindExistingOrg] = useState(false);
 
-    const expandNewClientOrgForm = () =>{
+    const expandNewClientOrgForm = (e) =>{
         setAddNewClientOrgState(!addNewClientOrgState);
+
+        e.target.classList.toggle("active");
     }
+
+    const closeMainModal = () => {
+        closeFindModal();
+        //Need to do this so that the state resets to false whenever we close the modal
+        setAddNewClientOrgState(false);
+    }
+
 
 
 
@@ -19,23 +32,30 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         overlayClassName ="modal_overlay"   
         isOpen={openClientOrgModal} 
         shouldCloseOnOverlayClick={false}
-        onRequestClose={closeFindModal}>
+        onRequestClose={closeMainModal}>
 
-            <div>
+            <div className="client_org_modal_container">
 
                 <h3>Find/Add Client Organization</h3>
 
                 <hr></hr>
 
 
-                <div className="client_org_modal">
+                <div className="client_org_modal_button">
 
                     <button>Existing Client Organization</button>
                     <button onClick={expandNewClientOrgForm}>New Client Organization</button>
 
                 </div>
 
-               {addNewClientOrgState && <AddNewClientOrgForm /> }
+                <ExpandAndCollapseAnimation isActive={addNewClientOrgState}>
+                    <AddNewClientOrgForm />
+                </ExpandAndCollapseAnimation>
+
+                <ExpandAndCollapseAnimation isActive={findExistingOrg}>
+                    <FindExistingOrg />
+                </ExpandAndCollapseAnimation>
+
 
 
             </div>

@@ -1,4 +1,15 @@
-.client_org_modal{
+.client_org_modal_container{
+
+    //transition: <property> <duration> <timing-function> <delay>;
+    //you want to use ms for duration as that is standard for javascript
+   transition: max-height 10350ms;
+   max-height: 800px;
+}
+
+
+
+
+.client_org_modal_button{
     display: grid;
     margin-top: 15px;
     gap: 5px;
@@ -6,17 +17,25 @@
     grid-auto-flow: column;
 
     button{
-        color: $activeTextColor ;
-        padding: 20px;
+        color: $secondaryTextColor ;
+        padding: 5px 20px;
         font-size: 1rem;
-        background-color: rgb(58, 146, 117);
+        background-color: rgb(28, 99, 75);
         border: rgb(117, 117, 117) solid 2px;
         max-width: 200px;
+        justify-self: flex-end;
 
         &:hover{
-            filter: brightness(1.25);
-            color:$activeTextColor;
+            filter: brightness(1.3);
             cursor: pointer;
         }
+
+        &:active{
+            animation: navClick 100ms;
+        }
+    }
+
+    .active{
+        filter: brightness(1.3);
     }
 }

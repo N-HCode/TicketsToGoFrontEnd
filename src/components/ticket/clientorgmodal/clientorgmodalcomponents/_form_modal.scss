@@ -1,0 +1,58 @@
+.form_modal{
+    display: grid;
+    margin-top: 15px;
+    gap: 5px;
+    font-family: $mainTextStyle;
+    overflow: hidden;
+
+
+    input, div{
+        margin-bottom: 5px;
+    }
+
+    input:not([type='checkbox']){
+  
+    }
+
+    
+
+    
+}
+
+.open_form_modal{
+    overflow: hidden;
+    animation: heightChange 550ms linear;
+}
+
+.close_form_modal{
+    overflow: hidden;
+    animation: heightChangeR 350ms reverse ease-out;
+}
+
+@keyframes heightChange {
+    0%{
+        max-height: 0px;
+        // transform: scaleX(0);
+        
+    }
+
+    100%{
+        // transform: scaleX(1);
+        max-height: 600px;
+    }
+
+}
+
+@keyframes heightChangeR {
+    0%{
+        max-height: 0px;
+        // transform: scaleX(0);
+        
+    }
+
+    100%{
+        // transform: scaleX(1);
+        max-height: 350px;
+    }
+
+}
