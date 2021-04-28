@@ -56,3 +56,16 @@
     }
 
 }
+
+.form_submit_button{
+    justify-self: flex-end;
+
+    button{
+        border-radius: 5px;
+        color: $activeTextColor;
+        background-color: $secondarymainBGColor;
+        border: rgb(175, 175, 175) solid 0px;
+
+    }
+
+}

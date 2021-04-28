@@ -38,8 +38,25 @@ const AddNewClientOrgForm = () => {
         e.preventDefault();
         try {
 
-            const response = await addClientOrg(clientOrgInfoState);
-            console.log(response);
+            await addClientOrg(clientOrgInfoState);
+
+
+            //reset information
+            setClientOrgInfoState( 
+            {
+                isForeignAddress: false,
+                city: null,
+                state: null,
+                streetAddress: null,
+                zipcode: null,
+                country: null,
+                organizationName: null,
+                organizationPhoneNumber: null,
+            })
+
+            console.log(clientOrgInfoState);
+
+    
             
         } catch (error) {
             
@@ -57,30 +74,29 @@ const AddNewClientOrgForm = () => {
             </div>
 
             <label htmlFor="organizationName">Organization Name:</label>
-            <input  type="text" required name="organizationName" onChange={onChange}></input>
+            <input  type="text" required name="organizationName"  value={clientOrgInfoState.organizationName || ""} onChange={onChange}></input>
 
 
             <label htmlFor="city">City:</label>
-            <input  type="text" required name="city" onChange={onChange}></input>
+            <input  type="text" required name="city" value={clientOrgInfoState.city || ""} onChange={onChange}></input>
 
             <label htmlFor="state">State:</label>
-            <input  type="text" required name="state" onChange={onChange}></input>
+            <input  type="text" required name="state" value={clientOrgInfoState.state || ""} onChange={onChange}></input>
 
             <label htmlFor="streetAddress">Address:</label>
-            <input  type="text" required name="streetAddress" onChange={onChange}></input>
+            <input  type="text" required name="streetAddress" value={clientOrgInfoState.streetAddress || ""} onChange={onChange}></input>
 
             <label htmlFor="zipcode">Zipcode:</label>
-            <input  type="text" required name="zipcode" onChange={onChange}></input>
+            <input  type="text" required name="zipcode" value={clientOrgInfoState.zipcode || ""} onChange={onChange}></input>
 
             <label htmlFor="country">Country:</label>
-            <input  type="text" required name="country" onChange={onChange}></input>
+            <input  type="text" required name="country" value={clientOrgInfoState.country || ""} onChange={onChange}></input>
 
             <label htmlFor="organizationPhoneNumber">Phone # (Optional):</label>
-            <input  type="text" name="organizationPhoneNumber" onChange={onChange}></input>
+            <input  type="text" name="organizationPhoneNumber" value={clientOrgInfoState.organizationPhoneNumber || ""} onChange={onChange}></input>
 
-            <div className="client_org_modal_button">
-         
-                <button form="client_org_modal_create"> Submit</button>
+            <div className="client_org_modal_button form_submit_button">
+                <button form="client_org_modal_create"> Create</button>
             </div>
   
         </form>
