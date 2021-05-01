@@ -4,4 +4,10 @@ const addClientOrg = (ClientOrganization) => {
     return axiosForRequestsOtherThanGet.post(`http://localhost:8080/clients_organization/add`,ClientOrganization)
 }
 
-export {addClientOrg};
+const findClientOrgBasedOnSearchCriteria = (searchTerm) => {
+
+
+    return axiosForGetRequests.get(`http://localhost:8080/clients_organization/search?searchTerm=${searchTerm}`)
+}
+
+export {addClientOrg, findClientOrgBasedOnSearchCriteria};

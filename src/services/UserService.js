@@ -6,7 +6,7 @@ import {axiosForGetRequests, axiosForRequestsOtherThanGet} from "./config/AxiosC
 
 const loginAPI = (username, password) => {
 
-    axiosForRequestsOtherThanGet.defaults.headers.common["X-XSRF-TOKEN"] = document.cookie.match("XSRF-TOKEN").input.replace("XSRF-TOKEN=","");
+    axiosForRequestsOtherThanGet.defaults.headers.common["X-XSRF-TOKEN"] = document.cookie.match("XSRF-TOKEN")?.input.replace("XSRF-TOKEN=","");
     
     //For spring security form login or we need to use 'application/x-www-form-urlencoded'
     //axios is smart enough when you use a string it will have the content type.

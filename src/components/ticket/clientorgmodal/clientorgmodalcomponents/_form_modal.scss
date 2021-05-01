@@ -1,6 +1,6 @@
 .form_modal{
     display: grid;
-    margin-top: 15px;
+    margin-top: 5px;
     gap: 5px;
     font-family: $mainTextStyle;
     overflow: hidden;
@@ -15,8 +15,11 @@
     }
 
     
+}
 
-    
+.search_form{
+    display: flex;
+    gap: 10px;
 }
 
 .open_form_modal{

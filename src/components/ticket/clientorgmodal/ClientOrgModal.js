@@ -91,39 +91,36 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
                 <h3>Find/Add Client Organization</h3>
 
+ 
+
+                <div className="client_org_modal_button" ref={buttonContainer}>   
+                        <button onClick={expandFindOrg}>Find</button>
+                        <button onClick={expandNewClientOrgForm}>Add</button>          
+                </div>
+
                 <hr></hr>
 
-                <div className="client_org_modal_button" ref={buttonContainer}>
-              
-                        <button onClick={expandFindOrg}>Existing Client Organization</button>
-
-                        <MountAndDismountAnimiation 
+                <MountAndDismountAnimiation 
                         mountAnimiationClass={"open_form_modal"}
-                        dismountAnimiationClass={"close_form_modal"}
+                        dismountAnimiationClass={"no_animiation"}
                         isActive={findExistingOrg}>
                             <FindExistingOrg />
                             
                         </MountAndDismountAnimiation>
 
 
-
-                        <button onClick={expandNewClientOrgForm}>New Client Organization</button>
-
-             
-                        <MountAndDismountAnimiation 
+                <MountAndDismountAnimiation 
                         mountAnimiationClass={"open_form_modal"}
-                        dismountAnimiationClass={"close_form_modal"}
+                        dismountAnimiationClass={"no_animiation"}
                         isActive={addNewClientOrgState}>
                                 <AddNewClientOrgForm />
                             
                         </MountAndDismountAnimiation>
-
-               
-              
-                </div>
             </div>
 
         </Modal>
+
+
     )
 }
 

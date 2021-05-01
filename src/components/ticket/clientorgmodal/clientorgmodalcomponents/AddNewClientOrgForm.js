@@ -53,11 +53,7 @@ const AddNewClientOrgForm = () => {
                 organizationName: null,
                 organizationPhoneNumber: null,
             })
-
-            console.log(clientOrgInfoState);
-
-    
-            
+       
         } catch (error) {
             
         }
