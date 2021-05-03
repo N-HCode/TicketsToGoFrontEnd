@@ -22,9 +22,6 @@ const MountAndDismountAnimiation = ({mountAnimiationClass, dismountAnimiationCla
     //We only want to unmount when isActive is false so we have a logic that only run if isActive is false
     const onAnimationEnd = () => {
         if(!isActive){
-
-            console.log("dfjisdjfoi")
-
             setState(false);
             //Just in case the setState takes longer than the animation end.
             //We will make the component invisible until it gets unmounted so that it does not look jarring

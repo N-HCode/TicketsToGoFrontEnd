@@ -1,14 +1,16 @@
 import React from 'react';
 
-const FindOrgResultTable = ({data}) => {
+const FindOrgResultTable = ({searchResults}) => {
     return (
-        <div>
+        <div >
 
-            <table>
+            <table className="admin_person_table form_result_table">
                 <thead>
 
                     <tr>
-                        <th></th>
+                        <th>Name</th>
+                        <th>Account #</th>
+                        <th>Address</th>
  
                     </tr>
 
@@ -16,16 +18,29 @@ const FindOrgResultTable = ({data}) => {
                 </thead>
                 <tbody>
 
-                    <tr>
-                        <td></td>
+                {searchResults.map((result,index)=>
+                
+                <tr key={"result_"+index}>
+                    <td><div>{result.organizationName}</div></td>
+                    <td><div>{result.id}</div></td>
+                    <td><div>{result.streetAddress + ", " +  result.state + ", " + result.zipcode }</div></td>
 
-                    </tr>
+                </tr>
+                
+                
+                )}
+
+
 
 
                 </tbody>
 
             </table>
             
+            <div className="client_org_modal_button table_select_button">
+
+                <button >Select</button>
+            </div>
         </div>
     )
 }

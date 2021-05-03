@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import Modal from 'react-modal';
 
-import ExpandAndCollapseAnimation from './clientorgmodalcomponents/ExpandAndCollapseAnimation';
+
 import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
 import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg';
 import MountAndDismountAnimiation from '../../../helper/MountAndDismountAnimiation';
