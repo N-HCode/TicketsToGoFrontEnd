@@ -1,6 +1,49 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 
 const FindOrgResultTable = ({searchResults}) => {
+
+    const [selectedOrg, setSelectedOrg] = useState(null);
+
+    const tableBody = useRef();
+
+
+    const changeActive = (e,result) =>{
+
+        setSelectedOrg(result);
+
+       
+
+        let activeButton;
+
+        //placed this in a try, because by default both button do not have the active.
+        //so when finding an active button, it will return undefined and gives an error
+        //when we try to remove it. It may be faster to just try and fail then to write
+        //logic code.
+        try {
+            //First I used the useRef to get the the div I want to search. This will narrow down
+            //what is to be search so that it will have better performance.
+            //Then I convert the HTMLcollection into an array to use the find fuction to filter
+            //the element with the class name I want.
+            activeButton = Array.from(tableBody.current.children).find(item => item.classList.contains("active"));
+                //if we click the same active button again, we want to make it not active.
+                //so we can just toggle it.
+            activeButton.classList.remove("active");
+        } catch (error) {
+
+            
+        }
+
+            //add active to the button that is clicked.
+
+            if(e.target != activeButton){
+                //current target will actually get the element that has an event listener
+                //the tr has the onClick.
+                //However, we could also just use parentNode to get the parent, as e.target is the child element
+                e.currentTarget.classList.toggle("active");
+            }
+    }
+
+
     return (
         <div >
 
@@ -16,11 +59,11 @@ const FindOrgResultTable = ({searchResults}) => {
 
 
                 </thead>
-                <tbody>
+                <tbody ref={tableBody}> 
 
                 {searchResults.map((result,index)=>
                 
-                <tr key={"result_"+index}>
+                <tr key={"result_"+index} onClick={(e) => changeActive(e,result)}>
                     <td><div>{result.organizationName}</div></td>
                     <td><div>{result.id}</div></td>
                     <td><div>{result.streetAddress + ", " +  result.state + ", " + result.zipcode }</div></td>
@@ -39,7 +82,7 @@ const FindOrgResultTable = ({searchResults}) => {
             
             <div className="client_org_modal_button table_select_button">
 
-                <button >Select</button>
+                <button  >Select</button>
             </div>
         </div>
     )
