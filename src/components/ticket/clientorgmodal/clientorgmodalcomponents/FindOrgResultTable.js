@@ -1,17 +1,16 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
+import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
 const FindOrgResultTable = ({searchResults}) => {
 
     const [selectedOrg, setSelectedOrg] = useState(null);
 
+    const [selectedOrgContext, setSelectedOrgContext ] = useContext(SelectedOrgContext);
+
     const tableBody = useRef();
 
 
     const changeActive = (e,result) =>{
-
-        setSelectedOrg(result);
-
-       
 
         let activeButton;
 
@@ -35,12 +34,27 @@ const FindOrgResultTable = ({searchResults}) => {
 
             //add active to the button that is clicked.
 
-            if(e.target != activeButton){
+            if(e.currentTarget != activeButton){
                 //current target will actually get the element that has an event listener
                 //the tr has the onClick.
                 //However, we could also just use parentNode to get the parent, as e.target is the child element
                 e.currentTarget.classList.toggle("active");
+                setSelectedOrg(result);
+            }else{
+                setSelectedOrg(null);
             }
+    }
+
+    const selectOrg = () => {
+
+        if(selectedOrg != null){
+            
+            setSelectedOrgContext(selectedOrg)
+        }else{
+            alert("Please select an Org to add to Ticket")
+        }
+
+
     }
 
 
@@ -82,7 +96,7 @@ const FindOrgResultTable = ({searchResults}) => {
             
             <div className="client_org_modal_button table_select_button">
 
-                <button  >Select</button>
+                <button  onClick={selectOrg}>Select</button>
             </div>
         </div>
     )

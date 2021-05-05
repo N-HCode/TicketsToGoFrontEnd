@@ -4,7 +4,8 @@ import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
-import ClientOrgModal from './clientorgmodal/ClientOrgModal'
+import ClientOrgModal from './clientorgmodal/ClientOrgModal';
+import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
 
 import axios from 'axios';
@@ -30,6 +31,8 @@ const CreateTicketPage = (props) => {
         status: statusList.currentStatus,
         assignedTo: null
     });
+
+    const [selectedOrgContext] = useContext(SelectedOrgContext);
 
      // the method that runs when the create button is hit
     const onSubmit = (event) => {
