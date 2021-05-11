@@ -7,11 +7,11 @@ const SelectedOrgProvider = (props) => {
 
 
     return (
-        <PriorityListContext.Provider
+        <SelectedOrgContext.Provider
             value={ [selectedOrg, setSelectedOrg] }
         > 
            {props.children}
-       </PriorityListContext.Provider>
+       </SelectedOrgContext.Provider>
     )
 }
 

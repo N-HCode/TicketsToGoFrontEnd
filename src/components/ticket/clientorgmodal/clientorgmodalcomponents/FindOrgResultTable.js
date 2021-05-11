@@ -1,7 +1,7 @@
 import React, {useState, useRef, useContext} from 'react';
 import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
-const FindOrgResultTable = ({searchResults}) => {
+const FindOrgResultTable = ({presentation, closeMainModal}) => {
 
     const [selectedOrg, setSelectedOrg] = useState(null);
 
@@ -49,7 +49,9 @@ const FindOrgResultTable = ({searchResults}) => {
 
         if(selectedOrg != null){
             
-            setSelectedOrgContext(selectedOrg)
+            setSelectedOrgContext(selectedOrg);
+            closeMainModal();
+            
         }else{
             alert("Please select an Org to add to Ticket")
         }
@@ -65,22 +67,22 @@ const FindOrgResultTable = ({searchResults}) => {
                 <thead>
 
                     <tr>
-                        <th>Name</th>
-                        <th>Account #</th>
-                        <th>Address</th>
- 
+                        {presentation.tableHeaders.map((title, index) =>         
+                            <th key={"table_header_" + index}><div>{title}</div></th>        
+                        )}
+
                     </tr>
 
 
                 </thead>
                 <tbody ref={tableBody}> 
 
-                {searchResults.map((result,index)=>
+                {presentation.data.map((data,index)=>
                 
-                <tr key={"result_"+index} onClick={(e) => changeActive(e,result)}>
-                    <td><div>{result.organizationName}</div></td>
-                    <td><div>{result.id}</div></td>
-                    <td><div>{result.streetAddress + ", " +  result.state + ", " + result.zipcode }</div></td>
+                <tr key={"result_"+index} onClick={(e) => changeActive(e,data)}>
+                    <td><div>{data.name}</div></td>
+                    <td><div>{data.id}</div></td>
+                    <td><div>{data.address}</div></td>
 
                 </tr>
                 

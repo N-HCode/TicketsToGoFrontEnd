@@ -3,11 +3,18 @@ import FindOrgResultTable from './FindOrgResultTable';
 import {findClientOrgBasedOnSearchCriteria} from '../../../../services/ClientOrgService';
 import MountAndDismountAnimiation from '../../../../helper/MountAndDismountAnimiation';
 
-const FindExistingOrg = () => {
+const FindExistingOrg = ({closeMainModal}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
     const [searchResults, setSearchResults] = useState([])
+
+    const [presentation, setPresentation] = useState(
+        {
+            tableHeaders: ["Name", "Account #", "Address"],
+            data:[]
+        }
+    )
 
     const onChange = (e) => {
         setSearchTerm(e.target.value)
@@ -29,8 +36,27 @@ const FindExistingOrg = () => {
             //we put %25 because that is the code for "%" if we just put a %, it will fail to decode.
             //For Springboot paging, the page starts at 0 line the array.
             const response = await findClientOrgBasedOnSearchCriteria(searchTerm + "%25", 0);
-            console.log(response.data);
+            // console.log(response.data.content);
             setSearchResults(response.data);
+
+            // We created this prenstation data to place this in our table component.
+            // This way we can have an semi-interface-like so we can use the same component for
+            // other set of data as well.
+            const presentationData = response.data.content.map(
+                (dataSet) => 
+                    {
+                        return {
+                            id: dataSet.id,
+                            name: dataSet.organizationName,
+                            address: dataSet.streetAddress + ", " +  dataSet.state + ", " + dataSet.zipcode
+                        }
+
+                    }
+            )
+            setPresentation({
+                ...presentation,
+                data: presentationData
+            })
 
         } catch (error) {
             //Gets 404 not found error
@@ -71,7 +97,9 @@ const FindExistingOrg = () => {
                     dismountAnimiationClass={"no_animiation"}
                     isActive={searchResults.hasOwnProperty("content")}>
               
-                        <FindOrgResultTable searchResults={searchResults.content}/>   
+                        <FindOrgResultTable presentation={presentation}
+                            closeMainModal={closeMainModal}
+                        />   
                     </MountAndDismountAnimiation>
                            
 

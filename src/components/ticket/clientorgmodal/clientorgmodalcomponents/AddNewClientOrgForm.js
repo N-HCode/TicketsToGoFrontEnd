@@ -43,16 +43,7 @@ const AddNewClientOrgForm = () => {
 
             //reset information
             setClientOrgInfoState( 
-            {
-                isForeignAddress: false,
-                city: null,
-                state: null,
-                streetAddress: null,
-                zipcode: null,
-                country: null,
-                organizationName: null,
-                organizationPhoneNumber: null,
-            })
+            {})
        
         } catch (error) {
             

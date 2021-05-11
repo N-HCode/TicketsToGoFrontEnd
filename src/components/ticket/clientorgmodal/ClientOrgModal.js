@@ -72,10 +72,17 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
     }
 
     const closeMainModal = () => {
-        closeFindModal();
+        
         //Need to do this so that the state resets to false whenever we close the modal
-        setAddNewClientOrgState(false);
         setFindExistingOrg(false);
+        setAddNewClientOrgState(false);
+        closeFindModal();
+        
+    }
+
+    const test = () => {
+        console.log(findExistingOrg);
+        console.log(addNewClientOrgState);
     }
 
 
@@ -95,7 +102,8 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
 
                 <div className="client_org_modal_button" ref={buttonContainer}>   
                         <button onClick={expandFindOrg}>Find</button>
-                        <button onClick={expandNewClientOrgForm}>Add</button>          
+                        <button onClick={expandNewClientOrgForm}>Add</button>
+                        <button onClick={test}></button>   
                 </div>
 
                 <hr></hr>
@@ -104,9 +112,9 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                         mountAnimiationClass={"open_form_modal"}
                         dismountAnimiationClass={"no_animiation"}
                         isActive={findExistingOrg}>
-                            <FindExistingOrg />
+                            <FindExistingOrg closeMainModal={closeMainModal}/>
                             
-                        </MountAndDismountAnimiation>
+                </MountAndDismountAnimiation>
 
 
                 <MountAndDismountAnimiation 
@@ -115,7 +123,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                         isActive={addNewClientOrgState}>
                                 <AddNewClientOrgForm />
                             
-                        </MountAndDismountAnimiation>
+                </MountAndDismountAnimiation>
             </div>
 
         </Modal>
