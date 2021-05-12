@@ -1,11 +1,11 @@
 import React, {useState, useRef, useContext} from 'react';
-import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
-const FindOrgResultTable = ({presentation, closeMainModal}) => {
+
+const FindOrgResultTable = ({presentation, closeMainModal, providedContext}) => {
 
     const [selectedOrg, setSelectedOrg] = useState(null);
 
-    const [selectedOrgContext, setSelectedOrgContext ] = useContext(SelectedOrgContext);
+    const [context, setContext ] = useContext(providedContext);
 
     const tableBody = useRef();
 
@@ -43,13 +43,14 @@ const FindOrgResultTable = ({presentation, closeMainModal}) => {
             }else{
                 setSelectedOrg(null);
             }
+
     }
 
     const selectOrg = () => {
 
         if(selectedOrg != null){
             
-            setSelectedOrgContext(selectedOrg);
+            setContext(selectedOrg);
             closeMainModal();
             
         }else{
@@ -80,9 +81,9 @@ const FindOrgResultTable = ({presentation, closeMainModal}) => {
                 {presentation.data.map((data,index)=>
                 
                 <tr key={"result_"+index} onClick={(e) => changeActive(e,data)}>
-                    <td><div>{data.name}</div></td>
-                    <td><div>{data.id}</div></td>
-                    <td><div>{data.address}</div></td>
+                    {Object.values(data).map((value, index2)=>
+                        <td key={"table_"+index+"_"+index2 }><div>{value}</div></td>
+                    )}
 
                 </tr>
                 

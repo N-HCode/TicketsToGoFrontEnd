@@ -67,6 +67,8 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
             if(e.target != activeButton){
                 e.target.classList.toggle("active");
             }
+
+        
            
 
     }
@@ -79,12 +81,6 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         closeFindModal();
         
     }
-
-    const test = () => {
-        console.log(findExistingOrg);
-        console.log(addNewClientOrgState);
-    }
-
 
     return (
         <Modal
@@ -103,7 +99,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                 <div className="client_org_modal_button" ref={buttonContainer}>   
                         <button onClick={expandFindOrg}>Find</button>
                         <button onClick={expandNewClientOrgForm}>Add</button>
-                        <button onClick={test}></button>   
+
                 </div>
 
                 <hr></hr>

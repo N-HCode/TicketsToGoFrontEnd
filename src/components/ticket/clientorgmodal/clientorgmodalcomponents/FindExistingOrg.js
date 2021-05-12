@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FindOrgResultTable from './FindOrgResultTable';
 import {findClientOrgBasedOnSearchCriteria} from '../../../../services/ClientOrgService';
 import MountAndDismountAnimiation from '../../../../helper/MountAndDismountAnimiation';
+import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
 const FindExistingOrg = ({closeMainModal}) => {
 
@@ -46,8 +47,8 @@ const FindExistingOrg = ({closeMainModal}) => {
                 (dataSet) => 
                     {
                         return {
-                            id: dataSet.id,
                             name: dataSet.organizationName,
+                            id: dataSet.id,
                             address: dataSet.streetAddress + ", " +  dataSet.state + ", " + dataSet.zipcode
                         }
 
@@ -97,8 +98,10 @@ const FindExistingOrg = ({closeMainModal}) => {
                     dismountAnimiationClass={"no_animiation"}
                     isActive={searchResults.hasOwnProperty("content")}>
               
-                        <FindOrgResultTable presentation={presentation}
+                        <FindOrgResultTable 
+                            presentation={presentation}
                             closeMainModal={closeMainModal}
+                            providedContext={SelectedOrgContext}
                         />   
                     </MountAndDismountAnimiation>
                            
