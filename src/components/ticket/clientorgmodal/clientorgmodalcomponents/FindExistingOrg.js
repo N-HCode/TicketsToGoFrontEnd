@@ -4,24 +4,20 @@ import {findClientOrgBasedOnSearchCriteria} from '../../../../services/ClientOrg
 import MountAndDismountAnimiation from '../../../../helper/MountAndDismountAnimiation';
 import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
-const FindExistingOrg = ({closeMainModal}) => {
+const FindExistingOrg = ({providedPresentation, closeMainModal}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
     const [searchResults, setSearchResults] = useState([])
 
-    const [presentation, setPresentation] = useState(
-        {
-            tableHeaders: ["Name", "Account #", "Address"],
-            data:[]
-        }
-    )
+    const [presentation, setPresentation] = useState(providedPresentation)
 
     const onChange = (e) => {
         setSearchTerm(e.target.value)
     }
 
     const onSubmit = async (e) => {
+        //preventDefault so that on Submit will not refresh the page upon click
         e.preventDefault();
 
         //the code below is not needed, because input with required tag will not let you 
@@ -36,7 +32,7 @@ const FindExistingOrg = ({closeMainModal}) => {
             //we add the % because we are using a LIKE query. The % is a wildcard in the SQL language
             //we put %25 because that is the code for "%" if we just put a %, it will fail to decode.
             //For Springboot paging, the page starts at 0 line the array.
-            const response = await findClientOrgBasedOnSearchCriteria(searchTerm + "%25", 0);
+            const response = await providedPresentation.serviceFunction(searchTerm + "%25",0);
             // console.log(response.data.content);
             setSearchResults(response.data);
 
@@ -46,12 +42,7 @@ const FindExistingOrg = ({closeMainModal}) => {
             const presentationData = response.data.content.map(
                 (dataSet) => 
                     {
-                        return {
-                            name: dataSet.organizationName,
-                            id: dataSet.id,
-                            address: dataSet.streetAddress + ", " +  dataSet.state + ", " + dataSet.zipcode
-                        }
-
+                        return providedPresentation.dataFunction(dataSet);
                     }
             )
             setPresentation({

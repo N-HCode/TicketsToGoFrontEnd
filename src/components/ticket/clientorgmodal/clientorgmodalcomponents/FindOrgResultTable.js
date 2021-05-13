@@ -54,7 +54,7 @@ const FindOrgResultTable = ({presentation, closeMainModal, providedContext}) => 
             closeMainModal();
             
         }else{
-            alert("Please select an Org to add to Ticket")
+            alert("Please make a selection")
         }
 
 

@@ -1,12 +1,11 @@
 import React, {useState, useRef} from 'react';
 import Modal from 'react-modal';
-
-
 import AddNewClientOrgForm from './clientorgmodalcomponents/AddNewClientOrgForm';
 import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg';
 import MountAndDismountAnimiation from '../../../helper/MountAndDismountAnimiation';
 
-const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
+
+const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPresentation, FormElement}) => {
 
     
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
@@ -78,7 +77,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         //Need to do this so that the state resets to false whenever we close the modal
         setFindExistingOrg(false);
         setAddNewClientOrgState(false);
-        closeFindModal();
+        closeModalFunction();
         
     }
 
@@ -86,13 +85,13 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
         <Modal
         className="modal"
         overlayClassName ="modal_overlay"   
-        isOpen={openClientOrgModal} 
+        isOpen={modalState} 
         shouldCloseOnOverlayClick={false}
         onRequestClose={closeMainModal}>
 
             <div className="client_org_modal_container">
 
-                <h3>Find/Add Client Organization</h3>
+                <h3>{modalTitle}</h3>
 
  
 
@@ -108,7 +107,9 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                         mountAnimiationClass={"open_form_modal"}
                         dismountAnimiationClass={"no_animiation"}
                         isActive={findExistingOrg}>
-                            <FindExistingOrg closeMainModal={closeMainModal}/>
+                            <FindExistingOrg
+                                providedPresentation={providedPresentation}
+                                closeMainModal={closeMainModal}/>
                             
                 </MountAndDismountAnimiation>
 
@@ -117,7 +118,7 @@ const ClientOrgModal = ({openClientOrgModal, closeFindModal}) => {
                         mountAnimiationClass={"open_form_modal"}
                         dismountAnimiationClass={"no_animiation"}
                         isActive={addNewClientOrgState}>
-                                <AddNewClientOrgForm />
+                                <FormElement />
                             
                 </MountAndDismountAnimiation>
             </div>
