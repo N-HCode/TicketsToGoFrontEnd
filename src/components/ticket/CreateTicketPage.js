@@ -4,8 +4,11 @@ import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
-import ClientOrgModal from './clientorgmodal/ClientOrgModal'
-
+import ClientOrgModal from './clientorgmodal/ClientOrgModal';
+import {SelectedOrgContext} from '../context/SelectedOrgContext';
+import ContactModal from './contactmodal/ContactModal';
+import AddNewClientOrgForm from './clientorgmodal/clientorgmodalcomponents/AddNewClientOrgForm';
+import {clientOrgPresentation} from './presentations/PRESENTATIONS';
 
 import axios from 'axios';
 
@@ -17,6 +20,7 @@ const CreateTicketPage = (props) => {
 
     const [statusList] = useContext(StatusListContext);
     const [priorityList] = useContext(PriorityListContext);
+    const [selectedOrgContext] = useContext(SelectedOrgContext);
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
@@ -28,8 +32,10 @@ const CreateTicketPage = (props) => {
         ticketNotes: null,
         responses: null,
         status: statusList.currentStatus,
-        assignedTo: null
+        assignedTo: null,
     });
+
+
 
      // the method that runs when the create button is hit
     const onSubmit = (event) => {
@@ -69,20 +75,47 @@ const CreateTicketPage = (props) => {
 
     const [openClientOrgModal, setopenClientOrgModal] = useState(false)
 
-    const openFindModal = () =>{
+    const openFindModal = () => {
         setopenClientOrgModal(true);
     }
 
-    const closeFindModal = () =>{
+    const closeFindModal = () => {
         setopenClientOrgModal(false);
     }
+
+    const [contactModalState, setContactModalState] = useState(false)
+
+    const openContactModal = () => {
+        setContactModalState(true);
+    }
+
+    const closeContactModal = () => {
+        setContactModalState(false);
+    }
+
+
 
 
     return (
         // form for creating tickets
         <div>
 
-                <ClientOrgModal openClientOrgModal={openClientOrgModal} closeFindModal={closeFindModal} />
+                
+                <ClientOrgModal 
+                    modalState={openClientOrgModal} 
+                    closeModalFunction={closeFindModal}
+                    modalTitle={"Find/Add Client Organization"}
+                    providedPresentation={clientOrgPresentation}
+                    // Able to pass through elements but they will need to be capitalized
+                    FormElement={AddNewClientOrgForm} />
+
+
+                <ClientOrgModal 
+                    modalState={contactModalState} 
+                    closeModalFunction={closeContactModal}
+                    modalTitle={"Find/Add Contact"}
+                    FormElement={AddNewClientOrgForm}
+                />
 
 
        
@@ -103,7 +136,15 @@ const CreateTicketPage = (props) => {
                                 {/* client organization */}
 
                                 <label htmlFor="client_organization">Client Organization:</label>
-                                <select type="text" name="client_organization" onClick={openFindModal} onChange={onChange}></select>
+                                <select 
+                                    type="text" 
+                                    name="client_organization" 
+                                    onClick={openFindModal} 
+                                    onChange={onChange}
+                                    defaultValue={selectedOrgContext?.id}>
+                                    <option value={selectedOrgContext?.id}>{selectedOrgContext? selectedOrgContext?.organizationName + " (" + selectedOrgContext?.id + ")" : ""}</option>
+
+                                </select>
 
                                 
 
@@ -133,10 +174,22 @@ const CreateTicketPage = (props) => {
                             </div>
                             <div className="ticket_form__oneside">
 
-                                {/* client organization */}
+                                {/* contact*/}
+
+                                
+                                {/* Contact */}
 
                                 <label htmlFor="contact">Contact:</label>
-                                <select type="text" name="contact" onChange={onChange}></select>
+                                <select 
+                                    type="text" 
+                                    name="contact" 
+                                    onClick={openContactModal} 
+                                    onChange={onChange}
+                                    defaultValue={""}>
+                                    <option ></option>
+
+                                </select>
+
 
                                 {/* Ticket Owner */}
                                 

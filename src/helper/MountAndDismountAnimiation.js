@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react';
 
-const ExpandAndCollapseAnimation = ({isActive, children}) => {
-
+const MountAndDismountAnimiation = ({mountAnimiationClass, dismountAnimiationClass,isActive, children}) => {
     //we seperate the animation out to its own component so that we can wrap it around whichever component we want.
     //This will help us seperate the animation logic as well as let us put this animation on other components if we want
 
@@ -23,7 +22,6 @@ const ExpandAndCollapseAnimation = ({isActive, children}) => {
     //We only want to unmount when isActive is false so we have a logic that only run if isActive is false
     const onAnimationEnd = () => {
         if(!isActive){
-
             setState(false);
             //Just in case the setState takes longer than the animation end.
             //We will make the component invisible until it gets unmounted so that it does not look jarring
@@ -38,7 +36,7 @@ const ExpandAndCollapseAnimation = ({isActive, children}) => {
         //state will be the one that control the mount and dismount
         state &&
         // This is an example of the isActive controling the animation
-        <div className={isActive? "open_form_modal" : "close_form_modal"}
+        <div className={isActive? mountAnimiationClass : dismountAnimiationClass}
             onAnimationEnd={onAnimationEnd}
             ref={animiationDiv}
         >
@@ -48,6 +46,7 @@ const ExpandAndCollapseAnimation = ({isActive, children}) => {
             
         </div>
     )
+
 }
 
-export default ExpandAndCollapseAnimation
+export default MountAndDismountAnimiation

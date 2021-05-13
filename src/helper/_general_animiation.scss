@@ -1,0 +1,15 @@
+.no_animiation{
+
+    //no animiation is used when we just want a dismounting or a mounting animiation and not both
+    //We need a animiation to trigger the onAnimiationEnd of the Dismount. For the mounting
+    //the class can just be empty, but having no animiation will have the intention clearer.
+
+    animation: noAnimiation 0ms;
+
+    @keyframes noAnimiation {
+
+    }
+
+
+}
+

@@ -28,6 +28,7 @@
 @import '../components/homepagecomponents/tickettemplateoptions/optionsModals/template_modals';
 @import '../components/ticket/clientorgmodal/client_org_modal';
 @import '../components//ticket//clientorgmodal/clientorgmodalcomponents/form_modal';
+@import '../helper//general_animiation';
 //Include the animation in the variable file on the top index so others can use it.
 @include blinkclick;
 @include popupmixin;

@@ -1,6 +1,6 @@
 .form_modal{
     display: grid;
-    margin-top: 15px;
+    margin-top: 5px;
     gap: 5px;
     font-family: $mainTextStyle;
     overflow: hidden;
@@ -13,10 +13,57 @@
     input:not([type='checkbox']){
   
     }
-
+    
     
 
     
+}
+
+.search_form{
+    display: flex;
+    gap: 10px;
+}
+
+.form_result_container{
+    p{
+        padding: 0;
+        margin: 0 0 5px 0;
+    }
+
+    th{
+        background-color: rgb(68, 68, 68);
+    }
+
+    th,td{
+        border: 1px solid rgb(44, 44, 44);
+        
+    }
+    tbody{
+        tr{
+            &:hover{
+                filter: brightness(1.3);
+                cursor: pointer;
+            }
+
+            &:active{
+                animation: navClick 100ms;
+            }
+        }
+
+    }
+
+    
+
+  
+   
+
+    
+
+}
+
+.form_result_table{
+    font-size: 1rem;
+
 }
 
 .open_form_modal{
@@ -53,6 +100,39 @@
     100%{
         // transform: scaleX(1);
         max-height: 350px;
+    }
+
+}
+
+.form_submit_button{
+ 
+    justify-self: flex-end;
+
+    button{
+        
+        border-radius: 5px;
+        color: $activeTextColor;
+        background-color: $secondarymainBGColor;
+        border: rgb(175, 175, 175) solid 0px;
+
+    }
+
+}
+
+.table_select_button{
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+
+    button{
+        justify-self: end;
+        border: none;
+        padding: 5px 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        color: $activeTextColor;
+        background-color: $secondarymainBGColor;
+
     }
 
 }

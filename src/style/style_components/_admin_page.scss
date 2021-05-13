@@ -10,19 +10,17 @@
     transform: translate(-50%, -50%);
     min-width: 250px;
     width: fit-content;
-    max-width: 100vw;
-    user-select: none;
+    max-width: 90vw;
     outline: none;
-    
     height: fit-content;
-    max-height: 100vh;
+    max-height: 90vh;
 
     overflow: auto;
 
     padding: 0 10px 15px 10px;
     border-radius: 5px;
     border: none;
-    z-index: 1;
+   
     font-family: $mainTextStyle;
 
     .edit_modal_content{
@@ -98,7 +96,7 @@
     //for some reason using opacity will affect the Modal as well
     //So we use the rgba
     background-color: rgba(5, 1, 1, 0.568);
-    z-index: 1;
+
 }
 
 
@@ -239,52 +237,55 @@
          
         }
 
-        .admin_person_table{
-            border-collapse: collapse;
-            font-size: 0.9em;
-            text-align: left;
 
-            th{
-                background-color: $primaryHeaderBGColor2;
-                font-weight: normal;
-            }
-
-            div{
-                white-space: nowrap;
-                padding: 0;
-                margin: 0;
-                max-width: 125px;
-                overflow: hidden;
-                overflow-x: auto;
-                scrollbar-width: none; //remove scrollbar while still allowing to scroll Firefox
-                -ms-overflow-style: none;  /* Internet Explorer 10+ */
-
-                &::-webkit-scrollbar{ //Chrome
-                    display: none;
-                    background: transparent;
-                }
-            }
-
-            th, td{
-                padding: 10px 15px 10px 15px
-            }
-            
-            tbody{
-                tr:nth-child(odd){
-                    background-color: $secondarymainBGColor;
-                }
-
-                tr:nth-child(even){
-                    background-color: $secondaryPHBGColor;
-                }
-            }
-
-            i{
-                font-size: 16px;
-            }
-            
-        }
         
     }
 
+}
+
+.admin_person_table{
+    border-collapse: collapse;
+    font-size: 0.9em;
+    text-align: left;
+
+    th{
+        background-color: $primaryHeaderBGColor2;
+        font-weight: normal;
+    }
+
+    div{
+        white-space: nowrap;
+        padding: 0;
+        margin: 0;
+        max-width: 125px;
+        overflow: hidden;
+        overflow-x: auto;
+        scrollbar-width: none; //remove scrollbar while still allowing to scroll Firefox
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+        &::-webkit-scrollbar{ //Chrome
+            display: none;
+            background: transparent;
+        }
+    }
+
+    th, td{
+        padding: 10px 15px 10px 15px
+    }
+    
+    tbody{
+        tr:nth-child(odd){
+            background-color: $secondarymainBGColor;
+        }
+
+        tr:nth-child(even){
+            background-color: $secondaryPHBGColor;
+        }
+    }
+
+    i{
+        font-size: 16px;
+    }
+ 
+    
 }
