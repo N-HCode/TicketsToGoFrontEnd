@@ -5,7 +5,20 @@
    transition: max-height 10350ms;
    max-height: 800px;
    width: 100%;
-   
+   display: flex;
+   flex-direction: column;
+
+
+
+
+   h3{
+       margin-top: 5px;
+   }
+
+   hr{
+       width: 100%;
+   }
+
 }
 
 

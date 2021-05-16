@@ -4,7 +4,7 @@ import {findClientOrgBasedOnSearchCriteria} from '../../../../services/ClientOrg
 import MountAndDismountAnimiation from '../../../../helper/MountAndDismountAnimiation';
 import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
-const FindExistingOrg = ({providedPresentation, closeMainModal}) => {
+const FindExistingOrg = ({providedPresentation, closeMainModal, serviceFunctionParametersAsArray}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
@@ -32,7 +32,7 @@ const FindExistingOrg = ({providedPresentation, closeMainModal}) => {
             //we add the % because we are using a LIKE query. The % is a wildcard in the SQL language
             //we put %25 because that is the code for "%" if we just put a %, it will fail to decode.
             //For Springboot paging, the page starts at 0 line the array.
-            const response = await providedPresentation.serviceFunction(searchTerm + "%25",0);
+            const response = await providedPresentation.serviceFunction(searchTerm + "%25", serviceFunctionParametersAsArray);
             // console.log(response.data.content);
             setSearchResults(response.data);
 

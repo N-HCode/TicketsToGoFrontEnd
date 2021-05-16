@@ -5,7 +5,7 @@ import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg';
 import MountAndDismountAnimiation from '../../../helper/MountAndDismountAnimiation';
 
 
-const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPresentation, FormElement}) => {
+const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPresentation, FormElement, serviceFunctionParametersAsArray}) => {
 
     
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
@@ -89,7 +89,10 @@ const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPre
         shouldCloseOnOverlayClick={false}
         onRequestClose={closeMainModal}>
 
+         
             <div className="client_org_modal_container">
+                
+                
 
                 <h3>{modalTitle}</h3>
 
@@ -98,6 +101,7 @@ const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPre
                 <div className="client_org_modal_button" ref={buttonContainer}>   
                         <button onClick={expandFindOrg}>Find</button>
                         <button onClick={expandNewClientOrgForm}>Add</button>
+                        <button onClick={closeMainModal}>Cancel</button>
 
                 </div>
 
@@ -109,7 +113,8 @@ const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPre
                         isActive={findExistingOrg}>
                             <FindExistingOrg
                                 providedPresentation={providedPresentation}
-                                closeMainModal={closeMainModal}/>
+                                closeMainModal={closeMainModal}
+                                serviceFunctionParametersAsArray={serviceFunctionParametersAsArray}/>
                             
                 </MountAndDismountAnimiation>
 

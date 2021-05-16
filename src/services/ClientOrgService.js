@@ -7,7 +7,7 @@ const addClientOrg = (ClientOrganization) => {
 const findClientOrgBasedOnSearchCriteria = (searchTerm, pageNo) => {
 
 
-    return axiosForGetRequests.get(`http://localhost:8080/clients_organization/search/${pageNo}?searchTerm=${searchTerm}`)
+    return axiosForGetRequests.get(`http://localhost:8080/clients_organization/search/${pageNo[0]}?searchTerm=${searchTerm}`)
 }
 
 export {addClientOrg, findClientOrgBasedOnSearchCriteria};

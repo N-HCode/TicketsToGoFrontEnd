@@ -107,14 +107,18 @@ const CreateTicketPage = (props) => {
                     modalTitle={"Find/Add Client Organization"}
                     providedPresentation={clientOrgPresentation}
                     // Able to pass through elements but they will need to be capitalized
-                    FormElement={AddNewClientOrgForm} />
+                    FormElement={AddNewClientOrgForm} 
+                    serviceFunctionParametersAsArray={[0]}
+                    />
 
 
                 <ClientOrgModal 
                     modalState={contactModalState} 
                     closeModalFunction={closeContactModal}
                     modalTitle={"Find/Add Contact"}
+                    providedPresentation={clientOrgPresentation}
                     FormElement={AddNewClientOrgForm}
+                    serviceFunctionParametersAsArray={[0]}
                 />
 
 
@@ -173,10 +177,7 @@ const CreateTicketPage = (props) => {
 
                             </div>
                             <div className="ticket_form__oneside">
-
-                                {/* contact*/}
-
-                                
+                           
                                 {/* Contact */}
 
                                 <label htmlFor="contact">Contact:</label>
