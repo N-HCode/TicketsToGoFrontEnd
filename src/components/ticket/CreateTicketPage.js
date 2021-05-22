@@ -1,14 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { createTicket } from '../../services/TicketService';
 import { UserContext } from '../context/UserContext';
 import { TicketContext } from '../context/TicketContext';
 import {StatusListContext} from '../context/StatusListContext';
 import {PriorityListContext} from '../context/PriorityListContext';
 import ClientOrgModal from './clientorgmodal/ClientOrgModal';
+
 import {SelectedOrgContext} from '../context/SelectedOrgContext';
-import ContactModal from './contactmodal/ContactModal';
+import {SelectedContactContext} from '../context/SelectedContactContext';
+
 import AddNewClientOrgForm from './clientorgmodal/clientorgmodalcomponents/AddNewClientOrgForm';
-import {clientOrgPresentation} from './presentations/PRESENTATIONS';
+import {clientOrgPresentation, contactPresentation} from './presentations/PRESENTATIONS';
+import ContactForm from './clientorgmodal/clientorgmodalcomponents/AddNewContactForm';
+
+import {Auth} from '../../routing/Auth';
 
 import axios from 'axios';
 
@@ -20,7 +25,8 @@ const CreateTicketPage = (props) => {
 
     const [statusList] = useContext(StatusListContext);
     const [priorityList] = useContext(PriorityListContext);
-    const [selectedOrgContext] = useContext(SelectedOrgContext);
+    const [selectedOrgContext, setSelectedOrgContext] = useContext(SelectedOrgContext);
+    const [selectedContactContext, setSelectedContactContext] = useContext(SelectedContactContext)
 
     // Declare a ticket State 
     const [ticket, setTicket] = useState({
@@ -34,6 +40,14 @@ const CreateTicketPage = (props) => {
         status: statusList.currentStatus,
         assignedTo: null,
     });
+
+    useEffect(() => {
+     
+        return () => {
+            setSelectedOrgContext(null);
+            setSelectedContactContext(null);
+        }
+    }, [])
 
 
 
@@ -77,6 +91,10 @@ const CreateTicketPage = (props) => {
 
     const openFindModal = () => {
         setopenClientOrgModal(true);
+
+        // console.log(Auth.userData);
+        // console.log(selectedOrgContext);
+        // console.log(selectedContactContext);
     }
 
     const closeFindModal = () => {
@@ -86,7 +104,20 @@ const CreateTicketPage = (props) => {
     const [contactModalState, setContactModalState] = useState(false)
 
     const openContactModal = () => {
-        setContactModalState(true);
+
+
+
+        if (selectedOrgContext != null) {
+            setContactModalState(true);
+        }else{
+            window.alert("Please select an Org First")
+        }
+
+
+        
+
+
+
     }
 
     const closeContactModal = () => {
@@ -102,6 +133,7 @@ const CreateTicketPage = (props) => {
 
                 
                 <ClientOrgModal 
+                    providedContext={SelectedOrgContext}
                     modalState={openClientOrgModal} 
                     closeModalFunction={closeFindModal}
                     modalTitle={"Find/Add Client Organization"}
@@ -109,16 +141,21 @@ const CreateTicketPage = (props) => {
                     // Able to pass through elements but they will need to be capitalized
                     FormElement={AddNewClientOrgForm} 
                     serviceFunctionParametersAsArray={[0]}
-                    />
+                    
+                />
+
+
+
 
 
                 <ClientOrgModal 
                     modalState={contactModalState} 
                     closeModalFunction={closeContactModal}
                     modalTitle={"Find/Add Contact"}
-                    providedPresentation={clientOrgPresentation}
-                    FormElement={AddNewClientOrgForm}
-                    serviceFunctionParametersAsArray={[0]}
+                    providedPresentation={contactPresentation}
+                    FormElement={ContactForm}
+                    serviceFunctionParametersAsArray={[selectedOrgContext?.id, 0]}
+                    providedContext={SelectedContactContext}
                 />
 
 
@@ -146,7 +183,7 @@ const CreateTicketPage = (props) => {
                                     onClick={openFindModal} 
                                     onChange={onChange}
                                     defaultValue={selectedOrgContext?.id}>
-                                    <option value={selectedOrgContext?.id}>{selectedOrgContext? selectedOrgContext?.organizationName + " (" + selectedOrgContext?.id + ")" : ""}</option>
+                                    <option value={selectedOrgContext?.id}>{selectedOrgContext? selectedOrgContext?.name + " (" + selectedOrgContext?.id + ")" : ""}</option>
 
                                 </select>
 
@@ -186,8 +223,9 @@ const CreateTicketPage = (props) => {
                                     name="contact" 
                                     onClick={openContactModal} 
                                     onChange={onChange}
-                                    defaultValue={""}>
-                                    <option ></option>
+                                    defaultValue={selectedContactContext?.id}>
+                                    <option value={selectedContactContext?.id}>{selectedContactContext? selectedContactContext?.firstName + " " + selectedContactContext?.lastName + " (" + selectedContactContext?.email + ")" : ""}</option>
+                            
 
                                 </select>
 

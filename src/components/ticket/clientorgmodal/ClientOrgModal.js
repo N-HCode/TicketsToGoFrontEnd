@@ -5,7 +5,7 @@ import FindExistingOrg from './clientorgmodalcomponents/FindExistingOrg';
 import MountAndDismountAnimiation from '../../../helper/MountAndDismountAnimiation';
 
 
-const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPresentation, FormElement, serviceFunctionParametersAsArray}) => {
+const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPresentation, FormElement, serviceFunctionParametersAsArray, providedContext}) => {
 
     
     const [addNewClientOrgState, setAddNewClientOrgState] = useState(false);
@@ -114,7 +114,9 @@ const ClientOrgModal = ({modalState, closeModalFunction, modalTitle, providedPre
                             <FindExistingOrg
                                 providedPresentation={providedPresentation}
                                 closeMainModal={closeMainModal}
-                                serviceFunctionParametersAsArray={serviceFunctionParametersAsArray}/>
+                                serviceFunctionParametersAsArray={serviceFunctionParametersAsArray}
+                                providedContext={providedContext}
+                                />
                             
                 </MountAndDismountAnimiation>
 

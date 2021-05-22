@@ -28,11 +28,13 @@ import {PriorityListProvider} from './components/context/PriorityListContext';
 
 import {VerifyStatusProvider} from './components/context/VerifyStatusContext';
 
-import {SelectedOrgProvider} from './components/context/SelectedOrgContext'
+import {SelectedOrgProvider} from './components/context/SelectedOrgContext';
 
+import {SelectedContactProvider} from './components/context/SelectedContactContext';
 
 
 import {AllRoutes} from './routing/AllRoutes';
+
 
 
 
@@ -83,6 +85,7 @@ class App extends React.Component {
                       {/* TicketTabContext to hold the ticket tabs*/}
                       <TicketTabContextProvider>
                         <SelectedOrgProvider>
+                          <SelectedContactProvider>
                         
 
                         
@@ -90,7 +93,8 @@ class App extends React.Component {
                           
                           {/* {pages and the component assgined to them} */}
                   
-                          <Route component={AllRoutes}/>
+                            <Route component={AllRoutes}/>
+                          </SelectedContactProvider>
 
                           </SelectedOrgProvider>
                         

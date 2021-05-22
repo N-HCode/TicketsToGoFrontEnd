@@ -6,4 +6,10 @@ const findContactOrgBasedOnSearchCriteria = (searchTerm, parameterArray) => {
     return axiosForGetRequests.get(`http://localhost:8080/contact/search/${parameterArray[0]}/${parameterArray[1]}?searchTerm=${searchTerm}`)
 }
 
-export {findContactOrgBasedOnSearchCriteria}
+const createContact = (orgId, contact) => {
+
+    axiosForRequestsOtherThanGet.post(`http://localhost:8080/contact/create/${orgId}`,contact)
+
+}
+
+export {findContactOrgBasedOnSearchCriteria, createContact}

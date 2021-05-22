@@ -52,4 +52,8 @@ const verify = () => {
     return axiosForGetRequests.get(`http://localhost:8080/user/verify`);
 }
 
-export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser, verify};
+const getTheUser = () => {
+    return axiosForGetRequests.get(`http://localhost:8080/user`);
+}
+
+export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser, verify, getTheUser};

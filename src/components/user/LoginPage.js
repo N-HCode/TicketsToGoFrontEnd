@@ -4,7 +4,8 @@ import React, { useContext, useState } from 'react';
 import { loginAPI } from '../../services/UserService';
 import { getAllStatus } from '../../services/StatusListService';
 import { getAllPriorities} from '../../services/PriorityListService';
-import { getAllTemplates } from '../../services/TicketColumnTempleService'
+import { getAllTemplates } from '../../services/TicketColumnTempleService';
+import { getTheUser } from '../../services/UserService';
 
 //Contexts
 import { UserContext } from '../context/UserContext';
@@ -66,12 +67,16 @@ const LoginPage = (props) => {
             await loginAPI(userLogin.username, userLogin.password);
             //the code below will only excute when there is an successful response.
             //otherwise it will be in the catch.
-            Auth.login();
+            
 
             setUserLogin({
                 username: "",
                 password: ""
             });
+
+            const response = await getTheUser();
+            
+            Auth.login(response.data);
 
 
             const ticketColumnResponse = await getAllTemplates();

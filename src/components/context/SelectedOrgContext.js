@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 const SelectedOrgContext = createContext();
 
 const SelectedOrgProvider = (props) => {
-    const [ selectedOrg, setSelectedOrg] = useState();
+    const [ selectedOrg, setSelectedOrg] = useState(null);
 
 
     return (

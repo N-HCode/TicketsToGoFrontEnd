@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import FindOrgResultTable from './FindOrgResultTable';
 import {findClientOrgBasedOnSearchCriteria} from '../../../../services/ClientOrgService';
 import MountAndDismountAnimiation from '../../../../helper/MountAndDismountAnimiation';
-import {SelectedOrgContext} from '../../../context/SelectedOrgContext';
 
-const FindExistingOrg = ({providedPresentation, closeMainModal, serviceFunctionParametersAsArray}) => {
+
+const FindExistingOrg = ({providedPresentation, closeMainModal, serviceFunctionParametersAsArray, providedContext}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
@@ -14,6 +14,7 @@ const FindExistingOrg = ({providedPresentation, closeMainModal, serviceFunctionP
 
     const onChange = (e) => {
         setSearchTerm(e.target.value)
+
     }
 
     const onSubmit = async (e) => {
@@ -92,7 +93,7 @@ const FindExistingOrg = ({providedPresentation, closeMainModal, serviceFunctionP
                         <FindOrgResultTable 
                             presentation={presentation}
                             closeMainModal={closeMainModal}
-                            providedContext={SelectedOrgContext}
+                            providedContext={providedContext}
                         />   
                     </MountAndDismountAnimiation>
                            
