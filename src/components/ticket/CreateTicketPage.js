@@ -233,7 +233,8 @@ const CreateTicketPage = (props) => {
                                 {/* Ticket Owner */}
                                 
                                 <label htmlFor="assignedTo">Assigned To:</label>
-                                <input type="text" name="assignedTo" defaultValue={user.fullName} readOnly></input> 
+                                {/* default value will appear in the input */}
+                                <input type="text" name="assignedTo" defaultValue={Auth.userData? Auth.userData.firstName : ""} readOnly></input> 
 
 
                                 {/* Resolution */}

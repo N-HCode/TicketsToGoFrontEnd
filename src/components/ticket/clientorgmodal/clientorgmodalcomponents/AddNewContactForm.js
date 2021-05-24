@@ -30,9 +30,20 @@ const AddNewContactForm = () => {
         e.preventDefault();
 
         try {
-            console.log(selectedOrgContext);
-            const reponse = await createContact(selectedOrgContext.id, contactState);
-            console.log(reponse);
+
+            await createContact(selectedOrgContext.id, contactState);
+
+            setContactState(
+                {
+                    firstName: null,
+                    lastName: null,
+                    fullName: null,
+                    email: null,
+                    phoneNumber: null
+                }
+
+            )
+
 
             
         } catch (error) {

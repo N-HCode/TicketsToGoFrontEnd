@@ -1,5 +1,12 @@
 //https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
+.main_nav_container{
+    display: flex;
+    gap: 15px;
+    color: $secondaryTextColor;
+
+}
+
 #main_nav{
     background-color: $primaryHeaderBGColor;
     display: flex;

@@ -18,15 +18,17 @@ const MainNavOptions = () => {
     const logOut = async() => {
 
         try {
-
-            await logoutApplication();
+            
             closeMenu();
             setUser({});
             setTickets({});
             setOrganization({});
             Auth.logout();
-            //reloading the session will clear a lot of the session data.
             window.location.reload();
+            await logoutApplication();
+
+            //reloading the session will clear a lot of the session data.
+            
         } catch (error) {
             
         }

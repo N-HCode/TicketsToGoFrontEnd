@@ -1,6 +1,7 @@
 import React from 'react'
 import Searchbar from './SearchBar';
 import MainNavOptions from './MainNavOptions';
+import {Auth} from '../../../routing/Auth';
 
 const MainNavBar = () => {
 
@@ -13,7 +14,14 @@ const MainNavBar = () => {
             <div id="main_nav">
 
                 <Searchbar/>
-                <MainNavOptions/>
+                <div className="main_nav_container">
+                  
+                    <p>{Auth.userData? "Hello " + Auth.userData.firstName : ""} </p>
+                   
+                    
+                    <MainNavOptions/>
+                </div>
+            
 
             </div>
         </div>
