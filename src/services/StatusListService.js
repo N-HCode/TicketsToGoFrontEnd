@@ -1,13 +1,13 @@
 import {axiosForGetRequests, axiosForRequestsOtherThanGet} from "./config/AxiosConfig";
 
-const getAllStatus = (statusListId) => {
-    return axiosForGetRequests.get(`http://localhost:8080/statuslist/${statusListId}`);
+const getAllStatus = () => {
+    return axiosForGetRequests.get(`http://localhost:8080/status_list`);
 }
 
 
 //Need to change the header so that it expects a String for the body and not an entity
-const addAStatus = (statusListId, status) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/statuslist/add/${statusListId}`
+const addAStatus = (status) => {
+    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/status_list/add`
     , status
     , {
 
@@ -16,8 +16,8 @@ const addAStatus = (statusListId, status) => {
     );
 }
 
-const removeAStatus = (statusListId, status) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/statuslist/remove/${statusListId}`
+const removeAStatus = (status) => {
+    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/status_list/remove`
     , status
     , {
 

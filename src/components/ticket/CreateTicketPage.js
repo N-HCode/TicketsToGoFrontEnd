@@ -14,8 +14,8 @@ import {clientOrgPresentation, contactPresentation} from './presentations/PRESEN
 import ContactForm from './clientorgmodal/clientorgmodalcomponents/AddNewContactForm';
 
 import {Auth} from '../../routing/Auth';
+import { useHistory } from "react-router-dom";
 
-import axios from 'axios';
 
 const CreateTicketPage = (props) => {
     
@@ -39,7 +39,13 @@ const CreateTicketPage = (props) => {
         responses: null,
         status: statusList.currentStatus,
         assignedTo: null,
+        userId: Auth.userData.id,
+        contactId: null,
+        clientsOrganizationId: null,
+
     });
+
+    const history = useHistory();
 
     useEffect(() => {
      
@@ -48,6 +54,25 @@ const CreateTicketPage = (props) => {
             setSelectedContactContext(null);
         }
     }, [])
+
+    useEffect(() => {
+
+        setTicket({
+            ...ticket,
+            clientsOrganizationId: selectedOrgContext?.id
+        })
+        
+
+    }, [selectedOrgContext])
+
+    useEffect(() => {
+        setTicket({
+            ...ticket,
+            contactId: selectedContactContext?.id
+        })
+        
+
+    }, [selectedContactContext])
 
 
 
@@ -61,15 +86,17 @@ const CreateTicketPage = (props) => {
 
         // if they do confirm call api here and create the ticket and then redirect, else do nothing
         if( confirm ){
+
+            try {
+
+                createTicket(ticket);
+                history.push("/");
+                
+            } catch (error) {
+                
+                // console.log(error);
+            }
            
-            axios.post(
-                createTicket,
-                ticket,
-                { params: { userId: user.userId}}
-            )
-            .then( response => setTickets( [ ...tickets, response.data] ))
-            .then( props.history.push("/") )
-            .catch( err => alert(err) )
 
         }else{
             return;

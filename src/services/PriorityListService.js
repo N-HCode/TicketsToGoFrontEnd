@@ -1,11 +1,11 @@
 import {axiosForGetRequests, axiosForRequestsOtherThanGet} from "./config/AxiosConfig";
 
-const getAllPriorities = (priorityListId) => {
-    return axiosForGetRequests.get(`http://localhost:8080/prioritylist/${priorityListId}`);
+const getAllPriorities = () => {
+    return axiosForGetRequests.get(`http://localhost:8080/priority_list`);
 }
 
-const addAPriority = (priorityListId, priority) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/prioritylist/add/${priorityListId}`
+const addAPriority = (priority) => {
+    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/priority_list/add`
         , priority
         , {
 
@@ -15,8 +15,8 @@ const addAPriority = (priorityListId, priority) => {
 }
 
 //Need to change the header so that it expects a String for the body and not an entity
-const removeAPriority = (priorityListId, priority) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/prioritylist/remove/${priorityListId}`
+const removeAPriority = (priority) => {
+    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/priority_list/remove`
         , priority
         , {
 

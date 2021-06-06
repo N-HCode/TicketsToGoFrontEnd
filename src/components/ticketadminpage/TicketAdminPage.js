@@ -19,7 +19,7 @@ const TicketAdminPage = () => {
 
     const saveToStatusList = async (status) => {
         try {
-            await addAStatus(organization.statusListId, status);
+            await addAStatus(status);
 
             const newStatusList = statusList.statusListArray.slice(0);
             newStatusList.push(status);
@@ -35,24 +35,27 @@ const TicketAdminPage = () => {
     }
 
     const removeFromStatusList = async (index,status) => {
-        try {
-            await removeAStatus(organization.statusListId, status);
 
-            const newStatusList = statusList.statusListArray.slice(0);
-            newStatusList.splice(index, 1);
-            setStatusList({
-                ...statusList,
-                statusListArray: newStatusList
-            });
-            
-        } catch (error) {
-            alert(error);
+        if(window.confirm("Do you want to remove this status?")){
+            try {
+                await removeAStatus(status);
+
+                const newStatusList = statusList.statusListArray.slice(0);
+                newStatusList.splice(index, 1);
+                setStatusList({
+                    ...statusList,
+                    statusListArray: newStatusList
+                });
+                
+            } catch (error) {
+                alert(error);
+            }
         }
     }
 
     const saveToPriorityList = async (priority) => {
         try {
-            await addAPriority(organization.priorityListId, priority);
+            await addAPriority(priority);
 
             const newPriorityList = priorityList.slice(0);
             newPriorityList.push(priority);
@@ -65,19 +68,21 @@ const TicketAdminPage = () => {
 
     const removeFromPriorityList = async ( index,priority) => {
 
-        console.log(priority);
-
-        try {
-            const response = await removeAPriority(organization.priorityListId, priority);
-            console.log(response);
-
-            const newPriorityList = priorityList.slice(0);
-            newPriorityList.splice(index, 1);
-            setPriorityList(newPriorityList);
-            
-        } catch (error) {
-            alert(error);
+        if(window.confirm("Do you want to remove this priority?")){
+            try {
+                const response = await removeAPriority(priority);
+                console.log(response);
+    
+                const newPriorityList = priorityList.slice(0);
+                newPriorityList.splice(index, 1);
+                setPriorityList(newPriorityList);
+                
+            } catch (error) {
+                alert(error);
+            }
         }
+
+
 
     }
 

@@ -74,9 +74,21 @@ const LoginPage = (props) => {
                 password: ""
             });
 
-            const response = await getTheUser();
+            const statusRequst =  await getAllStatus();
+
+            setStatusList({
+                ...statusList,
+                statusListArray: statusRequst.data
+            })
+
+            const priorityRequest = await getAllPriorities();
+            console.log(priorityRequest);
+
+            setPriorityList(priorityRequest.data)
+
+            const userInfoRequest = await getTheUser();
             
-            Auth.login(response.data);
+            Auth.login(userInfoRequest.data);
 
 
             const ticketColumnResponse = await getAllTemplates();

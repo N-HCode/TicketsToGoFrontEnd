@@ -25,6 +25,7 @@
 }
 
 .form_result_container{
+    overflow: auto;
     p{
         padding: 0;
         margin: 0 0 5px 0;
@@ -67,12 +68,12 @@
 }
 
 .open_form_modal{
-    overflow: hidden;
+    overflow: auto;
     animation: heightChange 550ms linear;
 }
 
 .close_form_modal{
-    overflow: hidden;
+    overflow: auto;
     animation: heightChangeR 350ms reverse ease-out;
 }
 

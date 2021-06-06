@@ -1,6 +1,10 @@
 import {axiosForGetRequests, axiosForRequestsOtherThanGet} from "./config/AxiosConfig";
 
-const createTicket = "http://localhost:8080/ticket/create";
+const createTicket = (ticket) => {
+
+    return axiosForRequestsOtherThanGet.post("http://localhost:8080/ticket/create", ticket);
+
+} 
 const editTicket = "http://localhost:8080/ticket/";
 const findAll = "http://localhost:8080/ticket/all";
 const deleteTicket= "http://localhost:8080/ticket/";
