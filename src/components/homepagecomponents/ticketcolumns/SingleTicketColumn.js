@@ -1,15 +1,17 @@
-import React, {useContext, useRef, useEffect } from 'react';
+import React, {useContext, useRef, useEffect, useState } from 'react';
 import TicketList from '../../ticket/TicketList';
-import { TicketContext } from '../../context/TicketContext';
+
 import {StatusListContext} from '../../context/StatusListContext';
 import { useHistory } from "react-router-dom";
-import {TicketColumnsContext} from '../../context/TicketColumnsContext'
+import {TicketColumnsContext} from '../../context/TicketColumnsContext';
+import {getTicketByStatus} from '../../../services/TicketService';
 
 const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openTicketModal, templateIndex}) => {
 
-    const [ tickets ] = useContext(TicketContext);
+  
     const [statusList, setStatusList] = useContext(StatusListContext);
     const [ticketColumnsContext, setTicketColumnsContext] = useContext(TicketColumnsContext);
+    const [columnTickets, setcolumnTickets] = useState([])
 
     const history = useHistory();
     
@@ -20,8 +22,24 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     //columns
 
     useEffect(() => {
+
+        getTicketsBasedOnStatus(columnState.title);
    
-    }, [columnState])
+    }, [columnState.title])
+
+    const getTicketsBasedOnStatus = async (status) => {
+            console.log("REFRSH PLEASE")
+        
+            try {
+
+                const response = await getTicketByStatus(status);
+                const newList = response.data.content;
+                setcolumnTickets(newList);
+                
+            } catch (error) {
+                console.log(error)
+            }
+    }
 
 
     const editTitle = () => {
@@ -53,7 +71,7 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
 
 
     const checkTickets = () => {
-        console.log(tickets)
+        console.log(columnTickets)
     }
 
     const drop = (e) => {
@@ -63,7 +81,7 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
   
         card.style.opacity = '1';
         e.target.appendChild(card);
-        tickets[e.dataTransfer.getData('ticket_index')].status = columnState.title;
+        columnTickets[e.dataTransfer.getData('ticket_index')].status = columnState.title;
 
        
     }
@@ -135,11 +153,12 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
             >
                 Template/TicketList
                 { 
-                    tickets.length > 0 && 
+                    columnTickets.length > 0 && 
                         <TicketList 
                         key={"ticket_list_"+ keyIndex +"_column_" + keyIndex + "pri_nav" + selectedIndex}
+                        columnNumber={keyIndex}
                         status={columnState.title}
-                        ticketList={ tickets.filter( ticket => ticket.status == columnState.title) }
+                        ticketList={ columnTickets }
                         openTicketModal={openTicketModal}
                     />
                     

@@ -36,7 +36,7 @@ const Ticket = (props) => {
             })
         }
 
-        setOpenTicketState(ticket.ticketNumber);
+        setOpenTicketState(ticket.id);
         props.openTicketModal();
 
     }

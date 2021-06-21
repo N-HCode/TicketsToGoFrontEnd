@@ -18,23 +18,23 @@ const TicketList = (props) => {
 
   
             
-    // Update this component every 60 seconds 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            // update home page every 60 sec but not in use for now
-            // axios.get(findAll)
-            // .then( response => setTicketList(response.data) )
-        }, 60000);
-        return () => {
-            clearInterval(interval)
-        }
-    }, [])
+    // // Update this component every 60 seconds 
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         // update home page every 60 sec but not in use for now
+    //         // axios.get(findAll)
+    //         // .then( response => setTicketList(response.data) )
+    //     }, 60000);
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [])
 
        // mapping through the array to create a ticket component for each object in the array
     return (
 
         <div>
-            {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber} 
+            {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber+"_"+props.columnNumber} 
                 openTicketModal={props.openTicketModal}
             
             

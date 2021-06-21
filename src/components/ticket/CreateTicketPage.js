@@ -77,7 +77,7 @@ const CreateTicketPage = (props) => {
 
 
      // the method that runs when the create button is hit
-    const onSubmit = (event) => {
+    const onSubmit = async (event) => {
          // stop the reload of page when event is triggerd
          event.preventDefault();
          
@@ -89,7 +89,7 @@ const CreateTicketPage = (props) => {
 
             try {
 
-                createTicket(ticket);
+                await createTicket(ticket);
                 history.push("/");
                 
             } catch (error) {

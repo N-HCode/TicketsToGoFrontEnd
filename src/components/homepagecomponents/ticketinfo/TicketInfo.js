@@ -5,10 +5,11 @@ import Modal from 'react-modal';
 //Contexts
 import { OpenTicketContext} from '../../context/OpenTicketContext';
 import { StatusListContext } from '../../context/StatusListContext';
-import { PriorityListContext} from '../../context/PriorityListContext'
+import { PriorityListContext} from '../../context/PriorityListContext';
 
 //Services
-import {getTicketById, closeTicket} from '../../../services/TicketService'
+import {getTicketById, closeTicket, editTicket} from '../../../services/TicketService';
+import {getUserById} from '../../../services/UserService';
 
 //Other
 import {TICKETERROR, ERRORACTIONS} from '../../constants/Error';
@@ -53,6 +54,8 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
     })
 
+    const [assignedTo, setAssignedTo] = useState(null)
+
     useEffect(() => {
         if (openTicketState !== null) {
             getTicket();
@@ -74,13 +77,26 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
     const getTicket = async () => {
 
-        const response = await getTicketById(openTicketState);
-        oldTicketData.current = response.data;
+        try {
 
-        setTicketInfo({
-            ...response.data
-        })
-        
+            const response = await getTicketById(openTicketState);
+    
+            oldTicketData.current = response.data;
+    
+            setTicketInfo({
+                ...response.data
+            })
+
+            const assignedUserInfo = await getUserById(response.data.userId);
+            setAssignedTo(assignedUserInfo.data)
+
+            
+            
+        } catch (error) {
+            
+        }
+
+
     }
 
     const onChange = (e) => {
@@ -91,11 +107,10 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
     }
 
     const closingTicket = async () => {
-        console.log(statusList);
 
         if(window.confirm("Do you want to close the case?")){
             try {
-                const response = await closeTicket(ticketInfo.ticketNumber);
+                const response = await closeTicket(ticketInfo.id);
                 setTicketInfo({
                     ...ticketInfo,
                     dateClosed: response.data
@@ -114,6 +129,18 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
     }
 
+    const save = async() => {
+        try {
+
+            console.log(openTicketState)
+
+            // const response = await editTicket(ticketInfo.id);
+            
+        } catch (error) {
+            
+        }
+    }
+
     return (
             <Modal
             className="modal"
@@ -129,7 +156,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
         
                     {/* Buttons */}
                     <div className="ticket_info_buttons">
-                        {changesMade && <button>Save</button>}
+                        {changesMade && <button onClick={save}>Save</button>}
                         <button onClick={closingTicket}>Close Case</button>
                         <button onClick={closeTicketModal}>Exit</button>
                     </div>
@@ -150,7 +177,8 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="assignedTo">Assigned To:</label>
-                                    <input name="assignedTo" value={ticketInfo.assignedTo || ''} onChange={onChange}/>
+                                    <input name="assignedTo" readOnly value={assignedTo?.firstName +" (" + assignedTo?.email+")" || ''}
+                                    onChange={null}></input>
                                 </div>
 
 

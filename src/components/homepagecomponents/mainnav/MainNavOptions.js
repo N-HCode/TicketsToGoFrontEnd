@@ -5,7 +5,8 @@ import { UserContext } from '../../context/UserContext';
 import { TicketContext } from '../../context/TicketContext';
 import { OrganizationContext} from '../../context/OrganizationContext';
 import {logoutApplication} from '../../../services/RefreshAndLogoutService';
-
+import { useHistory } from "react-router-dom";
+import {NoNavPATHS} from "../../../routing/Paths"
 import {Auth} from '../../../routing/Auth';
 
 
@@ -15,24 +16,26 @@ const MainNavOptions = () => {
     const [tickets, setTickets] = useContext(TicketContext);
     const [organization, setOrganization] = useContext(OrganizationContext);
 
+    const history = useHistory();
+
     const logOut = async() => {
 
-        try {
-            
-            closeMenu();
-            setUser({});
-            setTickets({});
-            setOrganization({});
-            Auth.logout();
-            window.location.reload();
-            await logoutApplication();
+        closeMenu();
+        setUser({});
+        setTickets({});
+        setOrganization({});
+        Auth.logout();
 
-            //reloading the session will clear a lot of the session data.
-            
-        } catch (error) {
-            
+        try {
+            //we isolated this because we still want the rest to run even if the
+            //API token is expired or just not working.
+            await logoutApplication();
+        } catch (error) {   
         }
 
+        history.push(NoNavPATHS.login);
+        //reloading the session will clear a lot of the session data.
+        window.location.reload();
         
     }
 

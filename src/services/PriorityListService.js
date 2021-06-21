@@ -5,7 +5,7 @@ const getAllPriorities = () => {
 }
 
 const addAPriority = (priority) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/priority_list/add`
+    return axiosForRequestsOtherThanGet.post(`http://localhost:8080/priority_list/add`
         , priority
         , {
 

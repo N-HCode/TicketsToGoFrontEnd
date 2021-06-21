@@ -82,7 +82,6 @@ const LoginPage = (props) => {
             })
 
             const priorityRequest = await getAllPriorities();
-            console.log(priorityRequest);
 
             setPriorityList(priorityRequest.data)
 
