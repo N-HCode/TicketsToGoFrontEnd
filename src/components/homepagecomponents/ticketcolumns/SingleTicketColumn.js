@@ -28,7 +28,7 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     }, [columnState.title])
 
     const getTicketsBasedOnStatus = async (status) => {
-            console.log("REFRSH PLEASE")
+    
         
             try {
 

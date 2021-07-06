@@ -23,12 +23,8 @@ const getUserById = (id) => {
 }
 
 
-const signUp = (user) => {
+const createUser = (user) => {
     return axiosForRequestsOtherThanGet.post("http://localhost:8080/user/create", user)
-}
-
-const addOrganizationToUser = (id, organizationId) => {
-    return axiosForRequestsOtherThanGet.post(`http://localhost:8080/user/organization?id=${id}&organizationId=${organizationId}`)
 }
 
 
@@ -60,4 +56,4 @@ const getTheUser = () => {
     return axiosForGetRequests.get(`http://localhost:8080/user`);
 }
 
-export  { loginAPI, signUp, addOrganizationToUser, editUser, checkPassword, checkUsername, deleteUser, verify, getTheUser, getUserById};
+export  { loginAPI, createUser, editUser, checkPassword, checkUsername, deleteUser, verify, getTheUser, getUserById};

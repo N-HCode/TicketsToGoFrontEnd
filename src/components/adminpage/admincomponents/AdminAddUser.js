@@ -2,7 +2,7 @@ import React, {useReducer, useState} from  'react';
 import Modal from 'react-modal';
 import {ERROR, ERRORACTIONS} from '../../constants/Error';
 import ErrorComponent from '../../constants/ErrorComponent';
-import { signUp, addOrganizationToUser } from '../../../services/UserService';
+import { createUser } from '../../../services/UserService';
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -29,7 +29,7 @@ const reducer = (state, action) => {
     }
 }
 
-const AdminAddUser = ({IsOpen, cancelAddUser, confirmPassword, organization, setOrgUsersToNewList}) => {
+const AdminAddUser = ({IsOpen, cancelAddUser, confirmPassword, updateToCurrentUsers, currentPage}) => {
 
     const [state, dispatch] = useReducer(reducer,{ 
         username: null,
@@ -67,13 +67,9 @@ const AdminAddUser = ({IsOpen, cancelAddUser, confirmPassword, organization, set
         }else{
             
             try {
-                const response = await signUp(state);
-                const userId = response.data.userId;
-                await addOrganizationToUser(userId, organization.id);
-    
-                const newList = organization.users.slice(0);
-                newList.push(response.data);
-                setOrgUsersToNewList(newList);
+                const response = await createUser(state);
+                console.log(response);
+                updateToCurrentUsers(currentPage);
     
             } catch (error) {
                 alert(error);
@@ -154,8 +150,10 @@ const AdminAddUser = ({IsOpen, cancelAddUser, confirmPassword, organization, set
                         {/* if option value is "" it will cause a validation error if the 
                         required tagged is there. */}
                         <label htmlFor="userRole">User Role:</label>
-                        <select name="userRole" onChange={onChange} required>
-                            <option value="" disabled selected>Select Role...</option>
+                        {/* the defaultValue has to match the value of the option. if the value is "" then it will prompt the user to
+                        select from the list */}
+                        <select name="userRole" defaultValue="" onChange={onChange} required>
+                            <option value="" disabled hidden >Select Role...</option>
                             <option value="user">user</option>
                             <option value="admin">admin</option>
                         </select>

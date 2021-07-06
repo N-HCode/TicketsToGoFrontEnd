@@ -131,10 +131,9 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
     const save = async() => {
         try {
+            await editTicket(ticketInfo.id, ticketInfo);
+            setChangesMade(false);
 
-            console.log(openTicketState)
-
-            // const response = await editTicket(ticketInfo.id);
             
         } catch (error) {
             

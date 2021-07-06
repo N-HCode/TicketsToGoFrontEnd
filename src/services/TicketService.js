@@ -6,8 +6,8 @@ const createTicket = (ticket) => {
 
 } 
 
-const editTicket = (id) => {
-    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/ticket/${id}`)
+const editTicket = (id, ticket) => {
+    return axiosForRequestsOtherThanGet.put(`http://localhost:8080/ticket/${id}`, ticket);
 } 
 
 const findAll = "http://localhost:8080/ticket/all";

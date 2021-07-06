@@ -30,7 +30,9 @@ const Pagination = ({numberOfPages, paginationConfig, changeShownDataByPageNum})
 
     const changePage = (number, pages) => {
         //This is the function will change the data shown. This will be passed down from the main component
-        changeShownDataByPageNum(number);
+
+        //number -1 because pagination for springboot start at 0, but our page number makes more sense to start a 1 visually
+        changeShownDataByPageNum(number-1);
         setCurrentPage(number);
 
         ////Everything else below is the pagination logic

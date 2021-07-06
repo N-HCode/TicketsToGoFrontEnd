@@ -16,8 +16,8 @@ const findByUserId = (userId) => {
     return axiosForGetRequests.get(`http://localhost:8080/organization/user/${userId}`)
 }
 
-const getAllUserInOrg = (orgId) => {
-    return axiosForGetRequests.get(`http://localhost:8080/organization/getAllUser/${orgId}`)
+const getAllUserInOrg = (pageNo, numberPerPage) => {
+    return axiosForGetRequests.get(`http://localhost:8080/organization/get_users_from_organization/${pageNo}/${numberPerPage}`)
 }
 
 

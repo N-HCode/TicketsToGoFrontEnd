@@ -9,6 +9,9 @@
     font-family: $mainTextStyle ;
     padding: 0px 0px 0px 5px;
     margin-bottom: 5px;
+    max-height: 4.25rem;
+    min-width: 3rem;
+    overflow: hidden;
 
     &:hover{
         cursor: pointer;
