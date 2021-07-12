@@ -12,6 +12,8 @@
     max-height: 4.25rem;
     min-width: 3rem;
     overflow: hidden;
+    
+ 
 
     &:hover{
         cursor: pointer;
@@ -21,16 +23,17 @@
         color: white;
         text-decoration: none;
         font-family: $mainTextStyle ;
-        
+        pointer-events: none;
     }
 
     h4{
         margin: 0px 0px 5px 0px;
         font-weight: normal;
-        
+        pointer-events: none;
     }
 
     p{
-        margin: 0px 0px 5px 0px;   
+        margin: 0px 0px 5px 0px;  
+        pointer-events: none; 
     }
 }

@@ -46,34 +46,26 @@ const Ticket = (props) => {
 
     
     const dragStart = (e) => {
-        const target = e.target;
-
-        e.dataTransfer.setData('card_id', target.id);
-        //we only need the index of the ticket to be passed. Since we are taking it from
-        //the ticket context anyways. Ticket number will not always be the index.
-        //Sometimes tickets get loaded in different order.
-        e.dataTransfer.setData('ticket_index', tickets.indexOf(ticket));
-        setTimeout( ()=> {
-            target.style.opacity = ".5";
-        }, 0)
+        e.target.classList.add("dragging");
     }
 
     const dragOver = (e) => {
         e.stopPropagation();
+
     }
 
     const onDragEnd = (e) => {
-        e.target.style.opacity = "1";
+        e.target.classList.remove("dragging");
     }
 
     const drop = (e) => {
         e.preventDefault();
-        const card_id = e.dataTransfer.getData('card_id');
-        const card = document.getElementById(card_id);
-        card.style.opacity = '1';
-        e.target.parentNode.appendChild(card);
-        // tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
-        console.log(tickets);
+        // const card_id = e.dataTransfer.getData('card_id');
+        // const card = document.getElementById(card_id);
+        // card.style.opacity = '1';
+        // e.target.parentNode.appendChild(card);
+        // // tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
+        // console.log(tickets);
 
     }
 
@@ -86,9 +78,9 @@ const Ticket = (props) => {
             className="single_ticket" 
             onClick={addTicketTabAndOpenModal}
             onDragStart={dragStart}
-            onDragOver={dragOver}
+            // onDragOver={dragOver}
             onDragEnd={onDragEnd}
-            onDrop={drop}
+            // onDrop={drop}
             draggable="true"
 
         >

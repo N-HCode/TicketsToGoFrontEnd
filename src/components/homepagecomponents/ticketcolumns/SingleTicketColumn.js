@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useEffect, useState } from 'react';
 import TicketList from '../../ticket/TicketList';
-
+import Ticket from '../../ticket/Ticket';
 import {StatusListContext} from '../../context/StatusListContext';
 import { useHistory } from "react-router-dom";
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
@@ -22,7 +22,7 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     //columns
 
     useEffect(() => {
-
+        console.log("hmoshi moshi")
         getTicketsBasedOnStatus(columnState.title);
    
     }, [columnState.title])
@@ -70,25 +70,71 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
     }
 
 
-    const checkTickets = () => {
-        console.log(columnTickets)
-    }
+    // const checkTickets = () => {
+    //     console.log(columnTickets)
+    // }
 
     const drop = (e) => {
         e.preventDefault();
-        const card_id = e.dataTransfer.getData('card_id');
-        const card = document.getElementById(card_id);
+        // const card_id = e.dataTransfer.getData('card_id');
+        // const card = document.getElementById(card_id);
   
-        card.style.opacity = '1';
-        e.target.appendChild(card);
-        columnTickets[e.dataTransfer.getData('ticket_index')].status = columnState.title;
+        // card.style.opacity = '1';
+        // e.target.appendChild(card);
+        // columnTickets[e.dataTransfer.getData('ticket_index')].status = columnState.title;
 
        
     }
 
+    // const onDragEnter = (e) => {
+    //     e.stopPropagation()
+    //     e.target.style.background = "purple";
+    // }
+
+    const onDragLeave= (e) => {
+        e.preventDefault();
+    }
+
+  
+
     const dragOver = (e) => {
+
+
+        let container;
         e.preventDefault();
 
+        //This is to make sure we get the correct container.
+        if(e.target.classList.contains("single_ticket")){
+            container = e.target.parentElement;
+        }else{
+            container = e.target;
+        }
+        
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const draggedObject = document.querySelector('.dragging');
+        
+       if (afterElement == null || afterElement == undefined) {
+            container.appendChild(draggedObject);
+       }else{
+           container.insertBefore(draggedObject,afterElement);
+       }
+
+    }
+
+    const getDragAfterElement = (container, y) => {
+        const draggableElements = [...container.querySelectorAll('.single_ticket:not(.dragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height/2;
+
+            //if offset is postive then we are at the bottom of the list
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child}
+            }else{
+                return closest;
+            }
+        }, {offset: Number.NEGATIVE_INFINITY}).element
     }
 
     const deleteColumn = (index) => {        
@@ -147,25 +193,32 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
                 }
             </div>
             <div className="ticket_list_container"
+                key={"ticket_list_container_" + keyIndex}
                 onDrop={drop} 
+                // onDragEnter={onDragEnter}
+                onDragLeave={onDragLeave}
                 onDragOver={dragOver}
             
             >
-                Template/TicketList
+              
                 { 
-                    columnTickets.length > 0 && 
-                        <TicketList 
-                        key={"ticket_list_"+ keyIndex +"_column_" + keyIndex + "pri_nav" + selectedIndex}
-                        columnNumber={keyIndex}
-                        status={columnState.title}
-                        ticketList={ columnTickets }
-                        openTicketModal={openTicketModal}
-                    />
+                    columnTickets.length > 0 && columnTickets.map( 
+                        
+                        
+                        ticket => <Ticket ticket={ticket} key={ticket.ticketNumber+"_"+keyIndex} 
+                    openTicketModal={openTicketModal} />)
+                    //     <TicketList 
+                    //     key={"ticket_list_"+ keyIndex +"_column_" + keyIndex + "pri_nav" + selectedIndex}
+                    //     columnNumber={keyIndex}
+                    //     status={columnState.title}
+                    //     ticketList={ columnTickets }
+                    //     openTicketModal={openTicketModal}
+                    
                     
                 }
             </div>
                 
-                <button onClick={checkTickets}>check tickets</button>
+                {/* <button onClick={checkTickets}>check tickets</button> */}
         </div>
     );
 }

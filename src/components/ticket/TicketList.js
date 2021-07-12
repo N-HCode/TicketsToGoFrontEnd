@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react'
+import React, {useEffect, useRef } from 'react'
 import Ticket from './Ticket';
 
 
@@ -16,24 +16,48 @@ const TicketList = (props) => {
         // empty dependancy array to mount component one time
     },[props])
 
+    const ticketListContainer = useRef();
+
+    const dragOver = (e) => {
+        e.preventDefault();
+      
+        const container = ticketListContainer.current;
+        console.log(container);
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const draggedObject = document.querySelector('.dragging');
+        console.log(afterElement);
+        if (afterElement == null || afterElement == undefined) {
+            container.appendChild(draggedObject);
+        }else{
+            container.insertBefore(draggedObject,afterElement);
+        }
+
+    }
+
+    const getDragAfterElement = (container, y) => {
+        const draggableElements = [...container.querySelectorAll('.single_ticket:not(.dragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height/2;
+
+            //if offset is postive then we are at the bottom of the list
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child}
+            }else{
+                return closest;
+            }
+        }, {offset: Number.NEGATIVE_INFINITY}).element
+    }
+
   
             
-    // // Update this component every 60 seconds 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         // update home page every 60 sec but not in use for now
-    //         // axios.get(findAll)
-    //         // .then( response => setTicketList(response.data) )
-    //     }, 60000);
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // }, [])
-
-       // mapping through the array to create a ticket component for each object in the array
     return (
 
-        <div>
+        <div ref={ticketListContainer}
+        onDragOver={dragOver}
+        style={{'width': "100%"}}
+        >
             {props.ticketList.length > 0 && props.ticketList.map( ticket => <Ticket ticket={ticket} key={ticket.ticketNumber+"_"+props.columnNumber} 
                 openTicketModal={props.openTicketModal}
             
@@ -47,22 +71,3 @@ const TicketList = (props) => {
 export default TicketList;
 
 
-// temp test data
-// {
-//     subject: "subject of testTicket1",
-//     description: "description of testTicket1",
-//     ticketNumber: "0001",
-//     ticketOwner: {firstName: "Pepega"}
-// },
-// {
-//     subject: "subject of testTicket2",
-//     description: "description of testTicket2",
-//     ticketNumber: "0002",
-//     ticketOwner: {firstName: "Sadge"}
-// },
-// {
-//     subject: "subject of testTicket2",
-//     description: "description of testTicket2",
-//     ticketNumber: "0003",
-//     ticketOwner: {firstName: "Kappa"}
-// }
