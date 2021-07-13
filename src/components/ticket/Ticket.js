@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import {TicketTabContext} from '../context/TicketTabContext';
-import { TicketContext } from '../context/TicketContext';
 import { OpenTicketContext} from '../context/OpenTicketContext';
 import { PrimaryNavSelectedContext } from '../context/PrimaryNavSelectedContext';
+import { editTicket } from '../../services/TicketService';
 
 // The Component for the display of each individual ticket on the ticketList
 // Props is used to hold data and carry it down
@@ -13,10 +12,9 @@ const Ticket = (props) => {
     const ticketTabState = primaryNavSelectedContext.array[primaryNavSelectedContext.index]
 
     // deconstructing props
-    const ticket = props.ticket;
-
-    const [ tickets ] = useContext(TicketContext);
-    const [ticketTabListState, setTicketTabListState] = useContext(TicketTabContext);
+    let ticket = props.ticket;
+    const [oldTicketstate, setOldTicketstate] = useState(ticket);
+    const [ticketstate, setTicketstate] = useState(ticket);
     const [openTicketState, setOpenTicketState] = useContext(OpenTicketContext);
 
 
@@ -40,35 +38,47 @@ const Ticket = (props) => {
         props.openTicketModal();
 
     }
+
+    useEffect(() => {
+
+        //this is how we can compare two objects
+        if(JSON.stringify(oldTicketstate) !==  JSON.stringify(ticketstate)){
+            
+            editingTicket(ticketstate);
+        }
+
+    }, [ticketstate])
  
 
-    // Showing the parts from each Ticket Object that will be printed out here
+    const editingTicket = async (newTicketState) => {
+        
+        try {
+            
+            await editTicket(ticket.id, newTicketState);
+            console.log("HELLOTHERE")
+            setOldTicketstate(newTicketState);
+            console.log("HELLOTHERE2")
+        } catch (error) {
+            
+        }
+    }
 
     
     const dragStart = (e) => {
         e.target.classList.add("dragging");
     }
 
-    const dragOver = (e) => {
-        e.stopPropagation();
 
-    }
 
     const onDragEnd = (e) => {
         e.target.classList.remove("dragging");
+        const columnTitle = e.target.parentElement.parentElement.children[0].querySelector("p").innerHTML
+        setTicketstate({
+            ...ticketstate,
+            status: columnTitle
+        })
+        
     }
-
-    const drop = (e) => {
-        e.preventDefault();
-        // const card_id = e.dataTransfer.getData('card_id');
-        // const card = document.getElementById(card_id);
-        // card.style.opacity = '1';
-        // e.target.parentNode.appendChild(card);
-        // // tickets[e.dataTransfer.getData('ticket_index')].status = ticketColumnTitle.title;
-        // console.log(tickets);
-
-    }
-
 
     return (
 

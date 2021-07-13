@@ -196,8 +196,8 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="status">Status:</label>
-                                    <select name="status" onChange={onChange}>
-                                            <option value={ticketInfo.status} disabled>{ticketInfo.status}</option>
+                                    <select name="status" defaultValue="" onChange={onChange}>
+                                            <option value="" disabled >{ticketInfo.status}</option>
                                             {statusList.statusListArray.map((status, index) => 
                                             <option
                                                 key = {"status_list_option" + index}
@@ -210,7 +210,7 @@ const TicketInfo = ({ticketIsOpen, closeTicketModal}) => {
 
                                 <div className="ticket_info_input_container">
                                     <label htmlFor="priority">Priority:</label>
-                                    <select name="priority" onChange={onChange}>
+                                    <select name="priority" defaultValue="" onChange={onChange}>
                                             <option value="" disabled>{ticketInfo.priority}</option>
                                             {priorityList.map((priority, index) => 
                                             <option
