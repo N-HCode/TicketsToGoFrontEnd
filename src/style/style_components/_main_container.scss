@@ -2,4 +2,9 @@
     //this is to make it so there is whitespace on the sides
     margin: auto;
     width: $mainContainer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    max-height: 100%;
 }

@@ -28,24 +28,34 @@ const HomePage = () => {
             {/* <div id="primary_tab"> */}
 
 
-
-            <PrimaryNavTabs/>
-
-
-            {/* <div className="tab_line"></div>
-            </div> */}
-
-            { primaryNavSelectedContext.index >= 0 &&
-
-                PRIMARYCOMPONENTS[primaryNavSelectedContext.array[primaryNavSelectedContext.index].type]
+            <div
             
+            style={
+                {
+                    "margin-bottom": "50px",
+                }
             }
+            
+            >
+                
+                <PrimaryNavTabs/>
+
+
+                {/* <div className="tab_line"></div>
+                </div> */}
+
+                { primaryNavSelectedContext.index >= 0 &&
+
+                    PRIMARYCOMPONENTS[primaryNavSelectedContext.array[primaryNavSelectedContext.index].type]
+                
+                }
+            </div>
 
 
 
             {/* Footer if needed*/}
             <div id="footer">
-                Footer
+                Created By: N-HCode
             </div>
 
 

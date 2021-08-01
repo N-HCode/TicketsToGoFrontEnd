@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import {TicketColumnsContext} from '../../context/TicketColumnsContext';
 import {getTicketByStatus} from '../../../services/TicketService';
 
+
 const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openTicketModal, templateIndex}) => {
 
   
@@ -171,12 +172,22 @@ const SinglePrimaryTab = ({selectedIndex, setState, keyIndex, columnState, openT
                 {columnState.isEdit ?
                     //We want an uncontrolled input field so that it does not keep filtering tickets
                     //or make API calls whenever we type a character.
-                    <input 
-                    // pass in the ref here so we can reference it later
-                        ref={newTitle}
-                        defaultValue={columnState.title}
-                        maxLength="15">
-                    </input>
+
+                    <select name="status" defaultValue={columnState.title} ref={newTitle}>
+                        
+                            {statusList.statusListArray.map((status, index) => {
+
+                                
+                                return (<option
+                                key = {"status_list_option" + index}
+                                value={status}
+
+                                >{status} </option>)
+
+
+                            })}
+                            
+                    </select>
                      : 
                     <p>{columnState.title}</p>
                 }
